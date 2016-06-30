@@ -219,6 +219,22 @@ a {
 }
 
 /* font-size */
+.f4 {
+  font-size: 4px;
+}
+
+.f5 {
+  font-size: 5px;
+}
+
+.f6 {
+  font-size: 6px;
+}
+
+.f7 {
+  font-size: 7px;
+}
+
 .f8 {
   font-size: 8px;
 }
@@ -285,6 +301,10 @@ a {
 
 .f24 {
   font-size: 24px;
+}
+
+.f25 {
+  font-size: 25px;
 }
 
 /* height width */
@@ -3348,7 +3368,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
   margin-right: 0;
 }
 
-/* 适用于frame的html*/
+/* 适用于frame    */
 html {
   height: auto;
   overflow: auto;

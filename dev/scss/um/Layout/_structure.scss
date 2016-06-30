@@ -12,7 +12,7 @@
 	visibility: hidden;
 	//overflow: hidden;
     z-index: -1;
-   background-color: $um-body-bg-color;
+	background-color: $um-body-bg-color;
    &.active {
 		visibility: visible;
 		z-index: z("little");
@@ -53,7 +53,7 @@
 	// animation: rise ease-out .4s;
 } 
 
-	/* 适用于frame的html*/
+	/* 适用于frame    */
 	html {
 	    height:auto;
 	    overflow: auto;
