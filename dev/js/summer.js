@@ -1,8 +1,8 @@
 /*
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
- * Author: gct@yonyou.com
- * Version: 1.0.0
+ * Author: gct@yonyou.com go
+ * Version: 1.0.20160701
  */
 
 ;(function(w){
@@ -16,10 +16,8 @@
         _script.type = 'text/javascript';
         _script.charset = 'utf-8';
         _script.async = true;
-        //alert(url)
         _script.src = url;
         _script.onload = function (e) {
-            //alert(w.cordova)
             w.$summer["cordova"] = w.cordova;
             w.summer["cordova"] = w.cordova;
 
@@ -41,10 +39,7 @@
                     if(typeof summerReady == "function")
                         summerReady();  
 
-                });
-
-
-            	              
+                });         
             }, false);
 
         };
