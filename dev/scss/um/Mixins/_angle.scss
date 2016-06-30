@@ -1,0 +1,15 @@
+@mixin angle($w:14px,$h:14px,$border-width:3px,$border-color:$um-theme-color,$deg:45deg,$vc:false) {
+	content: "";
+	display: inline-block;
+	width: $w;
+  height: $h;
+  border-left: $border-width solid $border-color;
+  border-bottom: $border-width solid $border-color;
+  @if ($vc) {
+  	position: absolute;
+  	top: 50%;
+  	@include transform(translate(0, -50%) rotate($deg));
+  }@else {
+  	@include transform(rotate($deg));
+  }
+}

@@ -1,0 +1,117 @@
+
+.um-switch1 {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+.um-switch1 input[type="checkbox"] {
+	display: none;
+	&:checked ~ .um-track {
+		border-color: #4cd964;
+		background-color: #4cd964;
+		.um-handle {
+			@include transform(translate3d(21px, 0, 0));
+			background-color: #fff;
+		}
+	}
+}
+.um-switch1 .um-track {
+	transition: background-color ease-in-out .3s, border ease-in-out .3s;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 52px;
+	height: 32px;
+	border: solid 2px #e6e6e6;
+	border-radius: 20px;
+	background-color: #fff;
+	content: ' ';
+	cursor: pointer;
+	pointer-events: none;
+	margin-bottom: -5px;
+}
+.um-switch1 .um-handle {
+	transition: 0.3s cubic-bezier(0, 1.1, 1, 1.1);
+	-webkit-transition-property: background-color, transform;
+	transition-property: background-color, transform;
+	position: absolute;
+	display: block;
+	width: 26px;
+	height: 26px;
+	border-radius: 27px;
+	background-color: #fff;
+	top: 3px;
+	left: 4px;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.15);
+
+	&:before {
+		position: absolute;
+		top: -4px;
+		left: -21.5px;
+		padding: 18.5px 34px;
+		content: " ";
+	}
+}
+.um-switch2 {
+	display: inline-block;
+	input[type="checkbox"] {
+		display: none;
+		&~ .um-switch2-check {
+			background-color: #FFF;
+			padding: 11px 9px;
+			border-radius: $border-radius-large;
+			vertical-align: middle;
+			display: inline-block;
+			position: relative;
+			margin-right: 30px;
+			background: #F7836D;
+			width: 55px;
+			height: 10px;
+			box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(245, 146, 146, 0.4);
+			box-sizing: content-box;
+			transition: all 0.1s ease-in;
+			pointer-events: none;
+			&:before {
+				content: ' ';
+				position: absolute;
+				background: #FFF;
+				top: 0px;
+				z-index: z("little");
+				left: 0px;
+				width: 24px;
+				color: #FFF;
+				height: 32px;
+				border-radius: $border-radius-large;
+				box-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
+				transition: all 0.1s ease-in;
+			}
+			&:after {
+				content: attr(data-off-text);
+				position: absolute;
+				top: 2px;
+				color: white;
+				font-size: .8em;
+				left: 8px;
+				padding: 5px;
+				border-radius: 100px;
+				transition: all 0.1s ease-in;
+			}
+			&:after {
+				left: 35px;
+			}
+		}
+		&:checked ~ .um-switch2-check {
+			background: #67A5DF;
+			box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(146, 196, 245, 0.4);
+		}
+		&:checked ~ .um-switch2-check:before {
+			content: ' ';
+			position: absolute;
+			z-index: z("little");
+			left: 49px;
+		}
+		&:checked ~ .um-switch2-check:after {
+			content: attr(data-on-text);
+			left: 6px;
+		}
+	}
+}

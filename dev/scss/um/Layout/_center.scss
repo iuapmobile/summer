@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+// 几种居中定位样式
+
+
+// 绝对定位 在需要居中的元素上添加该类，其父盒子需要绝对或者相对定位
+
+// 水平居中
+.um-css3-hc {
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+}
+//
+.um-css3-vc {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+
+.um-css3-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+
+// 流式布局居中 
+// 在需要居中元素的父盒子上设置
+
+// 水平垂直居中
+.um-box-center { @include flex-align(center, center); }
+// 水平居中
+.um-box-hc { @include flex-align(center); }
+// 垂直居中
+.um-box-vc { @include flex-align(null, center); }

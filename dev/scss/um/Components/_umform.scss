@@ -1,0 +1,160 @@
+@charset "utf-8";
+
+.um-list {
+	margin: 30px -15px;
+	background: #fff;
+	overflow: hidden;
+	position: relative;
+	// 该设置当ul里面没有行um-list-item时会有上下2边框
+	@include line-img(top);
+	border-width: 1px 0 1px 0;
+	&:empty {
+		border-width: 0;
+	}
+	/* 圆角列表 */
+	&.um-list-corner {
+		margin: 0;
+		border: 0; // popover不设置列表边框
+		border-radius: $border-radius-base;
+	}
+
+	/* 底线铺满的列表 */
+	&.um-list-full {
+		.um-list-item {
+			padding-left: 0;
+		}
+
+		.um-list-item-inner {
+			padding-left: 15px;
+		}
+
+	}
+
+	/* 嵌套列表 */
+	& & {
+		margin: 0;
+		border-width: 0;
+		padding-left: 30px;
+	}
+	>li:last-child>.um-list-item .um-list-item-inner:after,
+	>.um-list-item:last-child .um-list-item-inner:after,
+	& & li:last-child .um-list-item-inner:after,
+	& & >.um-list-item:last-child {
+		border-width: 0;
+	} 
+
+	/* 列表行单元 */
+	.um-list-item {
+		position: relative;
+		@include flex-align(null, center);
+		padding: 0;
+		padding-left: 15px;
+		color: $font-color;
+		transition: all ease .3s;
+	}
+	
+
+	/* 行链接 */
+	a.um-list-item {
+		cursor: pointer;
+		&:active,
+		&.active {
+			background-color: $btn-active-bgcolor;
+		}
+		&:before {
+			@include angle(10px, 10px, 2px, #c2c2c2, -135deg, true);
+			right: $padding-base-horizontal + 3px;
+			z-index: z("little");
+		}
+	}
+
+	.um-list-item-media {
+		margin-right: 12px;
+		@include flex-align(null, center);
+		z-index: 1;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	.um-list-item-inner {
+		position: relative;
+		//@include flex-align(null, center);
+		@include flex-align-justify; //该用法无法解决文字溢出问题
+		@include flex-count;
+		-webkit-align-self: stretch;
+		align-self: stretch;
+		/* 用伪类解决swipe-action一根红线的bug,因为不占空间？*/
+		&:after {
+			content:"";
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			@include line-img(bottom);
+		}
+		z-index: 1;
+	}
+
+	.um-list-item-body {
+		@include flex-count;
+		padding: $padding-base-vertical 0;
+		padding-right: 25px;
+		-webkit-align-self: stretch;
+		align-self: stretch;
+	}
+	.um-list-item-left {
+		padding: $padding-base-vertical 0;
+		-webkit-flex-shrink: 0;
+		flex-shrink: 0;
+		width: 35%;
+	}
+	.um-list-item-right {
+		padding-left: 5px;
+		padding-right: 14px;
+		text-align: right;
+		@include flex-count;
+		-webkit-flex-shrink: 1;
+  			flex-shrink: 1;
+	}
+
+}
+.um-list-left-icon {
+	margin-left: -30px;
+	opacity: 0;
+	transition: all ease-out .3s;
+}
+.um-list-left-open .um-list-left-icon {
+	margin-left: 0px;
+	opacity: 1;
+}
+// input[type=time],
+// input[type=number],
+// input[type=search],
+// input[type=text],
+// input[type=password],
+// input[type=email],
+// input[type=tel],
+// input[type=url],
+// input[type=date],
+// input[type=datetime-local],
+// select,
+// textarea
+.um-list .form-control {
+	@include appearance;
+	box-sizing: border-box;
+	border: none;
+	background: 0 0;
+	border-radius: 0;
+	box-shadow: none;
+	display: block;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	color: $font-color;
+	height: 100%;
+} 
+.um-list textarea.form-control {
+	height: 64px;
+}

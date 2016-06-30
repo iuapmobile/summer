@@ -1,0 +1,10 @@
+%um-reset-btn {
+	border-color: transparent;
+	border-radius: 0;
+	&:active,
+	&.active {
+		box-shadow: none;
+		background-color: $btn-active-bgcolor;
+		// opacity: .96;
+	}
+}

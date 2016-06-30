@@ -1,0 +1,68 @@
+@charset "utf-8";
+.um-list {
+	// 对于li标签下没有其他如a标签的元素，需要对其添加um-list-static
+	&.um-list-static {
+		// 在form表单内设置固定高度和居中对齐
+		>li {
+			padding: $padding-base-vertical;
+			@include line-img(bottom);
+			&:last-child {
+				border-width: 0;
+			}
+			>.btn {
+				margin: (-$padding-base-vertical) (-$padding-base-horizontal);
+				width: calc(100% + 24px);
+			}
+		} 
+	}
+	//列表右箭头样式
+	a.btn:before {
+		right: $padding-base-horizontal - 2px;
+		@include angle($w: 10px, $h:10px, $border-width:2px, $border-color:#c2c2c2, $deg:-135deg, $vc:true);
+	}
+	& &>li:first-child .btn,
+	>.btn:first-child {
+		@include line-img(r);
+	}
+	.um-list .btn {
+		padding-left: 0;
+	}
+	.btn {	
+		transition: all ease 0.3s;
+		@extend %um-reset-btn;
+		text-align: left;
+		color:$gray-dark;
+		@include line-img(bottom);
+	}
+	>li:last-child>.btn, 
+	>.btn:last-child {
+		border-width: 0;
+	}
+}
+
+.um-list-divider {
+  background-color: #E8E8E8;
+  padding: 0 12px;
+  font-weight: bold;
+  color: $font-color;
+}
+
+.um-list a.um-collapse-btn:before {
+	transition: all ease .3s;
+	@include transform(translate(0, -50%) rotate(135deg));
+}
+.um-list .um-open>a.um-collapse-btn:before {
+	@include transform(translate(0, -50%) rotate(-45deg));
+}
+.um-collapse-content {
+	display: none;
+	white-space: normal;
+	.um-collapse-text {
+		padding: ($padding-base-vertical + 1px) $padding-base-horizontal;
+	}
+	.um-open>& {
+		display: block;
+	}
+}
+
+

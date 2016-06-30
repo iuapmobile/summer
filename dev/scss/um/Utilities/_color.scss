@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* 常用颜色 */
+// 字体颜色 七彩色
+.um-red{color:$brand-danger;}
+.um-orange{color:$brand-warning;}
+.um-yellow{color:#ffcc00;}
+.um-green{color:$brand-success;}
+.um-cyan {color: cyan}
+.um-blue{color:$um-theme-color;}
+.um-purple{color:#c644fc;}
+
+// 黑白色
+.um-black{color:#000;}
+.um-white{color:#fff;}
+// 灰色
+.um-lighter{color:#ddd;}
+.um-gray{color:#999;}
+
+// 背景色
+.um-bgc-red{background-color:$brand-danger;}
+.um-bgc-orange{background-color:$brand-warning;}
+.um-bgc-yellow{background-color:#ffcc00;}
+.um-bgc-green{background-color:$brand-success;}
+.um-bgc-cyan {background-color: cyan}
+.um-bgc-blue{background-color:$um-theme-color;}
+.um-bgc-purple{background-color:#c644fc;}
+
+.um-bgc-black{background-color:#000;}
+.um-bgc-white{background-color:#fff;}
+
+.um-bgc-lighter{background-color:#ddd;}
+.um-bgc-gray{background-color:#999;}
+

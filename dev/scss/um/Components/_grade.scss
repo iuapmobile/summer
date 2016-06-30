@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+.um-grade {
+	overflow: hidden;
+}
+.um-grade-text {
+	display: inline-block;
+	vertical-align: middle;
+}
+.um-grade-out {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-right: 5px;
+	display: inline-block;
+	background-image: url(../img/grade-out.png);
+	background-size: 100%;
+	vertical-align: middle;
+	transition: background-image .1s ease-in;
+}
+.um-grade-in {
+	background-image: url(../img/grade-in.png);
+	background-size: 100%;
+}
+.um-grade-half {
+	background-image: url(../img/grade-half.png);
+	background-size: 100%;
+}

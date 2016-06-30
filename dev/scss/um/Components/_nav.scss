@@ -1,0 +1,20 @@
+.um-nav {
+	overflow: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar{display: none;}
+}
+.um-nav-inner {
+	display: -webkit-box;
+	display: box;
+	-webkit-box-align: center;
+	box-align: center;
+}
+.um-nav-item {
+	&:active,&.active {
+		color: $um-theme-color;
+	}
+	display: block;
+	padding: 10px;
+	text-align: center;
+}

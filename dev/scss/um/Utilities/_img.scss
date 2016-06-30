@@ -1,0 +1,19 @@
+// Images
+
+// Responsive images (ensure images don't scale beyond their parents)
+.um-img-responsive {
+  @include um-img-responsive(inline-block);
+}
+
+// Image thumbnails
+// Heads up! This is mixin-ed into thumbnails.less for `.thumbnail`.
+.um-img-thumbnail {
+  padding: $thumbnail-padding;
+  line-height: $line-height-base;
+  background-color: $thumbnail-bg;
+  border: 1px solid $thumbnail-border;
+  border-radius: $thumbnail-border-radius;
+  transition: all .2s ease-in-out;
+  // Keep them at most 100% wide
+  @include um-img-responsive(inline-block);
+}

@@ -1,0 +1,52 @@
+$z-layers: (
+  "super":           9999999,
+  "highest":         9999, 
+  "mid":             99,
+  "little":          2,
+  "default":         1,
+  "below":           -1,
+  "bottomless":      -9000,
+  "base":(
+    "header":        5,
+    "footer":        9,
+    "overlay":       99,
+    "model":         9999
+  )
+);
+// model > footer > header >default
+@function map-has-nested-keys($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @return false;
+    }
+    $map: map-get($map, $key);
+  }
+  
+  @return true;
+}
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+ 
+  @return $map;
+}
+@function z($layers...) {
+  @if not map-has-nested-keys($z-layers, $layers...) {
+    @warn "No layer found for `#{inspect($layers...)}` in $z-layers map. Property omitted.";
+  }
+ 
+  @return map-deep-get($z-layers, $layers...);
+}
+
+//   header {
+//     z-index: z("base", "header");
+//   }
+//  
+//   footer {
+//     z-index: z("base", "footer");
+//   }
+// }
+// .goku {
+//   z-index: z("mid");
+// }

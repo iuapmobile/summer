@@ -1,0 +1,74 @@
+@charset "utf-8";
+.um-header-title {
+	font-size: 1em;
+	// max-height: 44px;
+	text-align: center;
+	display: block;
+	margin: 0;
+	padding: 9px 0;
+	white-space: nowrap;
+	@include text-overflow;
+	pointer-events: none;
+}
+.um-header {
+	position: relative;
+	min-height: 44px;
+	background-color: $header-bgcolor;
+	@extend .um-border-bottom;
+	z-index: z("base", "header");
+	h3 {
+		@extend .um-header-title;
+	}
+}
+
+// 多个按钮在header右边时的容器
+.um-header-btns {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 10px;
+	@include flex-align(null, center);
+}
+
+// 左侧按钮
+.um-back,
+.um-header-left {
+	height: 44px;
+	line-height: 44px;
+	min-width: 44px;
+}
+
+.um-back,
+.um-header-right,
+.um-header-left {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	font-weight: 500;
+	color: $um-theme-color;
+	// font-size: $font-size-base; 图标可以使用f20
+	line-height: 44px;
+	text-decoration: none;
+	&[class*="ti-"] {
+		line-height: 44px;
+	}
+	&.btn {
+		color: $um-theme-color;
+	}
+
+	&:hover,
+	&:active {
+		opacity: .3;
+	}
+
+}
+
+// 返回按钮
+.um-back:before {
+	@include angle;
+}
+
+.um-header-right {
+	left: auto;
+	right: 10px;
+}

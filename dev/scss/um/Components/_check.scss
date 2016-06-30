@@ -1,0 +1,120 @@
+@charset "utf-8";
+// .um-check-group专门为垂直单选框和复选框组设计
+.um-check-group {
+	position: relative;
+	overflow: hidden;
+	margin: 30px -15px 0;
+	color: $um-theme-color;
+}
+
+// 单选复选行单元
+.um-check-group-item {
+	position: relative;
+	@include text-overflow;
+	background-color: #fff;
+	padding: $padding-base-vertical $padding-base-horizontal;
+	transition-duration: 200ms;
+	&:after {
+		@extend %line;
+		left: $padding-base-horizontal;
+		bottom: 0;
+	}
+	* {
+		pointer-events: none; // 移动设备label里面的元素不冒泡？
+	}	
+	&:first-child, &:last-child {
+		@include line-img(top);
+	}
+	&:last-child {
+		border-width: 0 0 1px 0;
+		&:first-child {
+			border-width: 1px 0 1px 0;
+		}
+	}
+	// 单选框复选框组
+	// hide checkbox and radio 
+	& input[type=checkbox], & input[type=radio] {
+		display: none;
+	}
+	
+	& input[type=radio]~.um-icon-check,
+	& input[type=checkbox]~.um-icon-check,
+	& input[type=radio]~.um-icon-checkbox,
+	& input[type=checkbox]~.um-icon-checkbox {
+		display: none;
+		right: $padding-base-vertical;// icon in right
+	}
+
+	& input[type=checkbox]:checked~.um-icon-checkbox, 
+	& input[type=radio]:checked~.um-icon-check,
+	& input[type=checkbox]:checked~.um-icon-check, 
+	& input[type=radio]:checked~.um-icon-checkbox  {
+		display: inline-block;
+	}
+	&.active,&:active {
+		transition-duration: 0ms;
+		background-color: $border-color;
+	}
+	&:last-child:after {
+		content: none;
+	}
+}
+/* check icon in left */
+.um-check-group-left {
+	// um-check-group
+	.um-check-group-item {
+		padding-left: 40px;
+		&:after {
+			left: 40px;
+		}
+		& input[type="radio"]~.um-icon-check,
+		& input[type="checkbox"]~.um-icon-check {
+			left: 10px;
+		}
+		& input[type="radio"]~.um-icon-checkbox,
+		& input[type="checkbox"]~.um-icon-checkbox {
+			left:10px;
+			display: block;
+		}
+	}
+}
+.um-check-group-media {
+	.um-check-group-item {
+		padding-left: 40px;
+		&:after {
+			left: 40px;
+		}
+		.um-check-group-item-icon {
+			width: 20px;
+			height: 20px;
+			background: url(../img/portal.jpg) center;
+			background-size: 20px;
+			border-radius: 50%;
+			left: 8px;
+		}
+	}
+}
+
+.um-check-inline {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+    color: $um-theme-color;
+	// checkbox icon 无宽高，child绝对定位
+	padding-left: 20px;
+	.um-icon-checkbox {
+		left: 0;
+	}
+	input[type="checkbox"]~.um-icon-check {
+		display: none;
+		left: 0;
+	}
+	input[type="checkbox"]:checked~.um-icon-check {
+		display: inline-block;
+	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		display: none;
+	}
+}
+

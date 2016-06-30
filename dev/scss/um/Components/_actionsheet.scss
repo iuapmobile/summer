@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* 弹窗popup */
+.um-actionsheet {
+	position: absolute;
+	bottom: 0;
+	left: 5px;
+	right: 5px;
+	-webkit-transition:-webkit-transform ease .3s;
+	transition:transform ease .3s;
+	z-index: z("base","model");
+	@include translate3d(0,100%,0);
+	.um-list.um-list-corner {
+		margin-bottom: 6px;
+	}
+	&.active {
+		@include translate3d(0,0,0);
+	}
+	.btn {
+		@extend %um-reset-btn;
+		color: $um-theme-color;
+		padding-top: $padding-base-vertical - 2px;
+		padding-bottom: $padding-base-vertical - 2px;
+		text-align: center;
+		font-size: $font-size-base * 1.2;
+		&.popup-title {
+			font-size: $font-size-small;
+			white-space: normal;
+			color: $font-color;
+		}
+		&:after {
+			display: none;
+		}
+	}
+}
+.um-poppicker {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0 -15px;
+	-webkit-transition:-webkit-transform ease .3s;
+	transition:transform ease .3s;
+	z-index: z("base","model");
+	@include translate3d(0,100%,0);
+	&.active {
+		@include translate3d(0,0,0);
+	}
+	.btn {
+		@extend %um-reset-btn;
+		color: $um-theme-color;
+		text-align: right;
+		padding-right: 23px;
+		&:after {
+			display: none;
+		}
+	}
+	.um-poppicker-content {
+		padding: 15px 23px;
+		font-size: $font-size-small; 
+		color: $font-color;
+		background-color: #cfd5da;
+	}
+}

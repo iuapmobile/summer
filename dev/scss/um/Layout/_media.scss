@@ -1,0 +1,23 @@
+
+.um-media-left,
+.um-media-right,
+.um-media-body {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 50px;
+}
+.um-media-body {
+	max-width: 80%;
+}
+.um-media-right {
+	padding-left: 10px;
+}
+.um-media-left {
+	padding-right: 10px;
+}
+// Reset margins on headings for tighter default spacing
+.um-media-heading {
+	margin-top: 0;
+	margin-bottom: 5px;
+	font-weight: normal;
+}

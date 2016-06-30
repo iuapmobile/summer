@@ -1,0 +1,139 @@
+@charset "utf-8";
+.btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  color: $um-btn-color;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid $um-btn-border;
+  // white-space: nowrap;
+  -webkit-user-select: none;
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+  &[class*="ti-"] {
+    font-family: 'themify',$font-family-default;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  &:visited {
+    //color: inherit;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &:active, &.active {
+    outline: 0;
+    // background-color: $gray-lighter;
+    box-shadow: inset 2px 3px 5px rgba(0, 0, 0, 0.12);//inset 0 3px 5px rgba(0, 0, 0, .125);
+    opacity: .95;
+  }
+  &.disabled, &[disabled], fieldset[disabled] & {
+    cursor: $cursor-disabled;
+    pointer-events: none;
+    opacity: .6;
+  }
+}
+.btn-gray {
+  @include button-variant($font-color, #fff, #e6e6e6);
+}
+// colorful buttons
+.btn-primary {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+// Success appears as green
+.btn-success {
+  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+// Info appears as blue-green
+.btn-info {
+  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+}
+// Warning appears as orange
+.btn-warning {
+  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+}
+// Danger and error appear as red
+.btn-danger {
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+}
+.um-btn {
+  @extend .btn;
+  @include button-variant($um-btn-bgcolor, $um-btn-color, $um-btn-border);
+}
+.um-btn-gray {
+  @include button-variant($font-color, #ddd, #ddd);
+}
+.um-btn-primary {
+  @include button-variant($btn-primary-bg, $btn-primary-color, $btn-primary-border);
+}
+// Success appears as green
+.um-btn-success {
+  @include button-variant($btn-success-bg, $btn-success-color, $btn-success-border);
+}
+// Info appears as blue-green
+.um-btn-info {
+  @include button-variant($btn-info-bg, $btn-info-color, $btn-info-border);
+}
+// Warning appears as orange
+.um-btn-warning {
+  @include button-variant($btn-warning-bg, $btn-warning-color, $btn-warning-border);
+}
+// Danger and error appear as red
+.um-btn-danger {
+  @include button-variant($btn-danger-bg, $btn-danger-color, $btn-danger-border);
+}
+// Link buttons
+// -------------------------
+
+// Make a button look and behave like a link
+.btn-link {
+  &, &:focus,&:visited &:active, &.active, &[disabled], fieldset[disabled] & {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  &[disabled], fieldset[disabled] & {
+    &:hover, &:focus {
+      color: $btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+}
+.btn-sm {
+  // line-height: ensure proper height of button next to small input
+  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+}
+.btn-xs {
+  @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+}
+// inline button
+// --------------------------------------------------
+
+.btn-inline {
+  display: inline-block;
+  width: auto;
+}
+.btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+

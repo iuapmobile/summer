@@ -1,0 +1,19 @@
+.um-panel {
+	min-height: 30px;
+  	padding: 15px;
+  	margin-bottom: 20px;
+  	background-color: $panel-bg;
+  	border: 1px solid $panel-border;
+  	border-radius: $border-radius-base;
+  	box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  	&.um-row {
+  		border-radius: 0;
+  		border: none;
+  	}
+  	.um-panel-row {
+  		margin-bottom: 10px;
+  		&:last-child {
+  			margin-bottom: 0;
+  		}
+  	}
+}

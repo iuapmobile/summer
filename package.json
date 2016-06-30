@@ -1,0 +1,25 @@
+{
+  "name": "summer",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "gct",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcht/summer.git"
+  },
+  "keywords": [
+    "summer"
+  ],
+  "bugs": {
+    "url": "https://github.com/gcht/summer/issues"
+  },
+  "homepage": "https://github.com/gcht/summer#readme",
+  "description": "",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

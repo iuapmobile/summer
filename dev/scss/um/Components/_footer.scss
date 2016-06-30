@@ -1,0 +1,52 @@
+@charset "utf-8";
+.um-footer {
+	min-height: 44px;
+	// @include flex-align;
+	z-index: z("base", "footer");
+	text-align: center;
+	// @include line-img(top);
+	background-color: $header-bgcolor;
+}
+.um-footer-fixed {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	z-index: z("mid");
+}
+.um-footerbar {
+	@include flex-align;
+	//@include flex-count; 去除um-footer后和um-content flex为1
+	//width: 100%;
+	border: none;
+	border-radius: 0;
+}
+.um-footerbar-item {
+	display: block;
+	@include flex-count;
+	text-align: center;
+	color: #919191;
+	
+	padding-top: 5px;	
+	padding-bottom: 3px;
+	// width: 64px;
+	transition: color ease .3s;
+	&.active {
+		color: $um-theme-color;
+	}
+	img {
+		margin: 0 auto;
+	}
+}
+@supports (display: -webkit-flex) or
+          (display: flex) {
+	.um-footerbar-item {
+		display: inline-block;
+	}
+}
+
+// 以下为兼容上一版的样式
+.um-footerbar-item-text {
+	font-size: 12px;
+	line-height: 1;
+}

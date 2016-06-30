@@ -1,0 +1,32 @@
+.um-sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: $sidebar-width;
+	height: 100%;
+	overflow: auto;
+	transition: cubic-bezier(.32, .82, .45, .98) .4s;
+	@include transform(translate3d(-100%, 0, 0));
+	@include flex-align;
+	@include flex-orient(v);
+	background: $um-body-bg-color;
+}
+.um-sidebar-right,.um-sidebar-left {
+	z-index: z("base","model");
+}
+.um-sidebar-right {
+	right: 0;
+	left: auto;
+	@include transform(translate3d(100%, 0, 0));
+}
+.active.um-sidebar-left, .active.um-sidebar-right {
+	@include transform(translate3d(0, 0, 0));
+}
+
+.um-page-pushfromleft {
+	@include translate3d($sidebar-width,0,0);
+}
+
+.um-page-pushfromright {
+	@include translate3d(-$sidebar-width,0,0);
+}

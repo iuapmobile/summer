@@ -1,0 +1,282 @@
+// Variables
+// --------------------------------------------------
+
+//IOS header font color == #017afd
+// header bg color == #f6f6f6
+// body bg color == #f0eff4
+// border -color #c8c8ca
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+$um-theme-color:		 #007aff !default;
+$um-body-bg-color:       #efeff4 !default;
+
+
+
+$border-color:           #d7d7d7 !default;//  #c8c8cc
+
+$dark: 					 #000 !default;
+$gray-base:              lighten($dark, 10%) !default;
+$gray-darker:            lighten($dark, 13.5%) !default; // #222
+$gray-dark:              lighten($dark, 15.5%) !default;   // #282828
+$gray:                   lighten($dark, 33.5%) !default; // #555
+$gray-light:             lighten($dark, 46.7%) !default; // #777
+$gray-lighter:           lighten($dark, 93.5%) !default; // #eee
+
+$brand-primary:         #34aadc !default;//darken(#428bca, 6.5%) !default; // #337ab7
+$brand-success:         #4cd964 !default;//#5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #ff9500 !default;
+$brand-danger:          #ff3b30 !default;
+$brand-gray:          	#d9d9d9 !default;
+
+$font-color:			 $dark !default;
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-default:     "Helvetica Neue",Helvetica,"Microsoft Yahei",STHeiTi,Tahoma,Arial,Roboto,"Droid Sans","Droid Sans Fallback","Heiti SC","Hiragino Sans GB",Simsun,sans-self !default;
+//"Heiti SC", "Microsoft Yahei", "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-default !default;
+
+$font-size-base:          17px !default;
+$font-size-large:         $font-size-base * 1.2 !default; // ~20px
+$font-size-small:         $font-size-base * 0.85 !default; // ~13.5px
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.5 !default;//1.428571429  // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    $font-size-base * $line-height-base !default; // ~20px
+
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+$padding-base-vertical:     1 * 9px !default;
+$padding-base-horizontal:   1.2 * 10px !default;
+
+$padding-large-vertical:    1.2 * 10px !default;
+$padding-large-horizontal:  1.6 * 10px !default;
+
+$padding-small-vertical:    0.6 * 10px !default;
+$padding-small-horizontal:  1.2 * 10px !default;
+
+$padding-xs-vertical:       1px !default;
+$padding-xs-horizontal:     5px !default;
+
+$line-height-large:         2 !default; // extra decimals for Win 8.1 Chrome
+$line-height-small:         1.1 !default;
+
+$border-radius-base:        5px !default;
+$border-radius-large:       7px !default;
+$border-radius-small:       3px !default;
+
+//== Components
+//
+// list
+
+//$list-border-color:            #ddd !default;
+
+//== Tables
+//
+
+$panel-bg:                     #fefefe !default;
+$panel-border:                 darken($panel-bg, 7%) !default;
+
+// modal
+$modal-bgcolor:            	   #fff !default;// #e8e8e8 !default;
+$modal-active-bgcolor:         rgba(222,232,235,.95) !default;
+// header
+$header-bgcolor:  	 		 #f5f5f7 !default;
+
+// side bar
+$sidebar-width:                80% !default;
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+$btn-active-bgcolor:             rgba(230,230,230,.95) !default;
+
+$um-btn-color:           		 $um-theme-color !default;
+$um-btn-bgcolor:              	 #fff !default;
+$um-btn-border:          		 $um-theme-color !default;
+
+$btn-primary-color:              $brand-primary !default;
+$btn-primary-bg:                 #fff !default;
+$btn-primary-border:             $brand-primary !default;//darken($btn-primary-bg, 5%) !default;
+
+$btn-success-color:              $brand-success !default;
+$btn-success-bg:                 #fff !default;
+$btn-success-border:             $brand-success !default;
+
+$btn-info-color:                 $brand-info !default;
+$btn-info-bg:                    #fff !default;
+$btn-info-border:                $brand-info !default;
+
+$btn-warning-color:              $brand-warning !default;
+$btn-warning-bg:                 #fff !default;
+$btn-warning-border:             $brand-warning !default;
+
+$btn-danger-color:               $brand-danger !default;
+$btn-danger-bg:                  #fff !default;
+$btn-danger-border:              $brand-danger !default;
+
+$btn-link-disabled-color:        $gray-light !default;
+
+//== Forms
+//
+//##
+
+//** `<input>` background color
+$input-bg:                       #fff !default;
+//** `<input disabled>` background color
+$input-bg-disabled:              $gray-lighter !default;
+
+//** Text color for `<input>`s
+$input-color:                    $gray !default;
+//** `<input>` border color
+$input-border:                   rgba(0,0,0,.1) !default;
+
+// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
+$input-border-radius:            $border-radius-base !default;
+//** Large `.form-control` border radius
+//$input-border-radius-large:      $border-radius-large !default;
+//** Small `.form-control` border radius
+//$input-border-radius-small:      $border-radius-small !default;
+
+//** Border color for inputs on focus
+$input-border-focus:             #66afe9 !default;
+
+//** Placeholder text color
+$input-color-placeholder:        #939398 !default;
+
+//** Default `.form-control` height
+$input-height-base:              ($line-height-computed + ($padding-base-vertical * 1.6)) !default;
+//** Large `.form-control` height
+//$input-height-large:             ($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 0.2 !default;
+//** Small `.form-control` height
+//$input-height-small:             ($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 0.2 !default;
+
+
+//** Disabled cursor for form controls and buttons.
+$cursor-disabled:                not-allowed !default;
+
+// Extra small screen / phone
+//** Deprecated `$screen-xs` as of v3.0.1
+$screen-xs:                  48 * 10px !default;
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              $screen-xs !default;
+//** Deprecated `$screen-phone` as of v3.0.1
+$screen-phone:               $screen-xs-min !default;
+
+// Small screen / tablet
+//** Deprecated `$screen-sm` as of v3.0.1
+$screen-sm:                  76.8 * 10px !default;
+$screen-sm-min:              $screen-sm !default;
+//** Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet:              $screen-sm-min !default;
+
+// Medium screen / desktop
+//** Deprecated `$screen-md` as of v3.0.1
+$screen-md:                  99.2 * 10px !default;
+$screen-md-min:              $screen-md !default;
+//** Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop:             $screen-md-min !default;
+
+// Large screen / wide desktop
+//** Deprecated `$screen-lg` as of v3.0.1
+$screen-lg:                  120 * 10px !default;
+$screen-lg-min:              $screen-lg !default;
+//** Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop:          $screen-lg-min !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns:              12 !default;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         3 * 10px !default;
+
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+$container-tablet:             (72 * 10px + $grid-gutter-width) !default;
+//** For `$screen-sm-min` and up.
+$container-sm:                 $container-tablet !default;
+
+// Medium screen / desktop
+$container-desktop:            (94 * 10px + $grid-gutter-width) !default;
+//** For `$screen-md-min` and up.
+$container-md:                 $container-desktop !default;
+
+// Large screen / wide desktop
+$container-large-desktop:      (114 * 10px + $grid-gutter-width) !default;
+//** For `$screen-lg-min` and up.
+$container-lg:                 $container-large-desktop !default;
+
+
+//== Progress bars
+//
+//##
+
+//** Background color of the whole progress component
+$progress-bg:                 #dfdfdf !default;
+//** Progress bar text color
+$progress-bar-color:          #fff !default;
+//** Variable for setting rounded corners on progress bar.
+$progress-border-radius:      $border-radius-base !default;
+
+//** Default progress bar color
+$progress-bar-bg:             $um-theme-color !default;
+$progress-bar-primary-bg:     $brand-primary !default;
+//** Success progress bar color
+$progress-bar-success-bg:     $brand-success !default;
+//** Warning progress bar color
+$progress-bar-warning-bg:     $brand-warning !default;
+//** Danger progress bar color
+$progress-bar-danger-bg:      $brand-danger !default;
+//** Info progress bar color
+$progress-bar-info-bg:        $brand-info !default;
+
+
+//== Thumbnails
+//
+//##
+
+//** Padding around the thumbnail image
+$thumbnail-padding:           4px !default;
+//** Thumbnail background color
+$thumbnail-bg:                #fff !default;
+//** Thumbnail border color
+$thumbnail-border:            #ddd !default;
+//** Thumbnail border radius
+$thumbnail-border-radius:     $border-radius-base !default;
+
+
+//== Badges
+//
+//##
+
+$badge-color:                 #fff !default;
+//** Linked badge text color on hover
+$badge-link-hover-color:      #fff !default;
+$badge-bg:                    $gray-light !default;
+
+$badge-font-weight:           bold !default;
+$badge-line-height:           1 !default;
+$badge-border-radius:         10px !default;
+
+$hr-border:                   $gray-lighter !default;

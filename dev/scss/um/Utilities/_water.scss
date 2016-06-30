@@ -1,0 +1,33 @@
+.um-water {
+	content: "";
+	position: absolute;
+	background-color: #007aff;
+	border-radius: 100%;
+	display: inline-block;
+	height: 300px;
+	width: 300px;
+	pointer-events: none;
+	z-index: z("little");
+	-webkit-animation: ball-scale 1.5s both ease-out;
+	animation: ball-scale 1.5s both ease-out;
+}
+@-webkit-keyframes ball-scale {
+	0% {
+		-webkit-transform: scale(0);
+		opacity: .8;
+	}
+	100% {
+		-webkit-transform: scale(3);
+		opacity: 0
+	}
+}
+@keyframes ball-scale {
+	0% {
+		transform: scale(0);
+		opacity: .8;
+	}
+	100% {
+		transform: scale(3);
+		opacity: 0
+	}
+}

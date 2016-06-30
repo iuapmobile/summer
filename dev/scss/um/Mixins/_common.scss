@@ -1,0 +1,54 @@
+
+// Source:http://nicolasgallagher.com/micro-clearfix-hack/
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    // 1
+    display: table;
+    // 2
+  }
+
+  &:after {
+    clear: both;
+  }
+
+}
+
+@mixin hide-text() {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+// 文字隐藏
+@mixin text-hide() {
+  @include hide-text;
+}
+
+// 文字溢出处理
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// css3居中处理
+@mixin transform-center($x:-50%, $y:-50%) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate($x, $y);
+  transform: translate($x, $y);
+}
+
+
+// - Responsive image
+// - Retina image
+// Keep images from scaling beyond the width of their parents.
+@mixin um-img-responsive($display: block) {
+  display: $display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}

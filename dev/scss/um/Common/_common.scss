@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+// 文字隐藏
+.um-text-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+/* 去除圆角 */
+.um-no-brs {
+	border-radius: 0 !important;
+}
+
+/* 去除um-list um-list列表行的激活背景状态 */
+.um-no-active {
+	&.um-list .um-list-item:active {
+		background-color: inherit;
+	}
+	&.um-list .btn:active {
+		background-color: inherit;
+	}
+}
+
+/* 遮罩 overlay默认显示，um-overlay默认隐藏,加active类显示*/
+.um-overlay, .overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+	background-color: rgba(0, 0, 0, .4);
+	display: block;
+	z-index: z("base", "overlay");
+}
+.um-overlay {
+	display: none;
+}
+.um-overlay.active {
+	display: block;
+}
+.um-text-overflow {
+	@include text-overflow;
+}
+// 文本超过3行溢出时显示省略号...
+.um-text-overflow2,
+.um-text-overflow3 {
+	display: -webkit-box;
+	display: box;
+	-webkit-line-clamp: 2;
+	word-wrap: break-word;
+	word-break: break-all;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+}
+.um-text-overflow3 {
+	-webkit-line-clamp: 3;
+}
+.um-vw100 {
+	height: 100vw;
+}
+.um-no-icon {
+	&:before,&.um-list-item:after {
+		content: none !important;
+	}
+}
+
+.um-noborder {
+	border: none !important;
+}
+// Rounded corners 圆角设置
+.um-rounded {
+	border-radius: $border-radius-large;
+}
+// Perfect circle
+.um-circle {
+	border-radius: 50%;
+	// set radius in percents
+}
+// 方形无圆角
+.um-page .um-square {
+	border-radius: 0;
+}
+
+.um-transition-default {
+	transition-duration: .4s;
+	transition-timing-function: ease;
+}

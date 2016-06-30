@@ -1,0 +1,22 @@
+.um-label {
+	font-weight: normal;
+	background-color: #FFFFFF;
+  	padding-left: 15px;
+  	padding-right: 10px;
+  	margin: 0 -15px;
+  	max-width: none;
+	height: 44px;
+	// line-height: 44px;
+	overflow: hidden;
+	&+&{
+		border-top: 1px solid #d7d7d7;
+	}
+	.form-control {
+		@include appearance;
+		border:none;
+		color: $font-color;
+		&:focus {
+			box-shadow: none;
+		}
+	}
+}

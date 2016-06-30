@@ -1,0 +1,206 @@
+@charset "utf-8";
+// Forms
+// Restyle and baseline non-control form elements.
+
+label {
+    display: block;
+    max-width: 100%;
+    // font-weight: bold; 单选框复选框不应该粗体
+    cursor: pointer;
+}
+
+// Override content-box in Normalize (* isn't specific enough)
+input[type="search"] {
+    box-sizing: border-box;
+}
+
+// Search inputs in iOS
+
+input[type="search"],
+[type="reset"],
+[type="submit"],
+[type="file"],
+[type="number"] {
+    -webkit-appearance: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    &[disabled],
+    &.disabled,
+    fieldset[disabled] & {
+        cursor: $cursor-disabled;
+    }
+}
+.form-control[type=date] {
+   height: auto;
+   background-image: none;
+   font-size: 14px;
+}
+
+// 文件上传按钮美化
+input[type="file"] {
+    display: block;
+    &:focus,&:active {
+        opacity: .5;
+        outline: none;
+    }
+    &:focus {
+          outline: 5px auto -webkit-focus-ring-color;
+    }
+    &::-webkit-file-upload-button {
+        border:none;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        color: #fff;
+        background-color: #007aff;
+        background-image: none;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        padding: $padding-small-vertical $padding-small-horizontal;
+        font-size: 16px;
+        line-height: 1.42857;
+        border-radius: $border-radius-small;
+    }
+}
+
+// Make multiple select elements height not fixed
+select.form-control,
+select.form-control[multiple],
+select.form-control[size] {
+    height: auto;
+    background-image: none;
+    font-size: 14px;
+}
+// Reset height for `textarea`s
+textarea.form-control {
+    height: 64px;
+}
+input[type="number"].form-control {
+    height: auto; // 避免数字被遮住
+    padding: $padding-small-vertical $padding-small-horizontal;
+}
+
+// Common form controls
+//
+// Shared size and type resets for form controls. Apply `.form-control` to any
+// of the following form controls:
+//
+// select
+// textarea
+// input[type="text"]
+// input[type="password"]
+// input[type="datetime"]
+// input[type="datetime-local"]
+// input[type="date"]
+// input[type="month"]
+// input[type="time"]
+// input[type="week"]
+// input[type="number"]
+// input[type="email"]
+// input[type="url"]
+// input[type="search"]
+// input[type="tel"]
+// input[type="color"]
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: $input-height-base;
+    // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    padding: $padding-base-vertical $padding-base-horizontal;
+    font-size: $font-size-base;
+    font-family: $font-family-default;
+    line-height: $line-height-base;
+    color: $input-color;
+    background: url('about:blank') $input-bg;
+     /* 重置设备的默认背景颜色和图片 see https://github.com/necolas/normalize.css/issues/214 */
+    border: 1px solid $input-border;
+    border-radius: $input-border-radius;
+    transition: border-color ease-in-out 0.15s;
+    @include form-control-focus;
+    // Placeholder
+    @include placeholder;
+    // clear box-shadow in IOS Safria
+    &[disabled],
+    &[readonly],
+    fieldset[disabled] & {
+        background-color: $input-bg-disabled;
+        opacity: 1;
+        // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+    }
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: $cursor-disabled;
+    }
+    // clear input text
+    &+.um-input-clear {
+        position: absolute;
+        right: 8px;
+        cursor: pointer;
+        top: 50%;
+        @include transform(translate(0, -50%));
+        z-index: z("little");
+        color: rgba(0,0,0,0);
+    }
+}
+
+.um-input-search {
+    @include flex-align(null,center);
+    padding: $padding-base-vertical $padding-base-horizontal;
+    background-color: #c8c8cd;
+    margin-left: -15px;
+    margin-right: -15px;
+    .form-control {
+        background: url(../img/search.png) 5px 50% #fff no-repeat;
+        transition: width cubic-bezier(.7,.27,.46,.9) .3s;
+        background-size: $font-size-base;
+        padding-left: 25px;
+        height: 30px;
+        border: none;
+        font-size: 14px;
+        & + .um-input-cancle {
+            display: none;
+            color: $um-theme-color;
+            @include flex-count;
+            transition: width ease-in .3s;
+            min-width: 50px;
+            padding-left: 10px;
+            cursor: pointer;
+        }
+        &:focus {
+            width: calc(100% - 50px);
+            border: none;
+            box-shadow: none;
+            & ~ .um-input-cancle {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.um-input-text {
+    @include flex-align;
+    border-bottom: 1px solid $border-color;
+    .um-input-left-icon {
+        display: block;
+        margin-top: 15px;
+        margin-right: 5px;
+        z-index: z("little");
+    }
+    .form-control {
+        @include flex-count;
+        color: $font-color;
+        border-width: 0 0 1px 0;
+        border-radius: 0;
+        margin-top: 0;
+        border: none;
+        background-color: transparent;
+        padding-bottom: 0;
+        padding-left: 0;
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}

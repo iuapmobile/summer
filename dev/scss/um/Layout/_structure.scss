@@ -1,0 +1,75 @@
+@charset "utf-8";
+.um-page {
+	//position: absolute;width: 100%;height: 100%; 安卓设备的QQ微信上有bug----表格无法设置滚动
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	// height: 100%;
+	@include flex-align;
+	@include flex-orient(v);
+	visibility: hidden;
+	//overflow: hidden;
+    z-index: -1;
+   background-color: $um-body-bg-color;
+   &.active {
+		visibility: visible;
+		z-index: z("little");
+	}
+   &.um-page-forward {
+   		z-index: z("mid");
+   }
+   &.in:before,&.out:before {
+   		content: "";
+  		position: absolute;
+  		left: 0;
+  		right: 0;
+  		top: 44px;
+  		bottom: 0;
+   		box-shadow: -2px 0px 10px #d9d9d9;
+   		z-index: -1;
+   } 
+}
+.um-content {
+/* position:absolute;top:44px;right:0;bottom:50px;left:0; */
+	padding-left: 15px;
+	padding-right: 15px;
+	overflow: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	@include flex-count;
+	@include transform-origin(top center);
+
+	&.um-content-fill {
+		padding-left: 0;
+		padding-right: 0;
+		.um-list, .um-check-group, .um-input-search, .um-label {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+	// @include animation(moveFromTop ease-out .4s);// .um-moveFromTop
+	// animation: rise ease-out .4s;
+} 
+
+	/* 适用于frame的html*/
+	html {
+	    height:auto;
+	    overflow: auto;
+	}
+	/* 适用于frame的um-page*/
+  	.um-page {
+    	position: static;
+  	}
+
+	/* 适用于win的html*/
+	html.um-win {
+		height:100%;
+		overflow: hidden;
+	}
+	/* 适用于win的um-page*/
+	.um-page.um-win {
+		position: absolute;
+	}
+	/*********gct dev**********************/

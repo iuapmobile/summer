@@ -1,0 +1,21 @@
+/* box model */
+.um-box { @include flex-align; }
+.um-bf1 { @include flex-count; }
+.um-bf2 { @include flex-count(2); }
+.um-bf3 { @include flex-count(3); }
+.um-bf4 { @include flex-count(4); }
+.um-direction-h {
+	@include flex-orient(h);
+}
+.um-direction-v {
+	@include flex-orient(v);
+}
+.um-box-justify { 
+	@include flex-align-justify;
+	>a { 
+		display: block;
+		&:active,&.active { 
+			color: $um-theme-color;
+		}
+	}
+}

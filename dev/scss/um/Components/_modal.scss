@@ -1,0 +1,64 @@
+.um-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -135px;
+	width: 270px;
+	overflow: hidden;
+	background-color: $modal-bgcolor;
+	text-align: center;
+	@include transform(scale3d(1.12, 1.12, 1));
+	@include transition-property(transform);
+	border-radius: $border-radius-base * 2.4;
+	.um-modal-content {
+		padding: 15px;
+	}
+	.um-modal-title {
+		font-weight: bold;
+		margin-top: 10px;
+        margin-bottom: 10px;
+	}
+	.um-modal-text {
+		margin: 5px 0;
+		font-size: 15px;
+		color: #222;
+	}
+	.um-modal-btns {
+		@include flex-align;
+		.btn {
+			@extend %um-reset-btn;
+			@extend .um-border-right;
+			@include flex-count;
+			background-color: $modal-bgcolor;
+			font-weight: bold;
+			&:visited {
+				color: $um-theme-color;
+			}
+			&:first-child {
+				border-bottom-left-radius: $border-radius-base * 2.4;
+			}
+			&:last-child {
+				border-right-width: 0;
+				border-bottom-right-radius: $border-radius-base * 2.4;
+			}
+		}
+	}
+	.form-control {
+		font-size: $font-size-small;
+		padding-top: $padding-base-vertical - 4px;
+		padding-bottom: $padding-base-vertical - 4px;
+		height: $input-height-base - 8px;
+	}
+	
+	&.um-modal-in {
+		z-index: z("base", "model");
+		transition: -webkit-transform ease-out .4s;
+		transition: transform ease-out .4s;
+		@include transform(scale3d(1, 1, 1));
+	}
+	&.um-modal-out {
+		transition: -webkit-transform ease-out .4s;
+		transition: transform ease-out .4s;
+		@include transform(scale3d(.9, .9, 1));
+	}
+}

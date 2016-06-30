@@ -1,0 +1,74 @@
+//
+// Button groups
+.btn-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; // match .btn alignment given font-size hack above
+  > .btn {
+    position: relative;
+    float: left;
+  }
+}
+
+// Prevent double borders when buttons are next to each other
+.btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.btn-group > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+// Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match
+.btn-group > .btn:first-child {
+  margin-left: 0;
+  &:not(:last-child) {
+    @include border-right-radius(0);
+  }
+}
+// Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
+.btn-group > .btn:last-child:not(:first-child) {
+  @include border-left-radius(0);
+}
+
+// Vertical button groups
+// ----------------------
+
+.btn-group-vertical {
+  > .btn {
+    display: block;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+  }
+  // Clear floats so dropdown menus can be properly placed
+  > .btn + .btn {
+    margin-top: -1px;
+    margin-left: 0;
+  }
+}
+
+.btn-group-vertical > .btn {
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  &:first-child:not(:last-child) {
+    border-top-right-radius: $border-radius-base;
+    @include border-bottom-radius(0);
+  }
+  &:last-child:not(:first-child) {
+    border-bottom-left-radius: $border-radius-base;
+    @include border-top-radius(0);
+  }
+}
+
+
+// Justified button groups
+// ----------------------
+
+.btn-group-justify {
+  @include flex-align;
+  > .btn {
+    @include flex-count;
+  }
+}
