@@ -1,8 +1,8 @@
-/*
+﻿/*
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com go
- * Version: 1.0.20160701
+ * Version: 1.0.20160701/
  */
 
 ;(function(w){
