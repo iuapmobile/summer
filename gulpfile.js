@@ -18,8 +18,6 @@ gulp.task('umcss',function(){
 	var path1 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ump/projects/default/css';
 	var path2 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/css';
 	var path3 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/files/css';
-	
-
 	gulp.src(src).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
 	
 	//3 update to studio
@@ -27,6 +25,10 @@ gulp.task('umcss',function(){
 	var studio2 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/css';
 	var studio3 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/files/css';
 	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3));
+	
+	//4 update to wzjc
+	var wzjc = '../wzjc/src/script';
+	gulp.src(src).pipe(gulp.dest(wzjc));
 });
 gulp.task('summer',function(){
 	
