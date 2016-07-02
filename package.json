@@ -18,8 +18,10 @@
     "url": "https://github.com/gcht/summer/issues"
   },
   "homepage": "https://github.com/gcht/summer#readme",
-  "description": "",
+  "description": "this is a summer libary",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.5.4"
   }
 }
