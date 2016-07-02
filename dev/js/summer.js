@@ -1076,12 +1076,7 @@
     }
 
     adrinvoker.call2 = function(srvName, strJson){
-        var plug = summer.require('summer-plugin-service.XService');
-        json = json || {};
-        if(isSync)
-           invoker.call(srvName,json);
-        else
-           invoker.call(srvName,json);
+        adrinvoker.call(srvName, strJson);
     }
     w.adrinvoker = adrinvoker;
 	
