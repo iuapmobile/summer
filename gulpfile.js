@@ -1,14 +1,58 @@
 ﻿var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+
 //var sass = require('gulp-sass');
-gulp.task('default',function(){
-    gulp.watch('dev/js/summer.js', ['summer']);
+
+var YOURPATH = {
+	gitPath : '../../gityy',//改写成你的真实路径
+	studioPath : '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile'//改写成你的真实路径
+};
+var SYSPATH = {
+	git:{},
+	studio:{},
+	wzjc:{}
+};
+gulp.task('init',function(){
+	//1、css git path
+	SYSPATH.git["tpl_ump_css"] = YOURPATH.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/ump/projects/default/css';
+	SYSPATH.studio["tpl_ratchet_css"] = YOURPATH.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/css';
+	SYSPATH.git["tpl_files_css"] = YOURPATH.gitPath + '/publibs/resources/designer/templates/system/webtemplates/files/css';
 	
-	gulp.watch('dev/js/plugins/*.js', ['iuapmobile.frameworks.ui']);
+	//2、css studio path
+	SYSPATH.studio["tpl_ump_css"] = YOURPATH.studioPath + '/MOB/designer/templates/system/webtemplates/frametemplate/ump/projects/default/css';
+	SYSPATH.studio["tpl_ratchet_css"] = YOURPATH.studioPath + '/MOB/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/css';
+	SYSPATH.studio["tpl_files_css"] = YOURPATH.studioPath + '/MOB/designer/templates/system/webtemplates/files/css';
+	
+	
+	//3、js git path
+	SYSPATH.git["tpl_ump_js"] = YOURPATH.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js';
+	SYSPATH.git["tpl_ump_js_fw"] = SYSPATH.git["tpl_ump_js"] + '/frameworks';
+	SYSPATH.git["tpl_ratchet_js"] = YOURPATH.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/js';
+	SYSPATH.git["tpl_files_js"] = YOURPATH.gitPath + '/publibs/resources/designer/templates/system/webtemplates/files/js';
+
+	
+	//4 js studio path
+	SYSPATH.studio["tpl_ump_js"] = YOURPATH.studioPath + '/MOB/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js';
+	SYSPATH.studio["tpl_ratchet_js"] = YOURPATH.studioPath + '/MOB/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/js';
+	SYSPATH.studio["tpl_files_js"] = YOURPATH.studioPath + '/MOB/designer/templates/system/webtemplates/files/js';
+	SYSPATH.studio["tpl_ump_js_fw"] = SYSPATH.studio["tpl_ump_js"] + '/frameworks';
+
+	
+	//5
+	SYSPATH.wzjc["scripts"] = '../wzjc/src/script';
+	  console.log('init ok');
+});
+
+
+gulp.task('default',function(){
+	
+    gulp.watch('dev/js/summer.js', ['init','summer']);
+	
+	gulp.watch('dev/js/plugins/*.js', ['init','iuapmobile.frameworks.ui']);
 	
 	//监听umcss
-	gulp.watch('dev/css/iuapmobile.um.css', ['umcss']);
+	gulp.watch('dev/css/iuapmobile.um.css', ['init','umcss']);
 	
 	return;
 	
@@ -29,27 +73,23 @@ gulp.task('uglify',function(){
 gulp.task('umcss',function(){
 	//gulp.src('dev/scss/um.scss').pipe(sass()).pipe(gulp.dest('dist/css/'));
 	var src = 'dev/css/iuapmobile.um.css'
-	
+
 	//1 update github
 	gulp.src(src).pipe(gulp.dest('dist/css/'));
 	
 	//2 update gityy
-	var path1 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ump/projects/default/css';
-	var path2 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/css';
-	var path3 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/files/css';
-	gulp.src(src).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
+	var path1 = SYSPATH.git["tpl_ump_css"];
+	var path3 = SYSPATH.git["tpl_files_css"];
+	
+	gulp.src(src).pipe(gulp.dest(path1)).pipe(gulp.dest(path3));
 	
 	//3 update to studio
-	var studio1 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/frametemplate/ump/projects/default/css';
-	var studio2 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/css';
-	var studio3 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/files/css';
-	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3));
+	var studio1 = SYSPATH.studio["tpl_ump_css"];
+	var studio3  = SYSPATH.studio["tpl_files_css"];
+	
+	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
 	
 	return;
-	//wzjc没有使用um.css
-	//4 update to wzjc
-	var wzjc = '../wzjc/src/script';
-	gulp.src(src).pipe(gulp.dest(wzjc));
 });
 gulp.task('summer',function(){
 	
@@ -57,19 +97,21 @@ gulp.task('summer',function(){
 	gulp.src('dev/js/summer.js').pipe(gulp.dest('dist/js/'));
 	
 	//2 update gityy
-	var path1 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js';
-	var path2 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/js';
-	var path3 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/files/js';
+
+	var path1 = SYSPATH.git["tpl_ump_js"];
+	var path2 = SYSPATH.git["tpl_ratchet_js"];
+	var path3 = SYSPATH.git["tpl_files_js"];
+	
 	gulp.src('dev/js/summer.js').pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
 	console.log('update gityy end');
 	
 	//3 update to studio
-	var studio1 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js';
-	var studio2 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/js';
-	var studio3 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/files/js';
+	var studio1 = SYSPATH.studio["tpl_ump_js"];
+	var studio2 = SYSPATH.studio["tpl_ratchet_js"];
+	var studio3  = SYSPATH.studio["tpl_files_js"];
 	
 	//4
-	var wzjc = '../wzjc/src/script';
+	var wzjc = SYSPATH.wzjc["scripts"];
 	gulp.src('dev/js/summer.js').pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
 	console.log('update studio end');
 });
@@ -85,17 +127,20 @@ gulp.task('iuapmobile.frameworks.ui',function(){
 	console.log('update github end');
 	
 	//2 update gityy
-	var path1 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js/frameworks';
-	var path3 = '../../gityy/publibs/resources/designer/templates/system/webtemplates/files/js';
-	gulp.src(distPath+fileName+".js").pipe(gulp.dest(path1)).pipe(gulp.dest(path3));
-	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(path1)).pipe(gulp.dest(path3));
+	var path11 = SYSPATH.git["tpl_ump_js_fw"];
+	var path3 = SYSPATH.git["tpl_files_js"];
+
+
+	gulp.src(distPath+fileName+".js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
 	console.log('update gityy end');
-	
+
 	//3 update to studio
-	var studio1 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js/frameworks';
-	var studio3 = '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile/MOB/designer/templates/system/webtemplates/files/js';
-	gulp.src(distPath+fileName+".js").pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
-	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
+	var studio11  = SYSPATH.studio["tpl_ump_js_fw"];
+	var studio3  = SYSPATH.studio["tpl_files_js"];
+	
+	gulp.src(distPath+fileName+".js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
 	console.log('update studio end');
 });
 

@@ -48,7 +48,7 @@
 		position: relative;
 		@include flex-align(null, center);
 		padding: 0;
-		padding-left: 15px;
+		/*padding-left: 15px;*/
 		color: $font-color;
 		transition: all ease .3s;
 	}
@@ -69,6 +69,7 @@
 	}
 
 	.um-list-item-media {
+		margin-left: 12px;
 		margin-right: 12px;
 		@include flex-align(null, center);
 		z-index: 1;
@@ -98,9 +99,10 @@
 	.um-list-item-body {
 		@include flex-count;
 		padding: $padding-base-vertical 0;
-		padding-right: 25px;
+		/*padding-right: 25px;   不需要*/
 		-webkit-align-self: stretch;
 		align-self: stretch;
+		width: 0;
 	}
 	.um-list-item-left {
 		padding: $padding-base-vertical 0;

@@ -3377,6 +3377,7 @@ html {
 /* 适用于frame的um-page*/
 .um-page {
   position: static;
+  /*不出现单页滚动*/
 }
 
 /* 适用于win的html*/
@@ -3780,7 +3781,7 @@ input[type="number"].form-control {
   -webkit-align-items: center;
   align-items: center;
   padding: 0;
-  padding-left: 15px;
+  /*padding-left: 15px;*/
   color: #000;
   transition: all ease .3s;
 }
@@ -3805,6 +3806,7 @@ input[type="number"].form-control {
   z-index: 2;
 }
 .um-list .um-list-item-media {
+  margin-left: 12px;
   margin-right: 12px;
   display: -webkit-box;
   display: box;
@@ -3857,9 +3859,10 @@ input[type="number"].form-control {
   -webkit-flex: 1;
   flex: 1;
   padding: 9px 0;
-  padding-right: 25px;
+  /*padding-right: 25px;   不需要*/
   -webkit-align-self: stretch;
   align-self: stretch;
+  width: 0;
 }
 .um-list .um-list-item-left {
   padding: 9px 0;
