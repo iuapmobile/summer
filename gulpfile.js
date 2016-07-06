@@ -1,4 +1,6 @@
-﻿var gulp = require('gulp');
+﻿
+//请求gulp插件
+var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
