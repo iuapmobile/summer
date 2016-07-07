@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <device>
+        <type>iphone</type>
+        <certification>YONYOU_UAP_INHOUSE_299</certification>
+        <sdk>
+            <targetVersion>4.3</targetVersion>
+        </sdk>
+        <template>ios_um_template</template>
+        <iphoneIcon>
+            <icon>/app.png</icon>
+            <iconRetina>/app.png</iconRetina>
+            <launch></launch>
+            <launchRetina></launchRetina>
+        </iphoneIcon>
+        <ipadIcon/>
+        <bundleId>com.ufida.uap.dsl</bundleId>
+        <subTitle></subTitle>
+        <weixin></weixin>
+    </device>
+    <buildEnv>        
+        <property name="CFBundleIdentifier">com.ufida.uap.UAPMobileShine</property>
+    </buildEnv>
+    <build>
+        <preInit></preInit>
+        <preCompile></preCompile>
+        <prePackage></prePackage>
+        <preRelease></preRelease>
+    </build>
+    <parameters/>
+    <plugins/>
+    <user>
+    	<name>huangzwa@yonyou.com</name>
+    </user>
+</settings>

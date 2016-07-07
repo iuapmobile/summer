@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<script language="JavaScript" src="js/Frameworks/json.js" ></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.MACore.js" ></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.Container.js" ></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Property.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Entity.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Field.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Context.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Document.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Element.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.JControl.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Engine.js"></script>
+		<script language="JavaScript" src="js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+
+		<link rel="stylesheet" href="css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="css/uap-ui-controls.css"/>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<script src="js/custom.js"></script>
+		<style>
+			#save.save {
+				background: transparent;
+				color: #fff;
+				border: none;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="page3" data-theme="uap" data-role="page">
+
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" href="#" data-role="button" data-icon="uap-back">返回</a>
+				<h1>联系人列表</h1>
+			</div>
+
+			<div data-role="content">
+				<ul data-role="listview" data-inset="true" class="ui-noboxshadow" id="list1">
+				</ul>
+
+			</div>
+			<div data-role="footer" data-position="fixed">
+
+			</div>
+		</div>
+		<div id="page4" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" href="#" data-role="button" data-icon="uap-back">返回</a>
+				<h1>编辑联系人</h1>
+			</div>
+
+			<div data-role="content">
+				<form id="contactsForm">
+					<label> <span style="font-weight:bold">联系人姓名:</span>
+						<input type="text" name="name" data-clear-btn="true" placeholder="请输入联系人姓名"/>
+					</label>
+					<label> <span style="font-weight:bold">电话号码:</span>
+						<input type="text" name="phone" data-clear-btn="true" placeholder="请输入联系人电话号码"/>
+					</label>
+					<!--<label> <span style="font-weight:bold">出生日期:</span>
+					<input type="date" name="birth"/>
+					</label> -->
+					<label> <span style="font-weight:bold">工作年限:</span>
+						<input type="range" name="experience" min="0" max="100" step="1"/>
+					</label>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

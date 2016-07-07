@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" href="../css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="../css/uap-ui-controls.css"/>
+		<style>
+			.delete {
+				float: right;
+				display: inline-block;
+				font-weight: 100;
+				width: 60px;
+				height: 40px;
+				line-height: 40px;
+				font-family: "Microsoft Yahei", Tahoma, Helvetica, Arial, "SimSun", sans-serif;
+				font-size: 16px;
+				text-align: center;
+				color: #fff;
+				text-shadow: 1px 1px 1px #333;
+				border-radius: 5px;
+				border: 1px solid #b42323;
+				box-shadow: 0 1px 2px #e99494 inset, 0 -1px 0 #954b4b inset, 0 -2px 3px #e99494 inset;
+				background: -webkit-linear-gradient(top, #d53939, #b92929);
+				background: -moz-linear-gradient(top, #d53939, #b92929);
+				background: linear-gradient(top, #d53939, #b92929);
+				opacity: 0.8;
+				visibility: hidden;
+			}
+
+			.delete:hover {
+				background: -webkit-linear-gradient(top, #eb6f6f, #c83c3c);
+				background: -moz-linear-gradient(top, #eb6f6f, #c83c3c);
+				background: linear-gradient(top, #eb6f6f, #c83c3c);
+			}
+
+			.delete:active {
+				box-shadow: 0 1px 3px #5b0505 inset, 0 3px 0 #fff;
+				background: -webkit-linear-gradient(top, #b11a1a, #bf2626);
+				background: -moz-linear-gradient(top, #b11a1a, #bf2626);
+				background: linear-gradient(top, #b11a1a, #bf2626);
+			}
+		</style>
+		<script language="JavaScript" src="../js/Frameworks/json.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.MACore.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.Container.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Property.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Entity.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Field.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Context.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Document.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Element.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.JControl.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Engine.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+		<script>
+			$isWeb = true
+		</script>
+		<script>
+			function $pageReady() {
+				$('#list1 li').on("swipeleft", function() {
+					var len;
+					var elem = $(this);
+					elem.find(".delete").css({
+						'visibility' : 'visible'
+					}).click(function() {
+						elem.remove();
+						$('#list1').listview('refresh');
+					});
+					elem.siblings("li").find(".delete").css({
+						'visibility' : 'hidden'
+					});
+				})
+			}
+
+			$(function() {
+				//$pageReady();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="index.html" rel="external" data-role="button" data-icon="uap-back">首页</a>
+				<h1>侧滑删除列表</h1>
+			</div>
+			<div data-role="content">
+				<ul id="list1" data-role="listview"  class="ui-noboxshadow">
+					<li data-icon="custom">
+						<a href="#"><span style="height:40px;
+						line-height: 40px;">列表一</span><span class="delete">删除</span></a>
+					</li>
+					<li data-icon="custom">
+						<a href="#"><span style="height:40px;
+						line-height: 40px;">列表二</span><span class="delete">删除</span></a>
+					</li>
+					<li data-icon="custom">
+						<a href="#"><span style="height:40px;
+						line-height: 40px;">列表三</span><span class="delete">删除</span></a>
+					</li>
+				</ul>
+
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>工具栏</h1>
+			</div>
+		</div>
+	</body>
+</html>

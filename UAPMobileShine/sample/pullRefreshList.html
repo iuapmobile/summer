@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title>iScroll demo: simple</title>
+		<link rel="stylesheet" href="../css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="../css/uap-ui-controls.css"/>
+		<script src="../js/Frameworks/json.js" ></script>
+		<script src="../js/Frameworks/UMP.MACore.js" ></script>
+		<script src="../js/Frameworks/UMP.Container.js" ></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Property.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Entity.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Field.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Context.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Document.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Element.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.JControl.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Engine.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="../js/iscroll.js"></script>
+		<script>
+			$isWeb = true;
+			function $pageReady() {
+			}
+		</script>
+		<script type="text/javascript">
+			var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount = 0;
+			var data = [];
+			var curIndex = 0;
+			for ( i = 0; i < 108; i++) {
+				data[i] = {};
+				data[i].name = "水浒排名第" + (i + 1) + "位";
+				data[i].href = "#";
+			}
+			function pullDownAction() {
+				setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
+					var el, li;
+					el = document.getElementById('thelist');
+
+					for (var j = 0; j < 10 && curIndex < 108; curIndex++, j++) {
+						li = document.createElement('li');
+						li.setAttribute('data-icon', 'custom');
+						li.innerHTML = li.innerHTML = '<a href="' + data[curIndex].href + '"><span><img src="../img/application/contact.png" style="vertical-align:middle;"></span><span style="margin-left:10px;">' + data[curIndex].name + '</span></a>';
+						el.insertBefore(li, el.childNodes[0]);
+					}
+
+					$(el).listview('refresh');
+					myScroll.refresh();
+
+					// Remember to refresh when contents are loaded (ie: on ajax completion)
+				}, 1000);
+				// <-- Simulate network congestion, remove setTimeout from production!
+			}
+
+			function pullUpAction() {
+				setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
+					var el, li, i;
+					el = document.getElementById('thelist');
+
+					for (var j = 0; j < 10 && curIndex < 108; curIndex++, j++) {
+						li = document.createElement('li');
+						li.setAttribute('data-icon', 'custom');
+						li.innerHTML = li.innerHTML = '<a href="' + data[curIndex].href + '"><span><img src="../img/application/contact.png" style="vertical-align:middle;"></span><span style="margin-left:10px;">' + data[curIndex].name + '</span></a>';
+						el.appendChild(li, el.childNodes[0]);
+					}
+					$(el).listview('refresh');
+					myScroll.refresh();
+					// Remember to refresh when contents are loaded (ie: on ajax completion)
+				}, 1000);
+				// <-- Simulate network congestion, remove setTimeout from production!
+			}
+
+			function loaded() {
+				pullDownEl = document.getElementById('pullDown');
+				pullDownOffset = pullDownEl.offsetHeight;
+				pullUpEl = document.getElementById('pullUp');
+				pullUpOffset = pullUpEl.offsetHeight;
+
+				myScroll = new iScroll('wrapper', {
+					useTransition : true,
+					topOffset : pullDownOffset,
+					onRefresh : function() {
+						if (pullDownEl.className.match('loading')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+						} else if (pullUpEl.className.match('loading')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
+						}
+					},
+					onScrollMove : function() {
+						if (this.y > 5 && !pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'flip';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
+							this.minScrollY = 0;
+						} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+							this.minScrollY = -pullDownOffset;
+						} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'flip';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Release to refresh...';
+							this.maxScrollY = this.maxScrollY;
+						} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
+							this.maxScrollY = pullUpOffset;
+						}
+					},
+					onScrollEnd : function() {
+						if (pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'loading';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
+							pullDownAction();
+							// Execute custom function (ajax call?)
+						} else if (pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'loading';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading...';
+							pullUpAction();
+							// Execute custom function (ajax call?)
+						}
+					}
+				});
+
+				setTimeout(function() {
+					document.getElementById('wrapper').style.left = '0';
+					pullDownAction();
+				}, 100);
+			}
+
+
+			document.addEventListener('touchmove', function(e) {
+				e.preventDefault();
+			}, false);
+
+			document.addEventListener('DOMContentLoaded', function() {
+				setTimeout(loaded, 200);
+			}, false);
+		</script>
+
+		<style type="text/css" media="all">
+			#wrapper {
+				position: absolute;
+				z-index: 1;
+				top: 45px;
+				bottom: 48px;
+				left: -9999px;
+				width: 100%;
+				overflow: auto;
+			}
+
+			#scroller {
+				position: absolute;
+				z-index: 1;
+				/*	-webkit-touch-callout:none;*/
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+				width: 100%;
+				padding: 0;
+			}
+			#scroller ul {
+				margin: 0;
+			}
+			/**
+			 *
+			 * Pull down styles
+			 *
+			 */
+			#pullDown, #pullUp {
+				background: #fff;
+				height: 40px;
+				line-height: 40px;
+				padding: 5px 10px;
+				border-bottom: 1px solid #ccc;
+				font-weight: bold;
+				font-size: 14px;
+				color: #888;
+			}
+
+			#pullDown .pullDownIcon, #pullUp .pullUpIcon {
+				display: block;
+				float: left;
+				width: 40px;
+				height: 40px;
+				background: url(../img/application/pull-icon@2x.png) 0 0 no-repeat;
+				-webkit-background-size: 40px 80px;
+				background-size: 40px 80px;
+				-webkit-transition-property: -webkit-transform;
+				-webkit-transition-duration: 250ms;
+			}
+
+			#pullDown .pullDownIcon {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+
+			#pullUp .pullUpIcon {
+				-webkit-transform: rotate(-180deg) translateZ(0);
+			}
+
+			#pullDown.flip .pullDownIcon {
+				-webkit-transform: rotate(-180deg) translateZ(0);
+			}
+
+			#pullUp.flip .pullUpIcon {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+
+			#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+				background-position: 0 100%;
+				-webkit-transform: rotate(0deg) translateZ(0);
+				-webkit-transition-duration: 0ms;
+				-webkit-animation-name: loading;
+				-webkit-animation-duration: 2s;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-timing-function: linear;
+			}
+
+			@-webkit-keyframes loading {
+			from {
+				-webkit-transform: rotate(0deg) translateZ(0);
+			}
+			to {
+				-webkit-transform: rotate(360deg) translateZ(0);
+			}
+	
+		</style>
+	</head>
+	<body>
+
+		<div id="" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="index.html" rel="external" data-role="button" data-icon="uap-back">首页</a>
+				<h1>滑动刷新列表</h1>
+			</div>
+			<div data-role="content">
+				<div id="wrapper">
+					<div id="scroller">
+						<div id="pullDown">
+							<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+						</div>
+
+						<ul id="thelist" data-role="listview" data-inset="true" class="ui-noboxshadow"></ul>
+
+						<div id="pullUp">
+							<span class="pullUpIcon"></span><span class="pullUpLabel">Pull up to refresh...</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>工具栏</h1>
+			</div>
+		</div>
+	</body>
+</html>

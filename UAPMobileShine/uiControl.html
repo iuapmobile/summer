@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/base.css"/>
+		<link rel="stylesheet" href="css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="css/uap-ui-controls.css"/>
+		<link rel="stylesheet" href="external/fontAwesome/css/font-awesome.min.css"/>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<script>
+			$isWeb = true
+		</script>
+		<script>
+			function $pageReady() {
+				// alert("webview ready");
+			}
+
+
+			$(document).on("pageinit", "#page1", function() {
+				$.mobile.defaultPageTransition = "slide";
+			});
+			$(function() {
+				var count = 1;
+				$("#changeTheme").on("click", function(event) {
+					if (count) {
+						$("div[data-role=page]").removeClass("ui-page-theme-uap").removeClass("ui-page-theme-uap-red").addClass("ui-page-theme-uap-red").attr("data-theme", "uap-red");
+						count = 0;
+					} else {
+						$("div[data-role=page]").removeClass("ui-page-theme-uap").removeClass("ui-page-theme-uap-red").addClass("ui-page-theme-uap").attr("data-theme", "uap");
+						count = 1;
+					}
+				});
+			});
+		</script>
+		<style>
+			#icon i {
+				font-size: 26px;
+				color: #00a1ea;
+				display: inline-block;
+				margin: 10px;
+			}
+			#icon.ui-page-theme-uap-red i {
+				color: #e84c3d;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="page1" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="index.html" rel="external" data-role="button" data-icon="uap-back">返回</a>
+				<h1>UI控件</h1>
+				<button data-inline="true" id="changeTheme">
+					切换主题
+				</button>
+			</div>
+
+			<div data-role="content">
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="custom">
+						<a href="#button">按钮(button)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#ratio">单选框(ratio)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#checkbox">复选框(checkbox)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#select">下拉框(select)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#input">文本输入框(input)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#date">日期控件(datepicker)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#listview">列表(listview)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#header">标题导航栏(header)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#switch">开关(switch)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#slider">滑动条(slider)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#tabbar">选项卡(tab bar)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#table">响应式表格(table)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#grid">布局(layout)</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#icon">图标(icon)</a>
+					</li>
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>底部工具栏</h1>
+			</div>
+		</div>
+		<div id="button" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>按钮button</h1>
+			</div>
+			<div data-role="content">
+				<a href="#" data-role="button" data-inline="true" data-icon="star" data-iconpos="left">star</a>
+				<button data-icon="alert" data-iconpos="top" data-inline="true">
+					按钮
+				</button><h3>1.普通文字按钮</h3>
+				<button>
+					普通文字按钮
+				</button>
+				<br>
+				<br>
+				<h3>2.inline按钮</h3>
+				<button data-inline="true">
+					按钮(inline)
+				</button>
+
+				<br>
+				<br>
+				<h3>3.带图标按钮</h3>
+				<button>
+					按钮图标
+					<i class="fa fa-play-circle"></i>
+				</button>
+				<br>
+				<br>
+				<h3>4.带图标按钮(inline)</h3>
+				<button data-inline="true" data-theme="b">
+					按钮图标
+					<i class="fa fa-play-circle"></i>
+				</button>
+				<br>
+				<br>
+				<h3>5.mini按钮</h3>
+				<button data-mini="true">
+					mini按钮
+				</button>
+				<br>
+				<br>
+				<h3>6.Icon左+文字右按钮</h3>
+				<a href="#" data-role="button" data-inline="true"><i class="fa fa-home"></i>导航</a>
+				<br>
+				<br>
+				<br/>
+				<h3>7.Icon右+文字左按钮</h3>
+				<a href="#" data-role="button" data-inline="true">导航<i class="fa fa-home"></i></a>
+				<br>
+				<br>
+				<br/>
+				<h3>8.Icon上+文字下按钮</h3>
+				<a href="#" data-role="button" data-inline="true"><i class="fa fa-home" style="display:block;"></i>Icon上</a>
+				<br>
+				<br>
+			</div>
+		</div>
+
+		<div id="ratio" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>单选框(radio)</h1>
+			</div>
+			<div data-role="content">
+				<script>
+					$(function() {
+						var radio1 = $(".radio1").find("input:radio");
+						var radio2 = $(".radio2").find("input:radio");
+						radio1.on("change", function() {
+							setTimeout(function() {
+								alert("现在选择的值是：" + radio1.filter(":checked").val());
+							}, 200);
+						});
+						radio2.on("change", function() {
+							setTimeout(function() {
+								alert("现在选择的值是：" + radio2.filter(":checked").val());
+							}, 200);
+						});
+					})
+				</script>
+				<input type="hidden" id="hidVal" value="1"/>
+				<h3>1.单选框radio(横排)</h3>
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="radio1">
+					<legend>
+						说明文字:
+					</legend>
+					<input type="radio" name="radio-a" id="radio-a" value="list" checked="checked">
+					<label for="radio-a">List</label>
+					<input type="radio" name="radio-a" id="radio-b" value="grid">
+					<label for="radio-b">Grid</label>
+					<input type="radio" name="radio-a" id="radio-c" value="gallery">
+					<label for="radio-c">Gallery</label>
+				</fieldset>
+
+				<br>
+				<br>
+				<h3>2.单选框radio(竖排)</h3>
+				<fieldset data-role="controlgroup" data-mini="true" class="radio2">
+					<legend>
+						说明文字:
+					</legend>
+					<input type="radio" name="radio-b" id="radio-d" value="list" checked="checked">
+					<label for="radio-d">List</label>
+					<input type="radio" name="radio-b" id="radio-e" value="grid">
+					<label for="radio-e">Grid</label>
+					<input type="radio" name="radio-b" id="radio-f" value="gallery">
+					<label for="radio-f">Gallery</label>
+				</fieldset>
+			</div>
+
+		</div>
+
+		<div id="checkbox" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>复选框(checkbox)</h1>
+			</div>
+			<div data-role="content">
+				<h3>复选框checkbox横排</h3>
+				<script>
+					$(function() {
+						var checkbox1 = $(".checkbox1").find("input:checkbox");
+						var checkbox2 = $(".checkbox2").find("input:checkbox");
+						checkbox1.on("change", function() {
+							var checkboxs = checkbox1.filter(":checked"), v = [];
+							for (var i = 0, len = checkboxs.length; i < len; i++) {
+								v.push(checkboxs[i].value);
+							}
+							setTimeout(function() {
+								alert("现在选择的值是：" + v);
+							}, 200);
+						});
+						checkbox2.on("change", function() {
+							var checkboxs = checkbox2.filter(":checked"), v = [];
+							for (var i = 0, len = checkboxs.length; i < len; i++) {
+								v.push(checkboxs[i].value);
+							}
+							setTimeout(function() {
+								alert("现在选择的值是：" + v);
+							}, 200);
+						});
+					})
+				</script>
+				<form action="#">
+					<fieldset class="checkbox1" data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<legend>
+							只是复选框说明性文字，你可以在这说明它的用途
+						</legend>
+						<label>
+							<input type="checkbox" name="checkbox1" value="复选框1" checked/>
+							复选框1</label>
+						<label>
+							<input type="checkbox" name="checkbox1" value="复选框2"/>
+							复选框2</label>
+						<label>
+							<input type="checkbox" name="checkbox1" value="复选框3"/>
+							复选框3</label>
+					</fieldset>
+				</form>
+				<br>
+				<br>
+				<br>
+				<h3>复选框checkbox竖排</h3>
+
+				<fieldset class="checkbox2" data-role="controlgroup">
+					<legend>
+						只是复选框说明性文字，你可以在这说明它的用途
+					</legend>
+					<label>
+						<input type="checkbox" name="checkbox2" value="这是第一个复选框" checked/>
+						这是第一个复选框</label>
+					<label>
+						<input type="checkbox" name="checkbox2" value="这是第二个复选框"/>
+						这是第二个复选框</label>
+					<label>
+						<input type="checkbox" name="checkbox2" value="这是第三个复选框"/>
+						这是第三个复选框</label>
+					<label>
+						<input type="checkbox" name="checkbox2" value="这是第四个复选框"/>
+						这是第四个复选框</label>
+					<label>
+						<input type="checkbox" name="checkbox2" value="这是第n个复选框"/>
+						这是第n个复选框</label>
+				</fieldset>
+			</div>
+
+		</div>
+
+		<div id="select" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>下拉框select</h1>
+			</div>
+			<script>
+				$(function() {
+					$(".select1,.select2").on("change", function() {
+						var $this = $(this);
+						setTimeout(function() {
+							alert("你现在选择的值是" + $this.find("option:selected").text());
+						}, 200);
+					})
+				})
+			</script>
+			<div data-role="content">
+				<h3>下拉框select</h3>
+				<label class="select" for="select">这里的文字可以替换</label>
+				<select name="" class="select1" data-native-menu="false" data-role="button">
+					<option value="">第一个选项</option>
+					<option value="">第二个选项</option>
+					<option value="" selected="true">第三个选项</option>
+					<option value="">第四个选项</option>
+					<option value="">第五个选项</option>
+				</select>
+				<h3>下拉框多选</h3>
+				<label class="select" for="select">这里的文字可以替换</label>
+				<select name="" class="select2" data-native-menu="false" multiple="multiple">
+					<option value="">第一个选项</option>
+					<option value="">第二个选项</option>
+					<option value="" selected="true">第三个选项</option>
+					<option value="">第四个选项</option>
+					<option value="">第五个选项</option>
+				</select>
+			</div>
+
+		</div>
+
+		<div id="input" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>输入框(input)</h1>
+			</div>
+			<div data-role="content">
+				<h3>1.普通输入框</h3>
+				<input type="text"/>
+				<br>
+				<br>
+				<br>
+				<h3>2.搜索框</h3>
+				<input data-type="search" placeholder="请输入搜索内容"/>
+				<br>
+				<br>
+				<br>
+				<h3>3.数字输入框</h3>
+				<input type="number"/>
+				<br>
+				<br>
+				<h3>4.用户名输入框</h3>
+				<input type="text" id="user" class="uap-input-user uap-icon-input" placeholder="手机\\用户名\\邮箱"/>
+				<br>
+				<br>
+				<br>
+				<h3>5.密码输入框</h3>
+				<input type="password" id="psw" class="uap-input-psw uap-icon-input" placeholder="******"/>
+				<br>
+				<br>
+			</div>
+
+		</div>
+		<div id="date" data-theme="uap" data-role="page">
+
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>日期控件</h1>
+			</div>
+
+			<div data-role="content">
+				<h3>日期picker</h3>
+				<br>
+				苹果设备日期
+				<input type="date"/>
+				<code class="language-markup">
+					&lt;input type="date"/>
+				</code>
+				<br>
+				<br>
+				<br>
+				带插件的日期控件(适用于安卓)
+				<input type="text" data-role="date"/>
+				<code class="language-markup">
+					&lt;input type="text" data-role="date"/>
+				</code>
+				<br>
+				<br>
+				<link rel="stylesheet" href="external/jquery.mobile.datepicker.css" />
+				<script src="external/jquery.mobile.datepicker.js"></script>
+				<script src="external/jquery-ui/datepicker.js"></script>
+				<script>
+					$(function() {
+						$("input[data-role=date]").datepicker();
+					})
+				</script>
+			</div>
+		</div>
+		<div id="listview" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>列表listview</h1>
+			</div>
+			<div data-role="content">
+				<h3>列表listview</h3>
+				<br>
+				<br>
+				<h3>1.普通列表</h3>
+				<br>
+				<br>
+
+				<ul data-role="listview">
+					<li data-icon="custom">
+						<a href="#">列表一</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#">列表二</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#">列表三</a>
+					</li>
+				</ul>
+				<br>
+				<br>
+				<h3>2.普通列表 inset</h3>
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="custom">
+						<a href="#">列表一</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#">列表二</a>
+					</li>
+					<li data-icon="custom">
+						<a href="#">列表三</a>
+					</li>
+				</ul>
+				<h3>2.带图片列表</h3>
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<a href=""> <img src="img/tab_home_touch.png" class="ui-li-icon ui-corner-none" alt=""/> 第一列</a>
+					</li>
+					<li>
+						<a href=""> <img src="img/tab_home_touch.png" class="ui-li-icon ui-corner-none" alt=""/> 第二列</a>
+					</li>
+					<li>
+						<a href=""> <img src="img/tab_home_touch.png" class="ui-li-icon ui-corner-none" alt=""/> 第三列</a>
+					</li>
+					<li>
+						<a href=""> <img src="img/tab_home_touch.png" class="ui-li-icon ui-corner-none" alt=""/> 第四列</a>
+					</li>
+				</ul>
+				<h3>3.列表组</h3>
+				<ul data-role="collapsibleset">
+					<li data-role="collapsible">
+						<h4>分组名称一</h4>
+						<ul data-role="listview">
+							<li>
+								<a href="#">成员名称一</a>
+							</li>
+							<li>
+								<a href="#">成员名称二</a>
+							</li>
+							<li>
+								<a href="#">成员名称三</a>
+							</li>
+						</ul>
+					</li>
+					<li data-role="collapsible">
+						<h4>分组名称二</h4>
+						<ul data-role="listview">
+							<li>
+								<a href="#">成员名称一</a>
+							</li>
+							<li>
+								<a href="#">成员名称二</a>
+							</li>
+							<li>
+								<a href="#">成员名称三</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<br>
+				<br>
+				<h3>4.不带图标的列表</h3>
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="custom">
+						<a href="#"><span>列表一</span><span class="state">设置</span></a>
+					</li>
+					<li data-icon="custom">
+						<a href="#"><span>列表二</span><span class="state">设置</span></a>
+					</li>
+					<li data-icon="custom">
+						<a href="#"><span>列表三</span><span class="state">设置</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="header" data-theme="uap" data-role="page">
+
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>普通导航栏</h1>
+			</div>
+			<br>
+			<br>
+			<br>
+			<h3>带返回键的导航栏</h3>
+			<div data-role="header" >
+				<a data-rel="back" data-role="button" data-icon="uap-back">返回</a>
+				<h1>带返回键的导航栏</h1>
+			</div>
+			<br>
+			<br>
+			<h3>带首页导航栏</h3>
+			<div data-role="header">
+				<a data-iconpos="notext" data-rel="back" data-role="button"
+				data-icon="uap-back">返回</a>
+
+				<h1>带首页导航栏</h1>
+				<a data-iconpos="notext" href="#" data-role="button" data-icon="uap-home"></a>
+			</div>
+		</div>
+
+		<div id="switch" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>导航栏</h1>
+			</div>
+			<script>
+				$(function() {
+					$("#switch1,#switch2").on("change", function() {
+						var $this = $(this);
+						setTimeout(function() {
+							alert("开关状态为" + $this.find("option:selected").val());
+						}, 200);
+					})
+				})
+			</script>
+			<div data-role="content">
+				<h3>开关按钮switch</h3>
+				<label class="select" for="switch1">这里的文字可以替换,请注意开关只能设置两个选项</label>
+				<select name="" id="switch1" data-role="slider">
+					<option value="0">off</option>
+					<option value="1">on</option>
+				</select>
+				<h3>圆角开关</h3>
+				<div class="clearfix">
+					<div class="uap-switch">
+						<select name="switch" id="switch2" data-role="slider">
+							<option value="off"></option>
+							<option value="on"  selected=""></option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="tabbar" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>导航栏</h1>
+			</div>
+			<div data-role="content">
+				<h3>tabbar(navbar)</h3>
+
+				<div data-role="navbar" class="mybar-group">
+					<ul>
+						<li>
+							<a href="#" data-icon="custom" class="ui-btn-active mybar1">One</a>
+						</li>
+						<li>
+							<a href="#" data-icon="custom" class="mybar2">Two</a>
+						</li>
+						<li>
+							<a href="#" data-icon="custom" class="mybar3">Three</a>
+						</li>
+						<li>
+							<a href="#" data-icon="custom" class="mybar4">Four</a>
+						</li>
+						<li>
+							<a href="#" data-icon="custom" class="mybar5">Five</a>
+						</li>
+					</ul>
+				</div>
+				<style>
+					.mybar-group .ui-btn:after {
+						width: 24px;
+						height: 24px;
+						margin-left: -12px;
+						background-position: center center;
+						background-repeat: no-repeat;
+						border-radius: 0;
+					}
+					[class*=mybar]:after {
+						background: url(img/tab_camera.png);
+						-webkit-background-size: 24px;
+						background-size: 24px;
+					}
+				</style>
+				<div data-role="navbar">
+					<ul>
+						<li>
+							<a href="#" class="ui-btn-active">分类One</a>
+						</li>
+						<li>
+							<a href="#">分类Two</a>
+						</li>
+						<li>
+							<a href="#">分类Three</a>
+						</li>
+					</ul>
+				</div>
+				<br>
+				<br>
+				<br>
+				<h3> 图标选项卡 </h3>
+				<div data-role="navbar" class="navbar-custom-notext">
+					<ul>
+						<li>
+							<a href="#" class="ui-btn-active fa fa-home"></a>
+						</li>
+						<li>
+							<a href="#" class="fa fa-cog"></a>
+						</li>
+						<li>
+							<a href="#" class="fa fa-camera"></a>
+						</li>
+						<li>
+							<a href="#" class="fa fa-shopping-cart"></a>
+						</li>
+						<li>
+							<a href="#" class="fa fa-user"></a>
+						</li>
+					</ul>
+				</div>
+				<div data-role="footer" data-position="fixed" style="border-color:#ddd;background: #fff;">
+					<div data-role="navbar" class="navbar-custom">
+						<ul>
+							<li>
+								<a href="#" class="ui-btn-active fa fa-home">one</a>
+							</li>
+							<li>
+								<a href="#" class="fa fa-cog">two</a>
+							</li>
+							<li>
+								<a href="#" class="fa fa-camera">three</a>
+							</li>
+							<li>
+								<a href="#" class="fa fa-shopping-cart">four</a>
+							</li>
+							<li>
+								<a href="#" class="fa fa-user">five</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="table" data-theme="uap" data-role="page">
+
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>响应式表格</h1>
+			</div>
+
+			<div data-role="content">
+				<table data-role="table" class="ui-responsive table-stroke">
+					<thead>
+						<tr>
+							<th data-priority="2">Rank</th>
+							<th>Movie Title</th>
+							<th data-priority="3">Year</th>
+							<th data-priority="1"><abbr title="Rotten">Rating</abbr></th>
+							<th data-priority="5">Reviews</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>2</th>
+							<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+							<td>1942</td>
+							<td>97%</td>
+							<td>64</td>
+						</tr>
+						<tr>
+							<th>3</th>
+							<td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+							<td>1972</td>
+							<td>97%</td>
+							<td>87</td>
+						</tr>
+						<tr>
+							<th>4</th>
+							<td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+							<td>1939</td>
+							<td>96%</td>
+							<td>87</td>
+						</tr>
+						<tr>
+							<th>10</th>
+							<td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external">Inception</a></td>
+							<td>2010</td>
+							<td>84%</td>
+							<td>78</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+		<div id="slider" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>导航栏</h1>
+			</div>
+			<div data-role="content">
+				<label for="slider1">带数字</label>
+				<input type="range" name="slider" value="35" data-highlight="true" id="slider1"  min="0" max="100" step="1"/>
+				<script>
+					$("#slider1").attr("value", 59);
+				</script>
+			</div>
+
+		</div>
+		<div id="grid" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>布局</h1>
+			</div>
+			<div data-role="content">
+				<h3>1. 2行2列布局</h3>
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="background:rgb(105, 118, 255);">
+						<a href="#" data-role="button" class="fa fa-camera">three</a>
+					</div>
+					<div class="ui-block-b" style="background:rgb(99, 90, 244);">
+						<a href="#" data-role="button" class="fa fa-camera">three</a>
+					</div>
+				</div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="background:rgb(102, 99, 226);">
+						<a href="#" data-role="button" class="fa fa-camera">three</a>
+					</div>
+					<div class="ui-block-b" style="background:rgb(70, 66, 224);">
+						<a href="#" data-role="button" class="fa fa-camera">three</a>
+					</div>
+				</div>
+				<br>
+				<br>
+				<br>
+				<h3>2.九宫格布局</h3>
+				<div class="ui-grid-b">
+					<div class="ui-block-a default" style="background:rgb(56, 198, 210);">
+						A
+					</div>
+					<div class="ui-block-b default" style="background:rgb(122, 205, 224);">
+						B
+					</div>
+					<div class="ui-block-c default" style="background:rgb(85, 176, 203);">
+						C
+					</div>
+				</div>
+				<div class="ui-grid-b">
+					<div class="ui-block-a default" style="background:rgb(139, 228, 120);">
+						D
+					</div>
+					<div class="ui-block-b default" style="background:rgb(77, 199, 111);">
+						E
+					</div>
+					<div class="ui-block-c default" style="background:rgb(56, 168, 130);">
+						F
+					</div>
+				</div>
+				<div class="ui-grid-b">
+					<div class="ui-block-a default" style="background:rgb(255, 108, 108);">
+						G
+					</div>
+					<div class="ui-block-b default" style="background:rgb(252, 80, 80);">
+						H
+					</div>
+					<div class="ui-block-c default" style="background:rgb(189, 67, 67);">
+						I
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<div id="icon" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#page1" data-transition="slide" data-direction="reverse"  data-role="button" data-icon="uap-back">返回</a>
+				<h1>图标</h1>
+			</div>
+			<div data-role="content">
+				<div>
+					<i class="fa fa-spinner fa-spin"></i>
+					<i class="fa fa-circle-o-notch fa-spin"></i>
+					<i class="fa fa-refresh fa-spin"></i>
+					<i class="fa fa-cog fa-spin"></i>
+					<i class="fa fa-camera-retro"></i>
+					<i class="fa fa-navicon"></i>
+					<i class="fa fa-newspaper-o"></i>
+					<i class="fa fa-paint-brush"></i>
+					<i class="fa fa-paper-plane"></i>
+				</div>
+				<div>
+					<i class="fa fa-camera-retro fa-lg"></i> fa-lg <i class="fa fa-camera-retro fa-2x"></i> fa-2x <i class="fa fa-camera-retro fa-3x"></i> fa-3x <i class="fa fa-camera-retro fa-4x"></i> fa-4x <i class="fa fa-camera-retro fa-5x"></i> fa-5x
+				</div>
+				<div>
+					<i class="fa fa-home fa-fw"></i>
+					<i class="fa fa-book fa-fw"></i>
+					<i class="fa fa-pencil fa-fw"></i>
+					<i class="fa fa-cog fa-fw"></i>
+				</div>
+
+				<i class="fa-li fa fa-check-square"></i>
+				<i class="fa-li fa fa-check-square"></i>
+				<i class="fa-li fa fa-spinner fa-spin"></i>
+				<i class="fa-li fa fa-square"></i>
+				<i class="fa fa-quote-left fa-3x pull-left fa-border"></i>
+				<i class="fa fa-trash-o fa-lg"></i>
+				<i class="fa fa-cog"></i>
+
+				<i class="fa fa-flag fa-2x pull-left"></i>
+
+				<div>
+					<i class="fa fa-align-left"></i>
+					<i class="fa fa-align-center"></i>
+					<i class="fa fa-align-right"></i>
+					<i class="fa fa-align-justify"></i>
+				</div>
+
+				<div class="btn-group open">
+					<i class="fa fa-user fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
+					<i class="fa fa-pencil fa-fw"></i>
+					<i class="fa fa-trash-o fa-fw"></i>
+					<i class="fa fa-ban fa-fw"></i>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>

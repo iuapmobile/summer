@@ -1,0 +1,135 @@
+img {
+    vertical-align: middle;
+}
+/* 默认选项卡 */
+.ui-navbar.navbar-custom .ui-btn {
+    padding: 10px;
+    color: #666;
+    border-color: #ddd;
+    font-size: 18px;
+    -webkit-transition: all ease .3s;
+    -o-transition: all ease .3s;
+    transition: all ease .3s;
+}
+.ui-navbar.navbar-custom .ui-btn.ui-btn-active {
+    color: #00a1ea;
+    background-color: #fff;
+    border-top: 1px #00a1ea solid;
+}
+/* 红色tab选项卡 */
+.ui-page-theme-uap-red .ui-navbar.navbar-custom .ui-btn {
+    padding: 10px;
+    color: #666;
+    border-color: #ddd;
+    font-size: 18px;
+}
+.ui-page-theme-uap-red .ui-navbar.navbar-custom .ui-btn.ui-btn-active {
+    color: #e84c3d;
+    background-color: #fff;
+    border-top-color: #e84c3d;
+}
+.navbar-custom .ui-btn:before {
+    display: block;
+}
+html body .custom-mini {
+    padding: .4em .7em;
+    font-size: 14px;
+}
+
+html .ui-page .navbar-custom-notext .ui-btn {
+    text-indent: 0;
+    color: #666;
+    font-size: 20px
+}
+html .ui-page-theme-uap .navbar-custom-notext .ui-btn.ui-btn-active {
+    background: #FFF;
+    color: #00a1ea;
+}
+html .ui-page-theme-uap-red .navbar-custom-notext .ui-btn.ui-btn-active {
+    background: #FFF;
+    color: #e84c3d;
+}
+.ui-header .ui-btn.ui-link[data-rel=back] {
+    background: none;
+    border: none;
+    color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.ui-header .ui-btn.ui-btn-left[data-rel=back]:active {
+    background: none;
+    border: none;
+    color: #fff;
+    opacity: .6;
+}
+.ui-btn.ui-icon-uap-back.ui-btn-left:after {
+    background: url(uap-blue-icons/ui-icon-uap-back.png) center center;
+    border-radius: 0;
+}
+
+.ui-icon-uap-home {
+    background: none !important;
+    border: none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none !important;
+    border-radius: none !important;
+}
+
+.ui-icon-uap-home:after {
+    background: url(uap-blue-icons/ui-icon-uap-home.png) center center;
+    border-radius: 0 !important;
+}
+
+.ui-listview .ui-icon-custom {
+    position: relative;
+}
+
+.ui-listview .ui-icon-custom:after {
+    background-color: transparent;
+    background-image: url(uap-blue-icons/arr.png);
+    -webkit-background-size: 50%;
+    background-size: 50%;
+}
+
+.ui-listview .ui-icon-custom .state {
+    position: absolute;
+    right: 40px;
+    font-weight: normal;
+}
+
+.ui-block-a.default, .ui-block-a.default, .ui-block-b.default, .ui-block-c.default, .ui-block-d.default, .ui-block-e.default {
+    height: 60px;
+}
+a {
+    text-decoration: none;
+}
+/*
+ * 输入框样式(带说明性文字)
+ */
+.uap-input-caption  span:first-child {
+    font-weight: bold;
+}
+/*
+ * 用户登录输入框样式
+ */
+.ui-input-text .uap-icon-input {
+    background: url(../css/themes/images/icons-png/user-black.png) 10px 50% no-repeat;
+    padding: 0.5em 0 0.5em 2em;
+    -webkit-background-size: 16px;
+    background-size: 16px;
+}
+.ui-input-text .uap-input-psw {
+    background-image: url(../css/themes/images/icons-png/user-black.png);
+}
+.ui-input-text  .uap-input-psw {
+    background-image: url(../css/themes/images/icons-png/lock-black.png);
+}
+
+/*
+ * 圆形开关样式
+ */
+.uap-switch  .ui-slider-track.ui-slider.ui-slider-switch {
+    border-radius: 15px;
+    width: 52px;
+    vertical-align: middle;
+}

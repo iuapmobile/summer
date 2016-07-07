@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="../css/uap-ui-controls.css"/>
+		<script language="JavaScript" src="../js/Frameworks/json.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.MACore.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.Container.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Property.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Entity.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Field.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Context.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Document.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Element.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.JControl.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Engine.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+
+		<script>
+			$isWeb = true
+		</script>
+		<script>
+			function $pageReady() {
+				$('#request').click(function() {
+					var webStatus = $net.available();
+					var url = '';
+					if (webStatus) {
+						url = $('input[name=url]').val();
+						$service.get({
+							"url" : url,
+							"callback" : function() {
+								var result = $ctx.param("result");
+								result = $stringToJSON(result);
+								$alert("当前城市是" + result.weatherinfo.city + "\n" + "今天" + result.weatherinfo.date_y + " " + result.weatherinfo.week + "\n" + "温度" + result.weatherinfo.temp1 + "\n" + "天气" + result.weatherinfo.weather1);
+							},
+						});
+					} else {
+						$alert('网络不可用，请检查网络是否断开');
+					}
+				});
+			}
+
+			$(function() {
+
+			});
+		</script>
+
+	</head>
+	<body>
+		<div id="page1" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" data-role="button" data-icon="uap-back">返回</a>
+				<h1>原生GET请求</h1>
+			</div>
+			<div data-role="content">
+
+				<label class="uap-input-caption"> <span>请求路径:</span>
+					<input type="text" name="url" data-clear-btn="true" placeholder="请输入有效url" value="http://m.weather.com.cn/data/101010100.html"/>
+				</label>
+				<button id="request">
+					发起请求
+				</button>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>工具栏</h1>
+			</div>
+		</div>
+	</body>
+</html>

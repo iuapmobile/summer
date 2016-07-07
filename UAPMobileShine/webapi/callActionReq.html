@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="../css/uap-ui-controls.css"/>
+		<style>
+			#name {
+				background: url('../css/themes/images/icons-png/user-black.png') 10px 50% no-repeat;
+			}
+			#psw {
+				background: url('../css/themes/images/icons-png/lock-black.png') 10px 50% no-repeat;
+			}
+			.ui-slider-track.ui-slider.ui-slider-switch {
+				border-radius: 15px;
+				width: 52px;
+				margin: 8px 0 -10px 0;
+			}
+			.ui-input-text {
+				margin: 0;
+			}
+			.switch-right {
+				float: right;
+				margin-bottom: 8px;
+			}
+			#page1 .ui-input-text input {
+				padding: 0.6em 2em;
+			}
+			a {
+				text-decoration: none;
+			}
+			#page2 .ui-input-text.ui-body-inherit {
+				border: none;
+				border-bottom: 1px solid #dadada;
+				float: left;
+				width: 65%;
+				background: transparent;
+			}
+			#page2 .ui-input-text.ui-body-inherit:nth-child(2) {
+				width: 34%;
+			}
+			#page2 .ui-input-text input {
+				padding-bottom: 0.1em;
+			}
+			#add, #save {
+				background: transparent;
+				color: white;
+			}
+		</style>
+		<script src="../js/Frameworks/json.js" ></script>
+		<script src="../js/Frameworks/UMP.MACore.js" ></script>
+		<script src="../js/Frameworks/UMP.Container.js" ></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Property.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Entity.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Field.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Context.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Document.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Element.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.JControl.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Engine.js"></script>
+		<script src="../js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+
+		<script>
+			$isWeb = true
+		</script>
+		<script>
+			function refreshData() {
+				$service.callAction({
+					"viewid" : "a.b.data", //后台带包名的Controller名
+					"action" : "getData", //方法名,
+					"mydata" : "{code:\"a\"}", //自定义参数
+					"callback" : "cbcallma()", //请求回来后执行的ActionID
+					"error" : "errorcallma()"//失败回调的ActionId
+				});
+			}
+
+			function cbcallma() {
+				var result = $ctx.getJSONObject();
+				var data = result.data;
+				render(data);
+				
+			}
+
+			function errorcallma() {
+				$alert("load data error!");
+			}
+
+			function cbcallma_search() {
+				var result = $ctx.getJSONObject();
+				var data = result.data;
+				if (data) {
+					render(data);
+				}
+			}
+
+			function errorcallma_search() {
+				$alert("load data error!");
+			}
+
+			function cbcallma_del() {
+				refreshData();
+				$alert("删除成功！");
+			}
+
+			function errorcallma_del() {
+				$alert("delete data error!");
+			}
+
+			function cbcallma_add() {
+				$alert('新增成功！');
+				window.location.href="#page3";
+			}
+
+			function errorcallma_add() {
+				$alert("load data error!");
+				window.location.href="#page3";
+			}
+
+			function render(list) {
+				var i;
+				var len = Array.isArray(list) && list.length;
+				var list1 = $('#list1');
+				var fragment = document.createDocumentFragment();
+				if (len) {
+					for ( i = 0; i < len; i++) {
+						li = document.createElement('li');
+						li.setAttribute('data-icon', 'custom');
+						li.innerHTML = '<a href="#"><span>' + list[i].code + '</span><span class="state">' + list[i].name + '</span></a>';
+						fragment.appendChild(li);
+					}
+					list1.html(fragment).listview("refresh");
+				} else {
+					list1.empty();
+				}
+			}
+
+			function $pageReady() {
+				var userMsg = {
+					name : "123",
+					psw : "1234"
+				}
+				if (window.localStorage) {
+					var server_ = localStorage["server"];
+					var port_ = localStorage["port"];
+
+					server_ && $("#serverAddress").val(server_);
+					port_ && $("#port").val(port_);
+				}
+				$("#login").on("tap", function() {
+					var name = $("#name").val(), psw = $("#psw").val();
+					if (name !== userMsg.name || psw !== userMsg.psw) {
+						$alert("用户名或密码错误，请重新输入");
+						$("#psw").val("").focus();
+						return false;
+					}
+					var server = $("#serverAddress").val(), port = $("#port").val();
+
+					if (server == '' && port == '') {
+						$alert("请设置服务器地址和端口");
+						return false;
+					}
+
+					$alert("您设置的服务器地址为" + server + ", 端口为" + port);
+					return true;
+
+				})
+				$("#setAdr").on("touchstart", function() {
+					var server = $("#serverAddress").val(), port = $("#port").val();
+					localStorage["server"] = server;
+					localStorage["port"] = port;
+					$service.writeConfig("host", server);
+					$service.writeConfig("port", port);
+					wondow.location.href = "#page1";
+				});
+
+				$("#search").on("change", function(value) {
+					var keyword = $(this).val();
+					$service.callAction({
+						"viewid" : "a.b.data", //后台带包名的Controller名
+						"action" : "searchData", //方法名,
+						"mydata" : "{keyword:\"" + keyword + "\"}", //自定义参数
+						"callback" : "cbcallma_search()", //请求回来后执行的ActionID
+						"error" : "errorcallma_search()"//失败回调的ActionId
+					});
+				});
+
+				$("#list1").delegate("li","click",function() {
+					var index = $(this).index();
+					var data =$ctx.getJSONArray('data');
+					var row = data[index];
+					$alert(row);
+					var ifdelete = row && $confirm('确定要删除这项数据吗？');
+					if (ifdelete) {
+						row = JSON.stringify(row);
+						$service.callAction({
+							"viewid" : "a.b.data", //后台带包名的Controller名
+							"action" : "delData", //方法名,
+							"mydata" : row, //自定义参数
+							"callback" : "cbcallma_del()", //请求回来后执行的ActionID
+							"error" : "errorcallma_del()"//失败回调的ActionId
+						});
+					}
+				});
+
+				$('#save').click(function() {
+					var $form = $('form[name=addData]');
+					var name = $form.find('input[name=name]').val();
+					var phone = $form.find('input[name=phone]').val();
+					if (name == "" || phone == "") {
+						return true;
+					} else {
+						$service.callAction({
+							"viewid" : "a.b.data", //后台带包名的Controller名
+							"action" : "saveData", //方法名,
+							"mydata" : "{code:\"" + name + "\",name:\"" + phone + "\"}", //自定义参数
+							"callback" : "cbcallma_add()", //请求回来后执行的ActionID
+							"error" : "errorcallma_add()"//失败回调的ActionId
+						});
+						return false;
+					}
+				});
+
+				$("#page3").on('pagebeforeshow', function() {
+					refreshData();
+				});
+				$("#page4").on('pagebeforeshow', function() {
+					$('form[name=addData]').find('input').each(function() {
+						$(this).val('');
+					})
+				});
+			}
+
+			$(function() {
+				//$pageReady();
+			});
+		</script>
+
+	</head>
+	<body>
+		<div id="page1" data-theme="uap" data-role="page">
+
+			<div data-role="header" data-position="fixed">
+				<a href="index.html" rel="external" data-role="button" data-icon="uap-back">首页</a>
+				<h1>callAction示例</h1>
+			</div>
+
+			<div data-role="content">
+				<form action="">
+
+					<div id="" data-theme="uap" data-role="page"></div>
+
+					<input type="text" id="name" placeholder="手机\\用户名\\邮箱" value="123"/>
+					<input type="password" id="psw" placeholder="******" value="1234"/>
+					<div class="switch-right">
+						<span>自动登录</span>
+						<select name="switch" id="switch" data-role="slider" data-inline="true">
+							<option value="0"></option>
+							<option value="1"  selected=""></option>
+						</select>
+					</div>
+					<div style="overflow:hidden;clear:both;"></div>
+					<a href="#page3" data-role="button" data-transition="slide" id="login">立即登录</a>
+				</form>
+				<div class="switch-right">
+					<a href="#page2" data-transition="slide">还没设置？请点此设置并保存</a>
+				</div>
+				<div style="overflow:hidden;clear:both;"></div>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>工具栏</h1>
+			</div>
+		</div>
+		<div id="page2" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-iconpos="notext" data-rel="back" data-role="button" data-icon="uap-back">back</a>
+				<h1>返回</h1>
+			</div>
+			<div data-role="content">
+				<input type="text" id="serverAddress" placeholder="服务器地址" value="10.2.116.20"/>
+				<input type="text" id="port" placeholder="端口" value="9090"/>
+				<div class="switch-right">
+					<span>加密</span>
+					<select name="switch" id="switch" data-role="slider" data-inline="true">
+						<option value="0"></option>
+						<option value="1"  selected=""></option>
+					</select>
+				</div>
+				<div style="overflow:hidden;clear:both;"></div>
+				<a href="#" data-role="button"  id="setAdr" data-rel="back">保存</a>
+			</div>
+		</div>
+		<div id="page3" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" data-role="button" data-icon="uap-back">返回</a>
+				<h1>联系人</h1>
+				<a href="#page4" data-transition="slide" id="add">新增</a>
+				<input data-type="search" id="search" placeholder="请输入搜索内容"/>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="list1" class="ui-noboxshadow"></ul>
+			</div>
+			<div data-role="footer" data-position="fixed"></div>
+		</div>
+
+		<div id="page4" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" data-role="button" data-icon="uap-back" id="save">返回</a>
+				<h1>编辑联系人</h1>
+				<!--<a href="#" id="save">保存</a>-->
+			</div>
+			<div data-role="content">
+				<form name="addData">
+					<label> <span style="font-weight:bold">联系人姓名:</span>
+						<input type="text" name="name" data-clear-btn="true" placeholder="请输入联系人姓名"/>
+					</label>
+					<label> <span style="font-weight:bold">电话号码:</span>
+						<input type="text" name="phone" data-clear-btn="true" placeholder="请输入联系人电话号码"/>
+					</label>
+				</form>
+			</div>
+			<div data-role="footer" data-position="fixed"></div>
+		</div>
+	</body>
+</html>

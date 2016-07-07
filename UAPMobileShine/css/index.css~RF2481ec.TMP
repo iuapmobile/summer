@@ -1,0 +1,81 @@
+.box-hv-center {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	text-align: center;
+}
+#page1.ui-page-active {
+	display:-webkit-box;
+	padding:1em 1em 0 1em;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.activeWindow {
+	background: #47D092;
+}
+.uiControl {
+	background: #A8D062;
+}
+.thirdapi {
+	background: #209be7;
+}
+.mediaapi{
+	background: #5968D2;
+}
+.exapi {
+	background: #459875;
+}
+.sysapi {
+background: #3F73E5;
+}
+.uiapi {
+background: #52d1cd;
+}
+.netapi {
+	background: #4B80B5;
+}
+a.box-hv-center {
+	-webkit-transition: all ease .3s;
+	transition: all ease .3s;
+	margin:5px;
+	color: #fff !important;
+}
+a.box-hv-center:hover, a.box-hv-center:active{
+	 -webkit-filter:brightness(.6);
+	 -webkit-transition: all ease .3s;
+	 -o-transition: all ease .3s;
+	 transition: all ease .3s;
+}
+.box-align-justify span {
+	font-size: 30px;
+	color: #A65FFF;
+}
+.box-align-justify {
+	display: -webkit-box;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+	padding: 0 5px;
+}
+img {
+	display: block;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+.ui-collapsible-set {
+	padding: 0;
+}
+.swipe {
+	overflow: hidden;
+	visibility: hidden;
+	position: relative;
+}
+.swipe-wrap {
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap > div {
+	float: left;
+	width: 100%;
+	position: relative;
+}

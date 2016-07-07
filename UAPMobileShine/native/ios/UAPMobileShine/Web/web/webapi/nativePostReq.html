@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile-1.4.5.css">
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="../css/uap-ui-controls.css"/>
+		<script language="JavaScript" src="../js/Frameworks/json.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.MACore.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.Container.js" ></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Property.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Entity.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Field.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Context.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Document.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Element.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.JControl.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Engine.js"></script>
+		<script language="JavaScript" src="../js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+
+		<script>
+			$isWeb = true
+		</script>
+		<script>
+			function $pageReady() {
+				$('#request').click(function() {
+					var data = $('textarea[name=data]').val();
+					data = JSON.parse(data);
+					
+					var webStatus = $net.available();
+					var url = '';
+					var data = {};
+					if (webStatus) {
+						url = $('input[name=url]').val();
+						data = JSON.parse($('textarea[name=data]').val());				
+						$service.post({
+							"url" : url,
+							"data" : data,
+							"callback" : function() {
+								var result = $ctx.param("result");// 
+                          		result = $stringToJSON(result);//将字符串转换成JSON对象
+                          		if(result.status==false || result.status == "false"){
+                                     $alert("result.status == "+ result.status+"\n"+"result.errCode == "+ result.errCode+"\n"+"result.errMsg == " + result.errMsg);
+                                }else if(result.status==true || result.status == "true"){
+                                     $alert("result.status == "+ result.status+"\n"+"result.userName == " + result.userName);
+							    }
+							 }
+						});
+					} else {
+						$alert('网络不可用，请检查网络是否断开');
+					}
+				});
+			}
+
+			$(function() {
+				//$pageReady();
+			});
+		</script>
+
+	</head>
+	<body>
+		<div id="page1" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" data-role="button" data-icon="uap-back">返回</a>
+				<h1>原生POST请求</h1>
+			</div>
+			<div data-role="content">
+				<label class="uap-input-caption"> <span>请求路径:</span>
+					<input type="text" name="url" data-clear-btn="true" placeholder="请输入有效的url" value="http://academy.yonyou.com/api/loginLx.ashx"/>
+				</label>
+				<label class="uap-input-caption"> <span>请求主体:</span>
+					<textarea name="data"  placeholder="请输入有效的JSON格式的请求主体">{"key":"6480-4230-27FD-8AA0","user":"apitest","pwd":"123456"}</textarea>
+				</label>
+				<button id="request">发起请求</button>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>工具栏</h1>
+			</div>
+		</div>
+	</body>
+</html>

@@ -101,7 +101,7 @@ gulp.task('summer',function(){
 	var path1 = SYSPATH.git["tpl_ump_js"];
 	var path2 = SYSPATH.git["tpl_ratchet_js"];
 	var path3 = SYSPATH.git["tpl_files_js"];
-	
+	console.log(path3);
 	gulp.src('dev/js/summer.js').pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
 	console.log('update gityy end');
 	

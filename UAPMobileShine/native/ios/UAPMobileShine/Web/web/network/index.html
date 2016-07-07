@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../css/base.css"/>
+		<link rel="stylesheet" href="../css/themes/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.theme.uap-1.4.5.css">
+		<link rel="stylesheet" href="../external/fontAwesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="../css/uap-ui-controls.css"/>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.mobile-1.4.5.min.js"></script>
+		<script>
+			$isWeb = true
+		</script>
+		<script>
+			function $pageReady() {
+				//alert("webview ready");
+			}
+
+			function json_html() {
+				$.get("http://10.2.116.19:9090/json.html", {
+					get : 3
+				}, function(data) {
+					alert("请求的json.html数据为\n" + data);
+					document.getElementById("result").innerHTML = data;
+				});
+			}
+
+			$(function() {
+				var url;
+				url = document.getElementById("ip").value;
+				function get() {
+					$.get(url, {
+						get : 1
+					}, function(data) {
+						alert("get请求的数据为\n" + data);
+						document.getElementById("result").innerHTML = data;
+					});
+				}
+
+				function post() {
+					$.post(url, {
+						post : 2
+					}, function(data) {
+						alert("post请求的数据为\n" + data);
+						document.getElementById("result").innerHTML = data;
+					});
+				}
+
+
+				$("#getRes").on("click", function() {
+					get();
+				})
+				$("#postRes").on("click", function() {
+					post();
+				})
+			});
+		</script>
+		<style>
+		</style>
+
+	</head>
+	<body>
+		<div id="page1" data-theme="uap" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" data-role="button" data-icon="uap-back">返回</a>
+				<h1>导航栏</h1>
+			</div>
+
+			<div data-role="content">
+				<input type="text" id="ip" value="http://10.2.116.19:9090/te.asp">
+				<button id="getRes">
+					GET请求
+				</button>
+				<button id="postRes">
+					POST请求
+				</button>
+				<button onclick="json_html()">
+					请求json.html
+				</button>
+				<h1>表单1--get方式提交</h1>
+				<form name="form1" enctype="multipart/form-data" action="http://10.2.116.19:9090/te.asp" target="ajaxUpload" method="get">
+					<input type="text" name="user">
+					<input type="text" name="psw">
+					<input type="submit" value="提交">
+				</form>
+				<h1>表单2--post方式提交</h1>
+				<form name="form2" action="http://10.2.116.19:9090/te.asp" method="post" target="ajaxUpload">
+					<input type="text" name="user1">
+					<input type="text" name="psw1">
+					<input type="submit" value="提交">
+				</form>
+				
+				<div id="result"></div>
+				
+			</div>
+			<iframe name="ajaxUpload" id="ajaxUpload" width="0" height="0"></iframe>
+		</div>		
+	</body>
+</html>
