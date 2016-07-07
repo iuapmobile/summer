@@ -1,4 +1,4 @@
-@mixin angle($w:14px,$h:14px,$border-width:3px,$border-color:$um-theme-color,$deg:45deg,$vc:false) {
+@mixin angle($w:14px,$h:14px,$border-width:3px,$border-color:$um-theme-color,$deg:45deg,$vc:false,$margin:0px 0px 0xp 0px) {
 	content: "";
 	display: inline-block;
 	width: $w;
@@ -12,4 +12,5 @@
   }@else {
   	@include transform(rotate($deg));
   }
+  margin: $margin;
 }

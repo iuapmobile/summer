@@ -12,7 +12,8 @@
 	visibility: hidden;
 	//overflow: hidden;
     z-index: -1;
-	background-color: $um-body-bg-color;
+	//background-color: $um-body-bg-color;
+	background-color: $um-theme-color2;
    &.active {
 		visibility: visible;
 		z-index: z("little");

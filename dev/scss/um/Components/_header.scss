@@ -9,11 +9,12 @@
 	white-space: nowrap;
 	@include text-overflow;
 	pointer-events: none;
+	color: $um-theme-color2;
 }
 .um-header {
 	position: relative;
 	min-height: 44px;
-	background-color: $header-bgcolor;
+	background-color: $um-theme-color;
 	@extend .um-border-bottom;
 	z-index: z("base", "header");
 	h3 {
@@ -45,7 +46,7 @@
 	top: 0;
 	left: 10px;
 	font-weight: 500;
-	color: $um-theme-color;
+	color: $um-theme-color2;
 	// font-size: $font-size-base; 图标可以使用f20
 	line-height: 44px;
 	text-decoration: none;
@@ -65,7 +66,7 @@
 
 // 返回按钮
 .um-back:before {
-	@include angle;
+	@include angle(14px,14px,2px,$um-theme-color2,45deg,false,0px -3px 0px 0px);
 }
 
 .um-header-right {

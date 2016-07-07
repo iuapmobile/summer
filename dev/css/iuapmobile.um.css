@@ -2837,6 +2837,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
   border-bottom: 3px solid #007aff;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+  margin: 0px 0px 0xp 0px;
 }
 
 .um-icon-angle-right:before {
@@ -2848,6 +2849,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
   border-bottom: 2px solid #d8d8d8;
   -webkit-transform: rotate(-135deg);
   transform: rotate(-135deg);
+  margin: 0px 0px 0xp 0px;
 }
 
 .um-check-group-item:after {
@@ -3326,7 +3328,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
   flex-direction: column;
   visibility: hidden;
   z-index: -1;
-  background-color: #efeff4;
+  background-color: #ffffff;
 }
 .um-page.active {
   visibility: visible;
@@ -3404,12 +3406,13 @@ html.um-win {
   text-overflow: ellipsis;
   white-space: nowrap;
   pointer-events: none;
+  color: #ffffff;
 }
 
 .um-header {
   position: relative;
   min-height: 44px;
-  background-color: #f5f5f7;
+  background-color: #007aff;
   z-index: 5;
 }
 
@@ -3442,7 +3445,7 @@ html.um-win {
   top: 0;
   left: 10px;
   font-weight: 500;
-  color: #007aff;
+  color: #ffffff;
   line-height: 44px;
   text-decoration: none;
 }
@@ -3471,10 +3474,11 @@ html.um-win {
   display: inline-block;
   width: 14px;
   height: 14px;
-  border-left: 3px solid #007aff;
-  border-bottom: 3px solid #007aff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+  margin: 0px -3px 0px 0px;
 }
 
 .um-header-right {
@@ -3523,6 +3527,10 @@ html.um-win {
 }
 .um-footerbar-item img {
   margin: 0 auto;
+}
+
+.um-footerbar-item i {
+  font-size: 18px;
 }
 
 @supports (display: -webkit-flex) or (display: flex) {
@@ -3803,6 +3811,7 @@ input[type="number"].form-control {
   top: 50%;
   -webkit-transform: translate(0, -50%) rotate(-135deg);
   transform: translate(0, -50%) rotate(-135deg);
+  margin: 0px 0px 0xp 0px;
   right: 15px;
   z-index: 2;
 }
@@ -4166,6 +4175,7 @@ input[type="number"].form-control {
   top: 50%;
   -webkit-transform: translate(0, -50%) rotate(-135deg);
   transform: translate(0, -50%) rotate(-135deg);
+  margin: 0px 0px 0xp 0px;
 }
 .um-list .um-list > li:first-child .btn, .um-list .um-list > li:first-child .um-btn,
 .um-list > .btn:first-child,
@@ -4410,7 +4420,7 @@ input[type="number"].form-control {
 }
 
 .um-tabbar-item-text {
-  font-size: 12px;
+  font-size: 9px;
   line-height: 1;
 }
 
