@@ -3350,8 +3350,8 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
 
 .um-content {
   /* position:absolute;top:44px;right:0;bottom:50px;left:0; */
-  padding-left: 15px;
-  padding-right: 15px;
+  /*	padding-left: 15px;*/
+  /*	padding-right: 15px;*/
   overflow: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -3517,7 +3517,7 @@ html.um-win {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
-  color: #919191;
+  color: #777777;
   padding-top: 5px;
   padding-bottom: 3px;
   transition: color ease .3s;
@@ -3529,10 +3529,11 @@ html.um-win {
   margin: 0 auto;
 }
 
-.um-footerbar-item i {
-  font-size: 18px;
+/*
+.um-footerbar-item i{
+	font-size:18px;
 }
-
+*/
 @supports (display: -webkit-flex) or (display: flex) {
   .um-footerbar-item {
     display: inline-block;
@@ -4398,7 +4399,7 @@ input[type="number"].form-control {
 .um-tabbar-underline > li > a {
   border-right: 0;
   background-color: transparent;
-  color: #333;
+  color: #777777;
 }
 .um-tabbar-underline > li.active {
   color: #007aff;
@@ -4431,7 +4432,7 @@ input[type="number"].form-control {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
-  color: #919191;
+  color: #777777;
   padding-top: 5px;
   padding-bottom: 3px;
   transition: color ease .4s;

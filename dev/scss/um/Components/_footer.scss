@@ -25,7 +25,7 @@
 	display: block;
 	@include flex-count;
 	text-align: center;
-	color: #919191;
+	color: $gray-light;
 	
 	padding-top: 5px;	
 	padding-bottom: 3px;
@@ -38,9 +38,11 @@
 		margin: 0 auto;
 	}
 }
+/*
 .um-footerbar-item i{
 	font-size:18px;
 }
+*/
 @supports (display: -webkit-flex) or
           (display: flex) {
 	.um-footerbar-item {

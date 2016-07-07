@@ -39,7 +39,7 @@
 		>a {
 			border-right: 0;
 			background-color: transparent;
-			color: #333;
+			color: $gray-light;
 		}
 		&.active {
 			color: $um-theme-color;
@@ -71,7 +71,7 @@
 	display: block;
 	@include flex-count;
 	text-align: center;
-	color: #919191;
+	color: $gray-light;
 	padding-top: 5px;	
 	padding-bottom: 3px;
 	// width: 64px;
