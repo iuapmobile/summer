@@ -99,10 +99,10 @@
 	.um-list-item-body {
 		@include flex-count;
 		padding: $padding-base-vertical 0;
-		/*padding-right: 25px;   不需要*/
+		/*padding-right: 25px;   不需要gct*/
 		-webkit-align-self: stretch;
 		align-self: stretch;
-		width: 0;
+		width: 0; //需要给一个width
 	}
 	.um-list-item-left {
 		padding: $padding-base-vertical 0;
