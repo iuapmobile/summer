@@ -783,10 +783,10 @@
         }
     };
     u.fixIos7Bar = function(el){
-        // if(!u.isElement(el)){
-        //     console.warn('$api.fixIos7Bar Function need el param, el param must be DOM Element');
-        //     return;
-        // }
+        if(!u.isElement(el)){
+            alert('$summer.fixIos7Bar Function need el param, el param must be DOM Element');
+			return;
+        }
         // var strDM = api.systemType;
         // if (strDM == 'ios') {
         //     var strSV = api.systemVersion;
@@ -797,6 +797,15 @@
         //         el.style.paddingTop = '20px';
         //     }
         // }
+		if($summer.os == "ios"){
+         	el.style.paddingTop = '20px';
+            /*
+	        $(el).find(".um-back, .um-header-right, .um-header-left").each(function(){
+	   			this.style.top = '20px';
+	  		});
+	  		*/
+			$(el).find(".um-back, .um-header-right, .um-header-left").css("top","20px");
+        }
     };
     u.toast = function(title, text, time){
         // var opts = {};

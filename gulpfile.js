@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 
 var YOURPATH = {
 	gitPath : '../../gityy',//改写成你的真实路径
-	studioPath : '../../iUAPMobile-Standard-Summer-SR3-Windows/iUAPMobile'//改写成你的真实路径
+	studioPath : '../../iUAPMobile-Standard-Summer-SR4-Windows/iUAPMobile'//改写成你的真实路径
 };
 var SYSPATH = {
 	git:{},
@@ -43,7 +43,7 @@ gulp.task('init',function(){
 	
 	//5
 	SYSPATH.wzjc["scripts"] = '../wzjc/src/script';
-	  console.log('init ok');
+	console.log('init ok');
 });
 
 
@@ -75,6 +75,7 @@ gulp.task('uglify',function(){
 gulp.task('umcss',function(){
 	//gulp.src('dev/scss/um.scss').pipe(sass()).pipe(gulp.dest('dist/css/'));
 	var src = 'dev/css/iuapmobile.um.css'
+	console.log('iuapmobile.um.css update github dist end');
 
 	//1 update github
 	gulp.src(src).pipe(gulp.dest('dist/css/'));
@@ -84,28 +85,29 @@ gulp.task('umcss',function(){
 	var path3 = SYSPATH.git["tpl_files_css"];
 	
 	gulp.src(src).pipe(gulp.dest(path1)).pipe(gulp.dest(path3));
-	
+	console.log('iuapmobile.um.css is updated to gityy end');
+
 	//3 update to studio
 	var studio1 = SYSPATH.studio["tpl_ump_css"];
 	var studio3  = SYSPATH.studio["tpl_files_css"];
 	
 	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
-	
-	return;
+	console.log('iuapmobile.um.css is updated to studio end');
 });
 gulp.task('summer',function(){
 	
 	//1 update github
 	gulp.src('dev/js/summer.js').pipe(gulp.dest('dist/js/'));
-	
+	console.log('summer.js update github dist end');
+
 	//2 update gityy
 
 	var path1 = SYSPATH.git["tpl_ump_js"];
 	var path2 = SYSPATH.git["tpl_ratchet_js"];
 	var path3 = SYSPATH.git["tpl_files_js"];
-	console.log(path3);
+	
 	gulp.src('dev/js/summer.js').pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
-	console.log('update gityy end');
+	console.log('summer.js is updated to gityy end');
 	
 	//3 update to studio
 	var studio1 = SYSPATH.studio["tpl_ump_js"];
@@ -115,7 +117,7 @@ gulp.task('summer',function(){
 	//4
 	var wzjc = SYSPATH.wzjc["scripts"];
 	gulp.src('dev/js/summer.js').pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
-	console.log('update studio end');
+	console.log('summer.js is updated to studio end');
 });
 
 gulp.task('iuapmobile.frameworks.ui',function(){
@@ -126,7 +128,7 @@ gulp.task('iuapmobile.frameworks.ui',function(){
 	var distPath = 'dist/js/Frameworks/';
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
-	console.log('update github end');
+	console.log('iuapmobile.frameworks.ui.js update github dist end');
 	
 	//2 update gityy
 	var path11 = SYSPATH.git["tpl_ump_js_fw"];
@@ -135,7 +137,7 @@ gulp.task('iuapmobile.frameworks.ui',function(){
 
 	gulp.src(distPath+fileName+".js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
 	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
-	console.log('update gityy end');
+	console.log('iuapmobile.frameworks.ui.js update to gityy end');
 
 	//3 update to studio
 	var studio11  = SYSPATH.studio["tpl_ump_js_fw"];
@@ -143,6 +145,6 @@ gulp.task('iuapmobile.frameworks.ui',function(){
 	
 	gulp.src(distPath+fileName+".js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
 	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
-	console.log('update studio end');
+	console.log('iuapmobile.frameworks.ui.js update to studio end');
 });
 
