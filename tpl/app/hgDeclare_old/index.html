@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/iuapmobile.um-2.7.0.css">
+		<link rel="stylesheet" href="css/font-icons.css">
+		<script src="js/Frameworks/iuapmobile.frameworks.core-2.7.0.js" ></script>
+		<script src="js/jquery-2.1.4.min.js" ></script>
+		<script src="js/Frameworks/iuapmobile.frameworks.ui-2.7.0.js" ></script>
+
+		<script>
+			function $pageReady() {
+
+			}
+
+			$(function() {
+				$("#submit").on("click", function() {
+					//调用ma
+					//$service.writeConfig({
+					//	"host" : "172.20.8.238", //向configure中写入host键值
+					//	"port" : "9080"//向configure中写入ip键值
+					//});
+					var username = $("#username").val(), psw = $("#psw").val();
+					if (username === "" || psw === "") {
+						alert("用户名和密码都不能为空!");
+						return false;
+					}
+					$cache.write("username", username);
+					$cache.write("psw", psw);
+					$view.changePage("main.html", {
+						"isKeep" : "false",//打开新页面时，是否保留当前页面不关闭
+						"animation-type" : "suckEffect",//动画类型, Fade|Push|suckEffect|oglFlip|MoveIn
+						"animation-direction" : "left",//动画执行方向，例如left为从右向左...取值范围[left | right | top | bottom]
+					});
+				})
+			});
+		</script>
+		<style>
+			#index .um-content {
+				background: url(img/bg.png) center;
+				background-size: 100%;
+			}
+			.title {
+				height: 221px;
+				font-size: 25px;
+				color: #00458a;
+			}
+			.header {
+				background-color: #00a1ea;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="um-page header" id="index">
+			<div class="um-content">
+				<div class="um-box-center title">
+					海关申报系统
+				</div>
+				<form>
+					<div class="p15 um-rounded">
+						<label class="um-label um-box-vc">
+							<div><img src="img/user.png" width=25 height=25 alt="">
+							</div>
+							<div>
+								<input type="text" id="username" class="form-control" value="user01">
+							</div> </label>
+
+						<label class="um-label um-box-vc">
+							<div><img src="img/password.png" width=25 height=25 alt="">
+							</div>
+							<div>
+								<input type="text" id="psw" class="form-control" value="******">
+							</div> </label>
+					</div>
+					<div class="um-box-justify">
+						<a href="main.html">自动登录</a>
+						<a href="#settings">设置</a>
+					</div>
+					<a href="#" id="submit" class="btn btn-gray mt15"> 登录 </a>
+				</form>
+			</div>
+		</div>
+
+		<div class="um-page" id="settings">
+			<div class="um-header header" >
+				<a href="#" class="um-back">返回</a>
+				<h3>导航栏</h3>
+			</div>
+
+			<div class="um-content">
+				<div class="um-box">
+					<div class="um-input-text um-bf1 mr10">
+						<input type="text" class="form-control" placeholder="地址">
+					</div>
+					<div class="um-input-text w80">
+						<input type="text" class="form-control" placeholder="端口">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

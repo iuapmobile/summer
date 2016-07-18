@@ -1,0 +1,44 @@
+.collect .btn {
+	width: 100px;
+}
+#main .um-content {
+	padding-bottom: 125px;
+}
+/* .agree-btn {
+	-webkit-box-flex: initial;
+	box-flex: initial;
+	-webkit-flex: initial;
+	flex: initial;
+} 
+#isvDetail .agree-btn {
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}*/
+.um-align-justify .um-align-justify {
+	height: 100%;
+}
+.um-header .filter {
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	vertical-align: middle;
+	background-size: 25px;
+	position: absolute;
+	right: 60px;
+	top: 50%;
+	margin-top: -12px;
+}
+
+.um-check-inline.um-list-item-media {
+	padding-left: 0;
+	margin-left: -10px;
+}
+
+#status .um-check,
+#isvname .um-check,
+#qiye .um-check,
+#yinyong .um-check {
+	border-color: #ef4f20;
+}

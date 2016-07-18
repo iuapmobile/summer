@@ -1,0 +1,16 @@
+.header { background-color: #00a1ea; color: #fff; }
+.color-white { color: #fff; }
+.poster, .aftercall, .contacts, .massages, .email, .yeji { width: 80px; height: 80px; }
+.poster { background-color: #3A4091; }
+.aftercall { background-color: #E85175; }
+.contacts { background-color: #F7B52C; }
+.massages { background-color: #00A199; }
+.email { background-color: #0080c0; }
+.yeji { background-color: #008000; }
+
+.img { padding-bottom: 100%; background-size: 100%; display: block; position: relative; margin-top: 10px; margin-bottom: 10px; background-position: center; overflow: hidden; }
+.img img { position: absolute; top: 0; left: 0; right: 0; width: 100%; }
+
+.um-back:before { border-color: #fff; }
+.um-nav-item { max-width: 100%; max-height: 480px; width: 100vw; height: calc(100vh - 45px); }
+.um-nav-item img { max-width: 100%; max-height: 480px; height: calc(100vh - 45px); }

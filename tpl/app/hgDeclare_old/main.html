@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/font-icons.css">
+		<link rel="stylesheet" href="css/iuapmobile.um-2.7.0.css">
+		<link rel="stylesheet" type="text/css" href="css/iuapmobile.um.listview-2.7.0.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="js/Frameworks/iuapmobile.frameworks.core-2.7.0.js" ></script>
+		<script src="js/jquery-2.1.4.min.js" ></script>
+		<script src="js/knockout-2.2.0.js" ></script>
+		<script src="js/Frameworks/iuapmobile.frameworks.ui-2.7.0.js" ></script>
+		<script type="text/javascript" src="js/Frameworks/iuapmobile.frameworks.listview-2.7.0.js"></script>
+		<script>
+			function $pageReady() {
+				$js.backConfirm();
+				var username = $cache.read("username");
+				if (username) {
+					alert("您好，" + username);
+					$("#username").html(username);
+				}
+			}
+
+			function Model() {
+			}
+
+			var viewModel = new Model();
+
+			$(function() {
+				var lineData = {
+					"entry_id" : "00120030",
+					"com_id" : "FG3212",
+					"corname" : "",
+					"ty_no" : "dGDDR",
+					"jck_date" : "2015/3/5",
+					"pics" : []
+				}
+				//"img/app.png","img/bg.png"
+				viewModel.postData = ko.observable(lineData);
+				viewModel.allData = ko.observableArray();
+				viewModel.sbm = function() {
+					var d = viewModel.postData();
+					if (!d.corname) {
+						$alert("请输入经营单位");
+						return;
+					}
+					viewModel.allData.push(viewModel.postData());
+					UM.page.back();
+				};
+				viewModel.addImg = function() {
+					$camera.open({
+						bindfield : "img",
+						callback : function() {
+							var img = $ctx.getString("img");
+							lineData.pics.push(img);
+							viewModel.postData(lineData);
+						}
+					})
+				};
+				viewModel.removeImg = function() {
+					var index = Math.round(($("#removeImgContainer").scrollLeft()) / $(window).width());
+					lineData.pics.splice(index, 1);
+					viewModel.postData(lineData);
+				}
+				viewModel.poster = function() {
+					UM.page.changePage({
+						target : "#detail"
+					})
+					lineData = {
+						"entry_id" : "00120030",
+						"com_id" : "FG3212",
+						"corname" : "",
+						"ty_no" : "dGDDR",
+						"jck_date" : "2015/3/5",
+						"pics" : []
+					}
+					viewModel.postData(lineData);
+				};
+
+				ko.applyBindings(viewModel);
+
+				//$js.backConfirm();
+
+				//构造控件实例
+				var listview = UM.listview('#listview');
+				listview.on('pullUp', function(sender) {
+					sender.refresh();
+				});
+				listview.on('pullDown', function(sender) {
+					var row = {
+						"entry_id" : "00000010120002",
+						"com_id" : "0000000122",
+						"corname" : "",
+						"ty_no" : "XDddadfd2333255523",
+						"jck_date" : "",
+						"pics" : ["img/app.png"]
+					};
+					viewModel.allData.unshift(row);
+					sender.refresh();
+				})
+				listview.on('itemDelete', function(sender, args) {
+					args.$target.slideUp(500, function() {
+						var item = viewModel.allData()[args.rowIndex];
+						viewModel.allData.remove(item);
+					});
+				});
+				listview.on('itemSwipeLeft', function(sender, args) {
+					sender.showItemMenu(args.$target);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div class="um-header header">
+				<h3>申报系统</h3>
+				<a href="#pics" class="um-header-right color-white"> <img src="img/setting.png" width=44 height=44 alt=""> </a>
+			</div>
+			<div class="um-content">
+				<label class="um-label um-box-vc mb20 mt20">
+					<div>
+						<img src="img/avatar.png" width="38" class="um-circle  um-img-responsive" alt="">
+					</div>
+					<div>
+						<span class="ml15" id="username">keynue</span>
+					</div> </label>
+
+				<div class="um-grid mt30">
+					<div class="um-grid-row tc">
+						<div class="um-box-center">
+							<a href="#" class="poster um-circle um-box-center" data-bind="click: poster">
+							<div>
+								<img src="img/poster.png" width=35 class="um-img-responsive" alt="">
+								<div class="um-white f12">
+									我要申报
+								</div>
+							</div> </a>
+						</div>
+						<div class="um-box-center">
+							<a href="#shenpi" class="aftercall um-circle um-box-center">
+							<div>
+								<img src="img/aftercall.png" width=35 class="um-img-responsive" alt="">
+								<div class="um-white f12">
+									申报查询
+								</div>
+							</div> </a>
+						</div>
+						<div class="um-box-center">
+							<a href="#" class="contacts um-circle um-box-center">
+							<div>
+								<img src="img/contacts.png" width=35 class="um-img-responsive" alt="">
+								<div class="um-white f12">
+									通讯录
+								</div>
+							</div> </a>
+						</div>
+					</div>
+					<div class="um-grid-row tc">
+						<div class="um-box-center">
+							<a href="#" class="massages um-circle um-box-center">
+							<div>
+								<img src="img/massages.png" width=35 class="um-img-responsive" alt="">
+								<div class="um-white f12">
+									我的消息
+								</div>
+							</div> </a>
+						</div>
+						<div class="um-box-center">
+							<a href="#" class="email um-circle um-box-center">
+							<div>
+								<img src="img/poster.png" width=35 class="um-img-responsive" alt="">
+								<div class="um-white f12">
+									我的邮箱
+								</div>
+							</div> </a>
+						</div>
+						<div class="um-box-center">
+							<a href="#" class="yeji um-circle um-box-center">
+							<div>
+								<img src="img/poster.png" width=35 class="um-img-responsive" alt="">
+								<div class="um-white f12">
+									业绩分析
+								</div>
+							</div> </a>
+						</div>
+					</div>
+				</div>
+				<div class="um-list">
+					<a  href="#detail" class="um-list-item">
+					<div class="um-list-item-inner">
+						<div class="um-list-item-body">
+							申报统计
+						</div>
+					</div> </a>
+					<a  href="#shenpi" class="um-list-item">
+					<div class="um-list-item-inner">
+						<div class="um-list-item-body">
+							新增统计
+						</div>
+					</div> </a>
+				</div>
+			</div>
+		</div>
+		<div class="um-page" id="detail">
+			<div class="um-header header">
+				<a href="#"  class="um-back color-white"></a>
+				<h3>报关单信息</h3>
+				<a class="um-header-right color-white" href="#" data-bind="click: sbm">提交</a>
+			</div>
+			<div class="um-content">
+				<ul class="um-list" data-bind="with: postData">
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left w100">
+									海关编号
+								</div>
+								<div class="um-list-item-right" data-bind="text: entry_id">
+									0000000000000010120002
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left w100">
+									统一编号
+								</div>
+								<div class="um-list-item-right" data-bind="text: com_id">
+									000000000000000000122
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left w100">
+									经营单位
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" data-bind="value: corname" placeholder="请输入经营单位">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left w100">
+									提运单号
+								</div>
+								<div class="um-list-item-right" data-bind="text: ty_no">
+									XDddadfd2333255523
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left w100">
+									进出口日期
+								</div>
+								<div class="um-list-item-right w um-box-vc vc">
+									<input type="date" name="date" data-bind="value: jck_date" class="form-control">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									<div class="um-box-justify">
+										<div>
+											照片
+										</div>
+									</div>
+									<!-- style="background-image: url(img/app.png)" -->
+									<div class="um-row">
+										<span  data-bind="foreach: pics">
+											<div class="um-xs-3 pr p10">
+												<a href="#pics" data-transition="pop" class="img"> <img data-bind="attr: {src: $data}" alt=""> </a>
+											</div> </span>
+										<div class="addImg um-xs-3" data-bind="click: $parent.addImg">
+											<div class="img" style="background-image: url(img/addimg_normal.png)"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="um-page" id="shenpi">
+			<div class="um-header header">
+				<a href="#" class="um-back color-white"></a>
+				<h3>审批系统</h3>
+				<div class="um-header-btns">
+					<i class="ti-search f20 mr5"></i>
+					<i class="ti-filter f20"></i>
+				</div>
+			</div>
+
+			<div class="um-content">
+
+				<ul class="um-tabbar um-tabbar-underline">
+					<li class="active">
+						<a href="#">全部</a>
+					</li>
+					<li>
+						<a href="#">待审</a>
+					</li>
+					<li>
+						<a href="#">审批中</a>
+					</li>
+					<li>
+						<a href="#">退回</a>
+					</li>
+					<li>
+						<a href="#">完成</a>
+					</li>
+				</ul>
+				<div class="um-listview-wrap" id="listview">
+					<ul class="um-list um-no-active" data-bind="foreach: allData">
+						<li class="um-listview-row"  data-bind="click: $parent.lineClick">
+							<a href="#" class="um-list-item um-swipe-action um-no-icon">
+							<div class="um-swipe-btns">
+								<span class="um-swipe-btn um-delete">通过</span>
+							</div>
+							<div class="um-list-item-media">
+								<img width=50 height=50 data-bind="attr: {src: pics[0]}" alt="">
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body" style="padding-right:0">
+									<div class="clearfix f16">
+										<div class="um-xs-6 tl um-text-overflow">
+											<span class="fb" data-bind="text:entry_id"></span>
+										</div>
+										<div class="um-xs-6 tr um-text-overflow um-red">
+											<span  data-bind="text:com_id"></span>
+										</div>
+									</div>
+									<div class="clearfix mt5 f12">
+										<div class="um-xs-6 tl um-text-overflow">
+											<span data-bind="text:corname" class="um-gray"></span>
+											<span data-bind="text:ty_no"></span>
+										</div>
+										<div class="um-xs-6 tr um-text-overflow">
+											<span data-bind="text:jck_date" class="um-gray"></span>
+										</div>
+									</div>
+								</div>
+							</div> </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="um-page" id="pics">
+
+			<div class="um-header header" >
+				<a href="#"  class="um-back color-white">返回</a>
+				<h3>图片选择</h3>
+				<a class="um-header-right color-white" href="#" data-bind="click: removeImg">删除</a>
+			</div>
+
+			<div class="um-content um-content-fill">
+				<div class="um-nav" id="removeImgContainer"  data-bind="with: postData">
+					<div class="um-nav-inner" data-bind="foreach: pics">
+						<a href="#" data-transition="pop" class="um-nav-item" > <img data-bind="attr: {src: $data}" alt=""> </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

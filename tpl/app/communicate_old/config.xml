@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application>
+	<app_start>index.html</app_start>
+	<app_name>communicate</app_name>
+	<project_name>communicate</project_name>
+	<package_name>com.yyuap.communicate</package_name>
+	<icon relativePath="css/themes/default/app">app</icon>
+	<target>android-15</target>
+	<platform>android</platform>
+	<versionCode>1</versionCode>
+	<versionName>1</versionName>
+	<orientation>4</orientation>
+	<min_sdk_version>10</min_sdk_version>
+	<max_sdk_version>17</max_sdk_version>
+</application>

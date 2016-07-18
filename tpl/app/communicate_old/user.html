@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>通信开放平台-个人中心</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="css/um.css">
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/animations.css">
+
+		<script src="js/Frameworks/json.js" ></script>
+		<script src="js/Frameworks/UMP.MACore.js" ></script>
+		<script src="js/Frameworks/UMP.Container.js" ></script>
+		<script src="js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/um.js"></script>
+		<script>
+			$isWeb = true
+		</script>
+		<style>
+			.username {
+				float: right;
+				margin-right: 15px;
+			}
+			.badge {
+				background-color: red;
+				top: 2px;
+			}
+		</style>
+		<script type="text/javascript" charset="utf-8">
+			$(function() {
+				userInfo = $.parseJSON(localStorage.userInfo);
+				$(".username").text(userInfo.name);
+			});
+		</script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div class="um-header" >
+				<h3>个人中心</h3>
+			</div>
+			<div class="um-content">
+				<ul class="um-list-group">
+					<li class="um-list-item um-list-item-static">
+						用户名<span class="username"></span>
+					</li>
+					<li class="um-list-item">
+						<a href="##" class="btn"> 更改密码</a>
+					</li>
+				</ul>
+				<ul class="um-list-group mt15">
+					<li class="um-list-item">
+						<a href="#message" class="btn">我的消息 <span class="badge">6</span></a>
+					</li>
+				</ul>
+				<button id="logout" class="btn btn-danger mt20">
+					退出登录
+				</button>
+			</div>
+			<div class="um-footer um-noborder">
+				
+			</div>
+		</div>
+		<div class="um-page" id="message">
+			<div class="um-header" >
+				<a href="###"  class="um-back">返回</a>
+				<h3>我的消息</h3>
+			</div>
+			<div class="um-content">
+				<ul class="um-list um-list-static">
+					<li>
+						<span class="time">04月30号14:32:05</span><span class="um-red fr">网络异常</span>
+					</li>
+					<li>
+						<span class="time">04月30号14:32:05</span><span class="um-red fr">网络异常</span>
+					</li>
+					<li>
+						<span class="time">04月30号14:32:05</span><span class="um-red fr">网络异常</span>
+					</li>
+					<li>
+						<span class="time">04月30号14:32:05</span><span class="um-red fr">网络异常</span>
+					</li>
+					<li>
+						<span class="time">04月30号14:32:05</span><span class="um-red fr">网络异常</span>
+					</li>
+					<li>
+						<span class="time">04月30号14:32:05</span><span class="um-red fr">网络异常</span>
+					</li>
+				</ul>
+			</div>
+			<div class="um-footer um-noborder">
+			</div>
+		</div>
+		<div class="um-footer um-noborder">
+				<ul class="um-footer-tabbar">
+					<li>
+						<a href="enterpriseAudit.html"><div class="tab_audit"></div>企业审核</a>
+					</li>
+					<li>
+						<a href="chart.html"><div class="tab_count"></div>新增统计</a>
+					</li>
+					<li>
+						<a href="performance.html"><div class="tab_analyse"></div>业绩分析</a>
+					</li>
+					<li class="active">
+						<a href="javascript:;"><div class="tab_person"></div>个人中心</a>
+					</li>
+				</ul>
+			</div>
+		<script src="js/pagetransitions.js"></script>
+		<script>
+			document.getElementById("logout").addEventListener("touchstart", function() {
+				UModal.alert({
+					title : "友情提示",
+					text : '成功退出，欢迎下次回来',
+					ok : function() {
+						userInfo.autoLogin = false;
+						localStorage.userInfo = JSON.stringify(userInfo);
+						location.href = 'index.html';
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
