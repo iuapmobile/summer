@@ -983,7 +983,7 @@
         },
         closeWin : function(json){
 			if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json);
+				return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json);
         },
         setFrameAttr : function(json){
 			if(s.canrequire())
