@@ -74,7 +74,7 @@ li.active .tab_count {
 	background-image: url("../img/drawable/tab_analyse.png");
 }
 li.active .tab_analyse {
-	background-image: url("../img/drawable/tab_audit_touched.png");
+	background-image: url("../img/drawable/tab_analyse_touch.png");
 }
 .tab_person {
 	background-image: url("../img/drawable/tab_person.png");

@@ -58,7 +58,7 @@
 						$(this).addClass("active").siblings().removeClass("active");
 					})
 				});
-
+				callback();
 				// 过滤字段的拼接
 				$("#filter").find(".agree-btn").on("click", function() {
 					/*c.id=7910;app.id=35;isv.id=28;c.status=0;c.create_time>='2015-06-29 00:00:00';c.create_time<='2015-07-01 23:59:59'*/
@@ -68,7 +68,8 @@
 					var appid = $("#yinyong").find("input:radio:checked").next(".none").html();
 					var start = $(".make").find("input[type=datetime-local]").eq(0).val();
 					var end = $(".make").find("input[type=datetime-local]").eq(1).val();
-					assembleUrl(type, cid, isvid, appid, start, end);
+					//assembleUrl(type, cid, isvid, appid, start, end);
+					callback();
 				});
 			});
 		</script>
@@ -168,7 +169,7 @@
 							</div>
 						</li>
 						<li class="um-list-item">
-							<a href="#isvname" class="btn" id="isv"> ISV <span class="fr choice">优普企业空间</span> </a>
+							<a href="#isvname" class="btn" id="isv"> ISV <span class="fr choice">全部</span> </a>
 						</li>
 						<li class="um-list-item" id="appname">
 							<a href="#yinyong" class="btn"> 应用<span class="fr choice">全部</span> </a>

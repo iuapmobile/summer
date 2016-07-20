@@ -71,13 +71,57 @@ var option = {
 		data : []
 	}]
 };
-
+var data={
+	"flag": "000000",
+	"data": {
+		"totalItemNum": 4,
+		"items": [
+			{
+				"callingnum": 20003,
+				"activeusers": 100035,
+				"time": "2015-06-04",
+				"callingduration": 95631,
+				"activecarriers": 12369,
+				"addedusers": 12231,
+				"addedcarriers": 5691
+			},
+			{
+				"callingnum": 15000,
+				"activeusers": 23698,
+				"time": "2015-06-03",
+				"callingduration":48555,
+				"activecarriers": 7893,
+				"addedusers": 5532,
+				"addedcarriers": 4531
+			},
+			{
+				"callingnum": 11003,
+				"activeusers": 29098,
+				"time": "2015-06-02",
+				"callingduration": 36999,
+				"activecarriers": 4569,
+				"addedusers": 3412,
+				"addedcarriers": 3691
+			},
+			{
+				"callingnum": 8639,
+				"activeusers": 10004,
+				"time": "2015-06-01",
+				"callingduration": 12336,
+				"activecarriers": 2369,
+				"addedusers": 1032,
+				"addedcarriers": 1231
+			}
+		]
+	},
+	"desc": "success"
+}
 var myChart;
 var oldData=[];
 function renderChart(array){
 	//myChart未初始化
 	if(myChart == undefined){
-		var myChart = echarts.init(document.getElementById('chart'));
+		 myChart = echarts.init(document.getElementById('chart'));
 		myChart.on(echarts.config.EVENT.CLICK, xAxisClick);
 	}
 	if(option.xAxis[0].data.length){
@@ -153,8 +197,9 @@ function filter(str){
 }
 
 function callback(){
-	var array = $stringToJSON($ctx.param("result")).data.items;
+	var array = data.data.items;
 	//图标展示
+	console.log(array);
 	renderChart(array);
 	//列表展示
 	var str;

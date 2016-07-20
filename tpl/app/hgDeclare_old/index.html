@@ -27,13 +27,14 @@
 						alert("用户名和密码都不能为空!");
 						return false;
 					}
-					$cache.write("username", username);
+					location.href = "main.html";
+					/*$cache.write("username", username);
 					$cache.write("psw", psw);
 					$view.changePage("main.html", {
 						"isKeep" : "false",//打开新页面时，是否保留当前页面不关闭
 						"animation-type" : "suckEffect",//动画类型, Fade|Push|suckEffect|oglFlip|MoveIn
 						"animation-direction" : "left",//动画执行方向，例如left为从右向左...取值范围[left | right | top | bottom]
-					});
+					});*/
 				})
 			});
 		</script>
