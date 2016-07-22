@@ -27,7 +27,14 @@
 						alert("用户名和密码都不能为空!");
 						return false;
 					}
+					var userInfo = {
+						account: $("#username").val(),
+						password: $("#psw").val(),
+
+					}
+					localStorage.hguserInfo = JSON.stringify(userInfo);
 					location.href = "main.html";
+
 					/*$cache.write("username", username);
 					$cache.write("psw", psw);
 					$view.changePage("main.html", {
@@ -66,15 +73,16 @@
 							<div><img src="img/user.png" width=25 height=25 alt="">
 							</div>
 							<div>
-								<input type="text" id="username" class="form-control" value="user01">
+								<input type="text" id="username" class="form-control" value="user1">
 							</div> </label>
 
 						<label class="um-label um-box-vc">
 							<div><img src="img/password.png" width=25 height=25 alt="">
 							</div>
 							<div>
-								<input type="text" id="psw" class="form-control" value="******">
-							</div> </label>
+								<input type="password" id="psw" class="form-control" value="123" >
+							</div>
+						</label>
 					</div>
 					<div class="um-box-justify">
 						<a href="main.html">自动登录</a>

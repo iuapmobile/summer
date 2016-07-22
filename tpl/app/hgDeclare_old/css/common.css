@@ -1,0 +1,141 @@
+/* 重设样式 */
+.um-page {
+	display: none;
+	overflow: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.um-page.active {
+	display: block;
+	z-index: 1;
+}
+.um-header {
+	border-bottom: none;
+	background-color: #218752;
+}
+.um-header .um-header-title, .um-header h3 {
+	color: #fff;
+}
+.um-header .um-back, .um-header .um-header-right {
+	color: #fff;
+}
+.um-header .um-back:before {
+	border-color: #fff;
+}
+.agree-btn, .refuse-btn {
+	background-color: #15ad64 !important;
+	color: #fff;
+	border: none;
+	border-radius: 0;
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+	height: 100%;
+}
+.refuse-btn {
+	background-color: #ff615a !important;
+}
+.check {
+	width: 30px;
+	height: 30px;
+	background: url("../img/drawable/check_off.png") center no-repeat;
+	display: inline-block;
+	background-size: 50px;
+	vertical-align: middle;
+}
+input[type="checkbox"]:checked+.check {
+	background-image: url("../img/drawable/check_on.png");
+}
+.collect {
+	overflow: hidden;
+	color: #fff;
+	background-color: #333;
+}
+.um-orange {
+	color: orange;
+}
+.tab_audit, .tab_count, .tab_analyse, .tab_person {
+	background: url("../img/drawable/tab_audit.png") center no-repeat;
+	height: 25px;
+	-webkit-background-size: 25px;
+	background-size: 25px;
+}
+li.active .tab_audit {
+	background-image: url("../img/drawable/tab_audit_touched.png");
+}
+.tab_count {
+	background-image: url("../img/drawable/tab_count.png");
+}
+li.active .tab_count {
+	background-image: url("../img/drawable/tab_count_touch.png");
+}
+.tab_analyse {
+	background-image: url("../img/drawable/tab_analyse.png");
+}
+li.active .tab_analyse {
+	background-image: url("../img/drawable/tab_analyse_touch.png");
+}
+.tab_person {
+	background-image: url("../img/drawable/tab_person.png");
+}
+li.active .tab_person {
+	background-image: url("../img/drawable/tab_person_touch.png");
+}
+.um-footer-tabbar li a {
+	font-weight: bold;
+}
+.um-footer-tabbar li.active a, .um-footer-tabbar li > a:active {
+	color: rgb(0, 137, 0);
+	font-weight: bold;
+}
+.choice {
+	color: red;
+}
+td {
+	font-size: 12px;
+}
+
+/* page filter*/
+.um-list-item.active, .um-list-item:active {
+	background-color: #fff;
+}
+label.um-list-item.active, label.um-list-item:active {
+	background-color: #c8c8c8;
+}
+.um-page .um-footer {
+	padding-bottom: 79px;
+}
+.form-control[type=date] {
+	height: 35px;
+	background-color: #ECECEC;
+}
+.make {
+	line-height: 35px;
+}
+.make input {
+	width: 40%;
+	width: calc(50% - 20px);
+	max-width: calc(50% - 20px);
+	height: 35px;
+	padding-left: 5px;
+	display: inline-block;
+}
+.um-table-head {
+	padding: 0;
+}
+.um-tabbar-underline li.active a {
+	color: #333;
+	border-bottom: 2px solid #ef4f20;
+}
+.um-table-container.table-row-scroll {
+	height: 0;
+	overflow: hidden;
+	margin-top: 0;
+}
+.um-table-container.table-row-scroll.active {
+	height: 500px;
+}
+#status .um-check, #isvname .um-check, #qiye .um-check, #yinyong .um-check {
+	border-color: #ef4f20;
+}
