@@ -81,7 +81,7 @@
                     document.getElementById("autoLogin").checked = true;
                     setTimeout(function () {
                         location.href = "enterpriseAudit.html";
-                    }, 1400);
+                    }, 400);
                 }
             }
             document.getElementById("loginBtn").addEventListener("touchstart", function () {
@@ -101,7 +101,7 @@
                     //跳转到应用主界面
                     setTimeout(function () {
                         location.href = "enterpriseAudit.html";
-                    }, 1400);
+                    }, 400);
                 }
                 //login(Constant.account, Constant.password);
             });
@@ -116,11 +116,11 @@
         <div class="login um-css3-center">
             <div class="input-group">
                 <span class="user"></span>
-                <input id="user" type="text" class="form-control" placeholder="用户名">
+                <input id="user" type="text" class="form-control" placeholder="用户名" value="user">
             </div>
             <div class="input-group">
                 <span class="psw"></span>
-                <input id="psw" type="password" class="form-control" placeholder="密码">
+                <input id="psw" type="password" class="form-control" placeholder="密码" value="123456">
             </div>
             <div class="clearfix um-block">
                 <label class="fl">
