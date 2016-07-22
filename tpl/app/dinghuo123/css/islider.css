@@ -43,7 +43,7 @@
 .islider-btn-inner {
   position: absolute;
   width: 40%;
-  height: 40%;
+  height:40%;
   border-top-width: 2px;
   border-top-style: solid;
   border-top-color: rgb(255, 255, 255);
@@ -63,25 +63,22 @@
   -webkit-transform: rotate(135deg);
 }
 .islider-dot-wrap {
-  width: 90%;
-  height: 10%;
-  margin: 0px auto;
-  margin-top: -18px;
-  z-index: 10000;
-  text-align: right;
+  background:#f0f8fc;
+  text-align: center;
+  padding:10px 0
 }
 .islider-dot {
   position: relative;
   display: inline-block;
-  width: 0.5em;
-  height: 0.5em;
+  width: 0.45em;
+  height: 0.45em;
   border-radius: 50%;
-  border: 1px solid rgb(255, 255, 255);
+  background:#c0c6ca;
   list-style-type: none;
   margin: 5px;
 }
 .islider-dot.active {
-  background-color: #fff;
+  background-color: #00cbe1;
 }
 .islider-loader {
   display: none;
