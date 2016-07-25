@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style type="text/css">
+        .wrap{
+            background:#f5f5f5;
+            padding-bottom:0.2rem;
+        }
+        .item{
+            margin-bottom:0.2rem;
+            background:#ffffff;
+        }
+        .top{
+            border-bottom:1px solid #e8e8e8;
+            padding:0.2rem 0;
+        }
+        .i-box{
+            width:0.92rem;
+            border-right:1px solid #e8e8e8;
+            /*height:0.45rem;*/
+            text-align:center;
+        }
+        .i-box img{
+            display:block;
+            margin:0 auto;
+            width:0.45rem;
+            height:0.45rem;
+            border-radius:50% 50%;
+        }
+        .top h6{
+            font-size:0.3rem;
+            font-weight:normal;
+            line-height:0.45rem;
+            margin-left:0.24rem;
+        }
+        .status{
+            margin-right:0.24rem;
+            font-size:0.3rem;
+            color:#ea4f15;
+            line-height:0.45rem;
+        }
+        .cont{
+            padding:0.3rem 0.24rem;
+            border-bottom:1px solid #e8e8e8;
+        }
+        .cont img{
+            float:left;
+            width:1.15rem;
+            height:1.15rem;
+            margin-right:0.1rem;
+        }
+        .bott{
+            padding:0.18rem 0.24rem;
+            border-bottom:1px solid #e8e8e8;
+        }
+        .btn{
+            float:right;
+            display:block;
+            width:1.46rem;
+            height:0.6rem;
+            border:1px solid #81898e;
+            text-align:center;
+            line-height:0.6rem;
+            font-size:0.3rem;
+            margin-left:0.2rem;
+            color:#81898e;
+        }
+        .tot{
+            float:left;
+            font-size:0.28rem;
+            color:#81898e;
+            line-height:0.6rem;
+        }
+    </style>
+  </head>
+<body>
+    <div class="wrap">
+        <div class="item">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix">
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details" onclick="openWin('details-head')">订单详情</a>
+                <a class="btn follow"  onclick="openWin('follow-head')">订单跟踪</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix">
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details">订单详情</a>
+                <a class="btn follow">订单跟踪</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="top clearfix">
+                <div class="fl i-box">	
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix">
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details">订单详情</a>
+                <a class="btn follow">订单跟踪</a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix">
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details" onclick="openWin('details-head')">订单详情</a>
+                <a class="btn follow" onclick="openWin('follow-head')">订单跟踪</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script>
+    function openWin(type){
+        summer.openWin({
+            id : type,
+            url : 'html/'+ type + '.html',
+            pageParam:{
+            
+            pk : "0367066d442e4ab6b6ab10d11c74f21e"
+            }
+        });
+    }
+</script>
+</html>

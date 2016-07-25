@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style type="text/css" media="screen">
+        *{
+            /*box-sizing:content-box;*/
+        }
+        html,body,.wrap{
+            width:100%;
+            height:100%;
+        }
+        
+        .icon{
+            position:absolute;
+            left:0;
+            top:0;
+            color:#09c206;
+            width:0.8rem;
+            height:0.88rem;
+        }
+        .icon-back{
+            background:url(../icon/back.png) no-repeat center center;
+            background-size:0.24rem 0.42rem;
+        }
+        
+        .header{
+            position:relative;
+            height:0.9rem;
+            border-bottom:1px solid #e8e8e8;
+            background:#ffffff;
+        }
+        .title{
+            text-align:center;
+            line-height:0.88rem;
+            font-size:0.32rem;
+        }
+    </style>
+  </head>
+<body>
+    <div class="wrap">
+        <div class="header" id="header">
+            <a class="icon icon-back" onclick="summer.closeWin()"></a>
+            <h5 class="title">订单二维码</h5>
+        </div>        
+    </div>
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    summerready = function(){
+        var header = $summer.byId('header');
+        var headerPos = $summer.offset(header);
+        var width = $summer.winWidth();//==320
+        var height = $summer.winHeight() - headerPos.h;//gct:计算frame的高
+        summer.openFrame({
+            id : 'ewm',
+            url : 'html/ewm.html',
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: width,
+                h: height
+            }
+        });
+    };
+    
+</script>
+</html>

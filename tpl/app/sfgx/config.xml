@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application> 
+  <app_start>index.html</app_start>  
+  <app_name>simon</app_name>  
+  <project_name>simon</project_name>  
+  <package_name>com.yonyou.simon</package_name>  
+  <frame_name>ump</frame_name>  
+  <icon relativePath="css/themes/default/app">app</icon>  
+  <target>android-15</target>  
+  <platform>android</platform>  
+  <versionCode>1</versionCode>  
+  <versionName>1</versionName>  
+  <orientation>4</orientation>  
+  <min_sdk_version>10</min_sdk_version>  
+  <max_sdk_version>17</max_sdk_version>  
+  <permission id="android.permission.CALL_PHONE"></permission> 
+</application>

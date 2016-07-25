@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    
+    <style>
+        html,body{
+            height:100%;
+        }
+        #wrap{
+            height:100%;
+        }
+        .bar{
+            height:0.88rem;
+            position:relative;
+            background:#ffffff;
+            }
+        .icon{
+            position:absolute;
+            color:#09c206;
+            width:0.8rem;
+            height:100%;
+        }
+        .icon-person{
+            left:0;
+            top:0;
+            background:url(../icon/my.png) no-repeat center center;
+            background-size:0.34rem 0.38rem;
+        }
+        .icon-search{
+            right:0;
+            top:0;
+            background:url(../icon/seache.png) no-repeat center center;
+            background-size:0.36rem 0.37rem;
+        }
+        .title{
+            text-align:center;
+            font-size:0.32rem;
+            line-height:0.88rem;
+            width:100%;
+        }
+        
+        .nav .list{
+            float:left;
+            width:25%;
+            background:#09c206;
+            text-align:center;
+            padding-top:0.1rem;
+        }
+        .nav .list a{
+            padding-top:0.6rem;
+            color:#ffffff;
+            font-size:0.26rem;
+        }
+        .all{
+            background:url(../icon/all1.png) no-repeat center top;
+            background-size:0.34rem 0.42rem;
+        }
+        .distribution{
+            background:url(../icon/distribution1.png) no-repeat center top;
+            background-size: 0.42rem 0.34rem;
+        }
+        .rejected{
+            background:url(../icon/rejected1.png) no-repeat center top;
+            background-size:0.4rem 0.4rem;
+        }
+        .wait{
+            background:url(../icon/wait1.png) no-repeat center top;
+            background-size:0.53rem 0.46rem;
+        }
+        .nav .list.active{
+            background:#2ecb2b;
+        }
+        .nav .list.active a{
+            color:#f9ff57;
+        }
+        .nav .list.active .all{
+            background:url(../icon/all2.png) no-repeat center top;
+            background-size:0.34rem 0.42rem;
+        }
+        .nav .list.active .distribution{
+            background:url(../icon/distribution2.png) no-repeat center top;
+            background-size: 0.42rem 0.34rem;
+        }
+        .nav .list.active .rejected{
+            background:url(../icon/rejected2.png) no-repeat center top;
+            background-size:0.4rem 0.4rem;
+        }
+        .nav .list.active .wait{
+            background:url(../icon/wait2.png) no-repeat center top;
+            background-size:0.53rem 0.46rem;
+        }
+        /**/
+        
+    </style>
+  </head>
+<body>
+    <div id="wrap"> 
+        <header id="header">
+            <div class="bar clearfix">
+                <a class="icon icon-person"> </a>
+                <h1 class="title">华东师范大学订单</h1>
+                <a class="icon icon-search" onclick="openWin('search-head')"> </a>
+            </div>
+            <nav class="nav clearfix">
+                <div class="list active">
+                    <a class="all">全部</a>
+                </div>
+                <div class="list">
+                    <a class="wait">待配送</a>
+                </div>
+                <div class="list">
+                    <a class="distribution">配送中</a>
+                </div>
+                <div class="list">
+                    <a class="rejected">已收货</a>
+                </div>
+            </nav>
+        </header>
+    </div>
+    
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" charset="utf-8"> 
+    function openWin(name){
+        summer.openWin({
+            id : name,
+            url : 'html/'+name+'.html',
+        });
+    }
+    summerready = function(){
+        var header = $summer.byId('header');
+        var headerPos = $summer.offset(header);
+        var width = $summer.winWidth();//==320
+        var height = $summer.winHeight() - headerPos.h;//gct:计算frame的高
+        summer.openFrame({
+            id : 'order',
+            url : 'html/order.html',
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: width,
+                h: height
+            }
+        });
+    };
+    
+</script>
+</html>
