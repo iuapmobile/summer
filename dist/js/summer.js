@@ -2,7 +2,7 @@
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com go
- * Version: 1.0.20160706
+ * Version: 3.0.20160726
  */
 
 ;(function(w){
@@ -735,12 +735,28 @@
 
    
     /******************** Native API BEGIN ********************/
-	var umStorage = function(){
-        var ls = window.localStorage;
-        if(u.os == "android"){
-           ls = summer.localStorage();
-        }
-        return ls;
+	var umStorage = function(type){
+		type = type || "localStorage";
+		if(type == "localStorage"){
+			if(!window.localStorage){
+		        alert('your device do not support the localStorage');
+				return;
+		    }
+			return window.localStorage;
+		}else if(type == "sessionStorage"){
+			if(!window.sessionStorage){
+		        alert('your device do not support the sessionStorage');
+				return;
+		    }
+			return window.sessionStorage;
+		}else{
+			return null;
+			/*
+			if($summer.os == "android"){
+				ls = summer.localStorage();
+			}
+			*/
+		}
     };
 	u.setStorage = function(key, value){
         if(arguments.length === 2){

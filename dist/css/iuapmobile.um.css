@@ -2,11 +2,11 @@
 /* *
 CSS base
 * @name : iUAP Mobile CSS Libary
-* @version : 3.0
+* @version : 3.0.20160726
 * @type : Mobile Development
 * @author : gct@yonyou.com
 */
-/*20160706*/
+/*    v3.0.20160726   */
 dl, dt, dd, ul, ol, li, pre, form, p, fieldset, input, textarea, blockquote, th, td, button {
   margin: 0;
   padding: 0;
@@ -3490,7 +3490,7 @@ html.um-win {
   min-height: 44px;
   z-index: 9;
   text-align: center;
-  background-color: #f5f5f7;
+  background-color: #eeeeee;
 }
 
 .um-footer-fixed {
@@ -3743,7 +3743,6 @@ input[type="number"].form-control {
 }
 
 .um-list {
-  margin: 30px -15px;
   background: #fff;
   overflow: hidden;
   position: relative;
