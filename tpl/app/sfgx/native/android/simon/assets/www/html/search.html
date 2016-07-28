@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style type="text/css" media="screen">
+        .title{
+            font-size:0.24rem;
+            line-height:0.54rem;
+            padding-left:0.2rem;
+        }
+        .item{
+            background:#ffffff;
+            padding-bottom:0.3rem;
+        }
+        .item .list{
+            width:3.4rem;
+            border:1px solid #81898e;
+            border-radius:3px;
+            font-size:0.3rem;
+            color:#353e44;
+            text-align:center;
+            line-height:0.66rem;
+            margin-left:0.2rem;
+            margin-top:0.3rem;
+        }
+        .view{
+            background:#FFFFFF;
+        }
+        .view .v-list{
+            font-size:0.32rem;
+            padding-left:0.2rem;
+            line-height:0.9rem;
+            border-bottom:1px solid #e8e8e8;
+        }
+    </style>
+  </head>
+<body>
+    <div class="wrap">
+        <h6 class="title">学校饭堂</h6>
+        <div class="item clearfix">
+            <div class="list fl">厦门大学第一饭堂</div>
+            <div class="list fl">厦门大学第二饭堂</div>
+            <div class="list fl">厦门大学第三饭堂</div>
+            <div class="list fl">厦门大学第四饭堂</div>
+        </div>
+        <h6 class="title">搜索历史</h6>
+        <div class="view">
+            <div class="v-list" onclick="openWin('results-head')">东华大学</div>
+            <div class="v-list">清华大学</div>
+            <div class="v-list">北京大学</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" charset="utf-8">
+	function openWin(name){
+	    summer.openWin({
+	        id : name,
+	        url : 'html/'+name+'.html'
+	    });
+	}
+</script>
+</html>

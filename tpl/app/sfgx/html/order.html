@@ -1,0 +1,401 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style type="text/css">
+        .wrap{
+            background:#f5f5f5;
+            padding-bottom:0.2rem;
+        }
+        .item{
+            margin-bottom:0.2rem;
+            background:#ffffff;
+        }
+        .top{
+            border-bottom:1px solid #e8e8e8;
+            padding:0.2rem 0;
+        }
+        .i-box{
+            width:0.92rem;
+            border-right:1px solid #e8e8e8;
+            /*height:0.45rem;*/
+            text-align:center;
+        }
+        .i-box img{
+            display:block;
+            margin:0 auto;
+            width:0.45rem;
+            height:0.45rem;
+            border-radius:50% 50%;
+        }
+        .top h6{
+            font-size:0.3rem;
+            font-weight:normal;
+            line-height:0.45rem;
+            margin-left:0.24rem;
+        }
+        .status{
+            margin-right:0.24rem;
+            font-size:0.3rem;
+            color:#ea4f15;
+            line-height:0.45rem;
+        }
+        .cont{
+            padding:0.3rem 0.24rem;
+            border-bottom:1px solid #e8e8e8;
+        }
+        .cont img{
+            float:left;
+            width:1.15rem;
+            height:1.15rem;
+            margin-right:0.1rem;
+        }
+        .bott{
+            padding:0.18rem 0.24rem;
+            border-bottom:1px solid #e8e8e8;
+        }
+        .btn{
+            float:right;
+            display:block;
+            width:1.46rem;
+            height:0.6rem;
+            border:1px solid #81898e;
+            text-align:center;
+            line-height:0.6rem;
+            font-size:0.3rem;
+            margin-left:0.2rem;
+            color:#81898e;
+        }
+        .tot{
+            float:left;
+            font-size:0.28rem;
+            color:#81898e;
+            line-height:0.6rem;
+        }
+                .bar{
+            height:0.88rem;
+            position:relative;
+            background:#ffffff;
+            }
+        .icon{
+            position:absolute;
+            color:#09c206;
+            width:0.8rem;
+            height:100%;
+        }
+		  .icon-back {
+		    background: url(../icon/back.png) no-repeat center center;
+		    background-size: 0.24rem 0.42rem;
+		}
+        .title{
+            text-align:center;
+            font-size:0.32rem;
+            line-height:0.88rem;
+            width:100%;
+        }
+        
+        .nav .list{
+            float:left;
+            width:25%;
+            background:#09c206;
+            text-align:center;
+            padding-top:0.1rem;
+        }
+        .nav .list a{
+            padding-top:0.6rem;
+            color:#ffffff;
+            font-size:0.26rem;
+        }
+        .all{
+            background:url(../icon/all1.png) no-repeat center top;
+            background-size:0.34rem 0.42rem;
+        }
+        .distribution{
+            background:url(../icon/distribution1.png) no-repeat center top;
+            background-size: 0.42rem 0.34rem;
+        }
+        .rejected{
+            background:url(../icon/rejected1.png) no-repeat center top;
+            background-size:0.4rem 0.4rem;
+        }
+        .wait{
+            background:url(../icon/wait1.png) no-repeat center top;
+            background-size:0.53rem 0.46rem;
+        }
+        .nav .list.active{
+            background:#2ecb2b;
+        }
+        .nav .list.active a{
+            color:#f9ff57;
+        }
+        .nav .list.active .all{
+            background:url(../icon/all2.png) no-repeat center top;
+            background-size:0.34rem 0.42rem;
+        }
+        .nav .list.active .distribution{
+            background:url(../icon/distribution2.png) no-repeat center top;
+            background-size: 0.42rem 0.34rem;
+        }
+        .nav .list.active .rejected{
+            background:url(../icon/rejected2.png) no-repeat center top;
+            background-size:0.4rem 0.4rem;
+        }
+        .nav .list.active .wait{
+            background:url(../icon/wait2.png) no-repeat center top;
+            background-size:0.53rem 0.46rem;
+        }
+        .box{display:none}
+    </style>
+  </head>
+<body>
+    <div class="wrap">
+     <header id="header">
+            <div class="bar clearfix">
+                <a class="icon icon-back" href="main.html"> </a>
+                <h1 class="title">复旦大学订单</h1>
+                
+            </div>
+            <nav class="nav clearfix">
+                <div class="list active">
+                    <a class="all">全部</a>
+                </div>
+                <div class="list">
+                    <a class="wait">待配送</a>
+                </div>
+                <div class="list">
+                    <a class="distribution">配送中</a>
+                </div>
+                <div class="list">
+                    <a class="rejected">已收货</a>
+                </div>
+            </nav>
+        </header>
+        <div class="box" style="display: block">
+        <div class="item" onclick="location.href='details.html'">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix">
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details" href="details.html">订单详情</a>
+                <a class="btn follow">订单跟踪</a>
+            </div>
+        </div>
+         <div class="item" onclick="location.href='details.html'">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix" >
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details" href="details.html">订单详情</a>
+                <a class="btn follow">订单跟踪</a>
+            </div>
+        </div>
+        <div class="item" onclick="location.href='details.html'">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix">
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details" href="details.html">订单详情</a>
+                <a class="btn follow">订单跟踪</a>
+            </div>
+        </div>
+         <div class="item" onclick="location.href='details.html'">
+            <div class="top clearfix">
+                <div class="fl i-box">
+                    <img src="../icon/1.png" alt="" />
+                </div>
+                <h6 class="fl">广东AAA广场供应商</h6>
+                <span class="status fr">待配送</span>
+            </div>
+            <div class="cont clearfix">
+                <img src="../image/static/1.jpg" alt="" />
+                <img src="../image/static/2.jpg" alt="" />
+                <img src="../image/static/3.jpg" alt="" />
+                <img src="../image/static/4.gif" alt="" />
+            </div>
+            <div class="bott clearfix" >
+                <span class="tot fl">合计20件商品</span>
+                <a class="btn details" href="details.html">订单详情</a>
+                <a class="btn follow">订单跟踪</a>
+            </div>
+        </div>
+		</div>
+		 <div class="box" >
+
+	        <div class="item" onclick="location.href='details.html'">
+	            <div class="top clearfix">
+	                <div class="fl i-box">
+	                    <img src="../icon/1.png" alt="" />
+	                </div>
+	                <h6 class="fl">广东AAA广场供应商</h6>
+	                <span class="status fr">待配送</span>
+	            </div>
+	            <div class="cont clearfix">
+	                <img src="../image/static/1.jpg" alt="" />
+	                <img src="../image/static/2.jpg" alt="" />
+	                <img src="../image/static/3.jpg" alt="" />
+	                <img src="../image/static/4.gif" alt="" />
+	            </div>
+	            <div class="bott clearfix">
+	                <span class="tot fl">合计20件商品</span>
+	                <a class="btn details" href="details.html">订单详情</a>
+	                <a class="btn follow">订单跟踪</a>
+	            </div>
+	        </div>
+	         <div class="item" onclick="location.href='details.html'">
+	            <div class="top clearfix">
+	                <div class="fl i-box">
+	                    <img src="../icon/1.png" alt="" />
+	                </div>
+	                <h6 class="fl">广东AAA广场供应商</h6>
+	                <span class="status fr">待配送</span>
+	            </div>
+	            <div class="cont clearfix">
+	                <img src="../image/static/1.jpg" alt="" />
+	                <img src="../image/static/2.jpg" alt="" />
+	                <img src="../image/static/3.jpg" alt="" />
+	                <img src="../image/static/4.gif" alt="" />
+	            </div>
+	            <div class="bott clearfix" >
+	                <span class="tot fl">合计20件商品</span>
+	                <a class="btn details" href="details.html">订单详情</a>
+	                <a class="btn follow">订单跟踪</a>
+	            </div>
+	        </div>
+		</div>
+		 <div class="box" >
+	        
+	         <div class="item" onclick="location.href='details.html'">
+	            <div class="top clearfix">
+	                <div class="fl i-box">
+	                    <img src="../icon/1.png" alt="" />
+	                </div>
+	                <h6 class="fl">广东AAA广场供应商</h6>
+	                <span class="status fr">待配送</span>
+	            </div>
+	            <div class="cont clearfix">
+	                <img src="../image/static/1.jpg" alt="" />
+	                <img src="../image/static/2.jpg" alt="" />
+	                <img src="../image/static/3.jpg" alt="" />
+	                <img src="../image/static/4.gif" alt="" />
+	            </div>
+	            <div class="bott clearfix" >
+	                <span class="tot fl">合计20件商品</span>
+	                <a class="btn details" href="details.html">订单详情</a>
+	                <a class="btn follow">订单跟踪</a>
+	            </div>
+	        </div>
+		</div>
+		 <div class="box" >
+	        <div class="item" onclick="location.href='details.html'">
+	            <div class="top clearfix">
+	                <div class="fl i-box">
+	                    <img src="../icon/1.png" alt="" />
+	                </div>
+	                <h6 class="fl">广东AAA广场供应商</h6>
+	                <span class="status fr">待配送</span>
+	            </div>
+	            <div class="cont clearfix">
+	                <img src="../image/static/1.jpg" alt="" />
+	                <img src="../image/static/2.jpg" alt="" />
+	                <img src="../image/static/3.jpg" alt="" />
+	                <img src="../image/static/4.gif" alt="" />
+	            </div>
+	            <div class="bott clearfix">
+	                <span class="tot fl">合计20件商品</span>
+	                <a class="btn details" href="details.html">订单详情</a>
+	                <a class="btn follow">订单跟踪</a>
+	            </div>
+	        </div>
+	         <div class="item" onclick="location.href='details.html'">
+	            <div class="top clearfix">
+	                <div class="fl i-box">
+	                    <img src="../icon/1.png" alt="" />
+	                </div>
+	                <h6 class="fl">广东AAA广场供应商</h6>
+	                <span class="status fr">待配送</span>
+	            </div>
+	            <div class="cont clearfix">
+	                <img src="../image/static/1.jpg" alt="" />
+	                <img src="../image/static/2.jpg" alt="" />
+	                <img src="../image/static/3.jpg" alt="" />
+	                <img src="../image/static/4.gif" alt="" />
+	            </div>
+	            <div class="bott clearfix" >
+	                <span class="tot fl">合计20件商品</span>
+	                <a class="btn details" href="details.html">订单详情</a>
+	                <a class="btn follow">订单跟踪</a>
+	            </div>
+        	</div>
+        	<div class="item" onclick="location.href='details.html'">
+	            <div class="top clearfix">
+	                <div class="fl i-box">
+	                    <img src="../icon/1.png" alt="" />
+	                </div>
+	                <h6 class="fl">广东AAA广场供应商</h6>
+	                <span class="status fr">待配送</span>
+	            </div>
+	            <div class="cont clearfix">
+	                <img src="../image/static/1.jpg" alt="" />
+	                <img src="../image/static/2.jpg" alt="" />
+	                <img src="../image/static/3.jpg" alt="" />
+	                <img src="../image/static/4.gif" alt="" />
+	            </div>
+	            <div class="bott clearfix" >
+	                <span class="tot fl">合计20件商品</span>
+	                <a class="btn details" href="details.html">订单详情</a>
+	                <a class="btn follow">订单跟踪</a>
+	            </div>
+        	</div>
+		</div>
+
+</body>
+
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script>
+	$('.nav .list').click(function(){
+		var eq = $(this).index();
+		$(this).addClass('active').siblings('.nav .list').removeClass('active');
+		$('.box').eq(eq).show().siblings('.box').hide();
+	});
+	
+</script>
+</html>

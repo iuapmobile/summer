@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <device>
+        <type>android</type>
+        <certification>ump2</certification>
+        <sdk>
+            <minSdkVersion>8</minSdkVersion>
+            <targetSdkVersion>10</targetSdkVersion>
+            <maxSdkVersion>17</maxSdkVersion>
+        </sdk>
+        <template>androidordertemplate</template>
+        <launcherIcon>
+            <ldpi></ldpi>
+            <mdpi></mdpi>
+            <hdpi></hdpi>
+            <xhdpi></xhdpi>
+        </launcherIcon>
+        <packageName>com.yonyou.simon</packageName>
+    </device>
+    <buildEnv>
+        <property name="package.name">com.yonyou.simon</property>
+    </buildEnv>
+    <build>
+        <preInit></preInit>
+        <preCompile></preCompile>
+        <prePackage></prePackage>
+        <preRelease></preRelease>
+    </build>
+    <parameters>
+    </parameters>
+    <plugins/>
+    <user>
+    	<name>564972781</name>
+    </user>
+</settings>

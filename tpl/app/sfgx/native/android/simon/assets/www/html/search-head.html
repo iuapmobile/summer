@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style type="text/css" media="screen">
+        html,body{
+            height:100%;
+        }
+        .icon{
+            float:left;
+            color:#09c206;
+            width:0.8rem;
+            height:0.88rem;
+        }
+        .bar{
+            height:0.9rem;
+            border-bottom:1px solid #e8e8e8;
+            background:#ffffff;
+        }
+        .icon-back{
+            background:url(../icon/back.png) no-repeat center center;
+            background-size:0.24rem 0.42rem;
+        }
+        .s-box{
+            background:#e6e8e9;
+            font-size:0.26rem;
+        }
+        .btn{
+            float:right;
+            font-size:0.3rem;
+            line-height:0.88rem;
+            color:#06BC03;
+            width:1.1rem;
+            text-align:center;
+        }
+        .s-box{
+            width:5.56rem;
+            margin-top:0.16rem;
+        }
+        .s-box input{
+            padding:0.1rem;
+            line-height:0.36rem;
+            width:4.38rem; 
+            font-size:0.24rem;
+        }
+        .fdj{
+            width:0.6rem;
+            height:0.56rem;
+            background:url(../icon/fdj.png) no-repeat center center;
+            background-size:0.28rem 0.3rem;
+        }
+        .close{
+            width:0.56rem;
+            height:0.56rem;
+            background:url(../icon/s-close.png) no-repeat center center;
+            background-size:0.24rem 0.24rem;
+        }
+    </style>
+  </head>
+<body>
+    <div id="wrap">	
+        <header class="bar clearfix" id="header">
+            <a class="icon icon-back" onclick="summer.closeWin()"></a>
+            <div class="s-box fl clearfix">
+                <span class="fl fdj"></span>
+                <input type='text' class="fl" placeholder="输入学校/饭堂/供应商/订单号"/>
+                <i class="close fr"></i>
+            </div>
+            <a class="btn" onclick="openWin('results-head')">搜索</a>
+        </header>
+        
+    </div>
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" charset="utf-8">
+    function openWin(name){
+        summer.openWin({
+            id : name,
+            url : 'html/'+name+'.html'
+        });
+    }
+	summerready = function(){
+	    var header = $summer.byId('header');
+        var headerPos = $summer.offset(header);
+        var width = $summer.winWidth();//==320
+        var height = $summer.winHeight() - headerPos.h;//gct:计算frame的高
+        summer.openFrame({
+            id : 'search',
+            url : 'html/search.html',
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: width,
+                h: height
+            }
+        });
+	};
+</script>
+</html>

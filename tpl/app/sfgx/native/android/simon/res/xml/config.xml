@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.yyuap.myapp" version="0.0.1"
+    xmlns="http://www.w3.org/ns/widgets">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="FrameManager">
+        <param name="android-package" value="com.yyuap.summer.plugin.FrameManager" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="CordovaHttpPlugin">
+        <param name="android-package" value="com.synconset.CordovaHttpPlugin" />
+    </feature>
+    <feature name="XService">
+        <param name="android-package" value="com.yyuap.summer.plugin.XService" />
+    </feature>
+    <feature name="XUpgrade">
+        <param name="android-package" value="com.yyuap.summer.plugin.YYUpdate" />
+    </feature>
+     <feature name="XImageSelect">
+        <param name="android-package" value="com.yyuap.summer.plugin.XImageSelect" />
+    </feature>
+    <feature name="PhoneCaller">
+        <param name="android-package" value="io.codebakery.phonecaller.PhoneCaller" />
+    </feature>
+	
+    <allow-intent href="market:*" />
+    <name>MyApp</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+</widget>
