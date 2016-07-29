@@ -24,6 +24,26 @@
             document.addEventListener('deviceready', function(){
                 //1、先通过cdv来获取页面参数
                 summer.winParam(function(ret){
+					//希望返回
+					var ctx = {
+						systemType:"android",//"ios"
+						systemVersion:7,// ios--> 7    android-->21
+						iOS7StatusBarAppearance:true,//false
+						fullScreen:true,
+						pageParam:{param0:123,param1:"abc"},
+						screenWidth:"",
+						screenHeight:"",
+						
+						winId:"",
+						winWidth:"",
+						winHeight:"",
+						
+						frameId:"",
+						frameWidth:"",
+						frameHeight:"",
+						
+						appParam:"",
+					}
                     //alert(typeof ret)// --> object
 
                     if(typeof ret == "string"){
@@ -995,7 +1015,7 @@
 //                }
 //            }
 			if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
+                return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
         },
         closeWin : function(json, successFn, errFn){
 			if(s.canrequire())
@@ -1068,23 +1088,62 @@
 		if(s.canrequire())
             return s.require('summer-plugin-frame.XFrame').execScript(json,null,null);
     };
-	s.setItem = function(json, successFn, errFn){
+	
+	//持久化本地存储
+	s.setStorage = function(json, successFn, errFn){
 		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').setItem(json, successFn, errFn);
+            return s.cordova.require('summer-plugin-frame.XService').setStorage(json, successFn, errFn);
 	};
-	s.getItem = function(json, successFn, errFn){
+	s.getStorage = function(json, successFn, errFn){
 		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').getItem(json, successFn, errFn);
+            return s.cordova.require('summer-plugin-frame.XService').getStorage(json, successFn, errFn);
 	};
-	s.removeItem = function(json, successFn, errFn){
+	s.rmStorage = function(json, successFn, errFn){
 		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').removeItem(json, successFn, errFn);
+            return s.cordova.require('summer-plugin-frame.XService').rmStorage(json, successFn, errFn);
 	};
-	s.clearItem = function(json, successFn, errFn){
+	s.clearStorage = function(json, successFn, errFn){
 		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').clear(json, successFn, errFn);
+            return s.cordova.require('summer-plugin-frame.XService').clearStorage(json, successFn, errFn);
 	};
 	
+	//应用级Storage
+	s.setAppStorage = function(json, successFn, errFn){
+		if(s.canrequire())
+            return s.cordova.require('summer-plugin-frame.XService').setAppStorage(json, successFn, errFn);
+	};
+	s.getAppStorage = function(json, successFn, errFn){
+		if(s.canrequire())
+            return s.cordova.require('summer-plugin-frame.XService').getAppStorage(json, successFn, errFn);
+	};
+	s.rmAppStorage = function(json, successFn, errFn){
+		if(s.canrequire())
+            return s.cordova.require('summer-plugin-frame.XService').rmAppStorage(json, successFn, errFn);
+	};
+	s.clearAppStorage = function(json, successFn, errFn){
+		if(s.canrequire())
+            return s.cordova.require('summer-plugin-frame.XService').clearAppStorage(json, successFn, errFn);
+	};
+	
+	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
+		if(s.canrequire() || true){
+            var plug = s.cordova.require(cordovaPlugName);
+			if(plug[plugFnName]){
+				plug[plugFnName](json, successFn, errFn);
+			}else{
+				alert("the cordova plug ["+cordovaPlugName+"]'s method[" + plugFnName + "] not implementation");
+			}
+		}
+	}
+	
+	s.sysInfo = function(json, successFn, errFn){
+		if(s.canrequire())
+            return s.cordova.require('summer-plugin-frame.XService').sysInfo(json, successFn, errFn);
+	};
+	s.addEventListener = function(json, successFn, errFn){
+		if(s.canrequire())
+            return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
+	};
 	//1、兼容Android
     if(w.adrinvoker) alert(w.adrinvoker);
     var adrinvoker = {};
