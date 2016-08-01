@@ -188,7 +188,7 @@ gulp.task('iuapmobile.frameworks.core',function(){
 	
 	
 	
-	var fileName =  "iuapmobile.frameworks.core.js";//目标文件名
+	var fileName =  "iuapmobile.frameworks.core";//目标文件名
 	var distPath = 'dist/js/Frameworks/';//目标文件夹
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
