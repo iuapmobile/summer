@@ -1,11 +1,28 @@
-﻿
+﻿//
 //-----------------------------------------------------------------------
 // Copyright (C) Yonyou Corporation. All rights reserved.
-// Author： gct
-// UAP Mobile
+// Author： gct@yonyou.com
+// iUAP Mobile JS Framework 3.0.0
 //
-
-$alert = function(msg){
+(function(window){
+	window._UM = window.UM;
+	var UM = {};
+	
+	if ( typeof define === "function" && define.amd ) {
+		define( "UM", [], function() {
+			return UM;
+		});
+	}
+	window.UM = UM;
+	UM.noConflict = function( deep ) {
+		if ( deep && window.UM === UM ) {
+			window.UM = window._UM;
+		}
+		return UM;
+	};
+})(window);
+if(typeof UM == "undefined") UM = {};
+UM.alert = function(msg){
 	try{
 		if(typeof msg == "string"){
 			alert(msg);
@@ -20,8 +37,8 @@ $alert = function(msg){
 		alert(msg);
 	}
 }
-
-$confirm = function(msg){
+$alert = UM.alert;
+UM.confirm = function(msg){
 	try{
 		return confirm(msg);
 	}catch(e){
@@ -29,45 +46,45 @@ $confirm = function(msg){
 		return false;
 	}
 }
+$confirm = UM.confirm;
 
-if(typeof __$jvm == "undefined"){
-	__$jvm = {};
-}
-__$getInstance = function(className){
-	try{
-		var T = eval(className);            
-    }catch(e1){
-		var msg = "命名空间" + className + "异常！\n请检查" + className + "所在js文件是否有语法错误。\n建议启动调试进行排查，也可查看浏览器的控制台...";
-		$exception(e1, msg);
-		return;
-    }
-	
-	if(T){
-		if(__$jvm[className]){
-			return __$jvm[className];
-		}else{
-			var isFailed = false;
-			try{
-				__$jvm[className] = new T();
-				__$jvm[className].__typeName = className;
-			}catch(e2){
-				isFailed = true;
-				var msg = className + " 类的构造函数发生错误，可能是由于" + className + ".prototype有语法错误，\n建议启动调试进行排查，也可查看浏览器的控制台"
-				$exception(e2, msg);
-			}finally{
-				if(isFailed && __$jvm[className]){
-					delete __$jvm[className];
-				}
-				delete isFailed;
-			}
-			return __$jvm[className];			
+(function(root){
+	root.__jvm = root.__jvm || {};
+	root.__getInstance = function(className){
+		try{
+			var T = eval(className);            
+		}catch(e1){
+			var msg = "命名空间" + className + "异常！\n请检查" + className + "所在js文件是否有语法错误。\n建议启动调试进行排查，也可查看浏览器的控制台...";
+			$exception(e1, msg);
+			return;
 		}
-	}else{
-		alert("当前命名空间下没有"+className+"类型，返回null");
-		return null;
+		
+		if(T){
+			if(root.__jvm[className]){
+				return root.__jvm[className];
+			}else{
+				var isFailed = false;
+				try{
+					root.__jvm[className] = new T();
+					root.__jvm[className].__typeName = className;
+				}catch(e2){
+					isFailed = true;
+					var msg = className + " 类的构造函数发生错误，可能是由于" + className + ".prototype有语法错误，\n建议启动调试进行排查，也可查看浏览器的控制台"
+					$exception(e2, msg);
+				}finally{
+					if(isFailed && root.__jvm[className]){
+						delete root.__jvm[className];
+					}
+					delete isFailed;
+				}
+				return root.__jvm[className];			
+			}
+		}else{
+			alert("当前命名空间下没有"+className+"类型，返回null");
+			return null;
+		}
 	}
-}
-
+})(UM)
 
 /**
 * 删除左右两端的空格
@@ -194,7 +211,9 @@ Array.prototype.remove3 = function(dx){
 	}
 	this.length-=1;
 }
-
+Array.prototype.insert = function (i, item){
+  return this.splice(i, 0, item);
+}
 Date.prototype.format = function(format){
 	// (new Date()).format("yyyy-MM-dd hh:mm:ss")
     var o = {
@@ -276,7 +295,7 @@ Map = function() {
 
 // json
 
-$jsonToString = function (obj){
+UM.jsonToString = function (obj){
     var THIS = this;
     switch(typeof(obj)){
         case 'string':            
@@ -313,7 +332,8 @@ $jsonToString = function (obj){
 				return '[' + strArr.join(',') + ']';
 			}else if(obj==null){
 				//return 'null';
-				return "\"\"";
+				return "";//兼容老版本		
+				//return "\"\"";
 		
 			}else{
 				var list = [];
@@ -328,12 +348,24 @@ $jsonToString = function (obj){
 					if(obj[property] instanceof Array){
 						
 					}else if(vv.toString().indexOf("\"")>=0){//哪一种情况??
-						/*
+						
 						if(typeof obj[property] == "string"){
-							vv = vv.replace(/\"/g,"\\\"");   
-							vv="\"" +vv+"\"" ;
+							if(obj[property].indexOf("{")>-1 && obj[property].indexOf("}")>obj[property].indexOf("{")){//
+								if(JSON.tryParseJSON(obj[property])){
+									//vv = vv.replace(/\"/g,"\\\""); 
+									vv = vv.replace(/(["\\])/g, '\\$1');									
+									vv="\"" +vv+"\"" ;
+								}else{
+									vv = vv.replace(/(["\\])/g, '\\$1');
+									vv="\"" +vv+"\"" ;
+								}
+							}else{
+								//vv = vv.replace(/\"/g,"\\\"");  
+								vv = vv.replace(/(["\\])/g, '\\$1');								
+								vv="\"" +vv+"\"" ;
+							}
 						}
-						*/
+						
 					}
 					else{
 						vv="\"" +vv+"\"" ;
@@ -347,15 +379,16 @@ $jsonToString = function (obj){
 			return obj;
 		case 'boolean':  
 			return "\"" + obj.toString() + "\"";
-		case 'undefined':  
-			return "\"\"";
-		case false:  
+		case 'undefined': 
+			return "";//兼容老版本		
+			//return "\"\"";
+		default:  
 			return obj;  
 		}  
 }
-jsonToString = $jsonToString;
-
-$stringToJSON = function (str){
+$jsonToString = UM.jsonToString;
+jsonToString = UM.jsonToString;
+UM.stringToJSON = function (str){
     if(str == null || (typeof str == "string" && str == ""))
 		return null;
 		
@@ -373,8 +406,14 @@ $stringToJSON = function (str){
 			if(/^[\d.]+$/.test(str)){
 				return str;
 			}
-			var json = eval('(' + str + ')');	
-			return json;
+			var result = eval('(' + str + ')');
+			if(Object.prototype.toString.call(result) === '[object Object]'){
+				return result;
+			}
+			if(Object.prototype.toString.call(result) === '[object Array]'){
+				return result;
+			}
+			return str;
 		}catch(e){
 			//alert("stringToJSON Exception! not a valid json string ");
 			return str;
@@ -382,12 +421,13 @@ $stringToJSON = function (str){
 	}else if(typeof str == "object"){
 		return str;
 	}else{
-		alert("$stringToJSON()出错!未识别的参数类型");
+		alert("$stringToJSON()出错! 试图将一个["+ typeof str +"]类型的参数执行stringToJSON!");
 		return str;//不会走到这里
 	}
 }
-
-$jsonToFormatString = function (json){
+$stringToJSON = UM.stringToJSON;
+stringToJSON = UM.stringToJSON;
+UM.jsonToFormatString = function (json){
 	var array = [];
 	for(prop in json){
 		if(json.hasOwnProperty(prop)){
@@ -396,15 +436,50 @@ $jsonToFormatString = function (json){
 	}	
 	return "{\n    " + array.join(",\n    ") + "\n}";
 }
+$jsonToFormatString = UM.jsonToFormatString;
 
-$isJSONObject = function (obj) {   
-  return Object.prototype.toString.call(obj) === '[object Object]';    
+UM.isJSONObject = function (obj) {
+	return Object.prototype.toString.call(obj) === '[object Object]';;
 }
-$isWindow = function( obj ) {
+$isJSONObject = UM.isJSONObject
+if(JSON){
+	JSON.isJSON = JSON.isJSON || function(obj){
+		if(Object.prototype.toString.call(obj) === '[object Object]'){
+			try{
+				var str1 = JSON.stringify(obj);
+				var str2 = JSON.stringify(JSON.parse(JSON.stringify(obj)));
+				return str1==str2;
+			}catch(e){
+				return false;
+			}
+		}
+	}
+	JSON.tryParse = JSON.tryParse || function(str){
+		try{
+			var json = JSON.parse(str);
+			return true;
+		}catch(e){
+			return false;
+		}
+	}
+	JSON.tryParseJSON = JSON.tryParseJSON || function(str){
+		try{
+			var obj = JSON.parse(str);
+			if(Object.prototype.toString.call(obj) === '[object Object]'){
+				return true;
+			}
+			return false;
+		}catch(e){
+			return false;
+		}
+	}
+}
+UM.isWindow= function( obj ) {
 		/* jshint eqeqeq: false */
 		return obj != null && obj == obj.window;
 }
-$isPlainObject = function (obj) {   
+$isWindow = UM.isWindow;
+UM.isPlainObject = function (obj) {   
 	var key;
 	if ( !obj || !$isJSONObject(obj) || obj.nodeType || $isWindow( obj ) ) {
 		return false;
@@ -433,21 +508,23 @@ $isPlainObject = function (obj) {
 
 	return key === undefined || hasOwnProperty.call( obj, key );
 }
-	
-$isJSONArray = function (obj) {   
+$isPlainObject = UM.isPlainObject;
+UM.isJSONArray = function (obj) {   
   return Object.prototype.toString.call(obj) === '[object Array]';    
 }
-$isFunction = function (obj) {   
+$isJSONArray = UM.isJSONArray;
+UM.isFunction = function (obj) {   
   return Object.prototype.toString.call(obj) === '[object Function]';    
 }
-
+$isFunction = UM.isFunction;
 //是否为空字符串
-$isEmpty = function(obj){
-	if(obj == undefined || obj == null || obj.toString() == ""){
+UM.isEmpty = function(obj){
+	if(obj == undefined || obj == null || (obj.toString && obj.toString() == "")){
 		return true;
 	}
+	return false;
 }
-
+$isEmpty = UM.isEmpty;
 $translateToArray = function(json){
 	for(key in json){
 		var val = json[key];
@@ -462,7 +539,7 @@ $translateToArray = function(json){
 	}
 	return json;
 }
-stringToJSON = $stringToJSON;
+
 
 function uuid(len, radix) {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
@@ -551,5 +628,4 @@ UMCodec.prototype.asciiToString = function (asccode) {
     if (!asccode) return;
     return String.fromCharCode(asccode);
 }
-
 $codec = new UMCodec();

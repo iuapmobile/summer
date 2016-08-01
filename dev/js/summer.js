@@ -1160,7 +1160,15 @@
     }
 
     adrinvoker.call2 = function(srvName, strJson){
-        adrinvoker.call(srvName, strJson);
+		if(navigator.platform.toLowerCase().indexOf("win")>=0){
+			alert("执行"+srvName+"完毕\n参数是："+strJson);
+			return;
+		}
+		if(summerBridge){
+			return summerBridge.callSync(srvName,strJson);
+		}else{
+			alert("summerBridge is not defined by native successfully!");
+		}
     }
     w.adrinvoker = adrinvoker;
 	

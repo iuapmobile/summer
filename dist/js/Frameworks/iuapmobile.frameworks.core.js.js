@@ -1,10 +1,1559 @@
-﻿
+//
 //-----------------------------------------------------------------------
 // Copyright (C) Yonyou Corporation. All rights reserved.
-// tea.js @VERSION 2.5
-// Author gct(debugger)
+// Author： gct@yonyou.com
+// iUAP Mobile JS Framework 3.0.0
+//
+(function(window){
+	window._UM = window.UM;
+	var UM = {};
+	
+	if ( typeof define === "function" && define.amd ) {
+		define( "UM", [], function() {
+			return UM;
+		});
+	}
+	window.UM = UM;
+	UM.noConflict = function( deep ) {
+		if ( deep && window.UM === UM ) {
+			window.UM = window._UM;
+		}
+		return UM;
+	};
+})(window);
+if(typeof UM == "undefined") UM = {};
+UM.alert = function(msg){
+	try{
+		if(typeof msg == "string"){
+			alert(msg);
+		}else if(msg.__baseClass == "UMP.UI.Mvc.Context"){    
+			alert($jsonToString(msg.unload()));
+		}else if(typeof msg == "object"){
+			alert($jsonToString(msg));
+		}else{
+			alert(msg);
+		}	
+	}catch(e){
+		alert(msg);
+	}
+}
+$alert = UM.alert;
+UM.confirm = function(msg){
+	try{
+		return confirm(msg);
+	}catch(e){
+		alert(msg);
+		return false;
+	}
+}
+$confirm = UM.confirm;
+
+(function(root){
+	root.__jvm = root.__jvm || {};
+	root.__getInstance = function(className){
+		try{
+			var T = eval(className);            
+		}catch(e1){
+			var msg = "命名空间" + className + "异常！\n请检查" + className + "所在js文件是否有语法错误。\n建议启动调试进行排查，也可查看浏览器的控制台...";
+			$exception(e1, msg);
+			return;
+		}
+		
+		if(T){
+			if(root.__jvm[className]){
+				return root.__jvm[className];
+			}else{
+				var isFailed = false;
+				try{
+					root.__jvm[className] = new T();
+					root.__jvm[className].__typeName = className;
+				}catch(e2){
+					isFailed = true;
+					var msg = className + " 类的构造函数发生错误，可能是由于" + className + ".prototype有语法错误，\n建议启动调试进行排查，也可查看浏览器的控制台"
+					$exception(e2, msg);
+				}finally{
+					if(isFailed && root.__jvm[className]){
+						delete root.__jvm[className];
+					}
+					delete isFailed;
+				}
+				return root.__jvm[className];			
+			}
+		}else{
+			alert("当前命名空间下没有"+className+"类型，返回null");
+			return null;
+		}
+	}
+})(UM)
+
+/**
+* 删除左右两端的空格
+*/
+String.prototype.trim=function(){
+    return this.replace(/(^\s*)|(\s*$)/g, "");
+}
+/**
+* 删除左边的空格
+*/
+String.prototype.ltrim=function(){
+    return this.replace(/(^\s*)/g, "");
+}
+/**
+* 删除右边的空格
+*/
+String.prototype.rtrim=function(){
+    return this.replace(/(\s*$)/g, "");
+}
+String.prototype.isNullOrEmpty=function(){
+	if(typeof this == "undefined" || this === null){
+		return true;
+	}
+	if(typeof this == "string" && this == ""){
+		return true;
+	}
+	return false;
+}
+
+//给Number类型增加一个add方法，使用时直接用 .add 即可完成加法计算。
+Number.prototype.add = function (arg) {
+    var accAdd = function(arg1, arg2){
+        var r1, r2, m;
+        try {
+            r1 = arg1.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r1 = 0;
+        }
+        try {
+            r2 = arg2.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r2 = 0;
+        }
+        m = Math.pow(10, Math.max(r1, r2));
+        return (arg1 * m + arg2 * m) / m;
+    };
+
+    return accAdd(arg, this);
+};
+
+//给Number类型增加一个sub方法，，使用时直接用 .sub 即可完成减法计算。
+Number.prototype.sub = function (arg) {
+    return this.add(this, -arg);
+};
+
+//给Number类型增加一个mul方法，使用时直接用 .mul 即可完成乘法计算。
+Number.prototype.mul = function (arg) {
+    var accMul = function (arg1, arg2) {
+        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+        try {
+            m += s1.split(".")[1].length;
+        }
+        catch (e) {
+        }
+        try {
+            m += s2.split(".")[1].length;
+        }
+        catch (e) {
+        }
+        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+    };
+
+    return accMul(arg, this);
+};
+
+//给Number类型增加一个div方法，，使用时直接用 .div 即可完成除法计算。
+Number.prototype.div = function (arg) {
+    var accDiv = function(arg1,arg2){
+        var t1 = 0, t2 = 0, r1, r2;
+        try {
+            t1 = arg1.toString().split(".")[1].length;
+        }
+        catch (e) {
+        }
+        try {
+            t2 = arg2.toString().split(".")[1].length;
+        }
+        catch (e) {
+        }
+        with (Math) {
+            r1 = Number(arg1.toString().replace(".", ""));
+            r2 = Number(arg2.toString().replace(".", ""));
+            return (r1 / r2) * pow(10, t2 - t1);
+        }
+    };
+    return accDiv(this, arg);
+};
+
+Array.prototype.remove = function(i){
+    if(isNaN(i) || i < 0 || i >= this.length){
+	    return this;
+	}
+	this.splice(i,1);
+	return this;
+}
+Array.prototype.remove2 = function(i){
+    if(isNaN(i))
+	    return this;
+	if(i < 0 || i >= this.length)
+	    return this;
+	else
+	    return this.slice(0,i).concat(this.slice(i+1,this.length));
+}
+Array.prototype.remove3 = function(dx){
+    if(isNaN(dx) || dx > this.length){
+		return false;
+	}
+	for(var i=0,n=0;i<this.length;i++){
+		if(this[i]!=this[dx]){
+			this[n++]=this[i];
+		}
+	}
+	this.length-=1;
+}
+Array.prototype.insert = function (i, item){
+  return this.splice(i, 0, item);
+}
+Date.prototype.format = function(format){
+	// (new Date()).format("yyyy-MM-dd hh:mm:ss")
+    var o = {
+        "M+" : this.getMonth()+1, //month 
+        "d+" : this.getDate(), //day 
+        "h+" : this.getHours(), //hour 
+        "m+" : this.getMinutes(), //minute 
+        "s+" : this.getSeconds(), //second 
+        "q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+        "S" : this.getMilliseconds() //millisecond 
+    }
+
+    if(/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    }
+
+    for(var k in o) {
+        if(new RegExp("("+ k +")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+        }
+    }
+    return format;
+} 
+
+//--------------map--------------
+Map = function() {
+    var struct = function(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+    
+    var put = function(key, value){
+        for (var i = 0; i < this.arr.length; i++) {
+            if ( this.arr[i].key === key ) {
+                this.arr[i].value = value;
+                return;
+            }
+        }
+        this.arr[this.arr.length] = new struct(key, value);
+    }
+    
+    var get = function(key) {
+        for (var i = 0; i < this.arr.length; i++) {
+            if ( this.arr[i].key === key ) {
+                return this.arr[i].value;
+            }
+        }
+        return null;
+    }
+    
+    var remove = function(key) {
+        var v;
+        for (var i = 0; i < this.arr.length; i++) {
+            v = this.arr.pop();
+            if ( v.key === key ) {
+                continue;
+            }
+            this.arr.unshift(v);
+        }
+    }
+    
+    var size = function() {
+        return this.arr.length;
+    }
+    
+    var isEmpty = function() {
+        return this.arr.length <= 0;
+    }
+    this.arr = new Array();
+    this.get = get;
+    this.put = put;
+    this.remove = remove;
+    this.size = size;
+    this.isEmpty = isEmpty;
+}
+
 //-----------------------------------------------------------------------
-// UMContainer by gct
+
+
+// json
+
+UM.jsonToString = function (obj){
+    var THIS = this;
+    switch(typeof(obj)){
+        case 'string':            
+			try{
+				return eval('"'+ obj.replace(/(["\\])/g, '\\$1') +'"');            
+            }catch(e){
+				return obj;
+            }
+		case 'array':
+			return '[' + obj.map(THIS.jsonToString).join(',') + ']';
+		case 'object':
+			if(obj instanceof Array){
+				var strArr = [];
+				var len = obj.length;
+				/*
+				for(var i=0; i<len; i++){
+					strArr.push(THIS.jsonToString(obj[i]));
+				}				
+				return '[' + strArr.join(',') + ']';
+				*/
+				
+				for(var i=0; i<len; i++){					
+					var item = null;
+					if(typeof obj[i] == "string"){
+						item = "\"" + obj[i] + "\"";
+					}else if(typeof obj[i] == "object"){
+						item = THIS.jsonToString(obj[i]);
+					}else{						
+						item = THIS.jsonToString(obj[i]);
+					}
+					
+					strArr.push(item);
+				}				
+				return '[' + strArr.join(',') + ']';
+			}else if(obj==null){
+				//return 'null';
+				return "";//兼容老版本		
+				//return "\"\"";
+		
+			}else{
+				var list = [];
+				for (var property in obj){
+					var vv = THIS.jsonToString(obj[property]);
+					var p = THIS.jsonToString(property);
+					if(p.indexOf("\"")>=0){
+
+					}else{
+						p="\""+p+"\"";
+					}
+					if(obj[property] instanceof Array){
+						
+					}else if(vv.toString().indexOf("\"")>=0){//哪一种情况??
+						
+						if(typeof obj[property] == "string"){
+							if(obj[property].indexOf("{")>-1 && obj[property].indexOf("}")>obj[property].indexOf("{")){//
+								if(JSON.tryParseJSON(obj[property])){
+									//vv = vv.replace(/\"/g,"\\\""); 
+									vv = vv.replace(/(["\\])/g, '\\$1');									
+									vv="\"" +vv+"\"" ;
+								}else{
+									vv = vv.replace(/(["\\])/g, '\\$1');
+									vv="\"" +vv+"\"" ;
+								}
+							}else{
+								//vv = vv.replace(/\"/g,"\\\"");  
+								vv = vv.replace(/(["\\])/g, '\\$1');								
+								vv="\"" +vv+"\"" ;
+							}
+						}
+						
+					}
+					else{
+						vv="\"" +vv+"\"" ;
+						//list.push("\""+THIS.jsonToString(property)+"\"" + ':'+"\"" + THIS.jsonToString(obj[property])+"\"");
+					}
+					list.push(p + ':'+vv);
+					}
+				return '{' + list.join(',') + '}';  
+			}  
+		case 'number':  
+			return obj;
+		case 'boolean':  
+			return "\"" + obj.toString() + "\"";
+		case 'undefined': 
+			return "";//兼容老版本		
+			//return "\"\"";
+		default:  
+			return obj;  
+		}  
+}
+$jsonToString = UM.jsonToString;
+jsonToString = UM.jsonToString;
+UM.stringToJSON = function (str){
+    if(str == null || (typeof str == "string" && str == ""))
+		return null;
+		
+	if(typeof str == "string"){
+		try{
+			if(str.indexOf("\n") >= 0){				
+				str = str.replace(/\n/g,"\\n");
+			}
+			if(str.indexOf("\r") >= 0){				
+				str = str.replace(/\r/g,"\\r");
+			}
+			if(!isNaN(str)){
+				return str;
+			}
+			if(/^[\d.]+$/.test(str)){
+				return str;
+			}
+			var result = eval('(' + str + ')');
+			if(Object.prototype.toString.call(result) === '[object Object]'){
+				return result;
+			}
+			if(Object.prototype.toString.call(result) === '[object Array]'){
+				return result;
+			}
+			return str;
+		}catch(e){
+			//alert("stringToJSON Exception! not a valid json string ");
+			return str;
+		}
+	}else if(typeof str == "object"){
+		return str;
+	}else{
+		alert("$stringToJSON()出错! 试图将一个["+ typeof str +"]类型的参数执行stringToJSON!");
+		return str;//不会走到这里
+	}
+}
+$stringToJSON = UM.stringToJSON;
+stringToJSON = UM.stringToJSON;
+UM.jsonToFormatString = function (json){
+	var array = [];
+	for(prop in json){
+		if(json.hasOwnProperty(prop)){
+			array.push(prop + " : \"" + json[prop] + "\"");
+		}
+	}	
+	return "{\n    " + array.join(",\n    ") + "\n}";
+}
+$jsonToFormatString = UM.jsonToFormatString;
+
+UM.isJSONObject = function (obj) {
+	return Object.prototype.toString.call(obj) === '[object Object]';;
+}
+$isJSONObject = UM.isJSONObject
+if(JSON){
+	JSON.isJSON = JSON.isJSON || function(obj){
+		if(Object.prototype.toString.call(obj) === '[object Object]'){
+			try{
+				var str1 = JSON.stringify(obj);
+				var str2 = JSON.stringify(JSON.parse(JSON.stringify(obj)));
+				return str1==str2;
+			}catch(e){
+				return false;
+			}
+		}
+	}
+	JSON.tryParse = JSON.tryParse || function(str){
+		try{
+			var json = JSON.parse(str);
+			return true;
+		}catch(e){
+			return false;
+		}
+	}
+	JSON.tryParseJSON = JSON.tryParseJSON || function(str){
+		try{
+			var obj = JSON.parse(str);
+			if(Object.prototype.toString.call(obj) === '[object Object]'){
+				return true;
+			}
+			return false;
+		}catch(e){
+			return false;
+		}
+	}
+}
+UM.isWindow= function( obj ) {
+		/* jshint eqeqeq: false */
+		return obj != null && obj == obj.window;
+}
+$isWindow = UM.isWindow;
+UM.isPlainObject = function (obj) {   
+	var key;
+	if ( !obj || !$isJSONObject(obj) || obj.nodeType || $isWindow( obj ) ) {
+		return false;
+	}
+
+	try {
+		// Not own constructor property must be Object
+		if ( obj.constructor &&
+				!hasOwnProperty.call(obj, "constructor") &&
+				!hasOwnProperty.call(obj.constructor.prototype, "isPrototypeOf") ) {
+				return false;
+		}
+	} catch ( e ) {
+		// IE8,9 Will throw exceptions on certain host objects #9897
+		return false;
+	}
+
+	// Handle iteration over inherited properties before own properties.
+	for ( key in obj ) {
+		return hasOwnProperty.call( obj, key );
+	}
+
+	// Own properties are enumerated firstly, so to speed up,
+	// if last one is own, then all properties are own.
+	for ( key in obj ) {}
+
+	return key === undefined || hasOwnProperty.call( obj, key );
+}
+$isPlainObject = UM.isPlainObject;
+UM.isJSONArray = function (obj) {   
+  return Object.prototype.toString.call(obj) === '[object Array]';    
+}
+$isJSONArray = UM.isJSONArray;
+UM.isFunction = function (obj) {   
+  return Object.prototype.toString.call(obj) === '[object Function]';    
+}
+$isFunction = UM.isFunction;
+//是否为空字符串
+UM.isEmpty = function(obj){
+	if(obj == undefined || obj == null || (obj.toString && obj.toString() == "")){
+		return true;
+	}
+	return false;
+}
+$isEmpty = UM.isEmpty;
+$translateToArray = function(json){
+	for(key in json){
+		var val = json[key];
+		if(val == "{}"){
+			json[key] = {};
+		}else if(val == "[]"){
+			json[key] = [];
+		}
+		else if(typeof val == "object"){
+			json[key] = $translateToArray(val);
+		}
+	}
+	return json;
+}
+
+
+function uuid(len, radix) {
+    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+    var uuid = [], i;
+    radix = radix || chars.length;
+ 
+    if (len) {
+      // Compact form
+      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+    } else {
+      // rfc4122, version 4 form
+      var r;
+ 
+      // rfc4122 requires these characters
+      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+      uuid[14] = '4';
+ 
+      // Fill in random data.  At i==19 set the high bits of clock sequence as
+      // per rfc4122, sec. 4.1.5
+      for (i = 0; i < 36; i++) {
+        if (!uuid[i]) {
+          r = 0 | Math.random()*16;
+          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+        }
+      }
+    }
+ 
+    return uuid.join('');
+}
+
+// 8 character ID (base=2)
+//uuid(8, 2)  //  "01001010"
+// 8 character ID (base=10)
+//uuid(8, 10) // "47473046"
+// 8 character ID (base=16)
+//uuid(8, 16) // "098F4D35"
+$exception = function (e, msg){
+	msg = msg ? msg + "\r\n" : "";
+	if(e){
+		if(e.stack){
+			alert(msg + e.stack);
+		}else{
+			alert(msg + e);
+		}
+	}else{
+		alert("发生异常:" + msg);
+	}
+}
+$e = $exception;
+
+
+//编解码
+UMCodec = function () {
+
+};
+UMCodec.prototype.urlDecode = function (zipStr) {
+    if (!zipStr) return;
+    var uzipStr = "";
+    for (var i = 0; i < zipStr.length; i++) {
+        var chr = zipStr.charAt(i);
+        if (chr == "+") {
+            uzipStr += " ";
+        } else if (chr == "%") {
+            var asc = zipStr.substring(i + 1, i + 3);
+            if (parseInt("0x" + asc) > 0x7f) {
+                uzipStr += decodeURI("%" + asc.toString() + zipStr.substring(i + 3, i + 9).toString());
+                i += 8;
+            } else {
+                uzipStr += this.asciiToString(parseInt("0x" + asc));
+                i += 2;
+            }
+        } else {
+            uzipStr += chr;
+        }
+    }
+
+    return uzipStr;
+}
+
+/*UMCodec.prototype.stringToAscii = function (str) {
+    if (!str) return;
+    return str.charCodeAt(0).toString(16);
+}*/
+
+UMCodec.prototype.asciiToString = function (asccode) {
+    if (!asccode) return;
+    return String.fromCharCode(asccode);
+}
+$codec = new UMCodec();
+
+
+//-----------------------------------------------------------------------
+// Copyright (C) Yonyou Corporation. All rights reserved.
+//-----------------------------------------------------------------------
+// UMP.MACore.js
+// UMP.UI.Mvc Framework Base.
+
+
+Function.__typeName = 'Function';
+Function.createDelegate = function Function$createDelegate(instance, method) {     
+    return function() {
+        return method.apply(instance, arguments);
+    }
+}
+
+if(typeof(window)=="undefined"){
+    this.window=this;
+}
+
+window.Type = Function;
+
+window.__rootNamespaces = [];
+window.__registeredTypes = {};
+
+Type.__fullyQualifiedIdentifierRegExp = new RegExp("^[^.0-9 \\s|,;:&*=+\\-()\\[\\]{}^%#@!~\\n\\r\\t\\f\\\\]([^ \\s|,;:&*=+\\-()\\[\\]{}^%#@!~\\n\\r\\t\\f\\\\]*[^. \\s|,;:&*=+\\-()\\[\\]{}^%#@!~\\n\\r\\t\\f\\\\])?$", "i");
+Type.__identifierRegExp = new RegExp("^[^.0-9 \\s|,;:&*=+\\-()\\[\\]{}^%#@!~\\n\\r\\t\\f\\\\][^. \\s|,;:&*=+\\-()\\[\\]{}^%#@!~\\n\\r\\t\\f\\\\]*$", "i");
+
+Type.prototype.callBaseMethod = function Type$callBaseMethod(instance, name, baseArguments) {
+
+    var baseMethod = this.getBaseMethod(instance, name);
+    if (!baseMethod) throw "Error.invalidOperation(String.format(Sys.Res.methodNotFound, name))";
+    if (!baseArguments) {
+        return baseMethod.apply(instance);
+    }
+    else {
+        return baseMethod.apply(instance, baseArguments);
+    }
+}
+
+Type.prototype.getBaseMethod = function Type$getBaseMethod(instance, name) {
+
+    if (!this.isInstanceOfType(instance)) throw "Error.argumentType('instance', Object.getType(instance), this)";
+    var baseType = this.getBaseType();
+    if (baseType) {
+        var baseMethod = baseType.prototype[name];
+        return (baseMethod instanceof Function) ? baseMethod : null;
+    }
+
+    return null;
+}
+
+Type.prototype.getBaseType = function Type$getBaseType() {
+    if (arguments.length !== 0) throw "Error.parameterCount()";
+    return (typeof(this.__baseType) === "undefined") ? null : this.__baseType;
+}
+
+Type.prototype.getInterfaces = function Type$getInterfaces() {
+    /// <returns type="Array" elementType="Type" mayBeNull="false" elementMayBeNull="false"></returns>
+    if (arguments.length !== 0) throw "Error.parameterCount()";
+    var result = [];
+    var type = this;
+    while(type) {
+        var interfaces = type.__interfaces;
+        if (interfaces) {
+            for (var i = 0, l = interfaces.length; i < l; i++) {
+                var interfaceType = interfaces[i];
+                if (!Array.contains(result, interfaceType)) {
+                    result[result.length] = interfaceType;
+                }
+            }
+        }
+        type = type.__baseType;
+    }
+    return result;
+}
+
+Type.prototype.getName = function Type$getName() {
+    /// <returns type="String"></returns>
+    if (arguments.length !== 0) throw "Error.parameterCount()";
+    return (typeof(this.__typeName) === "undefined") ? "" : this.__typeName;
+}
+
+Type.prototype.implementsInterface = function Type$implementsInterface(interfaceType) {
+
+    this.resolveInheritance();
+
+    var interfaceName = interfaceType.getName();
+    var cache = this.__interfaceCache;
+    if (cache) {
+        var cacheEntry = cache[interfaceName];
+        if (typeof(cacheEntry) !== 'undefined') return cacheEntry;
+    }
+    else {
+        cache = this.__interfaceCache = {};
+    }
+
+    var baseType = this;
+    while (baseType) {
+        var interfaces = baseType.__interfaces;
+        if (interfaces) {
+            if (Array.indexOf(interfaces, interfaceType) !== -1) {
+                return cache[interfaceName] = true;
+            }
+        }
+
+        baseType = baseType.__baseType;
+    }
+
+    return cache[interfaceName] = false;
+}
+
+Type.prototype.inheritsFrom = function Type$inheritsFrom(parentType) {
+
+    this.resolveInheritance();
+    var baseType = this.__baseType;
+    while (baseType) {
+        if (baseType === parentType) {
+            return true;
+        }
+        baseType = baseType.__baseType;
+    }
+
+    return false;
+}
+
+Type.prototype.initializeBase = function Type$initializeBase(instance, baseArguments) {
+
+    if (!this.isInstanceOfType(instance)) throw "Error.argumentType('instance', Object.getType(instance), this)";
+
+    this.resolveInheritance();
+    if (this.__baseType) {
+        if (!baseArguments) {
+            this.__baseType.apply(instance);
+        }
+        else {
+            this.__baseType.apply(instance, baseArguments);
+        }
+    }
+
+    return instance;
+}
+
+Type.prototype.isImplementedBy = function Type$isImplementedBy(instance) {
+
+    if (typeof(instance) === "undefined" || instance === null) return false;
+
+    var instanceType = Object.getType(instance);
+    return !!(instanceType.implementsInterface && instanceType.implementsInterface(this));
+}
+
+Type.prototype.isInstanceOfType = function Type$isInstanceOfType(instance) {
+
+    if (typeof(instance) === "undefined" || instance === null) return false;
+
+    if (instance instanceof this) return true;
+
+    var instanceType = Object.getType(instance);
+    return !!(instanceType === this) ||
+           (instanceType.inheritsFrom && instanceType.inheritsFrom(this)) ||
+           (instanceType.implementsInterface && instanceType.implementsInterface(this));
+}
+
+Type.prototype.registerClass = function Type$registerClass(typeName, baseType, interfaceTypes) {
+
+    if (!Type.__fullyQualifiedIdentifierRegExp.test(typeName)) throw "Error.argument('typeName', Sys.Res.notATypeName)";
+        var parsedName;
+    try {
+        parsedName = eval(typeName);
+    }
+    catch(e) {
+        throw "Error.argument('typeName', Sys.Res.argumentTypeName)";
+    }
+    if (parsedName !== this) {
+		var errInfo = this.name + "试图注册一个已经存在的["+typeName+"]类型，请检查";
+		alert(errInfo);
+		//throw errInfo;
+		return this;
+	}
+	
+    if (window.__registeredTypes[typeName]){		
+		//暂时不处理重复注册类的情况，重复出测时，后面的生效
+		//throw "Error.invalidOperation(String.format(Sys.Res.typeRegisteredTwice, typeName))";		
+		//throw "重复注册！已经注册了类型["+typeName+"]，请检查";
+		//ctx1.a-->ctx2
+		//ctx2.b-->ctx2
+		//ctx2会出现重复注册的情况
+	}
+    if ((arguments.length > 1) && (typeof(baseType) === 'undefined')){
+		alert("baseType of [" + typeName + " ] is 'undefined', probably error in the baseType");
+		throw "Error.argumentUndefined('baseType')";
+	}
+	if(typeof baseType == "string"){
+		alert("baseType of [" + typeName + " ] is not a class but a string["+baseType+"], please modify it");
+		throw "Error.argument('baseType', Sys.Res.baseNotAClass)";
+	}
+	if (baseType && !baseType.__class){
+		alert("baseType of [" + typeName + " ] is not a class, probably error in the baseType");
+		throw "Error.argument('baseType', Sys.Res.baseNotAClass)";
+	}
+	
+    this.prototype.constructor = this;
+    this.__typeName = typeName;
+    this.__class = true;
+    if (baseType) {
+        this.__baseType = baseType;
+        this.__basePrototypePending = true;
+    }
+        if (!window.__classes) window.__classes = {};
+    window.__classes[typeName.toUpperCase()] = this;
+
+                if (interfaceTypes) {
+        this.__interfaces = [];
+        for (var i = 2; i < arguments.length; i++) {
+            var interfaceType = arguments[i];
+            if (!interfaceType.__interface) throw "Error.argument('interfaceTypes[' + (i - 2) + ']', Sys.Res.notAnInterface)";
+            this.resolveInheritance();
+            for (var methodName in interfaceType.prototype) {
+                var method = interfaceType.prototype[methodName];
+                if (!this.prototype[methodName]) {
+                    this.prototype[methodName] = method;
+                }
+            }
+            this.__interfaces.push(interfaceType);
+        }
+    }
+    window.__registeredTypes[typeName] = true;
+
+    return this;
+}
+
+Type.prototype.registerInterface = function Type$registerInterface(typeName) {
+
+    if (!Type.__fullyQualifiedIdentifierRegExp.test(typeName)) "throw Error.argument('typeName', Sys.Res.notATypeName)";
+        var parsedName;
+    try {
+        parsedName = eval(typeName);
+    }
+    catch(e) {
+        throw "Error.argument('typeName', Sys.Res.argumentTypeName)";
+    }
+    if (parsedName !== this) throw "Error.argument('typeName', Sys.Res.badTypeName)";
+        if (window.__registeredTypes[typeName]) throw "Error.invalidOperation(String.format(Sys.Res.typeRegisteredTwice, typeName))";
+    this.prototype.constructor = this;
+    this.__typeName = typeName;
+    this.__interface = true;
+    window.__registeredTypes[typeName] = true;
+
+    return this;
+}
+
+Type.prototype.resolveInheritance = function Type$resolveInheritance() {
+    if (arguments.length !== 0) "throw Error.parameterCount()";
+
+    if (this.__basePrototypePending) {
+        var baseType = this.__baseType;
+
+        baseType.resolveInheritance();
+
+        for (var memberName in baseType.prototype) {
+            var memberValue = baseType.prototype[memberName];
+            if (!this.prototype[memberName]) {
+                this.prototype[memberName] = memberValue;
+            }
+        }
+        delete this.__basePrototypePending;
+    }
+}
+
+Type.getRootNamespaces = function Type$getRootNamespaces() {
+    /// <returns type="Array"></returns>
+    if (arguments.length !== 0) throw "Error.parameterCount()";
+    return Array.clone(window.__rootNamespaces);
+}
+
+Type.isClass = function Type$isClass(type) {
+
+    if ((typeof(type) === 'undefined') || (type === null)) return false;
+    return !!type.__class;
+}
+
+Type.isInterface = function Type$isInterface(type) {
+
+    if ((typeof(type) === 'undefined') || (type === null)) return false;
+    return !!type.__interface;
+}
+
+Type.isNamespace = function Type$isNamespace(object) {
+
+    if ((typeof(object) === 'undefined') || (object === null)) return false;
+    return !!object.__namespace;
+}
+
+Type.parse = function Type$parse(typeName, ns) {
+
+    var fn;
+    if (ns) {
+        if (!window.__classes) return null;
+        fn = window.__classes[ns.getName().toUpperCase() + '.' + typeName.toUpperCase()];
+        return fn || null;
+    }
+    if (!typeName) return null;
+    if (!Type.__htClasses) {
+        Type.__htClasses = {};
+    }
+    fn = Type.__htClasses[typeName];
+    if (!fn) {
+        fn = eval(typeName);
+        if (typeof(fn) !== 'function') throw "Error.argument('typeName', Sys.Res.notATypeName)";
+        Type.__htClasses[typeName] = fn;
+    }
+    return fn;
+}
+
+Type.registerNamespace = function Type$registerNamespace(namespacePath) {
+
+    if (!Type.__fullyQualifiedIdentifierRegExp.test(namespacePath)) throw "Error.argument('namespacePath', Sys.Res.invalidNameSpace)";
+    var rootObject = window;
+    var namespaceParts = namespacePath.split('.');
+
+    for (var i = 0; i < namespaceParts.length; i++) {
+        var currentPart = namespaceParts[i];
+        var ns = rootObject[currentPart];
+        if (ns && !ns.__namespace) {
+            //throw "Error.invalidOperation(String.format(Sys.Res.namespaceContainsObject, namespaceParts.splice(0, i + 1).join('.')))";
+			//alert("注册命名空间失败   Type.registerNamespace");
+        }
+        if (!ns) {
+            ns = rootObject[currentPart] = {};
+            if (i === 0) {
+                window.__rootNamespaces[window.__rootNamespaces.length] = ns;
+            }
+            ns.__namespace = true;
+            ns.__typeName = namespaceParts.slice(0, i + 1).join('.');
+            var parsedName;
+            try {
+                parsedName = eval(ns.__typeName);
+            }
+            catch(e) {
+                parsedName = null;
+            }
+            if (parsedName !== ns) throw Error.argument('namespacePath', Sys.Res.invalidNameSpace);
+            ns.getName = function ns$getName() {return this.__typeName;}
+        }
+        rootObject = ns;
+    }
+}
+Object.__typeName = 'Object';
+
+Object.getType = function Object$getType(instance) {
+
+    var ctor = instance.constructor;
+    if (!ctor || (typeof(ctor) !== "function") || !ctor.__typeName || (ctor.__typeName === 'Object')) {
+        return Object;
+    }
+    return ctor;
+}
+
+Object.getTypeName = function Object$getTypeName(instance) {
+
+    return Object.getType(instance).getName();
+}
+
+Array.__typeName = 'Array';
+
+Array.add = Array.enqueue = function Array$enqueue(array, item) {
+        array[array.length] = item;
+}
+
+Array.addRange = function Array$addRange(array, items) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="items" type="Array" elementMayBeNull="true"></param>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "items", type: Array, elementMayBeNull: true}
+    ]);
+    if (e) throw e;
+
+
+        array.push.apply(array, items);
+}
+
+Array.clear = function Array$clear(array) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    array.length = 0;
+}
+
+Array.clone = function Array$clone(array) {
+
+    if (array.length === 1) {
+        return [array[0]];
+    }
+    else {
+                        return Array.apply(null, array);
+    }
+}
+
+Array.contains = function Array$contains(array, item) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="item" mayBeNull="true"></param>
+    /// <returns type="Boolean"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "item", mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    return (Array.indexOf(array, item) >= 0);
+}
+
+Array.dequeue = function Array$dequeue(array) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <returns mayBeNull="true"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    return array.shift();
+}
+
+Array.forEach = function Array$forEach(array, method, instance) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="method" type="Function"></param>
+    /// <param name="instance" optional="true" mayBeNull="true"></param>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "method", type: Function},
+        {name: "instance", mayBeNull: true, optional: true}
+    ]);
+    if (e) throw e;
+
+    for (var i = 0, l = array.length; i < l; i++) {
+        var elt = array[i];
+        if (typeof(elt) !== 'undefined') method.call(instance, elt, i, array);
+    }
+}
+
+Array.indexOf = function Array$indexOf(array, item, start) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="item" optional="true" mayBeNull="true"></param>
+    /// <param name="start" optional="true" mayBeNull="true"></param>
+    /// <returns type="Number"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "item", mayBeNull: true, optional: true},
+        {name: "start", mayBeNull: true, optional: true}
+    ]);
+    if (e) throw e;
+
+    if (typeof(item) === "undefined") return -1;
+    var length = array.length;
+    if (length !== 0) {
+                start = start - 0;
+                if (isNaN(start)) {
+            start = 0;
+        }
+        else {
+                                    if (isFinite(start)) {
+                                start = start - (start % 1);
+            }
+                        if (start < 0) {
+                start = Math.max(0, length + start);
+            }
+        }
+
+                for (var i = start; i < length; i++) {
+            if ((typeof(array[i]) !== "undefined") && (array[i] === item)) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+Array.insert = function Array$insert(array, index, item) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="index" mayBeNull="true"></param>
+    /// <param name="item" mayBeNull="true"></param>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "index", mayBeNull: true},
+        {name: "item", mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    array.splice(index, 0, item);
+}
+
+Array.parse = function Array$parse(value) {
+    /// <param name="value" type="String" mayBeNull="true"></param>
+    /// <returns type="Array" elementMayBeNull="true"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "value", type: String, mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    if (!value) return [];
+    var v = eval(value);
+    if (!Array.isInstanceOfType(v)) throw Error.argument('value', Sys.Res.arrayParseBadFormat);
+    return v;
+}
+
+Array.remove = function Array$remove(array, item) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="item" mayBeNull="true"></param>
+    /// <returns type="Boolean"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "item", mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    var index = Array.indexOf(array, item);
+    if (index >= 0) {
+        array.splice(index, 1);
+    }
+    return (index >= 0);
+}
+
+Array.removeAt = function Array$removeAt(array, index) {
+    /// <param name="array" type="Array" elementMayBeNull="true"></param>
+    /// <param name="index" mayBeNull="true"></param>
+    var e = Function._validateParams(arguments, [
+        {name: "array", type: Array, elementMayBeNull: true},
+        {name: "index", mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    array.splice(index, 1);
+}
+
+function Sys$Enum$parse(value, ignoreCase) {
+    /// <param name="value" type="String"></param>
+    /// <param name="ignoreCase" type="Boolean" optional="true"></param>
+    /// <returns></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "value", type: String},
+        {name: "ignoreCase", type: Boolean, optional: true}
+    ]);
+    if (e) throw e;
+
+    var values, parsed, val;
+    if (ignoreCase) {
+        values = this.__lowerCaseValues;
+        if (!values) {
+            this.__lowerCaseValues = values = {};
+            var prototype = this.prototype;
+            for (var name in prototype) {
+                values[name.toLowerCase()] = prototype[name];
+            }
+        }
+    }
+    else {
+        values = this.prototype;
+    }
+    if (!this.__flags) {
+        val = (ignoreCase ? value.toLowerCase() : value);
+        parsed = values[val.trim()];
+        if (typeof(parsed) !== 'number') throw Error.argument('value', String.format(Sys.Res.enumInvalidValue, value, this.__typeName));
+        return parsed;
+    }
+    else {
+        var parts = (ignoreCase ? value.toLowerCase() : value).split(',');
+        var v = 0;
+
+        for (var i = parts.length - 1; i >= 0; i--) {
+            var part = parts[i].trim();
+            parsed = values[part];
+            if (typeof(parsed) !== 'number') throw Error.argument('value', String.format(Sys.Res.enumInvalidValue, value.split(',')[i].trim(), this.__typeName));
+            v |= parsed;
+        }
+        return v;
+    }
+}
+
+function Sys$Enum$toString(value) {
+    /// <param name="value" optional="true" mayBeNull="true"></param>
+    /// <returns type="String"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "value", mayBeNull: true, optional: true}
+    ]);
+    if (e) throw e;
+
+            if ((typeof(value) === 'undefined') || (value === null)) return this.__string;
+    if ((typeof(value) != 'number') || ((value % 1) !== 0)) throw Error.argumentType('value', Object.getType(value), this);
+    var values = this.prototype;
+    var i;
+    if (!this.__flags || (value === 0)) {
+        for (i in values) {
+            if (values[i] === value) {
+                return i;
+            }
+        }
+    }
+    else {
+        var sorted = this.__sortedValues;
+        if (!sorted) {
+            sorted = [];
+            for (i in values) {
+                sorted[sorted.length] = {key: i, value: values[i]};
+            }
+            sorted.sort(function(a, b) {
+                return a.value - b.value;
+            });
+            this.__sortedValues = sorted;
+        }
+        var parts = [];
+        var v = value;
+        for (i = sorted.length - 1; i >= 0; i--) {
+            var kvp = sorted[i];
+            var vali = kvp.value;
+            if (vali === 0) continue;
+            if ((vali & value) === vali) {
+                parts[parts.length] = kvp.key;
+                v -= vali;
+                if (v === 0) break;
+            }
+        }
+        if (parts.length && v === 0) return parts.reverse().join(', ');
+    }
+    throw Error.argumentOutOfRange('value', value, String.format(Sys.Res.enumInvalidValue, value, this.__typeName));
+}
+
+Type.prototype.registerEnum = function Type$registerEnum(name, flags) {
+
+    if (!Type.__fullyQualifiedIdentifierRegExp.test(name)) throw "Error.argument('name', Sys.Res.notATypeName)";
+        var parsedName;
+    try {
+        parsedName = eval(name);
+    }
+    catch(e) {
+        throw "Error.argument('name', Sys.Res.argumentTypeName)";
+    }
+    if (parsedName !== this) throw "Error.argument('name', Sys.Res.badTypeName)";
+    if (window.__registeredTypes[name]) throw "Error.invalidOperation(String.format(Sys.Res.typeRegisteredTwice, name))";
+    for (var i in this.prototype) {
+        var val = this.prototype[i];
+        if (!Type.__identifierRegExp.test(i)) throw "Error.invalidOperation(String.format(Sys.Res.enumInvalidValueName, i))";
+        if (typeof(val) !== 'number' || (val % 1) !== 0) throw "Error.invalidOperation(Sys.Res.enumValueNotInteger)";
+        if (typeof(this[i]) !== 'undefined') throw "Error.invalidOperation(String.format(Sys.Res.enumReservedName, i))";
+    }
+    for (var i in this.prototype) {
+        this[i] = this.prototype[i];
+    }
+    this.__typeName = name;
+    this.parse = Sys$Enum$parse;
+    this.__string = this.toString();
+    this.toString = Sys$Enum$toString;
+    this.__flags = flags;
+    this.__enum = true;
+    window.__registeredTypes[name] = true;
+}
+
+Type.isEnum = function Type$isEnum(type) {
+    /// <param name="type" mayBeNull="true"></param>
+    /// <returns type="Boolean"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "type", mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    if ((typeof(type) === 'undefined') || (type === null)) return false;
+    return !!type.__enum;
+}
+
+Type.isFlags = function Type$isFlags(type) {
+    /// <param name="type" mayBeNull="true"></param>
+    /// <returns type="Boolean"></returns>
+    var e = Function._validateParams(arguments, [
+        {name: "type", mayBeNull: true}
+    ]);
+    if (e) throw e;
+
+    if ((typeof(type) === 'undefined') || (type === null)) return false;
+    return !!type.__flags;
+}
+
+
+
+
+/**************************************************定义 全命名空间 Class **********************************/
+//UMP.register = UMP.registerNamespace = Type.registerNamespace
+Type.registerNamespace('Sys');
+
+/****************************************** Sys.Component Define ******************************************/
+Sys.Component = function Sys$Component() {
+    this._id = null;
+};
+function Sys$Component$get_id() {
+    return this._id;
+}
+Sys.Component.prototype = {
+    get_id: Sys$Component$get_id
+};
+Sys.Component.registerClass('Sys.Component')
+
+/****************************************** Sys._Application Define ******************************************/
+Sys._Application = function Sys$_Application() {    
+    this._components = {};
+    this._createdComponents = [];    
+}
+
+function UMP$Sys$_Application$findComponent(id, parent) { 
+    if(parent){
+	    alert("Exception in the Method[UMP$Sys$_Application$findComponent]");
+		return Sys.Application._components[id] || null;
+        if(Sys.IContainer.isInstanceOfType(parent)){
+                return parent.findComponent(id);                
+		}
+		else{
+			return parent[id]|| null;
+		}
+	}
+    return Sys.Application._components[id] || null;
+}
+Sys._Application.prototype = {
+    findComponent: UMP$Sys$_Application$findComponent 
+};
+Sys._Application.registerClass('Sys._Application', Sys.Component, Sys.IContainer);
+Sys.Application = new Sys._Application();
+
+
+
+/****************************************** Sys.EventHandlerList Define ******************************************/
+Sys.EventHandlerList = function Sys$EventHandlerList() {
+if (arguments.length !== 0) throw Error.parameterCount();
+this._list = {};
+}
+
+function Sys$EventHandlerList$addHandler(id, handler) {
+Array.add(this._getEvent(id, true), handler);
+////alert("fire addHandler");
+}
+
+function Sys$EventHandlerList$removeHandler(id, handler) {
+var evt = this._getEvent(id);
+if (!evt) return;
+Array.remove(evt, handler);
+}
+
+function Sys$EventHandlerList$getHandler(id) {
+var evt = this._getEvent(id);
+if (!evt || (evt.length === 0)) return null;
+evt = Array.clone(evt);
+if (!evt._handler) {
+evt._handler = function (source, args) {
+for (var i = 0, l = evt.length; i < l; i++) {
+evt[i](source, args);
+}
+};
+}
+return evt._handler;
+}
+
+function Sys$EventHandlerList$_getEvent(id, create) {
+if (!this._list[id]) {
+if (!create) return null;
+this._list[id] = [];
+}
+return this._list[id];
+}
+
+Sys.EventHandlerList.prototype = {
+addHandler: Sys$EventHandlerList$addHandler,
+removeHandler: Sys$EventHandlerList$removeHandler,
+getHandler: Sys$EventHandlerList$getHandler,
+
+_getEvent: Sys$EventHandlerList$_getEvent
+}
+Sys.EventHandlerList.registerClass('Sys.EventHandlerList');
+
+Sys.EventArgs = function Sys$EventArgs() {
+    if (arguments.length !== 0) throw Error.parameterCount();
+}
+Sys.EventArgs.registerClass('Sys.EventArgs');
+Sys.EventArgs.Empty = new Sys.EventArgs();
+
+
+
+
+
+
+
+
+Type.registerNamespace('Sys.UI');
+
+/****************************************** Sys.UI.DomEvent Define ******************************************/
+Sys.UI.DomEvent = function Sys$UI$DomEvent(eventObject) {
+    var e = eventObject;
+    this.rawEvent = e;
+    this.altKey = e.altKey;
+    if (typeof (e.button) !== 'undefined') {
+        this.button = (typeof (e.which) !== 'undefined') ? e.button :
+            (e.button === 4) ? Sys.UI.MouseButton.middleButton :
+            (e.button === 2) ? Sys.UI.MouseButton.rightButton :
+            Sys.UI.MouseButton.leftButton;
+    }
+    if (e.type === 'keypress') {
+        this.charCode = e.charCode || e.keyCode;
+    }
+    else if (e.keyCode && (e.keyCode === 46)) {
+        this.keyCode = 127;
+    }
+    else {
+        this.keyCode = e.keyCode;
+    }
+    /*this.clientX = e.clientX;
+    this.clientY = e.clientY;
+    this.ctrlKey = e.ctrlKey;
+    this.target = e.target ? e.target : e.srcElement;
+    if (this.target) {
+    var loc = Sys.UI.DomElement.getLocation(this.target);
+    this.offsetX = (typeof(e.offsetX) !== 'undefined') ? e.offsetX : window.pageXOffset + (e.clientX || 0) - loc.x;
+    this.offsetY = (typeof(e.offsetY) !== 'undefined') ? e.offsetY : window.pageYOffset + (e.clientY || 0) - loc.y;
+    }
+    this.screenX = e.screenX;
+    this.screenY = e.screenY;*/
+    this.shiftKey = e.shiftKey;
+    this.type = e.type;
+}
+
+function Sys$UI$DomEvent$preventDefault() {
+    if (arguments.length !== 0) throw Error.parameterCount();
+    if (this.rawEvent.preventDefault) {
+        this.rawEvent.preventDefault();
+    }
+    else if (window.event) {
+        window.event.returnValue = false;
+    }
+}
+function Sys$UI$DomEvent$stopPropagation() {
+    if (arguments.length !== 0) throw Error.parameterCount();
+    if (this.rawEvent.stopPropagation) {
+        this.rawEvent.stopPropagation();
+    }
+    else if (window.event) {
+        window.event.cancelBubble = true;
+    }
+}
+Sys.UI.DomEvent.prototype = {
+    preventDefault: Sys$UI$DomEvent$preventDefault,
+    stopPropagation: Sys$UI$DomEvent$stopPropagation
+}
+Sys.UI.DomEvent.registerClass('Sys.UI.DomEvent');
+
+
+
+
+/****************************************** Global Method API Define ******************************************/
+//  $addHandler
+//  var $find
+//  var $get
+
+var $find = Sys.Application.findComponent;
+var $get = function () {
+    return document.getElementById(id);
+}
+var $addHandler = Sys.UI.DomEvent.addHandler = function Sys$UI$DomEvent$addHandler(element, eventName, handler) {
+    if (!element._events) {
+        element._events = {};
+    }
+    var eventCache = element._events[eventName];
+    if (!eventCache) {
+        element._events[eventName] = eventCache = [];
+    }
+    var browserHandler;
+    if (element.addEventListener) {
+        browserHandler = function (e) {
+            return handler.call(element, new Sys.UI.DomEvent(e));
+        }
+        element.addEventListener(eventName, browserHandler, false);
+    }
+    else if (element.attachEvent) {
+        browserHandler = function () {
+            return handler.call(element, new Sys.UI.DomEvent(window.event));
+        }
+        element.attachEvent('on' + eventName, browserHandler);
+    }
+    eventCache[eventCache.length] = { handler: handler, browserHandler: browserHandler };
+}
+
+var $removeHandler = Sys.UI.DomEvent.removeHandler = function Sys$UI$DomEvent$removeHandler(element, eventName, handler) {
+    var browserHandler = null;
+    if ((typeof(element._events) !== 'object') || (element._events == null)) {
+		alert("Error in $removeHandler");
+		return;
+	}
+    
+	var cache = element._events[eventName];
+    if (!(cache instanceof Array)){
+		alert("Error in $removeHandler");
+		return;
+	}
+	
+    for (var i = 0, l = cache.length; i < l; i++) {
+        if (cache[i].handler === handler) {
+            browserHandler = cache[i].browserHandler;
+            break;
+        }
+    }
+    if (typeof(browserHandler) !== 'function') {
+		alert("Error in $removeHandler");
+		return;
+	}
+    if (element.removeEventListener) {
+        element.removeEventListener(eventName, browserHandler, false);
+    }
+    else if (element.detachEvent) {
+        element.detachEvent('on' + eventName, browserHandler);
+    }
+    cache.splice(i, 1);
+}
+
+
+
+//-----------------------------------------------------------------------
+// Copyright (C) Yonyou Corporation. All rights reserved.
+// UMP.Container.js @VERSION 3.0.0
+// Author gct(debugger)
 
 CurrentEnvironment={};
 CurrentEnvironment.DeviceIOS="ios";
@@ -13,8 +1562,42 @@ CurrentEnvironment.DeviceWin8="win8";
 CurrentEnvironment.DevicePC="pc";
 CurrentEnvironment.Debug="debug";
 CurrentEnvironment.DeviceType="android";
-
 $environment = CurrentEnvironment;
+(function(env){
+	var browser={
+		info:function(){
+			var ua = navigator.userAgent, app = navigator.appVersion;
+			return { //移动终端浏览器版本信息
+				//trident: ua.indexOf('Trident') > -1, //IE内核
+				//presto: ua.indexOf('Presto') > -1, //opera内核
+				webKit: ua.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+				//gecko: ua.indexOf('Gecko') > -1 && ua.indexOf('KHTML') == -1, //火狐内核
+				mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+				ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+				android: ua.indexOf('Android') > -1 || ua.indexOf('Linux') > -1, //android终端或uc浏览器
+				iPhone: ua.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+				iPad: ua.indexOf('iPad') > -1 //是否iPad
+				//webApp: ua.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+			};
+		}(),
+		lang:(navigator.browserLanguage || navigator.language).toLowerCase()
+	};
+	
+	if(browser.info.android){
+		env.DeviceType="android";
+	}else if(browser.info.ios || browser.info.iPhone || browser.info.iPad){
+		env.DeviceType="ios";
+	}
+})(CurrentEnvironment);
+
++function(UM, undefined){
+    UM.platform = {};
+	UM.platform.OS = "";
+	UM.platform.ANDROID = "android";
+	UM.platform.IOS = "ios";
+	UM.platform.HTML5 = "HTML5"; 
+}(UM);
+
 $isWeb = false;
 $__cbm = [];
 //
@@ -141,7 +1724,7 @@ CommonNativeCallService=function(){
 	
 	this._APIIsObsolete = "the API is obsolete, but continue executing...please use the new API: ";
 }
-//最基本平台内部调用服务的API，所有公共服务都通过callService调用执行，对外API为--------------------------$service.call
+//native service bridge, 最基本平台内部调用服务的API，所有公共服务都通过callService调用执行，对外API为--------------------------$service.call
 /*
 serviceType:平台提供的服务类型
 jsonArgs: json类型
@@ -165,13 +1748,65 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 			}			
 		}else if(typeof jsonArgs == "object"){
 			if(jsonArgs["callback"] && $isFunction(jsonArgs["callback"])){
-				var strFn = "fun" + uuid(8, 16) + "()";//anonymous method
-				while($__cbm[strFn]){
-					strFn =  "fun" + uuid(8, 16) + "()";//anonymous method
+				// callback:function(){}
+				var newCallBackScript = "fun" + uuid(8, 16) + "()";//anonymous method
+				while($__cbm[newCallBackScript]){
+					newCallBackScript =  "fun" + uuid(8, 16) + "()";//anonymous method
 				}
-				$__cbm[strFn] = jsonArgs["callback"];
-				jsonArgs["callback"] = strFn;				
+				$__cbm[newCallBackScript] = jsonArgs["callback"];//callback can be global or local, so define a reference function in $__cbm
+				
+				//
+				window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
+					try{
+						alert(typeof sender);
+						alert(typeof args);
+						$alert(sender);
+						$alert(args);
+						var _func = $__cbm[newCallBackScript];
+						_func(sender, args);	
+					}catch(e){
+						alert(e);
+					}finally{
+						delete $__cbm[newCallBackScript];
+						delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
+						alert("del ok");
+						alert(typeof $__cbm[newCallBackScript]);
+						alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+					}				
+				}
+				jsonArgs["callback"] = newCallBackScript;				
+			}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string"){
+				// callback:"mycallback()"
+				var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
+				var callbackFn = eval(cbName);
+				if(typeof callbackFn != "function"){
+					alert(cbName + " is not a global function, callback function must be a global function!");
+					return;
+				}
+				
+				var newCallBackScript = "fun" + uuid(8, 16) + "()";//anonymous method
+				while(window[newCallBackScript]){
+					newCallBackScript =  "fun" + uuid(8, 16) + "()";//anonymous method
+				}
+				//
+				window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
+					try{
+						alert(typeof sender);
+						alert(typeof args);
+						$alert(sender);
+						$alert(args);
+						callbackFn(sender, args);	
+					}catch(e){
+						alert(e);
+					}finally{
+						delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
+						alert("del ok");
+						alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+					}				
+				}
+				jsonArgs["callback"] = newCallBackScript;
 			}
+
 		
 			serviceparams = jsonToString(jsonArgs);
 			if(typeof serviceparams == "object"){
@@ -206,6 +1841,9 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 				//默认异步执行
 				return adrinvoker.call(serviceType,serviceparams);//call是异步调用 默认异步
 			}
+		}else if(CurrentEnvironment.DeviceType==CurrentEnvironment.Debug){
+			//alert("CurrentEnvironment.DeviceType == " + CurrentEnvironment.DeviceType + ", 已经执行")
+			console.log("CurrentEnvironment.DeviceType == " + CurrentEnvironment.DeviceType + ", 服务["+serviceType+"]已经执行，参数是"+serviceparams);
 		}else{
 			alert("CurrentEnvironment.DeviceType == " + CurrentEnvironment.DeviceType + ", $service.call Not Implementation!")
 		}
@@ -501,12 +2139,23 @@ function UMP$Services$Controls$blur(args){
 	}
 	return $service.callService("UMJS.blur", args, false);//异步set
 }
+function UMP$Services$Controls$invoke(args){
+	if(!$isJSONObject(args)){
+		alert("the paramter of invoke requires a JSONObject");
+	}
+	if(args["id"] == null){
+		alert("invoke方法必须指定参数id，即控件的id");
+		return;
+	}
+	return $service.call("UMJS.invoke", args, false);//异步set
+}
 UMP.Services.Controls.prototype = {
 	get: UMP$Services$Controls$get,
 	set: UMP$Services$Controls$set,
 	insert : UMP$Services$Controls$insert,
 	focus : UMP$Services$Controls$focus,
-	blur : UMP$Services$Controls$blur
+	blur : UMP$Services$Controls$blur,
+	invoke : UMP$Services$Controls$invoke
 };
 UMP.Services.Controls.registerClass('UMP.Services.Controls');
 var $controls = new UMP.Services.Controls();
@@ -762,6 +2411,7 @@ UMP.Services.Calendar.prototype = {
 UMP.Services.Calendar.registerClass('UMP.Services.Calendar');
 var $calendar = new UMP.Services.Calendar();
 
+
 //______________________________________________________________________________________________________ $ctx Begin
 Type.registerNamespace('UMP.UI.Container');
 UMP.UI.Container.UMCtx=function(){	
@@ -777,15 +2427,11 @@ UMP.UI.Container.UMCtx=function(){
 function UMP$UI$Container$UMCtx$push(ctx, isDataBinding){
 	this._setUMContext(ctx, isDataBinding);
 }
-function UMP$UI$Container$UMCtx$dataBind(jsonArgs){
-	if(typeof jsonArgs == "undefined"){
-		$service.call(this._UMCtx_dataBind, {}, false);	//异步执行  dataBind无需参数	
-	}else{
-		$service.call(this._UMCtx_dataBind, jsonArgs, false);	//异步执行  dataBind之后可指定callback	
-	}
+function UMP$UI$Container$UMCtx$dataBind(args){
+	return $service.call(this._UMCtx_dataBind, typeof args == "undefined" ? {} : args, false);//异步执行  dataBind之后可指定callback
 }
-function UMP$UI$Container$UMCtx$dataCollect(){
-	$service.call(this._UMCtx_dataCollect, {}, true);	//同步执行  dataBind无需参数		
+function UMP$UI$Container$UMCtx$dataCollect(args){
+	return $service.call(this._UMCtx_dataCollect, typeof args == "undefined" ? {} : args, true);//同步执行  dataBind无需参数		
 }
 function UMP$UI$Container$UMCtx$put(fieldName, value){
 	this._setValue(fieldName, value);
@@ -795,55 +2441,22 @@ function UMP$UI$Container$UMCtx$put2(fieldName, value){
 	json[fieldName] = value;
 	this.push(json);
 }
-function UMP$UI$Container$UMCtx$get(fieldName){	
-	if(arguments.length == 0){
-		var expr = "#{CONTEXT}";
-		return this._getValue(expr);
-	}else{		
-		var expr = "#{"+fieldName+"}";
-		return this._getValue(expr);
-	}
+function UMP$UI$Container$UMCtx$get(fieldName){
+	return this._getValue(this._expr(fieldName));
 }
-function UMP$UI$Container$UMCtx$getString(fieldName){	
-	//此方法仅仅支持获取Context本身和Context字段的值
-	var expr = "";
-	if(arguments.length == 0 || fieldName == ""){
-		expr = "#{CONTEXT}";
-	}else{
-		expr = "#{"+fieldName+"}";//字段表达式
-	}
-	
-	var obj = this._getValue(expr);//同步执行
-	var str = $jsonToString(obj);
-	return str;
+function UMP$UI$Container$UMCtx$getString(fieldName){
+	var obj = this.get(fieldName);
+	return typeof obj == "string" ? obj : $jsonToString(obj);
 }
-function UMP$UI$Container$UMCtx$getJSONObject(fieldName){	
-	//此方法仅仅支持获取Context本身和Context字段的值
-	var expr = "";
-	if(arguments.length == 0 || fieldName == ""){
-		expr = "#{CONTEXT}";
-	}else{
-		expr = "#{"+fieldName+"}";//字段表达式
-	}
-	
-	var str = this._getValue(expr);//同步执行
-	var obj = $stringToJSON(str);
-	if($isJSONObject(obj)){
-		return obj;
-	}else{
-		alert("getJSONObject("+fieldName+")返回值不是一个有效的JSONObject，其值为" + str);
-	}
+function UMP$UI$Container$UMCtx$getJSONObject(fieldName){
+	var obj = this.get(fieldName);
+	var json = $stringToJSON(obj);
+	return $isJSONObject(json) ? json : alert("执行UMCtx.getJSONObject("+ (typeof fieldName == "undefined" ? "" : fieldName) +")的返回值不是一个有效的JSONObject，其值为" + obj);
 }
-function UMP$UI$Container$UMCtx$getJSONArray(fieldName){	
-	//此方法仅仅支持获取Context字段的值
-	var expr = "#{"+fieldName+"}";//字段表达式
-	var str = this._getValue(expr);
-	var obj = $stringToJSON(str);	//同步执行
-    if($isJSONArray(obj)){
-		return obj;
-	}else{
-		alert("getJSONArray("+fieldName+")返回值不是一个有效的JSONArray，其值为" + str);
-	}	
+function UMP$UI$Container$UMCtx$getJSONArray(fieldName){
+	var obj = this.get(fieldName);
+	var json = $stringToJSON(obj);  
+	return $isJSONArray(json) ? json : alert("执行UMCtx.getJSONArray("+ (typeof fieldName == "undefined" ? "" : fieldName) +")的返回值不是一个有效的JSONArray，其值为" + obj);
 }
 
 
@@ -1114,6 +2727,9 @@ UMP.UI.Container.UMCtx.prototype ={
 	setApp : UMP$UI$Container$UMCtx$setApp,
 	getApp : UMP$UI$Container$UMCtx$getApp,
 	//私有方法
+	_expr : function(fd){
+		return (arguments.length == 0 || fd == undefined || fd == "") ? "#{CONTEXT}" : "#{"+fd+"}"
+	},
 	_getValue : UMP$UI$Container$UMCtx$_getValue,
 	_setValue : UMP$UI$Container$UMCtx$_setValue,
 	_getValue4debug : UMP$UI$Container$UMCtx$_getValue4debug,
@@ -1219,6 +2835,7 @@ $__isdebug = function(){
 $$__debug_ctx = function(){
 
 }
+
 
 
 //___________________________________________________________________________________________________ $cache UMP.Services.Cache
@@ -1332,33 +2949,39 @@ function UMP$Services$Cache$read2(key, maxlength, charset){
 	}
 }
 
-function UMP$Services$Cache$writeFile(filePath, content, append, charset, isSync){	
-	if($environment.DeviceType == $environment.DeviceIOS){
-		var str = content;
-		if(typeof content != "string"){
-			str = $jsonToString(content);
+function UMP$Services$Cache$writeFile(filePath, content, append, charset, isSync){
+	if($isJSONObject(filePath)){		
+		return $service.call("UMFile.write", filePath, true);
+	}else{
+		if($environment.DeviceType == $environment.DeviceIOS){
+			var str = content;
+			if(typeof content != "string"){
+				str = $jsonToString(content);
+			}
+			return UM_callNativeService(this._store, filePath, str);	
+		}else if($environment.DeviceType == $environment.DeviceAndroid){
+			var args = {};
+			if($isJSONObject(append) && arguments.length == 3){
+				args = append;
+				if(filePath)
+					args["path"] = filePath;
+				if(content)
+					args["content"] = content;
+			}else{				
+				if(filePath)
+					args["path"] = filePath;
+				if(content)
+					args["content"] = content;	
+				if(append)
+					args["append"] = append;
+				if(charset)
+					args["charset"] = charset;
+			}
+			if(typeof isSync == "undefined")
+				return UM_NativeCall.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
+			else
+				return UM_NativeCall.callService("UMFile.write", args, isSync);
 		}
-		return UM_callNativeService(this._store, filePath, str);	
-	}else if($environment.DeviceType == $environment.DeviceAndroid){
-		var args ={};
-		
-		if(filePath)
-			args["path"] = filePath;
-		if(content)
-			args["content"] = content;	
-		if(append)
-			args["append"] = append;
-		if(charset)
-			args["charset"] = charset;
-		
-		
-		//var str = $jsonToString(args);
-		
-		if(typeof isSync == "undefined")
-			return UM_NativeCall.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
-		else
-			return UM_NativeCall.callService("UMFile.write", args, isSync);
-		//___cache_UIState[path] = content;
 	}
 }
 function UMP$Services$Cache$readFile(filePath, maxlength, charset){
@@ -1403,11 +3026,25 @@ UMP.Services.Cache.prototype = {
 	write: UMP$Services$Cache$writeFile,
 	read: UMP$Services$Cache$readFile,
 	writeFile: UMP$Services$Cache$writeFile,
-	readFile: UMP$Services$Cache$readFile
+	readFile: UMP$Services$Cache$readFile,
+	remove:function(key){
+		return $file.remove.apply(this, arguments);
+	},
+	removeItem:function(key){
+		return $file.remove.apply(this, arguments);
+	},
+	getItem:function(key){
+		return this.readFile(key);
+	},
+	setItem:function(key,value){
+		return this.writeFile(key,value);
+	}
 };
 UMP.Services.Cache.registerClass('UMP.Services.Cache');
 $cache = new UMP.Services.Cache();
-$store = $cache;
+$localStorage = $cache;
+$localStore = $cache;
+
 
 //___________________________________________________________________________________________________ UMP.Services.Sqlite
 //Sqlite相关服务
@@ -1418,7 +3055,8 @@ UMP.Services.Sqlite = function UMP$Services$Sqlite(){
 	this.UMSQLite_execSql = "UMSQLite.execSql";
 	this.UMSQLite_query = "UMSQLite.query";
 	this.UMSQLite_queryByPage = "UMSQLite.queryByPage";
-	this.UMSQLite_exist = "UMSQLite.exist";	
+	this.UMSQLite_exist = "UMSQLite.exist";
+	this.UMSQLite_openDB = "UMSQLite.openDB";	
 }
 function UMP$Services$Sqlite$execSql(args){
 /*
@@ -1460,12 +3098,14 @@ function UMP$Services$Sqlite$query(args){
     });
 	*/
 	if($isJSONObject(args)){
+		/*
 		if($isEmpty(args["startIndex"])){
 			args["startIndex"] = 0;
 		}
 		if($isEmpty(args["endIndex"])){
 			args["endIndex"] = 9;
 		}
+		*/
 		return $service.call(this.UMSQLite_query, args, true);
 	}else{
 		alert("参数不是一个有效的JSONObject，请使用query({...})形式的API");
@@ -1511,7 +3151,23 @@ function UMP$Services$Sqlite$exist(args){
 	}
 }
 UMP.Services.Sqlite.prototype = {
-	//openDB:UMP$Services$Sqlite$openDB,
+	open:function(json){
+		return this.openOrCreateDB(json);
+	},
+	openOrCreateDB:function(json){
+		if($isJSONObject(json) && $isEmpty(json["db"])){	
+			return $service.call(this.UMSQLite_openDB, json, false);
+		}else{
+			alert("参数不是一个有效的JSONObject，请确保参数是一个有效的JSON且含有db键值");
+		}
+	},
+	openDB:function(args){
+		if($isJSONObject(args) && $isEmpty(args["db"])){			
+			return $service.call(this.UMSQLite_openDB, args, false);
+		}else{
+			alert("参数不是一个有效的JSONObject，请使用openDB({...})形式的API");
+		}
+	},
 	//delDB:UMP$Services$Sqlite$delDB,
 	execSql:UMP$Services$Sqlite$execSql,
 	query:UMP$Services$Sqlite$query,	//查询（默认分页）
@@ -1520,6 +3176,7 @@ UMP.Services.Sqlite.prototype = {
 };
 UMP.Services.Sqlite.registerClass('UMP.Services.Sqlite');
 var $sqlite = new UMP.Services.Sqlite();
+
 
 //___________________________________________________________________________________________________ UMP.Services.Network
 //网络相关服务
@@ -1605,6 +3262,7 @@ UMP.Services.Network.prototype = {
 UMP.Services.Network.registerClass('UMP.Services.Network');
 var $net = new UMP.Services.Network();
 
+
 //___________________________________________________________________________________________________ $console 
 //console相关服务
 if(typeof __debugger == "undefined"){
@@ -1639,6 +3297,7 @@ UMP.Services.Console.prototype = {
 UMP.Services.Console.registerClass('UMP.Services.Console');
 $console = new UMP.Services.Console();
 
+
 //___________________________________________________________________________________________________ $res UMP.Services.Resource
 //Resource相关服务
 /*
@@ -1664,6 +3323,7 @@ UMP.Services.Resource.prototype = {
 };
 UMP.Services.Resource.registerClass('UMP.Services.Resource');
 $res = new UMP.Services.Resource();
+
 
 //___________________________________________________________________________________________________ $view UMP.Services.UMView
 UMP.Services.UMView = function UMP$Services$UMView(){	
@@ -1742,6 +3402,15 @@ function UMP$Services$UMView$closeWithCallBack(jsonArgs){
 		$service.call("UMView.close",jsonArgs);
 	}else{
 		alert("请使用close({...})或close()形式的API");
+	}
+}
+function UMP$Services$UMView$launcher(val){
+	if(typeof val == "undefined"){
+		return $service.readConfig("customuaplauncher");
+	}else{
+		return $service.writeConfig({
+			"customuaplauncher" : val
+		});
 	}
 }
 function UMP$Services$UMView$openPop(jsonArgs){
@@ -1862,6 +3531,7 @@ UMP.Services.UMView.prototype = {
 	//xxx
 	close : UMP$Services$UMView$close,
 	closeWithCallBack : UMP$Services$UMView$closeWithCallBack,
+	launcher : UMP$Services$UMView$launcher,
 	openPop : UMP$Services$UMView$openPop,
 	closePop : UMP$Services$UMView$closePop,
 	openDialog : UMP$Services$UMView$openDialog,
@@ -1901,6 +3571,7 @@ UMP.Services.UMWindow.prototype = {
 UMP.Services.UMWindow.registerClass('UMP.Services.UMWindow');
 $window = new UMP.Services.UMWindow();
 //
+
 
 
 //___________________________________________________________________________________________________ $umdevice UMP.Services.UMDevice
@@ -1987,19 +3658,23 @@ function UMP$Services$UMDevice$capturePhoto(args){
 	$service.call("UMDevice.capturePhoto", args);
 
 }
-function UMP$Services$UMDevice$getAlbumPath(){
-	return $service.call("UMDevice.getAlbumPath", {}, true);
+function UMP$Services$UMDevice$getAlbumPath(args){
+	//args = { allAlbum: true}    ---> [{path:"xx/xx/UAPIMage1"},{path:"xx/xx/UAPIMage2"}，{path:"xx/xx/UAPIMage3"}]
+	return $service.call("UMDevice.getAlbumPath", typeof args == "undefined" ? {} : args, true);
 }
-function UMP$Services$UMDevice$getAppAlbumPath(json){
-	if(json){
-		if(!$isJSONObject(json)){
-			alert("调用getAppAlbumPath服务时，参数不是一个有效的JSONObject");
+function UMP$Services$UMDevice$getAppAlbumPath(jsonArgs){
+	if(jsonArgs){
+		if(!$isJSONObject(jsonArgs)){
+			alert("调用 getAppAlbumPath 服务时，参数不是一个有效的JSONObject");
 			return;
 		}
 	}else{
-		json = {};
+		jsonArgs = {};
 	}
-	return $service.call("UMDevice.getAppAlbumPath", json, true);
+	return $service.call("UMDevice.getAppAlbumPath", jsonArgs, true);
+}
+function UMP$Services$UMDevice$generateQRCode(json){
+	return $scanner.generateQRCode(json);
 }
 
 function UMP$Services$UMDevice$sendMail(receive, title, content){
@@ -2130,6 +3805,9 @@ function UMP$Services$UMDevice$getScreenDensity(){
 		$toast("未能获取到该设备的屏幕信息");
 	}
 }
+function UMP$Services$UMDevice$currentOrientation(){
+	return $service.call("UMDevice.currentOrientation", {}, true);
+}
 UMP.Services.UMDevice.prototype = {	
 	getTimeZoneID : UMP$Services$UMDevice$getTimeZoneID,
 	getTimeZoneDisplayName : UMP$Services$UMDevice$getTimeZoneDisplayName,
@@ -2149,7 +3827,7 @@ UMP.Services.UMDevice.prototype = {
 	capturePhoto  : UMP$Services$UMDevice$capturePhoto,
 	getAlbumPath : UMP$Services$UMDevice$getAlbumPath,
 	getAppAlbumPath : UMP$Services$UMDevice$getAppAlbumPath,
-	
+	generateQRCode : UMP$Services$UMDevice$generateQRCode,
 	sendMail : UMP$Services$UMDevice$sendMail,
     saveContact : UMP$Services$UMDevice$saveContact,
 	getContacts : UMP$Services$UMDevice$getContacts,
@@ -2164,7 +3842,8 @@ UMP.Services.UMDevice.prototype = {
 	notify	: UMP$Services$UMDevice$notify,
 	getScreenWidth : UMP$Services$UMDevice$getScreenWidth,
 	getScreenHeight : UMP$Services$UMDevice$getScreenHeight,
-	getScreenDensity : UMP$Services$UMDevice$getScreenDensity
+	getScreenDensity : UMP$Services$UMDevice$getScreenDensity,
+	currentOrientation : UMP$Services$UMDevice$currentOrientation
 };
 UMP.Services.UMDevice.registerClass('UMP.Services.UMDevice');
 $device = new UMP.Services.UMDevice();//命名规范 $device === UMDevice
@@ -2329,6 +4008,23 @@ UMP.Services.Vibrator.prototype = {
 UMP.Services.Vibrator.registerClass('UMP.Services.Vibrator');
 $vibrator = new UMP.Services.Vibrator();
 
+UMP.Services.UMGraphics = function UMP$Services$UMGraphics(){
+
+}
+UMP.Services.UMGraphics.prototype = {
+	watermark : function(json){
+		/*
+		json = {
+				src : "a/b/c/x.png", //原图片路径
+				watermark : "a/b/y.png",//水印图片路径
+				target : "a/b/xy.png"//输出路径
+		};
+		*/
+		return $service.call("UMGraphics.watermark", json, false);
+	}
+}
+UMP.Services.UMGraphics.registerClass('UMP.Services.UMGraphics');
+$graphics = new UMP.Services.UMGraphics();
 
 //========================================= $camera ======================================================== $camera
 Type.registerNamespace('UMP.UI.Container');
@@ -2337,13 +4033,15 @@ UMP.UI.Container.UMCamera=function(){
 	this._UMDevice_openPhotoAlbum = "UMDevice.openPhotoAlbum";
 }
 
-function UMP$UI$Container$UMCamera$open(json){
-	var args = {};
-	if(json.bindfield)
-		args["bindfield"] = json["bindfield"];
-	if(json.callback)
-		args["callback"] = json["callback"];
-	return $service.call(this._UMDevice_openCamera,args,false);
+function UMP$UI$Container$UMCamera$open(args){
+	/*{
+		bindfield:
+		callback:
+		compressionRatio:""
+	}
+	*/
+	if($validator.checkIfExist(args, ["bindfield","callback","compressionRatio"]))
+		return $service.call(this._UMDevice_openCamera,args,false);
 }
 function UMP$UI$Container$UMCamera$openPhotoAlbum(json){
 	if(!json) return;
@@ -2380,32 +4078,28 @@ function UMP$UI$Container$UMScanner$open(jsonArgs){
 	}
 }
 function UMP$UI$Container$UMScanner$generateQRCode(jsonArgs){
-	//twocode-size  //二维码大小，默认200*200，二维码为正方形
+	//twocode-size  //二维码大小，默认180*180，二维码为正方形
 	//twocode-content  //二维码内容，字符串
 	if($isJSONObject(jsonArgs)){
-		if(jsonArgs["size"] == null){
-			jsonArgs["size"] =  "200*200";
+		if(typeof jsonArgs["size"] != "undefined"){
+			jsonArgs["twocode-size"] =  jsonArgs["size"];
 		}
-		if(jsonArgs["content"] == null){
-			alert("参数content不能为空");
+		if(typeof jsonArgs["content"] != "undefined"){
+			jsonArgs["twocode-content"] =  jsonArgs["content"];
+		}
+		if(typeof jsonArgs["twocode-size"] == "undefined"){
+			jsonArgs["twocode-size"] =  "180";
+		}
+		if(typeof jsonArgs["twocode-content"] == "undefined"){
+			alert("参数twocode-content不能为空，此参数用来标识扫描二维码后的返回值");
 			return;
 		}
 	}else{
 		alert("generateQRCode方法的参数不是一个有效的JSONObject!");
+		return;
 	}
 	
-	var args = {};
-	for(key in jsonArgs){
-		if(key == "size"){
-			args["twocode-size"] = jsonArgs[key];
-		}else if(key == "content"){
-			args["twocode-content"] = jsonArgs[key];
-		}else if(jsonArgs.hasOwnProperty(key)){
-			args[key] = jsonArgs[key];
-		}
-	}
-	
-	return $service.call(this._UMDevice_createTwocodeImage, args, true);
+	return $service.call(this._UMDevice_createTwocodeImage, jsonArgs, true);
 }
 UMP.UI.Container.UMScanner.prototype ={
     /** 
@@ -2424,6 +4118,7 @@ UMP.UI.Container.UMScanner.registerClass('UMP.UI.Container.UMScanner');
 $scanner = new UMP.UI.Container.UMScanner();
 //______________________________________________________________________________________________________ $scanner End
 
+
 //___________________________________________________________________________________________________ $js
 Type.registerNamespace('UMP.Services');
 UMP.Services.UMJS=function(){	
@@ -2435,13 +4130,13 @@ UMP.Services.UMJS=function(){
 	this._UMCtx_setUMContext = "UMCtx.setUMContext";
 	this._UMCtx_setAppValue = "UMCtx.setAppValue";
 }
-function UMP$Services$UMJS$showLoadingBar(){
-	//显示loading：
-	return $service.call("UMJS.showLoadingBar",{});
+function UMP$Services$UMJS$showLoadingBar(args){
+	//显示loading： args = {opacity:0.8, background:#e3e3ea}
+	return $service.call("UMJS.showLoadingBar", typeof args == "undefined" ? {} : args);
 }
-function UMP$Services$UMJS$hideLoadingBar(){
+function UMP$Services$UMJS$hideLoadingBar(args){
 	//隐藏loading：
-	return $service.call("UMJS.hideLoadingBar",{});
+	return $service.call("UMJS.hideLoadingBar",typeof args == "undefined" ? {} : args);
 }
 function UMP$Services$UMJS$toast(msg){
 	//$service.call("UMJS.toast", {"msg":"保存成功"}, false);
@@ -2455,7 +4150,7 @@ function UMP$Services$UMJS$toast(msg){
 	}else if($isJSONObject(msg)){
 		json = msg;
 	}else{
-		alert("$toast方法的参数无效,不是一个有效的字符串或JSONObject");
+		alert("$toast方法不支持参数类型为["+typeof msg+"]的参数,不是一个有效的字符串或JSONObject");
 		return;
 	}
 	return $service.call("UMJS.toast", json, false);
@@ -2577,6 +4272,7 @@ UMP.Services.UMWXShare.prototype ={
 UMP.Services.UMWXShare.registerClass('UMP.Services.UMWXShare');
 $wxshare = new UMP.Services.UMWXShare();
 
+
 //
 Type.registerNamespace('UMP.UI.Container');
 UMP.UI.Container.UMAnimation=function(){	
@@ -2631,6 +4327,7 @@ UMP.UI.Container.UMAnimation.prototype ={
 }
 UMP.UI.Container.UMAnimation.registerClass('UMP.UI.Container.UMAnimation');
 $anim = new UMP.UI.Container.UMAnimation();
+
 //___________________________________________________________________________________________________ UMP.Services.File
 UMP.Services.UMFile = function UMP$Services$UMFile(){
 	this._downloadFile="UMService.downloadFile";
@@ -2656,9 +4353,9 @@ function UMP$Services$UMFile$upload(jsonArgs){
 	/*
 	var json = {
 		"url" : "http://10.2.112.22:8080/umserver/upload",
-		"bindfield" : "upload",
 		"filename" : imagePath,
-		"callback" : "uploadImageCallback()"
+		"bindfield" : "serverFileInfo",//上传后的服务器文件信息JSON对象，其中的url是地址，例如{url:http://xx/xx/xx.png}
+		"callback" : "afterupload()"//在callback中通过bindfield可以获取上传后的服务器端文件地址
 	};
 	*/
 	if ($isEmpty(jsonArgs.url)) {
@@ -2676,7 +4373,7 @@ function UMP$Services$UMFile$download(jsonArgs){
 		filename:"baidu.png",
 		locate:"downloadTest/image",
 		override:"true",
-		callback:"downloadfromserverCB()"
+		callback:"afterDownload()"
 	};
 	*/
 	if($isEmpty(jsonArgs.url)){
@@ -2734,6 +4431,10 @@ function UMP$Services$UMFile$write(args, isSync){
 	}
 	return UM_NativeCall.callService("UMFile.write", args, isSync);
 }
+function UMP$Services$UMFile$remove(args, isSync){
+	//参数path支持文件和文件夹两种,$service.call("UMFile.delete",{"path":"filetest/test.txt"},true);
+	return $service.call("UMFile.delete", args, typeof isSync == "undefined" ? false : true);//默认异步删除
+}
 function UMP$Services$UMFile$getFileInfo(args){
 	//return $service.call("UMFile.getFileInfo",{"path":"filetest/test.txt"}, true);
 	var json = args;
@@ -2753,6 +4454,7 @@ function UMP$Services$UMFile$ftpUpload(args){
 	//return $service.call("UMDevice.ftpUpload",{"url":"10.2.112.44","port":"21","username":"UAPFTP","password":"UAPFTP","remotePath":"/UAPAndroid/test/sunny/","fileNamePath":"/storage/emulated/0/DCIM","fileName":"miss.jpg","compresize":"99","remoteFileName":"Mr.jpg"},false);
 	if(!$isJSONObject(args)){
 		alert("调用$file.open方法时，参数不是一个有效的JSONObject");
+		return;
 	}
 	return $service.call("UMDevice.ftpUpload", args, false);//调用的是UMDevice的方法
 }
@@ -2760,6 +4462,7 @@ function UMP$Services$UMFile$ftpDownload(args){
 	//$service.call("UMDevice.ftpDownload",{"url":"10.2.112.44","port":"21","username":"UAPFTP","password":"UAPFTP","remotePath":"/UAPAndroid/test/sunny/","fileNamePath":"/storage/emulated/0/aaaaanewPath/ccc/","fileName":"Mr.jpg"},false);
 	if(!$isJSONObject(args)){
 		alert("调用$file.open方法时，参数不是一个有效的JSONObject");
+		return;
 	}
 	return $service.call("UMDevice.ftpDownload", args, false);//调用的是UMDevice的方法
 }
@@ -2769,6 +4472,7 @@ UMP.Services.UMFile.prototype = {
 	download : UMP$Services$UMFile$download,
 	writeFile : UMP$Services$UMFile$writeFile,
 	write : UMP$Services$UMFile$write,
+	remove : UMP$Services$UMFile$remove,
 	getFileInfo: UMP$Services$UMFile$getFileInfo,
 	open: UMP$Services$UMFile$open,
 	ftpUpload : UMP$Services$UMFile$ftpUpload,
@@ -2777,6 +4481,34 @@ UMP.Services.UMFile.prototype = {
 UMP.Services.UMFile.registerClass('UMP.Services.UMFile');
 $file = new UMP.Services.UMFile();
 //----------------------------------------------------------------------------END
+
+
+
+//___________________________________________________________________________________________________ UMP.Services.File
+UMP.Services.UAPappStore = function UMP$Services$UAPappStore(){
+}
+function UMP$Services$UAPappStore$updateAPP(json){
+	/*
+		$service.call("UAPappStore.updateAPP", {
+			url : $ctx.getApp("tempurl"),
+			override : "true",
+			callback:"upcomplete()"
+		}, false);
+	*/
+	if(!$isJSONObject(json)){
+		alert("调用$UAPappStore.updateAPP方法时，参数不是一个有效的JSONObject");
+		return;
+	}
+	return $service.call("UAPappStore.updateAPP", json, false);
+}
+UMP.Services.UAPappStore.prototype = {
+	updateAPP : UMP$Services$UAPappStore$updateAPP
+};
+UMP.Services.UAPappStore.registerClass('UMP.Services.UAPappStore');
+$UAPappStore = new UMP.Services.UAPappStore();
+
+
+
 
 //---------------------------------------------------------------------------------------------- $menu
 UMP.Services.Menu = function UMP$Services$Menu(){
@@ -2810,23 +4542,33 @@ UMP.Services.Menu.prototype = {
 UMP.Services.Menu.registerClass('UMP.Services.Menu');
 $menu = new UMP.Services.Menu();
 
+
 //----------------------------------------------------------------------------------- Validator
 UMP.Services.Validator = function UMP$Services$Validator(){
 }
-function UMP$Services$Validator$isEmpty(obj){
-	
-	if ($isJSONObject(obj)) {
-		return $isEmpty(obj);
-	} else if ($isJSONArray(obj)) {
-		for(var i=0, len = obj.length;i<len;i++){			
-			return this.isEmpty(obj[i]);
-		}
-	}else{
-		return true;
+function UMP$Services$Validator$check(obj,paramNameArray,msg){
+	for(var i=0,len=paramNameArray.length;i<len;i++){
+		if(obj[paramNameArray[i]] == undefined || obj[paramNameArray[i]] == null){
+			var str = "参数["+paramNameArray[i]+"]不能为空";
+			alert(msg ? msg + str : str);
+			return false;
+		}		
 	}
-
+	return true;
 }
-function UMP$Services$Validator$isValidNumber(obj){
+function UMP$Services$Validator$checkIfExist(obj,paramNameArray,msg){
+	for(var i=0,len=paramNameArray.length;i<len;i++){
+		var key = paramNameArray[i];
+		if(key in obj && UM.isEmpty(obj[key])){
+			var str = "参数["+paramNameArray[i]+"]不能为空";
+			alert(msg ? msg + str : str);
+			return false;
+		}			
+	}
+	return true;
+}
+function UMP$Services$Validator$isEmpty(obj){
+	return UM.isEmpty(obj);
 }
 function UMP$Services$Validator$isJSONObject(obj){
     if ($isJSONObject(obj)) {
@@ -2870,10 +4612,569 @@ function UMP$Services$Validator$isNamespace(ns){
     return true;
 }
 UMP.Services.Validator.prototype = {
-	isEmpty : UMP$Services$Validator$isEmpty,
-	isValidNumber : UMP$Services$Validator$isValidNumber,
+	check : UMP$Services$Validator$check,
+	checkIfExist : UMP$Services$Validator$checkIfExist,
 	isJSONObject : UMP$Services$Validator$isJSONObject,
 	isNamespace : UMP$Services$Validator$isNamespace
 };
 UMP.Services.Validator.registerClass('UMP.Services.Validator');
 $validator = new UMP.Services.Validator();
+
+//___________________________________________________________________________________________________ UMP.Services.DebugMgr
+Type.registerNamespace('UMP.Services');
+UMP.Services.DebugMgr = function(){
+	this._jsList = {};
+	this._del = {};
+	this._body = null;
+	this._debugArea = null;
+}
+UMP.Services.DebugMgr.prototype ={
+	reg : function (id, key, handler){
+		if(this._del[id]){
+			return;
+		}
+
+		this._jsList[id] = handler;
+		var li = document.createElement("li");
+		var btn = document.createElement("button");
+		btn.innerHTML = "点击此时可以调试>> " + key;
+		btn.onclick = handler;
+		li.style +="margin:10px"
+		li.appendChild(btn);
+		this.getDebugArea().appendChild(li); 
+	},
+	clear : function (){
+		for(key in this._jsList){
+			this._del[key] = "deleted";
+			var script = document.querySelector("#"+key);
+			var scriptP = script.parentNode;
+			script.innerHTML = "";
+			scriptP.removeChild(script);
+		}
+
+		this._jsList = {};
+		this.getDebugArea().innerHTML = "";
+	},
+	insertJS : function (id, str){
+		var script = document.createElement("script");
+		script.innerHTML =str;
+		script.id = id;
+		script.um_id = id;
+		this.getDebugArea().appendChild(script); 
+	},
+	getBody : function (){
+		if(this._body == null){
+			if(document){
+				this._body = document.querySelector("body");
+			}else{
+				alet("no exist document, pls check it ?");
+			}
+		}
+		return this._body;
+	},
+	getDebugArea : function (){
+		if(this._debugArea == null){
+			if(document){
+				this._debugArea = document.createElement("ul");
+				this.getBody().appendChild(this._debugArea); 
+			}else{
+				alet("no exist document, pls check it ?");
+			}
+		}
+		return this._debugArea;
+	}
+}
+UMP.Services.DebugMgr.registerClass('UMP.Services.DebugMgr');
+$debugMgr= new UMP.Services.DebugMgr();
+
+//controller.js
+//=================================================== UMP.UI.Mvc.Router =========================================================
+Type.registerNamespace('UMP.UI.Mvc');
+UMP.UI.Mvc.Router = function UMP$UI$Mvc$Router(){
+	//_actionMapping决定调用顺序
+}
+var __debugger = true;
+function UMP$UI$Mvc$Router$route(controllerBaseId, actionid, ctx){    
+	var json = ctx;	
+	if(typeof ctx =="string"){
+	    json = $stringToJSON(ctx);
+	}	
+	var cBase = UM.__getInstance(controllerBaseId);
+	cBase.execute(actionid, json);
+}
+function UMP$UI$Mvc$Router$eval(controllerid, js, ctx, sender, args, uicontrols){
+	//if($isWeb && false){
+	if(false){
+		UM.__controller.eval(js, ctx, sender, args);
+	}else{
+		var c = UM.__getInstance(controllerid);
+		if(c){
+			c.eval(js, ctx, sender, args, uicontrols);
+		}else{			
+			alert(controllerid + "未能正确初始化加载，可能是由于语法错误导致未能正确加载\n建议启动调试进行排查，也可查看浏览器的控制台")
+			return;
+		}
+	}
+}
+function UMP$UI$Mvc$Router$debug(controllerid, js, ctx, sender, args, custom){
+	//if($isWeb && false){
+	if(false){
+		UM.__controller.eval(js, ctx, sender, args);
+	}else{
+		var c = UM.__getInstance(controllerid);
+		if(c){
+			if(!custom) alert("调试发生异常");
+			custom["debug"] = "begin";//custom内已经含有id信息，用于标识该次执行JS的唯一标识
+			$service.call("UMJS.debug",custom,true);//同步通知安卓原生调试开始
+			
+			c.eval(js, ctx, sender, args, {});//执行Controller中的eval方法
+			
+			custom["debug"] = "end";
+			$service.call("UMJS.debug",custom,true);//同步通知安卓原生调试结束
+		}else{			
+			alert(controllerid + "未能正确初始化加载，可能是由于语法错误导致未能正确加载\n建议启动调试进行排查，也可查看浏览器的控制台")
+			return;
+		}
+	}
+}
+UMP.UI.Mvc.Router.prototype = {
+    route : UMP$UI$Mvc$Router$route,	
+	eval : UMP$UI$Mvc$Router$eval,
+	debug : UMP$UI$Mvc$Router$debug
+};
+UMP.UI.Mvc.Router.registerClass('UMP.UI.Mvc.Router');
+
+if(typeof $router == "undefined")  {
+	$router = new UMP.UI.Mvc.Router();
+}
+function $pageReady(){
+	//$document.fireEvent("pageReady");
+	if(typeof $document != "undefined"){
+		$document.fireEvent("pageReady");
+	}
+}
+
+//================================== UMP.UI.Mvc.ControllerBase ==========================================================================
+Type.registerNamespace('UMP.UI.Mvc');
+UMP.UI.Mvc.ControllerBase = function UMP$UI$Mvc$ControllerBase(args) {	
+	//this._context = null;
+	//this._entity = null;
+	this._controller = null;
+	
+	if(args){
+		var context = args["context"];
+		var controller = args["controller"];
+		var namespace = args["namespace"];
+			
+		
+		var controllerFullName = eval(namespace + "." + controller);
+		var cT = eval(controllerFullName);	
+		if(cT){
+			this._controller = UM.__getInstance(cT);
+			if(cT.initializeBase){
+				cT.initializeBase(this._controller);
+			}
+		}else{
+			alert("please check the js file["+controllerFullName+".js], it probably has some syntax wrong.");        
+		}
+	}
+}
+function UMP$UI$Mvc$ControllerBase$execute(actionid, json){
+	var action = eval("this." + actionid);
+	try{
+		//json = action.apply(this, [json]);//不使用apply，则this为window
+		eval("this."+actionid+"(json)")
+	}catch(e){
+        if(e.stack){
+            alert(e.stack);
+        }else{
+            alert(e.name + ":" + e.message);
+        }
+    }    
+	return json;
+}
+function UMP$UI$Mvc$ControllerBase$execMethod(args){
+	try{    	
+        if(!args.method){
+			alert("Action[" + args.actionid + "]不存在Method[" + args.method + "]");
+		}
+		if(this._controller){					
+			if(this._controller.initialize)
+				this._controller.initialize();
+			
+			//var method = eval("this._controller." + args.method);
+			//method.apply(this._controller, [args.json]);//不使用apply，则this为window
+			//$$__debug_ctx = args.json;
+			$ctx._setUMContext4debug(args.json);//debug Context
+			//$document.uiMD(uiMD);//debug UIControl MetaData
+		
+			this._controller.method(args.method, args);
+		}		
+    }catch(e){
+        alert(e.stack);
+    }    
+}
+UMP.UI.Mvc.ControllerBase.prototype = {
+	execute : UMP$UI$Mvc$ControllerBase$execute,
+	execMethod : UMP$UI$Mvc$ControllerBase$execMethod	
+};
+UMP.UI.Mvc.ControllerBase.registerClass('UMP.UI.Mvc.ControllerBase');
+
+
+
+
+
+
+
+Type.registerNamespace('UMP.UI.Mvc');
+UMP.UI.Mvc.Controller = function UMP$UI$Mvc$Controller(args) {	
+}
+function UMP$UI$Mvc$Controller$method(methodName, args){
+	try{
+		var func = eval("this."+methodName);
+		func.apply(this, [args]);
+		//or
+		//eval("this."+methodName+"()");
+	}catch(e){
+        alert(e.stack);
+    }    
+}
+function UMP$UI$Mvc$Controller$eval(js, json, sender, args, uiMD){
+	try{
+		$ctx._setUMContext4debug(json);//debug Context
+		if(typeof $document != "undefined"){//H5工程无需$document
+			$document.uiMD(uiMD);//debug UIControl MetaData
+		}
+		js = js.trim();
+		if(js.indexOf("this.")==0 && js.indexOf("(")>0 && js.indexOf(")")>js.indexOf("(") ){
+			//this.xxx()
+			var funcName = js.substring(0, js.indexOf("("));
+			var func = eval(funcName)
+			if(func){
+				func.apply(this, [sender, args]);
+			}else{
+				var m = funcName.substring(5);
+				alert("调用[" + this.__typeName + "]的[" + m + "]方法异常：\n请检查"+this.__typeName+".prototype中是否有" + m + "的定义");
+			}	
+		}else{
+			//xxx()
+			if($isFunction($__cbm[js])){
+				//callback队列中是否存在
+				var func = $__cbm[js];
+				func.apply(this, [sender, args]);				
+			}else{
+				var funcName = js.substring(0, js.indexOf("("));
+				if(false && this.evaljs){
+					//this.evaljs(js);//xxx()
+					var func = eval(funcName);
+					func.apply(this, [sender, args]);					
+				}else{
+					try{
+						var func = null;
+						try{
+							func = eval(funcName);
+						}catch(e){
+							var info = "找不到方法["+funcName+"]的定义\n\n";
+							e.stack ? alert(info + e.stack) : alert(info + e);
+							return;
+						}
+						if($isFunction(func)){
+							func.apply(this, [sender, args]);		
+						}else{
+							alert("要执行的["+funcName+"]不是一个有效的function，请检查");
+						}
+					}catch(e){
+						e.stack ? alert(e.stack) : alert(e);						
+					}		
+				}
+			}			
+		}
+    }catch(e){
+        alert(e.stack);
+    }    
+}
+UMP.UI.Mvc.Controller.prototype = {	
+	method: UMP$UI$Mvc$Controller$method,
+	eval: UMP$UI$Mvc$Controller$eval	
+};
+UMP.UI.Mvc.Controller.registerClass('UMP.UI.Mvc.Controller');
+UM.__controller = new UMP.UI.Mvc.Controller();
+/*
+//================================== UMP.UI.Mvc.Action ==========================================================================
+Type.registerNamespace('UMP.UI.Mvc');
+UMP.UI.Mvc.Action = function UMP$UI$Mvc$Action(id, method, ctx) {
+	this._id = id;
+	this._method = method;
+	this._ctx = ctx;
+}
+function UMP$UI$Mvc$Action$execute(func, ctx){	
+	return func.apply(this, [func, ctx]);
+}
+function UMP$UI$Mvc$Action$method(func, ctx){	
+	return func.apply(this, [func, ctx]);
+}
+UMP.UI.Mvc.Action.prototype = {
+	execute: UMP$UI$Mvc$Action$execute,	
+	method: UMP$UI$Mvc$Action$method	
+};
+UMP.UI.Mvc.Action.registerClass('UMP.UI.Mvc.Action');
+*/
+
+
+
+
+
+
+
+//=========================================================================
+//-----------------------------------------------------------------------
+// Copyright (C) Yonyou Corporation. All rights reserved.
+// include : UMP.Web.EventMgr
+// Author gct@yonyou.com
+//-----------------------------------------------------------------------
+/*!
+ * UAP Mobile JavaScript Library v2.7.0
+ */
+(function( window, undefined ) {
+    UM = window.UM || {};
+    UM._inherit = (function () {
+        var F = function () {
+        };
+        return function (C, P) {
+            F.prototype = P.prototype;
+            C.prototype = new F();
+            C.base =  P.prototype;
+            C.prototype.constructor = C;
+        };
+    })();
+
+    UM.EventMgr = function() {
+        this._events = {};
+        /*
+         this._events = {
+         "oninit" :[function(){},function(){}],
+         "onload" :[function(){},function(){}]
+         }
+         */
+    }
+    UM.EventMgr.prototype.on = function(evtName, handler) {
+        if (this._events[evtName] == null) {
+            this._events[evtName] = [];
+        }
+        this._events[evtName].push(handler);
+    }
+    UM.EventMgr.prototype.off = function(evtName, handler) {
+        var handlers = this._events[evtName];
+        if (typeof handler == "undefined") {
+            delete handlers;
+        } else {
+            var index = -1;
+            for (var i = 0, len = handlers.length; i < len; i++) {
+                if (handler == handlers[i]) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index > 0)
+                handlers.remove(index);
+        }
+    }
+    UM.EventMgr.prototype.trigger = function(evtName, sender, args) {
+        try{
+            var handlers = this._events[evtName] || [];
+            var handler;
+            args = args || {};
+            for (var i=0,len=handlers.length; i < len; i++) {
+                handler = handlers[i];
+                handler(sender, args);
+            }
+        }catch(e){
+            alert(e);
+        }
+    }
+
+	UM.NativeContainer = function() {
+		this._eventMgr = new UM.EventMgr();
+    }
+	UM.NativeContainer.prototype.onReady = function(handler){
+		this._eventMgr.on("ready", handler)
+	},
+	UM.NativeContainer.prototype.on = function(evtName, handler){
+		this._eventMgr.on(evtName, handler)
+	},
+	UM.NativeContainer.prototype.off = function(evtName, handler){
+		this._eventMgr.off(evtName, handler)
+	},
+	UM.NativeContainer.prototype.trigger = function(evtName, sender, args){
+		this._eventMgr.trigger(evtName, sender, args)
+	}
+	
+	UM.nativeContainer = new UM.NativeContainer();
+	
+})( window );
+
+
+//=========================================================================
+//-----------------------------------------------------------------------
+// Copyright (C) Yonyou Corporation. All rights reserved.
+// include : UM.Graphics
+// Author iUAP Mobile
+//-----------------------------------------------------------------------
+/*!
+ * UAP Mobile JavaScript Library v2.7.0
+ */
+(function(window, undefined) {
+	if (!window.UM)
+		window.UM = {};
+
+	function WaterMark() {}
+
+	WaterMark.prototype.watermark = function(options) {
+		if (!options || typeof options !== "object")
+			return;
+		var self = this;
+		/*  var canvas = document.createElement("canvas");*/
+		var canvas = document.getElementById("test");
+		var ctx = canvas.getContext("2d");
+		var oImg;
+		var imageFormat;
+		var imageURL = "";
+
+		if (options.src && options.target && typeof options.src == "string" && typeof options.target == "string") {
+			//修正options属性
+			if ( typeof options.watermark !== "string")
+				options.watermark = "";
+			if ( typeof options.watermarkStyle !== "object" || options.watermarkStyle == null)
+				options.watermarkStyle = {};
+			options.text = options.text || "";
+			if ( typeof options.textStyle !== "object" || options.textStyle == null)
+				options.textStyle = {};
+
+			//创建水印，并转换canvas为图片保存到本地
+			imageFormat = options.target.substr(options.target.lastIndexOf(".") + 1) || "png";
+			oImg = document.createElement("img");
+			//创建图片
+			oImg.src = options.src;
+			oImg.onload = function() {
+				var oImgW = oImg.width;
+				var oImgH = oImg.height;
+				canvas.setAttribute("width", oImgW);
+				canvas.setAttribute("height", oImgH);
+				ctx.drawImage(oImg, 0, 0);
+				try {
+					options.text && self.addText(canvas, options.text, options.textStyle);
+					if (options.watermark) {
+						self.addWatermark(canvas, options.watermark, options.watermarkStyle, function(canvas) {
+							imageURL = self.execImageURL(canvas, imageFormat);
+							self.saveImageLocal(imageURL, options.target);
+						});
+					} else {
+						imageURL = self.execImageURL(canvas, imageFormat);
+						self.saveImageLocal(imageURL, options.target);
+					}
+				} catch(e) {
+					alert(e.name + e.message);
+				}
+			};
+		}
+
+	};
+
+	WaterMark.prototype.addText = function(canvas, text, textStyle) {
+		var cansW = canvas.getAttribute("width");
+		var cansH = canvas.getAttribute("height");
+		var ctx = canvas.getContext("2d");
+		var left = textStyle.left || 10;
+		var right = textStyle.right;
+		var top = textStyle.top;
+		var bottom = textStyle.bottom || 10;
+		if (!left) {
+			ctx.textAlign = "end";
+		}
+		if (!top) {
+			ctx.textBaseline = "bottom"
+		}
+		left = left || (cansW - right);
+		top = top || (cansH - bottom);
+		ctx.font = (textStyle.fontSize || 14) + "px " + (textStyle.fontFamily || "黑体");
+		ctx.fillStyle = textStyle.color || "black";
+		ctx.fillText(text, left, top);
+	};
+
+	WaterMark.prototype.addWatermark = function(canvas, watermark, watermarkStyle, callback) {
+		var cansW = canvas.getAttribute("width");
+		var cansH = canvas.getAttribute("height");
+		var ctx = canvas.getContext("2d");
+		var left = watermarkStyle.left;
+		var top = watermarkStyle.top;
+		var width = watermarkStyle.width;
+		var height = watermarkStyle.height;
+
+		var watermarkImg = document.createElement("img");
+		watermarkImg.src = watermark;
+		watermarkImg.onload = function() {
+			var watermarkImgW = watermarkImg.width;
+			var watermarkImgH = watermarkImg.height;
+			watermarkWHRatio = watermarkImgW / watermarkImgH;
+			if (!height && width) {
+				height = width / watermarkWHRatio;
+			}
+			if (!width && height) {
+				width = height * watermarkWHRatio;
+			}
+			if (!width || !height) {
+				width = watermarkImgW;
+				height = watermarkImgH;
+			}
+			left = left || ("right" in watermarkStyle) && (cansW - width - watermarkStyle.right) || (cansW - width - 10);
+			top = top || (("bottom" in watermarkStyle) && (cansH - height - watermarkStyle.bottom)) || (cansH - height - 10);
+			ctx.drawImage(watermarkImg, left, top, width, height);
+			( typeof callback == "function") && callback(canvas);
+		};
+	};
+
+	WaterMark.prototype.execImageURL = function(canvas, imageFormat) {
+		imageFormat = "image/" + imageFormat;
+		var imageURL = canvas.toDataURL(imageFormat);
+		return imageURL;
+	}
+
+	WaterMark.prototype.saveImageLocal = function(imageURL, target) {
+		var aLink = document.createElement("a");
+		var evt = document.createEvent("HTMLEvents");
+		evt.initEvent("click", false, false);
+		//initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+		aLink.download = target;
+		aLink.href = imageURL;
+		aLink.dispatchEvent(evt);
+	};
+
+	var webWaterMark = null;
+
+	var graphics = {
+		watermark : function(json) {
+			/* json for example
+			 {
+			 src: "img/rose.jpg", //原图路径
+			 target: "xy.png",//加水印后的图片名称
+			 watermark: "img/app.png",//水印图片路径
+			 watermarkStyle: {"width": 40, "height": 40, "right": 20, "bottom": 10},//水印图片样式，可选参数 ，默认右下方10px处，支持top、bottom、left、right、width、height
+			 text: "这是水印文字内容",//水印文字内容
+			 textStyle: {"fontSize": 20, "fontFamily": "宋体", "color": "red", "left": 20, "bottom": 10} //水印文字样式，可选参数，默认左下方10px处，支持fontFamily, fontSize, color,top、bottom、left、right、width、height
+			 }
+			 */
+			try {
+				if (!( webWaterMark instanceof WaterMark)) {
+					webWaterMark = new waterMark();
+				}
+				webWaterMark.watermark(json);
+			} catch(e) {
+				console.warn(e.name + ":" + e.message);
+			}
+
+		},
+	};
+	window.UM.Graphics = graphics;
+	return window.UM.Graphics;
+})(window);
+
