@@ -818,9 +818,9 @@
             ls.clear();
         }
     };
-    u.fixIos7Bar = function(el){
+    u.fixStatusBar = function(el){
         if(!u.isElement(el)){
-            alert('$summer.fixIos7Bar Function need el param, el param must be DOM Element');
+            alert('$summer.fixStatusBar Function need el param, el param must be DOM Element');
 			return;
         }
         // var strDM = api.systemType;
@@ -833,15 +833,21 @@
         //         el.style.paddingTop = '20px';
         //     }
         // }
-		if($summer.os == "ios"){
-         	el.style.paddingTop = '20px';
-            /*
-	        $(el).find(".um-back, .um-header-right, .um-header-left").each(function(){
-	   			this.style.top = '20px';
-	  		});
-	  		*/
-			$(el).find(".um-back, .um-header-right, .um-header-left").css("top","20px");
-        }
+		if($summer.os == "ios" || $summer.os == "pc"){
+			$(el).children().css("top","20px");
+			var strSV = summer.systemVersion;
+            var numSV = parseInt(strSV,10);
+            var fullScreen = summer.fullScreen;
+            var statusBarAppearance = summer.statusBarAppearance;
+			
+			//if (numSV >= 7 && !fullScreen && statusBarAppearance) {
+			if (true) {
+				el.style.paddingTop = '20px';
+				$(el).children().css("top","20px");
+			}
+        }else{
+			
+		}
     };
     u.toast = function(title, text, time){
         // var opts = {};

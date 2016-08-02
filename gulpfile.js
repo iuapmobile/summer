@@ -50,7 +50,7 @@ gulp.task('init',function(){
 gulp.task('default',function(){
 	gulp.watch('dev/js/Frameworks/**/*.js', ['init','iuapmobile.frameworks.core']);
 		
-    gulp.watch('dev/js/summer.js', ['init','summer']);
+    gulp.watch('dev/js/summer.*.js', ['init','summer']);
 	
 	gulp.watch('dev/js/plugins/*.js', ['init','iuapmobile.frameworks.ui']);
 	
@@ -99,16 +99,25 @@ gulp.task('umcss',function(){
 gulp.task('summer',function(){
 	
 	//1 update github
-	gulp.src('dev/js/summer.js').pipe(gulp.dest('dist/js/'));
+	var srcFiles = [];//需合并的源文件数组
+	srcFiles.push("dev/js/summer.cordova.js");//1
+	srcFiles.push("dev/js/summer.util.js");//2
+	srcFiles.push("dev/js/summer.dom.js");//3
+	srcFiles.push("dev/js/summer.native.js");//4
+	srcFiles.push("dev/js/summer.bridge.js");//5
+
+	var fileName =  "summer";//目标文件名
+	var distPath = 'dist/js/';//目标文件夹
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
 	console.log('summer.js update github dist end');
-
+	
 	//2 update gityy
-
 	var path1 = SYSPATH.git["tpl_ump_js"];
 	var path2 = SYSPATH.git["tpl_ratchet_js"];
 	var path3 = SYSPATH.git["tpl_files_js"];
 	
-	gulp.src('dev/js/summer.js').pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
+	gulp.src(distPath + fileName+'.js').pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
 	console.log('summer.js is updated to gityy end');
 	
 	//3 update to studio
@@ -118,7 +127,7 @@ gulp.task('summer',function(){
 	
 	//4
 	var wzjc = SYSPATH.wzjc["scripts"];
-	gulp.src('dev/js/summer.js').pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
+	gulp.src(distPath + fileName+'.js').pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
 	console.log('summer.js is updated to studio end');
 });
 

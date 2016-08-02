@@ -2,7 +2,7 @@
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com go
- * Version: 3.0.20160726
+ * Version: 3.0.0.20160802
  */
 
 ;(function(w){
@@ -107,7 +107,6 @@
    
    w.$summer.require = w.summer.require;
 })(window);
-
 
 // JavaScript Base Type Extra API
 ;(function(){
@@ -348,6 +347,7 @@
 
     window.$summer = window.$summer || u;
 })();
+
 
 //HTML DOM API by gct
 ;(function(window){
@@ -818,9 +818,9 @@
             ls.clear();
         }
     };
-    u.fixIos7Bar = function(el){
+    u.fixStatusBar = function(el){
         if(!u.isElement(el)){
-            alert('$summer.fixIos7Bar Function need el param, el param must be DOM Element');
+            alert('$summer.fixStatusBar Function need el param, el param must be DOM Element');
 			return;
         }
         // var strDM = api.systemType;
@@ -833,15 +833,21 @@
         //         el.style.paddingTop = '20px';
         //     }
         // }
-		if($summer.os == "ios"){
-         	el.style.paddingTop = '20px';
-            /*
-	        $(el).find(".um-back, .um-header-right, .um-header-left").each(function(){
-	   			this.style.top = '20px';
-	  		});
-	  		*/
-			$(el).find(".um-back, .um-header-right, .um-header-left").css("top","20px");
-        }
+		if($summer.os == "ios" || $summer.os == "pc"){
+			$(el).children().css("top","20px");
+			var strSV = summer.systemVersion;
+            var numSV = parseInt(strSV,10);
+            var fullScreen = summer.fullScreen;
+            var statusBarAppearance = summer.statusBarAppearance;
+			
+			//if (numSV >= 7 && !fullScreen && statusBarAppearance) {
+			if (true) {
+				el.style.paddingTop = '20px';
+				$(el).children().css("top","20px");
+			}
+        }else{
+			
+		}
     };
     u.toast = function(title, text, time){
         // var opts = {};
@@ -935,31 +941,12 @@
     window.$api = window.$summer;
 })(window);
 
-//UAP Mobile Service
-;(function(window){
-	/*
-    var r = {};
-    r.eval = function(controllerid, js, ctx, sender, args, uicontrols){
-        //$router.eval("","getData()","","btn0",{a:1},{});
-        try{
-            var fnName = js.indexOf("(") > 0 ? js.substring(0, js.indexOf("(")) : js;
-            
-            var curInst = (controllerid && controllerid != ".") ? eval(controllerid) : window;
-            fn = eval(controllerid ? controllerid + "." + fnName : fnName);
-            fn.apply(curInst, [sender, args]);   
-                            
-        }catch(e){
-            alert(e.stack);
-        }    
-    };
-
-    window.$router = r;
-	*/
-})(window);
-
-
 //summer API
 +function(w,s){
+	if(!s){
+		s = {};
+		w.summer = s;
+	}
     s.window = {
         openFrame : function(json, successFn, errFn){
             json["animation"] = json["animation"] || {};
@@ -1144,6 +1131,10 @@
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
 	};
+}(window,summer);
+
+//summerBridge serivce 3.0.0.20160802
++function(w,s){
 	//1、兼容Android
     if(w.adrinvoker) alert(w.adrinvoker);
     var adrinvoker = {};
@@ -1197,10 +1188,5 @@
 		alert("UM_callNativeServiceNoraml is exist! fatal error!");
 		alert(UM_callNativeServiceNoraml);
 	}
-	 w.UM_callNativeServiceNoraml = UM_callNativeServiceNoraml;			
+	w.UM_callNativeServiceNoraml = UM_callNativeServiceNoraml;			
 }(window,summer);
-//alert(adrinvoker.call)
-
-$summer.log = function(nn){
-    $summer.byId("log").innerHTML =nn;
-}
