@@ -197,7 +197,7 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 			}			
 		}else if(typeof jsonArgs == "object"){
 			if(jsonArgs["callback"] && $isFunction(jsonArgs["callback"])){
-				// callback:function(){}
+				//1、 callback:function(){}
 				var newCallBackScript = "fun" + uuid(8, 16) + "()";//anonymous method
 				while($__cbm[newCallBackScript]){
 					newCallBackScript =  "fun" + uuid(8, 16) + "()";//anonymous method
@@ -227,7 +227,7 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 				}
 				jsonArgs["callback"] = newCallBackScript;				
 			}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string"){
-				// callback:"mycallback()"
+				//2、 callback:"mycallback()"
 				var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
 				var callbackFn = eval(cbName);
 				if(typeof callbackFn != "function"){
@@ -259,7 +259,8 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 				}
 				jsonArgs["callback"] = newCallBackScript;
 			}
-
+			
+			this.callBackProxy(jsonArgs , "error");
 		
 			serviceparams = jsonToString(jsonArgs);
 			if(typeof serviceparams == "object"){
@@ -308,6 +309,72 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 			info = "调用$service.call(\""+serviceType+"\", jsonArgs)时发生异常,请检查!";
 		$console.log(info);
 		alert(info+", 更多请查看console日志;\n错误堆栈信息为:\n" + e.stack);
+	}
+}
+
+CommonNativeCallService.prototype.callBackProxy = function(jsonArgs, callback_KEY){
+	if(jsonArgs[callback_KEY] && $isFunction(jsonArgs[callback_KEY])){
+		// callback:function(){}
+		var newCallBackFnName = callback_KEY + uuid(8, 16);//anonymous method
+		while($__cbm[newCallBackFnName]){
+			newCallBackFnName =  callback_KEY + uuid(8, 16);//anonymous method
+		}
+		$__cbm[newCallBackFnName] = jsonArgs[callback_KEY];//callback can be global or local, so define a reference function in $__cbm
+		
+		//
+		window[newCallBackFnName] = function (sender, args){
+			try{
+				//alert(typeof sender);
+				//alert(typeof args);
+				//$alert(sender);
+				//$alert(args);
+				if(args == undefined)
+					args = sender;
+				var _func = jsonArgs[callback_KEY];
+				_func(sender, args);	
+			}catch(e){
+				alert(e);
+			}finally{
+				delete $__cbm[newCallBackFnName];
+				delete window[newCallBackFnName];
+				//alert("del ok"); 
+				//alert(typeof $__cbm[newCallBackScript]);
+				//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+			}				
+		}
+		jsonArgs[callback_KEY] = newCallBackFnName + "()";				
+	}else if(jsonArgs[callback_KEY] && typeof(jsonArgs[callback_KEY]) == "string"){
+		// callback:"mycallback()"
+		var cbName = jsonArgs[callback_KEY].substring(0, jsonArgs[callback_KEY].indexOf("("));
+		var callbackFn = eval(cbName);
+		if(typeof callbackFn != "function"){
+			alert(cbName + " is not a global function, callback function must be a global function!");
+			return;
+		}
+		
+		var newCallBackFnName = callback_KEY + uuid(8, 16);//anonymous method
+		while(window[newCallBackFnName]){
+			newCallBackFnName =  callback_KEY + uuid(8, 16);//anonymous method
+		}
+		//
+		window[newCallBackFnName] = function (sender, args){
+			try{
+				//alert(typeof sender);
+				//alert(typeof args);
+				//$alert(sender);
+				//$alert(args);
+				if(args == undefined)
+					args = sender;
+				callbackFn(sender, args);	
+			}catch(e){
+				alert(e);
+			}finally{
+				delete window[newCallBackFnName];
+				//alert("del ok");
+				//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+			}				
+		}
+		jsonArgs[callback_KEY] = newCallBackFnName + "()";
 	}
 }
 

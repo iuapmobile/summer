@@ -199,10 +199,11 @@ gulp.task('iuapmobile.frameworks.core',function(){
 	
 	var fileName =  "iuapmobile.frameworks.core";//目标文件名
 	var distPath = 'dist/js/Frameworks/';//目标文件夹
+	
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
 	console.log('iuapmobile.frameworks.core.js build to github dist......end');
-	
+
 	//2 update git.yonyou.com
 	var path11 = SYSPATH.git["tpl_ump_js_fw"];
 	var path3 = SYSPATH.git["tpl_files_js"];
