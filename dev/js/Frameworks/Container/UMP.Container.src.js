@@ -207,10 +207,12 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 				//
 				window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
 					try{
-						alert(typeof sender);
-						alert(typeof args);
-						$alert(sender);
-						$alert(args);
+						//alert(typeof sender);
+						//alert(typeof args);
+						//$alert(sender);
+						//$alert(args);
+						if(args == undefined)
+							args = sender;
 						var _func = $__cbm[newCallBackScript];
 						_func(sender, args);	
 					}catch(e){
@@ -218,9 +220,9 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 					}finally{
 						delete $__cbm[newCallBackScript];
 						delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
-						alert("del ok");
-						alert(typeof $__cbm[newCallBackScript]);
-						alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+						//alert("del ok");
+						//alert(typeof $__cbm[newCallBackScript]);
+						//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
 					}				
 				}
 				jsonArgs["callback"] = newCallBackScript;				
@@ -240,17 +242,19 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 				//
 				window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
 					try{
-						alert(typeof sender);
-						alert(typeof args);
-						$alert(sender);
-						$alert(args);
+						//alert(typeof sender);
+						//alert(typeof args);
+						//$alert(sender);
+						//$alert(args);
+						if(args == undefined)
+							args = sender;
 						callbackFn(sender, args);	
 					}catch(e){
 						alert(e);
 					}finally{
 						delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
-						alert("del ok");
-						alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+						//alert("del ok");
+						//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
 					}				
 				}
 				jsonArgs["callback"] = newCallBackScript;
