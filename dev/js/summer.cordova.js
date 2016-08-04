@@ -2,7 +2,7 @@
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com go
- * Version: 3.0.0.20160804
+ * Version: 3.0.0.20160805
  */
 ;(function(w){
     w.$summer = {};

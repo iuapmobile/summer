@@ -2,7 +2,7 @@
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com go
- * Version: 3.0.0.20160804
+ * Version: 3.0.0.20160805
  */
 ;(function(w){
     w.$summer = {};
@@ -1154,7 +1154,7 @@
 			alert("执行"+srvName+"完毕\n参数是："+strJson);
 			return;
 		}
-		if(summerBridge){
+		if(typeof summerBridge != "undefined"){
 			return summerBridge.callSync(srvName,strJson);
 		}else{
 			alert("summerBridge is not defined by native successfully!");

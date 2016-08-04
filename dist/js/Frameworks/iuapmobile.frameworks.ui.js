@@ -1,5 +1,9 @@
-
-/*-----20160706--xx-*/
+/*
+ * Summer UI JavaScript Library
+ * Copyright (c) 2016 yonyou.com
+ * Author: gct@yonyou.com
+ * Version: 3.0.0.20160805
+ */ 
 var UM = UM || {};
 UM.UI = UM.UI || {};
 

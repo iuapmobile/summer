@@ -20,7 +20,7 @@
 			alert("执行"+srvName+"完毕\n参数是："+strJson);
 			return;
 		}
-		if(summerBridge){
+		if(typeof summerBridge != "undefined"){
 			return summerBridge.callSync(srvName,strJson);
 		}else{
 			alert("summerBridge is not defined by native successfully!");

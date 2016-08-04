@@ -53,7 +53,9 @@ gulp.task('default',function(){
     gulp.watch('dev/js/summer.*.js', ['init','summer']);
 	
 	gulp.watch('dev/js/plugins/*.js', ['init','iuapmobile.frameworks.ui']);
-	
+
+	gulp.watch('dev/js/Frameworks/UM.Listview.js', ['init','iuapmobile.frameworks.listview']);
+
 	//监听umcss
 	gulp.watch('dev/css/iuapmobile.um.css', ['init','umcss']);
 	
@@ -111,14 +113,14 @@ gulp.task('summer',function(){
 	//var distPath = 'test/**/**/css';
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
-	console.log('summer.js update github dist/js/ end at' + (new Date()).toLocaleString());
+	console.log('summer.js update github dist/js/ end at ' + (new Date()).toLocaleString());
 	
 	//2 update gityy
 	var path1 = SYSPATH.git["tpl_ump_js"];
 	var path2 = SYSPATH.git["tpl_ratchet_js"];
 	var path3 = SYSPATH.git["tpl_files_js"];
 	
-	gulp.src(distPath + fileName+'.js').pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
 	console.log('summer.js is updated to gityy end');
 	
 	//3 update to studio
@@ -128,7 +130,7 @@ gulp.task('summer',function(){
 	
 	//4
 	var wzjc = SYSPATH.wzjc["scripts"];
-	gulp.src(distPath + fileName+'.js').pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
 	console.log('summer.js is updated to studio end');
 });
 
@@ -147,17 +149,50 @@ gulp.task('iuapmobile.frameworks.ui',function(){
 	var path3 = SYSPATH.git["tpl_files_js"];
 
 
-	gulp.src(distPath+fileName+".js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
-	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
 	console.log('iuapmobile.frameworks.ui.js update to gityy end');
 
 	//3 update to studio
 	var studio11  = SYSPATH.studio["tpl_ump_js_fw"];
 	var studio3  = SYSPATH.studio["tpl_files_js"];
 	
-	gulp.src(distPath+fileName+".js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
-	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
 	console.log('iuapmobile.frameworks.ui.js update to studio end');
+});
+
+gulp.task('iuapmobile.frameworks.listview',function(){
+	
+	//1 update github
+	var srcFiles = ["dev/js/Frameworks/UM.Listview.js"];
+	var fileName =  "iuapmobile.frameworks.listview";
+	var distPath = 'dist/js/Frameworks/';
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
+	console.log('iuapmobile.frameworks.listview.js update to '+distPath+' at ' + (new Date()).toLocaleString());
+
+	//2 update gityy
+	var path11 = SYSPATH.git["tpl_ump_js_fw"];
+	var path3 = SYSPATH.git["tpl_files_js"];
+
+
+	            //gulp.src(distPath+fileName+".js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	            //gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	console.log('iuapmobile.frameworks.listview.js update to ' + path11 + ' at ' + (new Date()).toLocaleString());
+	console.log('iuapmobile.frameworks.listview.js update to ' + path3 + ' at ' + (new Date()).toLocaleString());
+
+	//3 update to studio
+	var studio11  = SYSPATH.studio["tpl_ump_js_fw"];
+	var studio3  = SYSPATH.studio["tpl_files_js"];
+	
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	console.log('iuapmobile.frameworks.listview.js update to ' + studio11 + ' at ' + (new Date()).toLocaleString());
+	console.log('iuapmobile.frameworks.listview.js update to ' + studio3 + ' at ' + (new Date()).toLocaleString());
+
 });
 
 
@@ -208,14 +243,14 @@ gulp.task('iuapmobile.frameworks.core',function(){
 	//2 update git.yonyou.com
 	var path11 = SYSPATH.git["tpl_ump_js_fw"];
 	var path3 = SYSPATH.git["tpl_files_js"];
-	gulp.src(distPath+fileName+".js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
-	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	    gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(gulp.dest(path11)).pipe(gulp.dest(path3));
 	console.log('iuapmobile.frameworks.core.js update to git.yonyou.com......end');
 
 	//3 update to studio
 	var studio11  = SYSPATH.studio["tpl_ump_js_fw"];
 	var studio3  = SYSPATH.studio["tpl_files_js"];
-	gulp.src(distPath+fileName+".js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
-	gulp.src(distPath+fileName+".min.js").pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	     gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
+	gulp.src(srcFiles).pipe(concat(fileName+'..min.js')).pipe(gulp.dest(studio11)).pipe(gulp.dest(studio3));
 	console.log('iuapmobile.frameworks.core.js update to studio......end');
 });
