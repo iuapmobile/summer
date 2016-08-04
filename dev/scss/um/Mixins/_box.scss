@@ -1,3 +1,19 @@
+@mixin flex($x:null,$y:null) {
+	display:-webkit-box;
+	display:box;
+	-webkit-box-align: $y;
+	box-align: $y;
+	-webkit-box-pack: $x;
+	box-pack: $x;
+
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: $y;
+	align-items: $y;
+	-webkit-justify-content: $x;
+	justify-content: $x;
+}
+//[obsoleted]
 @mixin flex-align($x:null,$y:null) {
 	display:-webkit-box;
 	display:box;
@@ -40,7 +56,7 @@
 }
 
 @mixin flex-align-justify {
-	@include flex-align;
+	@include flex;
 	-webkit-box-pack: justify;
 	box-pack: justify;
 	

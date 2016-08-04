@@ -1,4 +1,5 @@
 @charset "utf-8";
+/*** from scss/um/Common/base.scss ***/
 /*    v3.0.20160726   */
 // normalize css
 // p,button,blockquote
@@ -79,7 +80,7 @@ a{color:$um-theme-color;text-decoration:none;cursor: pointer;}
     }
 }
 
-/* margin */
+/* margin and padding */
 @for $i from 5 through 40{
     @if($i % 5 == 0){
         .m#{$i} {margin:$i + 0px;}
@@ -87,6 +88,7 @@ a{color:$um-theme-color;text-decoration:none;cursor: pointer;}
         .mr#{$i} {margin-right:$i + 0px;}
         .mb#{$i} {margin-bottom:$i + 0px;}
         .ml#{$i} {margin-left:$i + 0px;}
+		
         .p#{$i} {padding:$i + 0px;}
         .pt#{$i} {padding-top:$i + 0px;}
         .pr#{$i} {padding-right:$i + 0px;}
@@ -95,20 +97,6 @@ a{color:$um-theme-color;text-decoration:none;cursor: pointer;}
   }
 }
 
-/* 兼容上一版
-.mt50{margin-top:50px}
-.mt100{margin-top:100px}
-.mb50{margin-bottom:50px}
-.mb100{margin-bottom:100px}
-.ml50{margin-left:50px}
-.ml100{margin-left:100px}
-.mr50{margin-right:50px}
-.mr100{margin-right:100px}
-.pt50{padding-top:50px}
-.pb50{padding-bottom:50px}
-.pl50{padding-left:50px}
-.pr50{padding-right:50px}
- */
 /* overflow 溢出处理 */
 .oh{overflow:hidden}
 .oa{overflow:auto}

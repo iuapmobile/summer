@@ -108,9 +108,10 @@ gulp.task('summer',function(){
 
 	var fileName =  "summer";//目标文件名
 	var distPath = 'dist/js/';//目标文件夹
+	//var distPath = 'test/**/**/css';
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
-	console.log('summer.js update github dist end');
+	console.log('summer.js update github dist/js/ end at' + (new Date()).toLocaleString());
 	
 	//2 update gityy
 	var path1 = SYSPATH.git["tpl_ump_js"];
@@ -140,7 +141,7 @@ gulp.task('iuapmobile.frameworks.ui',function(){
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
 	console.log('iuapmobile.frameworks.ui.js update github dist end');
-	
+
 	//2 update gityy
 	var path11 = SYSPATH.git["tpl_ump_js_fw"];
 	var path3 = SYSPATH.git["tpl_files_js"];
