@@ -5,7 +5,8 @@
 	z-index: z("base", "footer");
 	text-align: center;
 	// @include line-img(top);
-	background-color: $gray-lighter;
+	background-color: $um-footer-bgColor;
+	border-top: 1px solid $gray-lighter;
 }
 .um-footer-fixed {
 	position: absolute;

@@ -6,8 +6,8 @@
 	box-flex: 1;
 	-webkit-flex: 1;
 	flex: 1;
-	margin-left: -15px;
-	margin-right: -15px;
+	/*margin-left: -15px;*/
+	/*margin-right: -15px;*/
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 }

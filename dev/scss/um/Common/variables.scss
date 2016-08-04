@@ -24,6 +24,7 @@ $gray-dark:              lighten($dark, 15.5%) !default;   // #282828
 $gray:                   lighten($dark, 33.5%) !default; // #555
 $gray-light:             lighten($dark, 46.7%) !default; // #777
 $gray-lighter:           lighten($dark, 93.5%) !default; // #eee
+$um-footer-bgColor:      lighten($dark, 97.5%) !default; // #f9f9f9
 
 $brand-primary:         #34aadc !default;//darken(#428bca, 6.5%) !default; // #337ab7
 $brand-success:         #4cd964 !default;//#5cb85c !default;
