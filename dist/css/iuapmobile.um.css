@@ -3076,7 +3076,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
 .btn, .um-btn {
   position: relative;
   display: block;
-  /*width: 100%;*/
+  width: 100%;
   font-family: inherit;
   font-weight: normal;
   text-align: center;
