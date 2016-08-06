@@ -1004,9 +1004,16 @@
                 return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
         },
         closeWin : function(json, successFn, errFn){
-			if(s.canrequire())
+			if(s.canrequire()){
+				//support closeWin('xxx') and closeWin({id:'xxx'})
+				if(typeof json == "string"){
+					json = {"id" : json};
+				}else if(typeof json == "undefined"){
+					json = {};
+				}				
 				return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json, successFn, errFn);
-        },
+			}
+		},
         setFrameAttr : function(json, successFn, errFn){
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').setFrameAttr(json, successFn, errFn);
