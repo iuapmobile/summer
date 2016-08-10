@@ -755,129 +755,7 @@
    
     /******************** Native API BEGIN ********************/
 	//20160810
-	var umStorage = function(type){
-		type = type || "localStorage";
-		if(type == "localStorage"){
-			if(!window.localStorage){
-		        alert('your device do not support the localStorage');
-				return;
-		    }
-			return window.localStorage;
-		}else if(type == "sessionStorage"){
-			if(!window.sessionStorage){
-		        alert('your device do not support the sessionStorage');
-				return;
-		    }
-			return window.sessionStorage;
-		}else if(type == "application"){
-			return {
-				setItem : function(key, value){
-					var json = {
-						key: key,
-						value: value
-					};
-					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
-				},
-				getItem : function(key){
-					var json = {
-						key: key
-					};
-					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
-				}				
-			};
-		}else if(type == "configure"){
-			return {
-				setItem : function(key, value){
-					var json = {
-						key: key,
-						value: typeof value == "string" ? value : JSON.stringify(value)
-					};
-					return summerBridge.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
-				},
-				getItem : function(key){
-					var json = {
-						key: key
-					};
-					return summerBridge.callSync("SummerStorage.readConfigure", JSON.stringify(json));
-				}				
-			};
-		}else if(type == "window"){
-			return {
-				setItem : function(key, value){
-					var json = {
-						key: key,
-						value: typeof value == "string" ? value : JSON.stringify(value)
-					};
-					return summerBridge.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
-				},
-				getItem : function(key){
-					var json = {
-						key: key
-					};
-					return summerBridge.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
-				}				
-			};
-		}
-    };
-	u.setStorage = function(key, value, storageType){
-        if(arguments.length === 2){
-            var v = value;
-            if(typeof v == 'object'){
-                v = JSON.stringify(v);
-                v = 'obj-'+ v;
-            }else{
-                v = 'str-'+ v;
-            }
-            var ls = umStorage(storageType);
-            if(ls){
-                ls.setItem(key, v);
-            }
-        }
-    };
-	u.setAppStorage = function(key, value){
-        return this.setStorage(key, value, "application");
-    };
-	u.setConfigureStorage = function(key, value){
-        return this.setStorage(key, value, "configure");
-    };
-	u.setWindowStorage = function(key, value){
-        return this.setStorage(key, value, "window");
-    };
 	
-    u.getStorage = function(key, storageType){
-        var ls = umStorage(storageType);
-        if(ls){
-            var v = ls.getItem(key);
-            if(!v){return;}
-            if(v.indexOf('obj-') === 0){
-                v = v.slice(4);
-                return JSON.parse(v);
-            }else if(v.indexOf('str-') === 0){
-                return v.slice(4);
-            }
-        }
-    };
-	u.getAppStorage = function(key){
-        return this.getStorage("application");
-    };
-	u.getConfigureStorage = function(key){
-        return this.getStorage("configure");
-    };
-	u.getWindowStorage = function(key){
-        return this.getStorage("window");
-    };
-    u.rmStorage = function(key){
-        var ls = umStorage();
-        if(ls && key){
-            ls.removeItem(key);
-        }
-    };
-    u.clearStorage = function(){
-        var ls = umStorage();
-        if(ls){
-            ls.clear();
-        }
-    };
     u.fixStatusBar = function(el){
         if(!u.isElement(el)){
             alert('$summer.fixStatusBar Function need el param, el param must be DOM Element');
@@ -1172,23 +1050,127 @@
             return s.cordova.require('summer-plugin-frame.XService').clearStorage(json, successFn, errFn);
 	};
 	
-	//应用级Storage
-	s.setAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').setAppStorage(json, successFn, errFn);
-	};
-	s.getAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').getAppStorage(json, successFn, errFn);
-	};
-	s.rmAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').rmAppStorage(json, successFn, errFn);
-	};
-	s.clearAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').clearAppStorage(json, successFn, errFn);
-	};
+	var umStorage = function(type){
+		type = type || "localStorage";
+		if(type == "localStorage"){
+			if(!window.localStorage){
+		        alert('your device do not support the localStorage');
+				return;
+		    }
+			return window.localStorage;
+		}else if(type == "sessionStorage"){
+			if(!window.sessionStorage){
+		        alert('your device do not support the sessionStorage');
+				return;
+		    }
+			return window.sessionStorage;
+		}else if(type == "application"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: value
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "configure"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readConfigure", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "window"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
+				}				
+			};
+		}
+    };
+	s.setStorage = function(key, value, storageType){
+		var v = value;
+		if(typeof v == 'object'){
+			v = JSON.stringify(v);
+			v = 'obj-'+ v;
+		}else{
+			v = 'str-'+ v;
+		}
+		var ls = umStorage(storageType);
+		if(ls){
+			ls.setItem(key, v);
+		}
+    };
+	s.setAppStorage = function(key, value){
+        return this.setStorage(key, value, "application");
+    };
+	s.setConfigureStorage = function(key, value){
+        return this.setStorage(key, value, "configure");
+    };
+	s.setWindowStorage = function(key, value){
+        return this.setStorage(key, value, "window");
+    };
+	
+    s.getStorage = function(key, storageType){
+        var ls = umStorage(storageType);
+        if(ls){
+            var v = ls.getItem(key);
+            if(!v){return;}
+            if(v.indexOf('obj-') === 0){
+                v = v.slice(4);
+                return JSON.parse(v);
+            }else if(v.indexOf('str-') === 0){
+                return v.slice(4);
+            }
+        }
+    };
+	s.getAppStorage = function(key){
+        return this.getStorage("application");
+    };
+	s.getConfigureStorage = function(key){
+        return this.getStorage("configure");
+    };
+	s.getWindowStorage = function(key){
+        return this.getStorage("window");
+    };
+    s.rmStorage = function(key){
+        var ls = umStorage();
+        if(ls && key){
+            ls.removeItem(key);
+        }
+    };
+    s.clearStorage = function(){
+        var ls = umStorage();
+        if(ls){
+            ls.clear();
+        }
+    };
 	
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
 		if(s.canrequire() || true){
