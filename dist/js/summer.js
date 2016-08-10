@@ -754,6 +754,7 @@
 
    
     /******************** Native API BEGIN ********************/
+	//20160810
 	var umStorage = function(type){
 		type = type || "localStorage";
 		if(type == "localStorage"){
@@ -768,16 +769,57 @@
 				return;
 		    }
 			return window.sessionStorage;
-		}else{
-			return null;
-			/*
-			if($summer.os == "android"){
-				ls = summer.localStorage();
-			}
-			*/
+		}else if(type == "application"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: value
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "configure"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readConfigure", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "window"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
+				}				
+			};
 		}
     };
-	u.setStorage = function(key, value){
+	u.setStorage = function(key, value, storageType){
         if(arguments.length === 2){
             var v = value;
             if(typeof v == 'object'){
@@ -786,14 +828,24 @@
             }else{
                 v = 'str-'+ v;
             }
-            var ls = umStorage();
+            var ls = umStorage(storageType);
             if(ls){
                 ls.setItem(key, v);
             }
         }
     };
-    u.getStorage = function(key){
-        var ls = umStorage();
+	u.setAppStorage = function(key, value){
+        return this.setStorage(key, value, "application");
+    };
+	u.setConfigureStorage = function(key, value){
+        return this.setStorage(key, value, "configure");
+    };
+	u.setWindowStorage = function(key, value){
+        return this.setStorage(key, value, "window");
+    };
+	
+    u.getStorage = function(key, storageType){
+        var ls = umStorage(storageType);
         if(ls){
             var v = ls.getItem(key);
             if(!v){return;}
@@ -804,6 +856,15 @@
                 return v.slice(4);
             }
         }
+    };
+	u.getAppStorage = function(key){
+        return this.getStorage("application");
+    };
+	u.getConfigureStorage = function(key){
+        return this.getStorage("configure");
+    };
+	u.getWindowStorage = function(key){
+        return this.getStorage("window");
     };
     u.rmStorage = function(key){
         var ls = umStorage();
@@ -1014,6 +1075,17 @@
 				return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json, successFn, errFn);
 			}
 		},
+		getSysInfo : function(json, successFn, errFn){
+			if(s.canrequire()){
+				//support closeWin('xxx') and closeWin({id:'xxx'})
+				if(typeof json == "string"){
+					json = {"id" : json};
+				}else if(typeof json == "undefined"){
+					json = {};
+				}				
+				return s.cordova.require('summer-plugin-frame.XFrame').getSysInfo(json, successFn, errFn);
+			}
+		},
         setFrameAttr : function(json, successFn, errFn){
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').setFrameAttr(json, successFn, errFn);
@@ -1083,7 +1155,7 @@
     };
 	
 	//持久化本地存储
-	s.setStorage = function(json, successFn, errFn){
+	s.setStorage = function(json, successFn, errFn) {
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XService').setStorage(json, successFn, errFn);
 	};
@@ -1178,7 +1250,7 @@
 		}else{}
 	}
 	if(typeof UM_callNativeService == "undefined"){
-		var UM_callNativeService = function(serviceType,strParams){//同步调用
+		var UM_callNativeService = function(serviceType,strParams){//同步调用，和安卓统一接口
 			return adrinvoker.call2(serviceType,strParams);
 		}
 	}else{
@@ -1186,8 +1258,9 @@
 		alert(UM_callNativeService);
 	}
 	w.UM_callNativeService = UM_callNativeService;
+	
 	if(typeof UM_callNativeServiceNoraml == "undefined"){
-		UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用
+		UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用，和安卓统一接口
 			return adrinvoker.call(serviceType,strParams);
 		}
 	}else{

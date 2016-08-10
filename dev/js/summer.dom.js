@@ -405,6 +405,7 @@
 
    
     /******************** Native API BEGIN ********************/
+	//20160810
 	var umStorage = function(type){
 		type = type || "localStorage";
 		if(type == "localStorage"){
@@ -419,16 +420,57 @@
 				return;
 		    }
 			return window.sessionStorage;
-		}else{
-			return null;
-			/*
-			if($summer.os == "android"){
-				ls = summer.localStorage();
-			}
-			*/
+		}else if(type == "application"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: value
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "configure"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readConfigure", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "window"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
+				}				
+			};
 		}
     };
-	u.setStorage = function(key, value){
+	u.setStorage = function(key, value, storageType){
         if(arguments.length === 2){
             var v = value;
             if(typeof v == 'object'){
@@ -437,14 +479,24 @@
             }else{
                 v = 'str-'+ v;
             }
-            var ls = umStorage();
+            var ls = umStorage(storageType);
             if(ls){
                 ls.setItem(key, v);
             }
         }
     };
-    u.getStorage = function(key){
-        var ls = umStorage();
+	u.setAppStorage = function(key, value){
+        return this.setStorage(key, value, "application");
+    };
+	u.setConfigureStorage = function(key, value){
+        return this.setStorage(key, value, "configure");
+    };
+	u.setWindowStorage = function(key, value){
+        return this.setStorage(key, value, "window");
+    };
+	
+    u.getStorage = function(key, storageType){
+        var ls = umStorage(storageType);
         if(ls){
             var v = ls.getItem(key);
             if(!v){return;}
@@ -455,6 +507,15 @@
                 return v.slice(4);
             }
         }
+    };
+	u.getAppStorage = function(key){
+        return this.getStorage("application");
+    };
+	u.getConfigureStorage = function(key){
+        return this.getStorage("configure");
+    };
+	u.getWindowStorage = function(key){
+        return this.getStorage("window");
     };
     u.rmStorage = function(key){
         var ls = umStorage();

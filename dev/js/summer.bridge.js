@@ -37,7 +37,7 @@
 		}else{}
 	}
 	if(typeof UM_callNativeService == "undefined"){
-		var UM_callNativeService = function(serviceType,strParams){//同步调用
+		var UM_callNativeService = function(serviceType,strParams){//同步调用，和安卓统一接口
 			return adrinvoker.call2(serviceType,strParams);
 		}
 	}else{
@@ -45,8 +45,9 @@
 		alert(UM_callNativeService);
 	}
 	w.UM_callNativeService = UM_callNativeService;
+	
 	if(typeof UM_callNativeServiceNoraml == "undefined"){
-		UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用
+		UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用，和安卓统一接口
 			return adrinvoker.call(serviceType,strParams);
 		}
 	}else{

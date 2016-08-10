@@ -72,6 +72,17 @@
 				return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json, successFn, errFn);
 			}
 		},
+		getSysInfo : function(json, successFn, errFn){
+			if(s.canrequire()){
+				//support closeWin('xxx') and closeWin({id:'xxx'})
+				if(typeof json == "string"){
+					json = {"id" : json};
+				}else if(typeof json == "undefined"){
+					json = {};
+				}				
+				return s.cordova.require('summer-plugin-frame.XFrame').getSysInfo(json, successFn, errFn);
+			}
+		},
         setFrameAttr : function(json, successFn, errFn){
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').setFrameAttr(json, successFn, errFn);
@@ -141,7 +152,7 @@
     };
 	
 	//持久化本地存储
-	s.setStorage = function(json, successFn, errFn){
+	s.setStorage = function(json, successFn, errFn) {
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XService').setStorage(json, successFn, errFn);
 	};
