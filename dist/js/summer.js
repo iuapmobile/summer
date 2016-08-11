@@ -924,8 +924,11 @@
 				$summer.alert(json);
 				delete json["alert"];
 			}
-			if(s.canrequire())
-				return s.cordova.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
+			if(s.canrequire()){
+				return this.callCordova('summer-plugin-frame.XFrame','openFrame',json, successFn, errFn);
+				//return s.cordova.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
+			}
+				
 			//等价于return s.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
         },
         closeFrame : function(json, successFn, errFn){
@@ -939,8 +942,10 @@
 //                    json["url"] = "www/html/" + json["url"];
 //                }
 //            }
-			if(s.canrequire())
-                return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
+			if(s.canrequire()){
+				return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
+                //return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
+			}
         },
         closeWin : function(json, successFn, errFn){
 			if(s.canrequire()){
@@ -1028,8 +1033,17 @@
 			frameId:'yyy',
 			script:'do()'
 		}*/
-		if(s.canrequire())
-            return s.require('summer-plugin-frame.XFrame').execScript(json,null,null);
+		if(typeof json == "object"){
+			if(json.script){
+				json.script = "try{"+json.script+"}catch(e){alert(e)}";
+			}else{
+				alert("the parameter script of the execScript function is " + json.script);
+			}
+		}
+		if(s.canrequire()){
+            //return s.require('summer-plugin-frame.XFrame').execScript(json,null,null);
+			return this.callCordova('summer-plugin-frame.XFrame','execScript',json, null, null);
+		}
     };
 	
 	//持久化本地存储
@@ -1173,8 +1187,8 @@
     };
 	
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
-		if(s.canrequire() || true){
-            var plug = s.cordova.require(cordovaPlugName);
+		if(this.canrequire()){
+            var plug = this.cordova.require(cordovaPlugName);
 			if(plug[plugFnName]){
 				plug[plugFnName](json, successFn, errFn);
 			}else{
