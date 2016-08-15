@@ -83,6 +83,5 @@
 		}else{
 			console.log("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] executed!");
 		}
-	}
-	
+	}	
 }(window,summer);
