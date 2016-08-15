@@ -34,8 +34,8 @@
 }
 .um-content {
 /* position:absolute;top:44px;right:0;bottom:50px;left:0; */
-	padding-left: 15px;
-	padding-right: 15px;
+/*	padding-left: 15px;  */
+/*	padding-right: 15px;  */
 	overflow: auto;
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
@@ -55,22 +55,49 @@
 } 
 
 	/* 适用于frame    */
-	html {
+	/*
+	html1 {
 	    height:auto;
 	    overflow: auto;
 	}
+	*/
 	/* 适用于frame的um-page*/
-  	.um-page {
-    	position: static;/*不出现单页滚动*/
+	/*
+  	.um-page1 {
+    	position: static;
   	}
+	*/
 
 	/* 适用于win的html*/
-	html.um-win {
+	/*
+	html1.um-win1 {
 		height:100%;
 		overflow: hidden;
 	}
+	*/
 	/* 适用于win的um-page*/
-	.um-page.um-win {
+	/*
+	.um-page1.um-win1 {
 		position: absolute;
 	}
-	/*********gct dev**********************/
+	*/
+	
+.um-win {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: $um-body-bg-color;
+	@include flex-align;
+	@include flex-orient(v);
+}
+
+
+.um-frame {
+	
+	background-color: $um-body-bg-color;
+}
+
+
+/*********gct dev**********************/

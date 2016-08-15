@@ -1,5 +1,9 @@
-
-/*-----20160706--xx-*/
+/*
+ * Summer UI JavaScript Library
+ * Copyright (c) 2016 yonyou.com
+ * Author: gct@yonyou.com
+ * Version: 3.0.0.20160805
+ */ 
 var UM = UM || {};
 UM.UI = UM.UI || {};
 
@@ -642,16 +646,20 @@ $(function() {
         },
         _init: function() {
             var settings = this.settings;
+            //1、先去掉active
             var indexPage = $(".um-page.active").length;
             if(indexPage) {
                 indexPage = $(".um-page.active").eq(0).index();
                 $(".um-page.active").removeClass("active");
             }
+
+            //2、data缓存原class
             $.each($(".um-page"), function() {
                 var $this = $(this);
                 $this.data("originalClassList", $this.attr("class"));
             });
 
+            //3、重新设置active
             var act = $(sessionStorage.initActivePageId);
             if (act.length && act.hasClass("um-page")) {
                 act.addClass("active");
@@ -666,14 +674,16 @@ $(function() {
         },
         // 改变页面
         changePage: function(options) {
-            var options;
-            if(typeof options === "string") {
+            //1、获取setting
+            //var options;
+            if(typeof options === "string") {//#xxx形式
                 options = {
                     target: options
                 }
             }
             this.settings = $.extend(this.settings, options);
 
+            //2、
             this._updateCurrent();
             if (this._checkSettings()) {
                 this._pageAnimate();
@@ -711,11 +721,15 @@ $(function() {
         },
         _checkSettings: function() {
             var settings = this.settings;
+
+            //1、检查target
             var target = settings.target;
             var $target = $(target);
             if (!target || !$target || !$target.length || sessionStorage.initActivePageId === target) {
                 return false; // 防止如首页链接到首页的错误导航
             }
+
+            //2、检查当前page有无id
             if (!this.currId && this.currPage.hasClass("um-page")) {
                 alert("请填写当前页page id,否则无法返回该页");
                 return false;
@@ -725,25 +739,25 @@ $(function() {
         _pageAnimate: function() {
             var settings = this.settings,
                 _this = this,
-                target = $(settings.target),
+                target = $(settings["target"]),
                 currPage = this.currPage,
                 animEndEventName = _this.animEndEventName,
                 zi = target.index() < currPage.index();
 
-            target.trigger("beforePageIn");
-            currPage.trigger("beforePageOut");
+            target.trigger("beforePageIn");//先新入
+            currPage.trigger("beforePageOut");//后旧出
 
             // 设置较大的zindex,放置被覆盖
-            if(zi && !settings.isReverse) {
+            if(zi && !settings.isReverse) {//目标小于当前，并且不反向
                 target.addClass("um-page-forward");
             }
-            if(!zi && settings.isReverse) {
+            if(!zi && settings.isReverse) {//目标大于当前，并且反向
                 currPage.addClass("um-page-forward");
             }
 
-            target.addClass("active");
+            target.addClass("active");//目标页面设置为active
             // set in out Class
-            _this._setTransitionClass(settings.transition);
+            _this._setTransitionClass(settings["transition"]);
 
             if (currPage.length) {
                 currPage.addClass(_this.outClass).on(animEndEventName, function() {
@@ -955,6 +969,7 @@ $(function() {
             console.log(e);
         }
     })
+
     return UM.page;
 }))
 

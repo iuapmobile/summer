@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <application>
 	<app_start>index.html</app_start>
-	<app_name>yl</app_name>
-	<project_name>yl</project_name>
-	<package_name>com.yonyou.yl</package_name>
+	<app_name>elong</app_name>
+	<project_name>elong</project_name>
+	<package_name>com.yonyou.elong</package_name>
 	<frame_name>ump</frame_name>
 	<icon relativePath="css/themes/default/app">app</icon>
 	<target>android-15</target>

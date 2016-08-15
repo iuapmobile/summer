@@ -8,9 +8,43 @@
 .email { background-color: #0080c0; }
 .yeji { background-color: #008000; }
 
-.img { padding-bottom: 100%; background-size: 100%; display: block; position: relative; margin-top: 10px; margin-bottom: 10px; background-position: center; overflow: hidden; }
+.img {      background-size: 100%; display: block; position: relative; margin-top: 10px; margin-bottom: 10px; background-position: center; overflow: hidden; }
+.addImg .img {
+    height: 65px;}
 .img img { position: absolute; top: 0; left: 0; right: 0; width: 100%; }
 
 .um-back:before { border-color: #fff; }
 .um-nav-item { max-width: 100%; max-height: 480px; width: 100vw; height: calc(100vh - 45px); }
 .um-nav-item img { max-width: 100%; max-height: 480px; height: calc(100vh - 45px); }
+#changeIcon{padding-left: 0;}
+#changeIcon::before {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    right: 20px;
+    border: none;
+    color: #282828;
+    content: '';
+    background: url(../img/right-arr.png) center no-repeat;
+    background-size: 20px;}
+#imgInput{
+    width: 100%;height: 85px;opacity: 0;;position: absolute;background-color: #000;z-index: 10;
+    top: 0;
+    left: 0;
+
+}
+.img-container {
+    height: 100px;
+ }
+#search {
+    padding: 10px;
+    padding-top: 0;
+}
+#search .search-input-cancle {
+    display: block;
+    
+}
+

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>通信开放平台-新增统计</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="css/um.css">
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/animations.css">
+		<script src="js/Frameworks/json.js" ></script>
+		<script src="js/Frameworks/UMP.MACore.js" ></script>
+		<script src="js/Frameworks/UMP.Container.js" ></script>
+		<script src="js/Frameworks/UMP.UI.Mvc.Controller.js" ></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bind.js"></script>
+		<script src="js/um.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/filterCommon.js"></script>
+		<script src="js/chart.js"></script>
+		<script src="js/echarts-all.js"></script>
+		<style>
+			.circle {
+				background: #fff;
+				padding: 0 25px 11px 25px;
+				margin: 0 -15px;
+			}
+			.circle .title {
+				padding: 11px 0;
+			}
+			#circle-choice .btn {
+				background: #ddd;
+				color: #333;
+				border: #ddd;
+			}
+			#circle-choice .btn.active, #circle-choice .btn:active {
+				background: red;
+				color: #fff;
+			}
+			.um-table {
+				font-size: 12px;
+			}
+			.um-content-local {
+				padding: 46px 0px 70px;
+			}
+		</style>
+		<script>
+			$(function() {
+				$("#table-nav li").click(function() {
+					var index = $(this).index();
+					var contentH = window.innerHeight - 78 - 100;
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".um-table-container").eq(index).height(contentH).find(".um-tb-data").height(contentH - 60).end().siblings(".table-row-scroll").height(0);
+				})
+				$("#table-nav li").eq(0).trigger("click");
+				$(function() {
+					$("#circle-choice").on("click", ".btn", function() {
+						$(this).addClass("active").siblings().removeClass("active");
+					})
+				});
+				callback();
+				// 过滤字段的拼接
+				$("#filter").find(".agree-btn").on("click", function() {
+					/*c.id=7910;app.id=35;isv.id=28;c.status=0;c.create_time>='2015-06-29 00:00:00';c.create_time<='2015-07-01 23:59:59'*/
+					var type = $("#circle-choice").find(".btn.active").attr("num");
+					var cid = $("#qiye").find("input:radio:checked").next(".none").html();
+					var isvid = $("#isvname").find("input:radio:checked").next(".none").html();
+					var appid = $("#yinyong").find("input:radio:checked").next(".none").html();
+					var start = $(".make").find("input[type=datetime-local]").eq(0).val();
+					var end = $(".make").find("input[type=datetime-local]").eq(1).val();
+					//assembleUrl(type, cid, isvid, appid, start, end);
+					callback();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="um-page" id="main">
+			<div class="um-header" >
+				<h3>新增统计</h3>
+				<a href="#filter" class="um-header-right">筛选</a>
+			</div>
+			<div class="um-content um-content-local">
+				<ul class="um-tabbar um-tabbar-underline" id="table-nav">
+					<li class="active">
+						<a href="javascript:;">列表</a>
+					</li>
+					<li>
+						<a href="javascript:;">图表</a>
+					</li>
+				</ul>
+				<div class="um-table-container active table-row-scroll">
+					<div class="um-tb-header">
+						<div  class="um-tb-header-title">
+							<table class="um-table">
+								<colgroup>
+									<col width="22%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+								</colgroup>
+								<tr>
+									<td>时间</td>
+									<td>新增</br>用户</td>
+									<td>活跃</br>用户</td>
+									<td>新增</br>企业</td>
+									<td>活跃</br>企业</td>
+									<td>通话</br>次数</td>
+									<td>通话</br>时长</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="um-tb-body">
+						<div class="um-tb-data"  data-row-width="300">
+							<table class="um-tb-data-table" id="byList">
+								<colgroup>
+									<col width="22%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+									<col width="13%">
+									</col>
+								</colgroup>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="um-table-container  table-row-scroll">
+					<div id="chart" style="height:350px;"></div>
+				</div>
+			</div>
+			<div class="um-footer um-noborder">
+
+			</div>
+		</div>
+		<div class="um-page" id="filter">
+			<div class="um-header" >
+				<a href="##"  class="um-back">返回</a>
+				<h3>筛选条件</h3>
+			</div>
+			<div class="um-content">
+				<div class="filter-choices">
+					<ul class="um-list-group">
+						<li class="um-list-item um-list-item-static">
+							时间
+							<div class="make mt10">
+								<input type="datetime-local" class="form-control">
+								&nbsp;至&nbsp;
+								<input type="datetime-local" class="form-control">
+							</div>
+						</li>
+						<li class="um-list-item">
+							<a href="#isvname" class="btn" id="isv"> ISV <span class="fr choice">优普企业空间</span> </a>
+						</li>
+						<li class="um-list-item" id="appname">
+							<a href="#yinyong" class="btn"> 应用<span class="fr choice">全部</span> </a>
+						</li>
+						<li class="um-list-item">
+							<a href="#qiye" class="btn" id="companys"> 企业<span class="fr choice">全部</span> </a>
+						</li>
+						<li>
+							<div class="circle">
+								<p class="title">
+									统计周期
+								</p>
+								<div class="um-align-justify" id="circle-choice">
+									<div class="btn btn-xs" num="1">
+										年
+									</div>
+									<div class="btn btn-xs ml5 mr5" num="3">
+										月
+									</div>
+									<div class="btn btn-xs" num="4">
+										日
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="um-footer um-noborder">
+				<!-- <button class="btn agree-btn">
+				确认
+				</button> -->
+				<a href="#main" class="btn agree-btn" data-reverse="true">确认</a>
+			</div>
+		</div>
+		<div class="um-page" id="isvname">
+			<div class="um-header" >
+				<a href="#filter"  class="um-back">返回</a>
+				<h3>应用详情</h3>
+			</div>
+			<div class="um-content">
+				<div class="um-list-group">
+					<label class="um-list-item um-list-item-static">
+						<input name="um-check1" type="radio" checked>
+						<span></span> <span>全部</span><span class="um-check um-css3-vc"></span> </label>
+					<label class="um-list-item um-list-item-static" data-um-repeat="isv">
+						<input name="um-check1" type="radio">
+						<span class="none"  data-um-bindfield="id"></span> <span data-um-bindfield="text">优普企业空间</span> <span class="um-check um-css3-vc"></span> </label>
+				</div>
+			</div>
+			<div class="um-footer um-noborder">
+				<a href="#filter" class="btn agree-btn" data-reverse="true">确认</a>
+			</div>
+		</div>
+		<div class="um-page" id="qiye">
+			<div class="um-header" >
+				<a href="#filter"  class="um-back">返回</a>
+				<h3>应用详情</h3>
+			</div>
+			<div class="um-content">
+				<div class="um-list-group">
+					<label class="um-list-item um-list-item-static">
+						<input name="um-check2" type="radio" checked>
+						<span></span> <span>全部</span><span class="um-check um-css3-vc"></span> </label>
+					<label class="um-list-item um-list-item-static" data-um-repeat="companys">
+						<input name="um-check2" type="radio">
+						<span class="none"  data-um-bindfield="id"></span> <span data-um-bindfield="text"></span><span class="um-check um-css3-vc"></span> </label>
+				</div>
+			</div>
+			<div class="um-footer um-noborder">
+				<a href="#filter" class="btn agree-btn" data-reverse="true">确认</a>
+			</div>
+		</div>
+		<div class="um-page" id="yinyong">
+			<div class="um-header" >
+				<a href="#filter"  class="um-back">返回</a>
+				<h3>应用详情</h3>
+			</div>
+			<div class="um-content">
+				<div class="um-list-group">
+					<label class="um-list-item um-list-item-static">
+						<input name="um-check3" type="radio" checked>
+						<span></span> <span>全部</span><span class="um-check um-css3-vc"></span> </label>
+
+					<label class="um-list-item um-list-item-static" data-um-repeat="applyName">
+						<input name="um-check3" type="radio">
+						<span class="none"  data-um-bindfield="id"></span> <span data-um-bindfield="text"></span> <span class="um-check um-css3-vc"></span> </label>
+				</div>
+			</div>
+			<div class="um-footer um-noborder">
+				<!-- <button class="btn agree-btn">
+				确认
+				</button> -->
+				<a href="#filter" class="btn agree-btn" data-reverse="true">确认</a>
+			</div>
+		</div>
+		<div class="um-page" id="isvDetail">
+			<div class="um-header" >
+				<a href="#main"  class="um-back">返回</a>
+				<h3>统计详情</h3>
+			</div>
+			<div class="um-content">
+				<ul class="um-form"  data-um-scope="isvDetail">
+					<li class="none" data-um-bindfield="id" class="bind_id"></li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									时间
+								</div>
+								<div class="um-list-item-right" data-um-bindfield="time"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									新增用户
+								</div>
+								<div class="um-list-item-right"  data-um-bindfield="addedusers"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									活跃用户
+								</div>
+								<div class="um-list-item-right"  data-um-bindfield="activeusers"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									新增企业
+								</div>
+								<div class="um-list-item-right"  data-um-bindfield="addedcarriers"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									活跃企业
+								</div>
+								<div class="um-list-item-right"  data-um-bindfield="activecarriers"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									通话次数
+								</div>
+								<div class="um-list-item-right"  data-um-bindfield="callingnum"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									通话时长
+								</div>
+								<div class="um-list-item-right"  data-um-bindfield="callingduration"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="um-footer um-noborder">
+
+			</div>
+		</div>
+		<div class="um-footer um-noborder">
+			<ul class="um-footer-tabbar">
+				<li>
+					<a href="enterpriseAudit.html"><div class="tab_audit"></div>企业审核</a>
+				</li>
+				<li class="active">
+					<a href="javascript:;"><div class="tab_count"></div>新增统计</a>
+				</li>
+				<li>
+					<a href="performance.html"><div class="tab_analyse"></div>业绩分析</a>
+				</li>
+				<li>
+					<a href="user.html"><div class="tab_person"></div>个人中心</a>
+				</li>
+			</ul>
+		</div>
+		<script>
+			document.body.addEventListener('touchstart', function() {
+			});
+		</script>
+	</body>
+</html>

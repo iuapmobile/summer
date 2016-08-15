@@ -24,7 +24,7 @@
   position: absolute;
   width: 3em;
   height: 3em;
-  opacity:0.5;
+  opacity:1;
   cursor: pointer;
   top: 0px;
   bottom: 0px;
@@ -42,8 +42,8 @@
 }
 .islider-btn-inner {
   position: absolute;
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   border-top-width: 2px;
   border-top-style: solid;
   border-top-color: rgb(255, 255, 255);

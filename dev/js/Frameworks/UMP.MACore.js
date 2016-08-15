@@ -170,7 +170,13 @@ Type.prototype.registerClass = function Type$registerClass(typeName, baseType, i
     catch(e) {
         throw "Error.argument('typeName', Sys.Res.argumentTypeName)";
     }
-    if (parsedName !== this) throw "Error.argument('typeName', Sys.Res.badTypeName)";
+    if (parsedName !== this) {
+		var errInfo = this.name + "试图注册一个已经存在的["+typeName+"]类型，请检查";
+		alert(errInfo);
+		//throw errInfo;
+		return this;
+	}
+	
     if (window.__registeredTypes[typeName]){		
 		//暂时不处理重复注册类的情况，重复出测时，后面的生效
 		//throw "Error.invalidOperation(String.format(Sys.Res.typeRegisteredTwice, typeName))";		

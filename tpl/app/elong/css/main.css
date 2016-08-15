@@ -1,13 +1,24 @@
-	#iSlider-wrapper {height: 140px}
+	
+*{font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", STHeiTi, sans-serif;}
+	.ti-angle-right:before{color:#ccc;}
+ span{color:#555;}
+	img{vertical-align:middle;}
+	  #iSlider-wrapper {height:140px;} 
 	 
-	#main button.search{margin:20px 0px;}
+	#main button.search{margin:20px 0px;line-height:44px;padding:0;border-radius:4px;}
 	#nav1 div.um-grid-row.tc:first-child{ border-top:1px solid #ddd;}
  	#nav1 div.um-grid-row.tc{line-height:50px;border-bottom:1px solid #ddd;}
     #nav1 div.um-grid-row .um-bgc-white{border-right:1px solid #ddd;padding:10px 0px;}
+	#nav1 div a span{font-size:0.825rem;}
+	#citylist {padding:0 15px;}
+	#citylist a.um-list-item:before{border-left: 2px solid #fff;border-bottom: 2px solid #fff;}
+	#citylist ul li h2{color:#fff;font-size:1.5rem;text-shadow: 1px 1px 6px #000;font-weight: normal;line-height:1;}
+	#citylist ul li p{color:#fff;font-size:0.813rem;margin-bottom:10px;}
 	#citylist ul li{margin-left:10%;}
+	 
 	#page2 .citylist button{margin-right:18px;margin-bottom:10px;}
 	#page2 .letter-list li{
-	    width: 17%;
+	width: 17%;
     margin-right: 2.5%;
     margin-bottom: 2.5%;
     border-radius: 3px;
@@ -19,15 +30,20 @@
     float: left;
 
 }
+#page2 div.citylist {overflow:hidden;}
+#page2 div.letter-list {overflow:hidden;}
+#page2 div.citylist ul {overflow:hidden;margin-left:5%;}
+#page2 div.letter-list ul {overflow:hidden;padding-left:5%;padding-top:10px;background:#fff;}
 #page2 .um-content{
 	font-size:0.8rem;
 	color:#555;
 }
 
+#page4 .liebiao ul{overflow:hidden;margin-left:5%;}
  
-#page2  .liebiao ul li,#page4  .liebiao ul li{
+#page2    ul li,#page4  .liebiao ul li{
 	padding: 0 12px;
-    width: 27%;
+    width: 28%;
     border-radius: 3px;
     margin-right: 5%;
     margin-bottom: 12px;
@@ -45,21 +61,23 @@
 	font-size:0.75rem;
 	color:#555;
 }
-#page2 .um-input-search,#page4 .um-input-search{
-	background:none;
+#page2 .um-input-search{
+	background:#fff;
 	 
 	position: relative;
-	left:30px;
+	left:13px;
+	border:none;
+	padding:7px 12px;
 }
- #page2 .um-input-search .form-control, #page4 .um-input-search .form-control{
+ #page2 .um-input-search .form-control{
 	display:inline-block;
 	height:35px;
 	border:1px solid #ddd;
 	width:75%;
 	border-radius:1px;
-	margin-left:5%;
+	margin-left:8%;
 }
-#page2 .um-input-search .form-control:focus,#page4 .um-input-search .form-control:focus{
+#page2 .um-input-search .form-control:focus{
   width: 75%;
   border: 1px solid #ddd;
   box-shadow: none;
@@ -72,13 +90,39 @@
 #page2 .um-back:before,#page4 .um-back:before{
 	width: 18px;
     height: 18px;
-    border-left: 3px solid gray;
-    border-bottom: 3px solid gray;
-    padding-right:5px;'
+    border-left: 2px solid #858585;
+    border-bottom: 2px solid #858585;
+    padding-right:5px;
+	margin-left:10px;
+	 
 }*/
 #page4 {
 	font-size:0.75rem;
 }
+
+ #page4 .um-input-search{
+	background:#fff;
+	 
+	position: relative;
+	left:13px;
+	border:none;
+	padding:7px 12px;
+}
+  #page4 .um-input-search .form-control{
+	display:inline-block;
+	height:35px;
+	border:1px solid #ddd;
+	width:75%;
+	border-radius:1px;
+	margin-left:8%;
+}
+ #page4 .um-input-search .form-control:focus{
+  width: 75%;
+  border: 1px solid #ddd;
+  box-shadow: none;
+}
+
+#choosedate div:first-child input{border:none;width:38%;font-size:0.8rem;color:#555;}
 
  
  

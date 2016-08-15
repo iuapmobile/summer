@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>My App</title>
+
+	</head>
+	<body>
+
+	</body>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$.ajax({
+		type : "get",
+		url :"http://api.e6gps.com/public/v3/Inface/Call?method=GetVehcileInfo&appkey=feb0698c-8b26-49bb-8e69-c3ba2a462e59&timestamp=2016-07-02%2014:55:42&format=json&vehicle=%E6%B5%99AE398T&sessionid=&isoffsetlonlat=1&sign='52589555CB12A9C5854259DAE4D4D0D5'" ,
+		dataType:"jsonp",
+		jsonp:"callBack",
+//		jsonpClassback:'he',
+		success:function(data){
+//			alert($summer.jsonToStr(data));
+//	        callBack(data);
+	       
+		},
+		error:function(data){
+			
+			alert('error:'+$summer.jsonToStr(data));
+		}
+	});
+</script>
+</html>

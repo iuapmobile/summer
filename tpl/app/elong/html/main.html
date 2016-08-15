@@ -8,624 +8,1531 @@
 		<link rel="stylesheet" href="../css/iuapmobile.um.css">
 		<link rel="stylesheet" href="../css/font-icons.css">
 		<link rel="stylesheet" type="text/css" href="../css/iuapmobile.um.listview-2.7.0.css">
-		<link rel="stylesheet" type="text/css" href="../css/islider.css" /> 
-		<link rel="stylesheet" type="text/css" href="../css/fullcalendar-1.6.4.css" /> 
-		<link rel="stylesheet" type="text/css" href="../css/iuapmobile.um.calendar-2.7.0.css" />	
+		<link rel="stylesheet" type="text/css" href="../css/islider.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iscroll.css" />
 		<script src="../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
 		<script src="../js/summer.js" ></script>
 		<script src="../js/jquery-2.1.4.min.js" ></script>
-		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>	
-		<script type="text/javascript" src="../js/knockout-2.2.0.js"></script>
-		<script type="text/javascript" src="../js/Frameworks/iuapmobile.frameworks.listview-2.7.0.js"></script>   
-	    <script type="text/javascript" src="../js/islider.js"></script> 
-	    <script src="../js/fullcalendar-1.6.4.js"></script> 
-	    <script src="../js/Frameworks/iuapmobile.frameworks.calendar-2.7.0.js"></script> 
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script type="text/javascript" src="../js/doT.min.js"></script>
+		<script type="text/javascript" src="../js/Frameworks/iuapmobile.frameworks.listview-2.7.0.js"></script>
+		<script type="text/javascript" src="../js/islider.js"></script>
+	 	<script src='../js/iscroll.js'></script>
 		<style>
-		    .listview-detail { overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
-			.um-header{background-color: #fcfcfc;}
-			.um-header h3{color: #444;}
-			.um-back:before{border-color:#858585;}
-			.um-input-search{background:#fff;border-top:1px solid #ddd;border-bottom: 1px solid #ddd}
-			.iSlider-wrapper {height: 200px;}
-			.box{border-radius: 3px;width: 170px;display: -webkit-box;display: box;display: -webkit-flex;display: flex;font-size:12px;border: 1px solid #ddd;color:#777;padding:0 10px;margin:0 10px}
-			.box-r{color:#000;-webkit-box-flex: 1;box-flex: 1;-webkit-flex: 1;flex: 1;display:box;display: -webkit-box;display: -moz-box;-webkit-box-pack:center;-moz-box-pack:center;-webkit-box-align:center;-moz-box-align:center; }
-			.box-l{-webkit-box-flex: 2;box-flex: 2;-webkit-flex: 2;flex: 2;}
-			.um-input-search .form-control {border:1px solid #ddd;height:38px;margin-right:10px}
-			.um-tabbar li{-webkit-box-flex: 1;box-flex: 1;-webkit-flex: 1;flex: 1;color: #f55;}
-			.um-tabbar li a{margin:0 10px;border: 1px solid #ddd;border-radius:5px}
-			.um-tabbar > li:last-child > a{border-right:1px solid #ddd;}
-			.um-tabbar-underline > li.active {color: #ff5;border-bottom:none;}
-			.um-tabbar-underline > li.active > a {color: #f55;border:1px solid #f55;}
-			.um-tabbar-underline{padding:10px 0}
-			.um-listview-wrap {margin-left:0px;margin-right:0px;}
-			.bg-span{margin-right: 4px;border-radius: 2px;color: #FFF;padding: 0 1px;}	
-			
+			html,body,.um-page{height:100%;position: fixed;font-weight: normal;}
+			.listview-detail {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			.um-header {
+				background-color: #fcfcfc;
+			}
+			.um-header h3 {
+				color: #444;
+			}
+			.um-back:before {
+				border-color: #858585;
+			}
+			.um-input-search {
+				background: #fff;
+				border-top: 1px solid #ddd;
+				border-bottom: 1px solid #ddd
+			}
+			.iSlider-wrapper {
+				height: 200px;
+			}
+			.box {
+				border-radius: 3px;
+				width: 170px;
+				display: -webkit-box;
+				display: box;
+				display: -webkit-flex;
+				display: flex;
+				font-size: 12px;
+				border: 1px solid #ddd;
+				color: #777;
+				padding: 0 10px;
+				margin: 0 10px
+			}
+			.box-r {
+				color: #000;
+				-webkit-box-flex: 1;
+				box-flex: 1;
+				-webkit-flex: 1;
+				flex: 1;
+				display: box;
+				display: -webkit-box;
+				display: -moz-box;
+				-webkit-box-pack: center;
+				-moz-box-pack: center;
+				-webkit-box-align: center;
+				-moz-box-align: center;
+			}
+			.box-l {
+				-webkit-box-flex: 2;
+				box-flex: 2;
+				-webkit-flex: 2;
+				flex: 2;
+			}
+			.um-input-search .form-control {
+				border: 1px solid #ddd;
+				height: 38px;
+				margin-right: 10px
+			}
+			.tabbar {
+				padding: 10px 0;
+				display: -webkit-box;
+				display: box;
+				display: -webkit-flex;
+				display: flex;
+			}
+			.tabbar li {
+				-webkit-box-flex: 1;
+				box-flex: 1;
+				-webkit-flex: 1;
+				flex: 1;
+				text-align: center;
+				border: 1px solid #DDD;
+				padding: 3px 0;
+				margin: 0 8px;
+				border-radius: 5px;
+				font-size: 13px;
+				color: #555
+			}
+			.tabbar .active {
+				color: #f55;
+				border: 1px solid #f55;
+			}
+			.um-listview-wrap {
+				margin-left: 0px;
+				margin-right: 0px;
+			}
+			.bg-span {
+				margin-right: 4px;
+				border-radius: 2px;
+				color: #FFF;
+				padding: 0 1px;
+			}
+			.more {
+				background: #F4F4F4;
+			}
+			.more p {
+				padding: 16px 0;
+				color: #999;
+				line-height: 20px;
+				font-size: 14px;
+				text-align: center
+			}
+			.more div {
+				text-align: center;
+				color: #ccc;
+			}
+			.more div a {
+				color: #555;
+				font-size: 13px
+			}
+
 		</style>
 	</head>
 	<body>
-		  <div class="um-page active" id="main">
-	       	 <div id="content" class="um-content"  >
-	            <!-- 轮播图片 -->
-	            <div class="um-row">
-	                <div id="iSlider-wrapper" class="iSlider-wrapper"></div>
-	            </div>
+
+		<div class="um-page active" id="main">
+			<div id="content" class="um-content"  >
+				<!-- 轮播图片 -->
+				<div class="um-row">
+					<div id="iSlider-wrapper" class="iSlider-wrapper"></div>
+				</div>
 				<div style="padding:0 15px">
 					<!-- 搜索框区域 -->
 					<!-- 第一行 -->
 					<div class="um-label um-box-justify" onclick="topage('#page2')">
 						<div >
-							<i class="ti-bar-chart"></i>
-							<span>北京市</span></div>
+							<img src='../img/addr.png' style='width:20px;height:20px;'>&nbsp;&nbsp; <span style='font-size:1.063rem;color:#555;'>北京市</span>
+						</div>
 						<div class="um-red">
-							<i class="ti-angle-right um-gray"></i>
-							<i class="ti-location-pin"></i>&nbsp;附近</div>
+							<p>
+								<i class="ti-angle-right um-gray" ></i>
+								<img src='../img/near.png' style='width:15px;height:17px;'>&nbsp;<span style='font-size:0.7rem;color:#f55;'>附近</span>
+							</p>
+						</div>
 					</div>
 					<!-- 第二行 -->
-					<div class="um-label um-box-justify" onclick="topage('#page3');">
-						<div >
-							<i class="ti-calendar"></i>&nbsp;
-							<span style="font-size:14px;">07月14日 今天 — 07月15日 明天</span></div>
+					<div class="um-label um-box-justify" id='choosedate'  >
+						<div  style='width:80%;'>
+							<img src='../img/rili.png'/ style='width:20px;height:20px;'>&nbsp;&nbsp;
+							<!-- <p><span style="font-size:0.954rem;">07月14日 <span style="font-size:0.688rem;">今天</span> — 07月15日 <span style="font-size:0.688rem;">明天</span></span></p> -->
+							<input  value=''   class='demo-test-date s_start'/>一
+							<input  value=''  class='demo-test-date s_end' />	
+						</div>
 						<div class="um-gray">
-							<span>一晚</span>&nbsp;
-							<i class="ti-angle-right"></i></div>
+							<span style="font-size:0.688rem;color:#999;"><span id='livetime'>1</span>晚</span>
+							<i class="ti-angle-right"></i>
+						</div>
 					</div>
 					<!-- 第三行 -->
-					<div class="um-label um-box-justify" onclick="topage('#page4')">
-						<div >
-							<i class="ti-search"></i>&nbsp;
-							<span class="um-gray">酒店名称/位置不限</span></div>
+					<div class="um-label um-box-justify"  id='choosehotel'>
+						<div onclick="topage('#page4')">
+							<img src='../img/hotel.png'/ style='width:20px;height:20px;'>&nbsp;&nbsp;
+							<span  style="color:#ccc;" >酒店名称/位置不限</span>
+							
+						</div>
 						<div class="um-gray">
 							<i class="ti-angle-right"></i>
+							<img src='../img/delete.png' style='width:16px;height:16px;position:relative;top:-3px;display:none;' />
 						</div>
 					</div>
 					<!-- 第四行 -->
 					<div class="um-label um-box-justify" style='border-bottom: 1px solid #d7d7d7;'>
-						<div onclick="showPrice()">
-							<i class="ti-money"></i>&nbsp;
-							<span class="um-gray">价格星级不限</span></div>
+						<div >
+							<img src='../img/price.png'/ style='width:20px;height:20px;'>&nbsp;&nbsp; <span style="color:#ccc;">价格星级不限</span>
+						</div>
 						<div class="um-gray">
 							<i class="ti-angle-right"></i>
 						</div>
 					</div>
-				   
-					
-					<!-- 第五行 -->
-					<button class="btn um-btn-danger search" style='width:80%;margin:20px auto;' onclick="topage('#page5')">
-						<i class="ti-search"></i>搜索</button>
 
-				
+					<!-- 第五行 -->
+					<button class="btn search" style='width:83%;margin:20px auto;background:#f55;border:none;color:#fff;' onclick="topage('#page5')">
+						<i class="ti-search"></i>&nbsp;搜索
+					</button>
+
 					<!-- 中间导航栏 -->
 					<div class="um-grid um-row" id="nav1">
 						<div class="um-grid-row tc um-border-bottom">
 							<div class="um-border-right um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/fujin.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">附近</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/fujin.png" width="27%" class="um-img-responsive" alt="" /> <span class="mt5">附近</span></a>
 							</div>
 							<div class="um-border-right um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/tejia.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">特价</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/tejia.png" width="27%" class="um-img-responsive" alt="" /> <span class=" mt5">特价</span></a>
 							</div>
 							<div class="um-border-right um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/guoji.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">国际</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/guoji.png" width="27%" class="um-img-responsive" alt="" /> <span class=" mt5">国际</span></a>
 							</div>
 							<div class="um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/faxian.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">发现酒店</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/faxian.png" width="27%" class="um-img-responsive" alt="" /> <span class="  mt5">发现酒店</span></a>
 							</div>
 						</div>
 						<div class="um-grid-row tc" >
 							<div class="um-border-right um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/gonglue.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">攻略</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/gonglue.png" width="27%" class="um-img-responsive" alt="" /> <span class=" mt5">攻略</span></a>
 							</div>
 							<div class="um-border-right um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/huochepiao.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">火车票</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/huochepiao.png" width="27%" class="um-img-responsive" alt="" /> <span class=" mt5">火车票</span></a>
 							</div>
 							<div class="um-border-right um-bgc-white " onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/feijipiao.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">机票</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/feijipiao.png" width="27%" class="um-img-responsive" alt="" /> <span class="  mt5">机票</span></a>
 							</div>
 							<div class="um-border-right um-bgc-white" onclick="topage('#page5')">
-								<a href="#" class="um-circle um-black">
-									<img src="../img/qichepiao.png" width="25" class="um-img-responsive" alt="" />
-									<span class="f12 mt5">汽车票</span></a>
+								<a href="#" class="um-circle um-black"> <img src="../img/qichepiao.png" width="27%" class="um-img-responsive" alt="" /> <span class="  mt5">汽车票</span></a>
 							</div>
 						</div>
 					</div>
 
-           	</div>
+				</div>
 
-					<div class="um-box um-grid-row" style="text-align:center;  margin:20px -15px;border:1px solid #ddd;">
-						<div class="um-bf1 p20  um-bgc-white" style="border-right:1px solid #ddd;">
-							<img src="../img/user.png" alt="" style="width:25px;" />账户</div>
-						<div class="um-bf1 p20 um-bgc-white" style="border-right:1px solid #ddd;">
-							<img src="../img/order.png" alt="" style="width:25px;" />订单</div>
-						<div class="um-bf1 p20 um-bgc-white">
-					
-	                    <img src="../img/phone.png" alt="" style="width:25px;" />电话</div></div>
-	            <img src="../img/search_app.jpg" width="100%" alt="" class="um-img-responsive" />
-	            <p style="text-align:center; margin-top:20px;margin-bottom:-25px;">热门城市</p>
-	            <div id="citylist"  >
-	                <ul class="um-list">
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 0;background-size:100% 822px;">
-	                        <li>
-	                            <h2>北京</h2>
-	                            <p>共有
-	                                <span class="um-red">6410</span>家酒店</p></li>
-	                    </a>
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -75px;background-size:100% 750px;">
-	                        <li>
-	                            <h2>上海</h2>
-	                            <p>共有
-	                                <span class="um-red ">4160</span>家酒店</p></li>
-	                    </a>
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -150px;background-size:100% 750px;">
-	                        <li>
-	                            <h2>广州</h2>
-	                            <p>共有
-	                                <span class="um-red ">4271</span>家酒店</p></li>
-	                    </a>
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -225px;background-size:100% 750px;">
-	                        <li>
-	                            <h2>深圳</h2>
-	                            <p>共有
-	                                <span class="um-red ">3232</span>家酒店</p></li>
-	                    </a>
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -300px;background-size:100% 750px;">
-	                        <li>
-	                            <h2>香港</h2>
-	                            <p>共有
-	                                <span class="um-red ">572</span>家酒店</p></li>
-	                    </a>
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -375px;background-size:100% 750px;">
-	                        <li>
-	                            <h2>杭州</h2>
-	                            <p>共有
-	                                <span class="um-red ">3037</span>家酒店</p></li>
-	                    </a>
-	                    <a class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -450px;background-size:100% 750px;">
-	                        <li>
-	                            <h2>苏州</h2>
-	                            <p>共有
-	                                <span class="um-red ">1641</span>家酒店</p></li>
-	                    </a>
-	                </ul>
-	            </div>
-	            <p style="text-align:center; font-size:12px;margin-bottom:5px;">&copy;2009-2016 艺龙无线</p></div>
-	      </div>
+				<div class="um-box um-grid-row" style="text-align:center;  margin:20px -15px;border:1px solid #ddd;">
+					<div class="um-bf1 p20  um-bgc-white" style="border-right:1px solid #ddd;">
+						<img src="../img/user.png" alt="" style="width:20px;" />&nbsp;&nbsp;<span style='font-size:0,875rem'>账户</span>
+					</div>
+					<div class="um-bf1 p20 um-bgc-white" style="border-right:1px solid #ddd;">
+						<img src="../img/order.png" alt="" style="width:20px;" />&nbsp;&nbsp;<span style='font-size:0,875rem'>订单</span>
+					</div>
+					<div class="um-bf1 p20 um-bgc-white">
+
+						<img src="../img/phone.png" alt="" style="width:20px;" />&nbsp;&nbsp;<span style='font-size:0,875rem'>电话</span>
+					</div>
+				</div>
+				<img src="../img/search_app.jpg" width="100%" alt="" class="um-img-responsive" />
+				<p style="text-align:center; margin-top:20px;margin-bottom:-25px;color:#555;font-size:14px;line-height:21px;">
+					热门城市
+				</p>
+				<div id="citylist"  >
+					<ul class="um-list">
+						<a onclick="topage('#page5','北京')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 0;background-size:100% 822px;">
+						<li>
+							<h2>北京</h2>
+							<p>
+								共有 <span class="um-red">6410</span>家酒店
+							</p>
+						</li> </a>
+						<a onclick="topage('#page5','上海')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -75px;background-size:100% 750px;">
+						<li>
+							<h2>上海</h2>
+							<p>
+								共有 <span class="um-red ">4160</span>家酒店
+							</p>
+						</li> </a>
+						<a onclick="topage('#page5','广州')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -150px;background-size:100% 750px;">
+						<li>
+							<h2>广州</h2>
+							<p>
+								共有 <span class="um-red ">4271</span>家酒店
+							</p>
+						</li> </a>
+						<a onclick="topage('#page5','深圳')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -225px;background-size:100% 750px;">
+						<li>
+							<h2>深圳</h2>
+							<p>
+								共有 <span class="um-red ">3232</span>家酒店
+							</p>
+						</li> </a>
+						<a onclick="topage('#page5','香港')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -300px;background-size:100% 750px;">
+						<li>
+							<h2>香港</h2>
+							<p>
+								共有 <span class="um-red ">572</span>家酒店
+							</p>
+						</li> </a>
+						<a onclick="topage('#page5','杭州')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -375px;background-size:100% 750px;">
+						<li>
+							<h2>杭州</h2>
+							<p>
+								共有 <span class="um-red ">3037</span>家酒店
+							</p>
+						</li> </a>
+						<a onclick="topage('#page5','苏州')" class="um-list-item" style="margin-bottom:3px;background:url(../img/citys.jpg) 0 -450px;background-size:100% 750px;">
+						<li>
+							<h2>苏州</h2>
+							<p>
+								共有 <span class="um-red ">1641</span>家酒店
+							</p>
+						</li> </a>
+					</ul>
+				</div>
+				<p style="text-align:center; font-size:0.688rem;margin-bottom:5px;">
+					<span>&copy;2009-2016 艺龙无线</span>
+				</p>
+			</div>
+		</div>
 		  <div class="um-page um-win" id="page2" style='background:#f2f2f2;'>
 		   
 		            
-		            <div class="um-input-search um-right-in">
+		            <div class="um-input-search">
 		            	<a href="#" class="um-back"></a>
 		                <input type="search" class="form-control" placeholder="请输入城市名、行政区或景区" />
 		             </div>
 		        
-		        <div class="um-content" style="padding:0 15px">
-		            <p style="margin:5px 10px;">搜索历史</p>
-		            <button class="btn btn-inline" style="color:red; border:none;padding:7px 10%;background:#fff;">北京</button>
-		            <hr style="margin:12px 0;" />
-		            <div class="citylist liebiao">
-		                <p style="margin:5px 10px;">热门城市</p>
-		                <ul>
-		                    <li style="color:red;">北京</li>
-		                    <li>上海</li>
-		                    <li>杭州</li>
-		                    <li>广州</li>
-		                    <li>深圳</li>
-		                    <li>厦门</li>
-		                    <li>南京</li>
-		                    <li>成都</li>
-		                    <li>武汉</li>
-		                    <li>青岛</li>
-		                    <li>西安</li>
-		                    <li>天津</li>
-		                    <li>重庆</li>
-		                    <li>香港</li>
-		                    <li>苏州</li>
-		                    <li>济南</li>
-		                    <li>长沙</li>
-		                    <li>大连</li>
-		                    <li>三亚</li>
-		                    <li>郑州</li></ul>
-		            </div>
-		            <div style="clear:both;"></div>
-		            <hr style="margin:12px 0;" />
-		            <div class="letter-list">
-		                <ul>
-		                    <li>A</li>
-		                    <li>B</li>
-		                    <li>C</li>
-		                    <li>D</li>
-		                    <li>E</li>
-		                    <li>F</li>
-		                    <li>G</li>
-		                    <li>H</li>
-		                    <li>I</li>
-		                    <li>J</li>
-		                    <li>K</li>
-		                    <li>L</li>
-		                    <li>M</li>
-		                    <li>N</li>
-		                    <li>O</li>
-		                    <li>P</li>
-		                    <li>Q</li>
-		                    <li>R</li>
-		                    <li>S</li>
-		                    <li>T</li>
-		                    <li>U</li>
-		                    <li>V</li>
-		                    <li>W</li>
-		                    <li>X</li>
-		                    <li>Y</li>
-		                    <li>Z</li></ul>
-		            </div>
-		        </div>
+		        <div class="um-content" >
+					<div style='padding:0 12px;'>
+							<div style='padding:0 12px;'>
+								<p style="margin:6px  0px;color:#999;">搜索历史</p>
+								 <ul><li style="color:red;">北京</li></ul>
+							</div>
+							 <div style='clear:both;'></div>
+							<hr style="margin-bottom:12px;border:1px solid #e4e4e4;" />
+						
+							<div class="citylist liebiao">
+								<p style="margin:5px 7%;">热门城市</p>
+								<ul  >
+									<li style="color:red;">北京</li>
+									<li>上海</li>
+									<li>杭州</li>
+									<li>广州</li>
+									<li>深圳</li>
+									<li>厦门</li>
+									<li>南京</li>
+									<li>成都</li>
+									<li>武汉</li>
+									<li>青岛</li>
+									<li>西安</li>
+									<li>天津</li>
+									<li>重庆</li>
+									<li>香港</li>
+									<li>苏州</li>
+									<li>济南</li>
+									<li>长沙</li>
+									<li>大连</li>
+									<li>三亚</li>
+									<li>郑州</li></ul>
+							</div>
+							<div style="clear:both;"></div>
+							<hr style="margin:12px 0;border:1px solid #e4e4e4;" />
+							<div class="letter-list">
+								<ul>
+									<li>A</li>
+									<li>B</li>
+									<li>C</li>
+									<li>D</li>
+									<li>E</li>
+									<li>F</li>
+									<li>G</li>
+									<li>H</li>
+									<li>I</li>
+									<li>J</li>
+									<li>K</li>
+									<li>L</li>
+									<li>M</li>
+									<li>N</li>
+									<li>O</li>
+									<li>P</li>
+									<li>Q</li>
+									<li>R</li>
+									<li>S</li>
+									<li>T</li>
+									<li>U</li>
+									<li>V</li>
+									<li>W</li>
+									<li>X</li>
+									<li>Y</li>
+									<li>Z</li></ul>
+							</div>
+						</div>
+					</div>
 		    </div>
-   		 <div class="um-page um-win" id="page3">
-	        <div class="um-header">
-	            <a href="#" class="um-back"></a>
-	            <h3>选择日期</h3></div>
-	        <div class="um-content" style="padding:0 15px">
-	            <div id="calendar" class="um-calendar"></div>
-	        </div>
-	        <div class="um-footer"></div>
-	    </div>
+   		  
+		<div class="um-page um-win" id="page4" style='background:#f2f2f2;'>
 
-         <div class="um-page um-win" id="page4" style='background:#f2f2f2;'>
-	        <div class="um-header">
-	            <a href="#" class="um-back "></a>
-	            <div class="um-input-search" style="font-size:0.938rem; padding-lef
-	            t:7px;">
-	                <input type="search" class="form-control" placeholder="输入酒店名、地址等" style='margin-left:0px;'/>搜索</div></div>
-	        <div class="um-content" style="padding:0 15px">
-	            <div class="um-label um-box-justify">
-	                <div>
-	                    <i class="ti-location-pin"></i>
-	                    <span>查看我附近的酒店</span></div>
-	                <div>
-	                    <i class="ti-angle-right"></i>
-	                </div>
-	            </div>
-	            <div class="liebiao">
-	                <p style="margin:15px  10px  10px  15px; font-size:0.75rem">商圈</p>
-	                <ul>
-	                    <li>王府井商业区</li>
-	                    <li>前门/大栅栏</li>
-	                    <li>鼓楼/后海/新街口</li>
-	                    <li>中关村/人民大学</li>
-	                    <li>北大/清华/学院路</li>
-	                    <li>
-	                        <i class="ti-angle-down"></i>
-	                    </li>
-	                </ul>
-	                <p style="margin:15px  10px  10px  15px; font-size:0.75rem">品牌</p>
-	                <ul>
-	                    <li>如家</li>
-	                    <li>汉庭</li>
-	                    <li>七天</li>
-	                    <li>速8</li>
-	                    <li>锦江之星</li>
-	                    <li>
-	                        <i class="ti-angle-down"></i>
-	                    </li>
-	                </ul>
-	                <p style="margin:15px  10px  10px  15px;font-size:0.75rem;">机场/车站</p>
-	                <ul>
-	                    <li>首都机场T1航站楼</li>
-	                    <li>首都机场T2航站楼</li>
-	                    <li>首都机场T3航站楼</li>
-	                    <li>北京南苑机场</li>
-	                    <li>北京站</li>
-	                    <li>
-	                        <i class="ti-angle-down"></i>
-	                    </li>
-	                </ul>
-	                <p style="margin:15px  10px  10px  15px;style=" font-size:0.875rem ''="">地铁站</p>
-	                <ul>
-	                    <li>北京站</li>
-	                    <li>北京西站</li>
-	                    <li>魏公村</li>
-	                    <li>前门</li>
-	                    <li>南锣鼓巷</li>
-	                    <li>
-	                        <i class="ti-angle-down"></i>
-	                    </li>
-	                </ul>
-	            </div>
-	            <div style="clear:both;"></div>
-	        </div>
-	        <div class="um-footer" style='height:0;'></div>
-    </div>
-		 <div class="um-page um-win" id="page5">
+			<div class="um-input-search" style="font-size:0.938rem; padding-lef
+			t:7px;">
+				<a href="#" class="um-back "></a>
+				<input type="search" class="form-control" placeholder="输入酒店名、地址等"  />
+				<span>搜索</span>
+			</div>
+			<div class="um-content" style="padding:0 15px">
+				<div class="um-label um-box-justify" style='margin:10px -15px;'>
+					<div >
+						<i class="ti-location-pin"></i>
+						<span style='font-size:0.875rem;'>查看我附近的酒店</span>
+					</div>
+					<div>
+						<i class="ti-angle-right"></i>
+					</div>
+				</div>
+				<div class="liebiao">
+					<p style="margin:15px  10px  10px  15px; font-size:0.688rem;color:#999;">
+						商圈
+					</p>
+					<ul>
+						<li>
+							王府井商业区
+						</li>
+						<li>
+							前门/大栅栏
+						</li>
+						<li>
+							鼓楼/后海/新街口
+						</li>
+						<li>
+							中关村/人民大学
+						</li>
+						<li>
+							北大/清华/学院路
+						</li>
+						<li>
+							<i class="ti-angle-down"></i>
+						</li>
+					</ul>
+					<p style="margin:15px  10px  10px  15px;font-size:0.688rem;color:#999;">
+						品牌
+					</p>
+					<ul>
+						<li>
+							如家
+						</li>
+						<li>
+							汉庭
+						</li>
+						<li>
+							七天
+						</li>
+						<li>
+							速8
+						</li>
+						<li>
+							锦江之星
+						</li>
+						<li>
+							<i class="ti-angle-down"></i>
+						</li>
+					</ul>
+					<p style="margin:15px  10px  10px  15px;font-size:0.688rem;color:#999;">
+						机场/车站
+					</p>
+					<ul>
+						<li>
+							首都机场T1航站楼
+						</li>
+						<li>
+							首都机场T2航站楼
+						</li>
+						<li>
+							首都机场T3航站楼
+						</li>
+						<li>
+							北京南苑机场
+						</li>
+						<li>
+							北京站
+						</li>
+						<li>
+							<i class="ti-angle-down"></i>
+						</li>
+					</ul>
+					<p style="margin:15px  10px  10px  15px;  font-size:0.688rem;color:#999;">
+						地铁站
+					</p>
+					<ul>
+						<li>
+							北京站
+						</li>
+						<li>
+							北京西站
+						</li>
+						<li>
+							魏公村
+						</li>
+						<li>
+							前门
+						</li>
+						<li>
+							南锣鼓巷
+						</li>
+						<li>
+							<i class="ti-angle-down"></i>
+						</li>
+					</ul>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="um-footer" style='height:0;'></div>
+		</div>
+		<div class="um-page um-win" id="page5">
 			<div class="um-header">
-				<a href="#" class="um-back"></a>
-				<h3>三亚市</h3>		
-				<div class="um-header-btns">					
+				<a href="#" class="um-back f24"></a>
+				<h3 style="font-size: 20px" class="city">三亚市</h3>
+				<div class="um-header-btns f24">
 					<i class="ti-heart" style="color:#858585;padding: 0 10px"></i>
 					<i class="ti-location-pin" style="color:#858585;"></i>
 				</div>
 			</div>
-			<img src="../img/load.gif" id="load" alt="" style="position:fixed;left:50%;top:20%;z-index: 9999;width:140px;height:70px;margin-left:-70px;display: none"/>
-			<div id="content" class="um-content">		
+			<img src="../img/load.gif" id="load" alt="" style="position:fixed;left:50%;top:30%;z-index: 9999;width:120px;height:100px;margin-left:-70px;display: none"/>
+			<div id="content" class="um-content">
 				<div class="um-input-search">
 					<div class="box">
 						<span class="box-l">
-							<p>入 : 07-15</p>
-							<p>离 : 07-16</p>
-						</span>
+							<p>
+								入 : 07-15
+							</p>
+							<p>
+								离 : 07-16
+							</p> </span>
 						<span class="box-r">1晚</span>
 					</div>
 					<input type="search" class="form-control" placeholder="酒店名称/位置不限">
 				</div>
-				
 
-			 <!-- 该画廊最好在um-content上加上um-content-fill样式类 -->
-		<ul class="um-tabbar um-tabbar-underline" id="nav">
-				<li class="active" >
-					<a href="javascript:;" onclick="tList(1)">不限</a>
-				</li>
-				<li >
-					<a href="javascript:;" onclick="tList(2)">今日特价</a>
-				</li>
-				<li >
-					<a href="javascript:;" onclick="tList(3)">低价高星</a>
-				</li>
-				<li >
-					<a href="javascript:;" onclick="tList(4)">优质连锁</a>
-				</li>
-			</ul>
-			<div class="um-listview-wrap" id="listview">
-				<ul class="um-list um-no-active" data-bind="foreach:data">
-					<li class="um-listview-row">
-						<a href="#" class="um-list-item um-swipe-action um-no-icon">
-						<div class="um-list-item-media">
-							<img alt="" width=72 height=72 data-bind="attr:{src: img}">
-						</div>
-						<div class="um-list-item-inner">
-							<div class="um-list-item-body f12 " style="padding-right:5px;color:#888">
-								<div data-bind="text:title" class="um-text-overflow f14" style="color:#353535;"></div>
-								<div class="clearfix" >
-									<div class="fr" style="color:#f55"><i style="font-style:normal">￥</i><span data-bind="text:price" style="font-size: 18px"></span></div>
-									<span data-bind="text:comments" style="color:#353535;line-height: 24px"></span><em style="color:#888;font-style: normal">好评</em>
-								</div>
-								<div class="clearfix">
-									<div class="fr">
-										<span style="background:#9B7AD0;" class="bg-span">APP新客折扣</span>
-										<span style="background:#F5725A;" class="bg-span">特价</span>
-										<span style="background:#FFA14D;;" class="bg-span">返</span>
-									</div>
-									<div>
-										<span data-bind="text:type"></span>
-										<i class="ti-bar-chart icons"></i>
-										<i class="ti-flag-alt icons"></i>
-									</div>
-									
-								</div>
-								<div data-bind="text:detail" class="f12 um-text-overflow"></div>
-								
-							</div>
-
-						</div> </a>
+				<!-- 该画廊最好在um-content上加上um-content-fill样式类 -->
+				<ul class="tabbar" id="nav">
+					<li class="active" onclick="tList(1)">
+						不限
+					</li>
+					<li onclick="tList(2)">
+						今日特价
+					</li>
+					<li onclick="tList(3)">
+						低价高星
+					</li>
+					<li onclick="tList(4)">
+						优质连锁
 					</li>
 				</ul>
-			</div>		
-		</div>
-	</body>	
-	<script>		
-            //Knockout绑定
-            var ViewModel = function () {
-                
-            };		
-           var jsonArray = [
-                    {         
-                    	"img": "../img/qq.jpg",
-                        "title": "三亚亚龙湾美高梅度假酒店",
-                        "comments":"10%",
-                        "price":"14800",
-                        "type":"豪华型",
-                        "detail": "亚龙湾度假区   |  亚龙湾",
-                    }];
-           for(var i=0,len=5;i<len;i++){
-				jsonArray.push({	      
-                	"img": "../img/qq.jpg",
-                    "title": "三亚亚龙湾美高梅度假酒店",
-                    "comments":"96%",
-                    "price":"14800",
-                    "type":"豪华型",
-                    "detail": "亚龙湾度假区   |  亚龙湾",
-				});
+				 
+				 <script id="list" type="text/x-dot-template"> 
+		        	{{ for (var i=0;i<it.length;i++ ){ }} 
+		        		
+			    		<li class="um-listview-row">
+							<a href="#" class="um-list-item um-swipe-action um-no-icon">
+							<div class="um-list-item-media">
+								<img alt="" width=72 height=72 src=" {{=it[i].img}} ">
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body f12 " style="padding-right:5px;color:#888">
+									<div  class="um-text-overflow f14" style="color:#353535;">{{=it[i].title}}</div>
+									<div class="clearfix" >
+										<div class="fr" style="color:#f55">
+											<i style="font-style:normal">￥</i><span  style="font-size: 18px">{{=it[i].price}}</span>
+										</div>
+										<span  style="color:#353535;line-height: 24px">{{=it[i].comments}}</span><em style="color:#888;font-style: normal">好评</em>
+									</div>
+									<div class="clearfix">
+										<div class="fr">
+											<span style="background:#9B7AD0;" class="bg-span">APP新客折扣</span>
+											<span style="background:#F5725A;" class="bg-span">特价</span>
+											<span style="background:#FFA14D;;" class="bg-span">返</span>
+										</div>
+										<div>
+											<span >{{=it[i].type}}</span>
+											<i class="ti-rss-alt icons"></i>
+											<i class="ti-flag-alt icons"></i>
+										</div>
+									</div>
+									<div  class="f12 um-text-overflow">{{=it[i].detail}}</div>
+								</div>
+							</div> </a>
+						</li>
+		           	{{ } }}
+		        </script>
+				<div class="um-listview-wrap" id="listview">
+					<ul class="um-list um-no-active" id="um-list">
+						
+					</ul>
+					<div class="more">
+						<p >
+							没有更多酒店了
+						</p>
+						<div>
+							<a>个人中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>下载客户端</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>返回首页</a>
+						</div>
+						<p style="font-size: 12px">
+							©2009-2016 艺龙无线
+						</p>
+					</div>
+
+				</div>
+			</div>
+	</body>
+	<script>	
+		var turn = 1;
+		var off = 1;
+		$('.tabbar li').click(function() {
+			if ($(this).index() == 0) {
+				$(this).addClass('active').siblings().removeClass('active');
+				turn = 1;
+			};
+			if ($(this).index() == 1) {
+				if (turn == 1) {
+					$(this).addClass('active').prev().removeClass('active');
+					turn = 2;
+				} else {
+					$(this).removeClass('active')
+					turn = 1;
+				}
+			}
+
+			if ($(this).index() == 2) {
+				$('.tabbar li').eq(0).removeClass('active');
+				if (off == 1) {
+					$(this).addClass('active').next().removeClass('active');
+					off = 2;
+				} else {
+					$(this).removeClass('active');
+					off = 1;
+				}
+			}
+
+			if ($(this).index() == 3) {
+				$('.tabbar li').eq(0).removeClass('active');
+				if (off == 2) {
+					$(this).addClass('active').prev().removeClass('active');
+					off = 1;
+				} else {
+					$(this).removeClass('active');
+					off = 2;
+				}
+
+			}
+
+			if (!$('.tabbar li').hasClass("active")) {
+				$('.tabbar li').eq(0).addClass('active');
+			}
+		})
+
+		var jsonArray ={
+		'北京': [{
+				"img" : "../img/pic1.jpg",
+				"title" : "北京亚奥国际酒店",
+				"comments" : "96%",
+				"price" : "891",
+				"type" : "四星级",
+				"detail" : "朝阳区   |  鸟巢",
+			}, {
+				"img" : "../img/pic2.jpg",
+				"title" : "北京如家精选东四店",
+				"comments" : "100%",
+				"price" : "594",
+				"type" : "高档型",
+				"detail" : "东城区   |  东直门",
+			},{
+				"img" : "../img/pic3.jpg",
+				"title" : "北京贝尔特酒店",
+				"comments" : "96%",
+				"price" : "638",
+				"type" : "高档型",
+				"detail" : "东城区   |  崇文门",
+			},{
+				"img" : "../img/pic4.jpg",
+				"title" : "北京机场快捷酒店",
+				"comments" : "71%",
+				"price" : "109",
+				"type" : "舒适性",
+				"detail" : "朝阳区   |  首都机场",
+			},{
+				"img" : "../img/pic5.jpg",
+				"title" : "北京如家新国展睿柏.云酒店",
+				"comments" : "80%",
+				"price" : "200",
+				"type" : "舒适性",
+				"detail" : "顺义区  |  新国展",
+			},{
+				"img" : "../img/pic6.jpg",
+				"title" : "北京若金酒店",
+				"comments" : "99%",
+				"price" : "1211",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  望京",
+			}, {
+				"img" : "../img/pic7.jpg",
+				"title" : "北京日坛宾馆",
+				"comments" : "96%",
+				"price" : "607",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  秀水市场",
+			}, {
+				"img" : "../img/pic8.jpg",
+				"title" : "北京亚龙湾美高梅度假酒店",
+				"comments" : "10%",
+				"price" : "800",
+				"type" : "豪华型",
+				"detail" : "亚龙湾度假区   |  亚龙湾",
+			}],
+			'上海':[{
+				"img" : "../img/pic1.jpg",
+				"title" : "上海亚奥国际酒店",
+				"comments" : "96%",
+				"price" : "891",
+				"type" : "四星级",
+				"detail" : "朝阳区   |  鸟巢",
+			}, {
+				"img" : "../img/pic2.jpg",
+				"title" : "上海如家精选东四店",
+				"comments" : "100%",
+				"price" : "594",
+				"type" : "高档型",
+				"detail" : "东城区   |  东直门",
+			},{
+				"img" : "../img/pic3.jpg",
+				"title" : "上海贝尔特酒店",
+				"comments" : "96%",
+				"price" : "638",
+				"type" : "高档型",
+				"detail" : "东城区   |  崇文门",
+			},{
+				"img" : "../img/pic4.jpg",
+				"title" : "上海机场快捷酒店",
+				"comments" : "71%",
+				"price" : "109",
+				"type" : "舒适性",
+				"detail" : "朝阳区   |  首都机场",
+			},{
+				"img" : "../img/pic5.jpg",
+				"title" : "上海如家新国展睿柏.云酒店",
+				"comments" : "80%",
+				"price" : "200",
+				"type" : "舒适性",
+				"detail" : "顺义区  |  新国展",
+			},{
+				"img" : "../img/pic6.jpg",
+				"title" : "上海若金酒店",
+				"comments" : "99%",
+				"price" : "1211",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  望京",
+			}, {
+				"img" : "../img/pic7.jpg",
+				"title" : "上海日坛宾馆",
+				"comments" : "96%",
+				"price" : "607",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  秀水市场",
+			}, {
+				"img" : "../img/pic8.jpg",
+				"title" : "上海亚龙湾美高梅度假酒店",
+				"comments" : "10%",
+				"price" : "800",
+				"type" : "豪华型",
+				"detail" : "亚龙湾度假区   |  亚龙湾",
+			}],
+			'广州':[{
+				"img" : "../img/pic1.jpg",
+				"title" : "广州亚奥国际酒店",
+				"comments" : "96%",
+				"price" : "891",
+				"type" : "四星级",
+				"detail" : "朝阳区   |  鸟巢",
+			}, {
+				"img" : "../img/pic2.jpg",
+				"title" : "广州如家精选东四店",
+				"comments" : "100%",
+				"price" : "594",
+				"type" : "高档型",
+				"detail" : "东城区   |  东直门",
+			},{
+				"img" : "../img/pic3.jpg",
+				"title" : "广州贝尔特酒店",
+				"comments" : "96%",
+				"price" : "638",
+				"type" : "高档型",
+				"detail" : "东城区   |  崇文门",
+			},{
+				"img" : "../img/pic4.jpg",
+				"title" : "广州机场快捷酒店",
+				"comments" : "71%",
+				"price" : "109",
+				"type" : "舒适性",
+				"detail" : "朝阳区   |  首都机场",
+			},{
+				"img" : "../img/pic5.jpg",
+				"title" : "广州如家新国展睿柏.云酒店",
+				"comments" : "80%",
+				"price" : "200",
+				"type" : "舒适性",
+				"detail" : "顺义区  |  新国展",
+			},{
+				"img" : "../img/pic6.jpg",
+				"title" : "广州若金酒店",
+				"comments" : "99%",
+				"price" : "1211",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  望京",
+			}, {
+				"img" : "../img/pic7.jpg",
+				"title" : "广州日坛宾馆",
+				"comments" : "96%",
+				"price" : "607",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  秀水市场",
+			}, {
+				"img" : "../img/pic8.jpg",
+				"title" : "广州亚龙湾美高梅度假酒店",
+				"comments" : "10%",
+				"price" : "800",
+				"type" : "豪华型",
+				"detail" : "亚龙湾度假区   |  亚龙湾",
+			}],
+			'深圳':[{
+				"img" : "../img/pic1.jpg",
+				"title" : "深圳亚奥国际酒店",
+				"comments" : "96%",
+				"price" : "891",
+				"type" : "四星级",
+				"detail" : "朝阳区   |  鸟巢",
+			}, {
+				"img" : "../img/pic2.jpg",
+				"title" : "深圳如家精选东四店",
+				"comments" : "100%",
+				"price" : "594",
+				"type" : "高档型",
+				"detail" : "东城区   |  东直门",
+			},{
+				"img" : "../img/pic3.jpg",
+				"title" : "深圳贝尔特酒店",
+				"comments" : "96%",
+				"price" : "638",
+				"type" : "高档型",
+				"detail" : "东城区   |  崇文门",
+			},{
+				"img" : "../img/pic4.jpg",
+				"title" : "深圳机场快捷酒店",
+				"comments" : "71%",
+				"price" : "109",
+				"type" : "舒适性",
+				"detail" : "朝阳区   |  首都机场",
+			},{
+				"img" : "../img/pic5.jpg",
+				"title" : "深圳如家新国展睿柏.云酒店",
+				"comments" : "80%",
+				"price" : "200",
+				"type" : "舒适性",
+				"detail" : "顺义区  |  新国展",
+			},{
+				"img" : "../img/pic6.jpg",
+				"title" : "深圳若金酒店",
+				"comments" : "99%",
+				"price" : "1211",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  望京",
+			}, {
+				"img" : "../img/pic7.jpg",
+				"title" : "深圳日坛宾馆",
+				"comments" : "96%",
+				"price" : "607",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  秀水市场",
+			}, {
+				"img" : "../img/pic8.jpg",
+				"title" : "深圳亚龙湾美高梅度假酒店",
+				"comments" : "10%",
+				"price" : "800",
+				"type" : "豪华型",
+				"detail" : "亚龙湾度假区   |  亚龙湾",
+			}],
+			'香港':[{
+				"img" : "../img/pic1.jpg",
+				"title" : "香港亚奥国际酒店",
+				"comments" : "96%",
+				"price" : "891",
+				"type" : "四星级",
+				"detail" : "朝阳区   |  鸟巢",
+			}, {
+				"img" : "../img/pic2.jpg",
+				"title" : "香港如家精选东四店",
+				"comments" : "100%",
+				"price" : "594",
+				"type" : "高档型",
+				"detail" : "东城区   |  东直门",
+			},{
+				"img" : "../img/pic3.jpg",
+				"title" : "香港贝尔特酒店",
+				"comments" : "96%",
+				"price" : "638",
+				"type" : "高档型",
+				"detail" : "东城区   |  崇文门",
+			},{
+				"img" : "../img/pic4.jpg",
+				"title" : "香港机场快捷酒店",
+				"comments" : "71%",
+				"price" : "109",
+				"type" : "舒适性",
+				"detail" : "朝阳区   |  首都机场",
+			},{
+				"img" : "../img/pic5.jpg",
+				"title" : "香港如家新国展睿柏.云酒店",
+				"comments" : "80%",
+				"price" : "200",
+				"type" : "舒适性",
+				"detail" : "顺义区  |  新国展",
+			},{
+				"img" : "../img/pic6.jpg",
+				"title" : "香港若金酒店",
+				"comments" : "99%",
+				"price" : "1211",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  望京",
+			}, {
+				"img" : "../img/pic7.jpg",
+				"title" : "香港日坛宾馆",
+				"comments" : "96%",
+				"price" : "607",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  秀水市场",
+			}, {
+				"img" : "../img/pic8.jpg",
+				"title" : "香港亚龙湾美高梅度假酒店",
+				"comments" : "10%",
+				"price" : "800",
+				"type" : "豪华型",
+				"detail" : "亚龙湾度假区   |  亚龙湾",
+			}]
 			}
 			
-            var viewModel = new ViewModel();
-			viewModel.data = ko.observableArray(jsonArray);
-            ko.applyBindings(viewModel);
+		var arrText = doT.template($("#list").text());
+		$("#um-list").html(arrText(jsonArray['北京']));
 			
-			 //构造控件实例
-            var listview = UM.listview("#listview");
-
-            //添加控件方法
-            listview.on("pullDown", function (sender) {
-                //这是可以编写列表下拉加载逻辑，参数sender即为当前列表实例对象
-				/* var row = {
-                    "img": "../img/news5.png",
-                     "title": "科大讯飞发布新交互界面 语音可同步转成文字",
-                     "detail": "此外科大讯飞还发布了录音宝、录音笔、讯飞听见网、智学网、E听说等新品。",
-                     "comments": 1800
-                };
-                viewModel.data.unshift(row); */
-                sender.refresh(); 
-            });
-            listview.on("pullUp", function (sender) {
-                //这是可以编写列表上拉刷新逻辑，参数sender即为当前列表实例对象
-                /* var row = {
-                      "img": "../img/news6.png",
-                      "title": "科幻成真？微软开发可预测未来犯罪应用",
-                      "detail": "这种新技术可依据历史记录，预测哪些囚犯将在获释6个月内重新被捕。",
-                      "comments": 2633
-                 };
-                viewModel.data.push(row); */
-                sender.refresh(); 
-            });
-            listview.on("itemDelete", function (sender, args) {
-                //这是可以编写行删除逻辑，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
-                /* args.$target.slideUp(500,function(){
-                 var item = viewModel.data()[args.rowIndex];
-                 viewModel.data.remove(item);
-                 });*/
-            });
-            listview.on("itemClick", function (sender, args) {
-                //这里可以处理行点击事件，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
-				//alert("您点击了列表的第" + (args.rowIndex + 1) +　"行！");
-            });
-            listview.on("itemSwipeLeft", function (sender, args) {
-                //这里可以处理行左滑事件，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
-                //sender.showItemMenu(args.$target);
-            });
-			listview.on("tapHold", function () {
-               //这里可以处理长按事件
-			   //console.log("您长按了列表！");
-            });
-            
-           function tList(name){
-		tLoad();
-		setTimeout("qq("+name+")",2000);
-
+		function tList(name) {
+			tLoad();
+			setTimeout("qq(" + name + ")", 1000);
 		}
 
-		function qq(name){
-		if(name==1){
-		jsonArray = [
-		{
-		"img": "../img/qq.jpg",
-		"title": "三亚亚龙湾美高梅度假酒店",
-		"comments":"96%",
-		"price":"14800",
-		"type":"豪华型",
-		"detail": "亚龙湾度假区   |  亚龙湾",
-		}];
+		function qq(name) {
+			if (name == 1) {
+			jsonArray = [
+			{
+				"img" : "../img/pic1.jpg",
+				"title" : "亚奥国际酒店",
+				"comments" : "96%",
+				"price" : "891",
+				"type" : "四星级",
+				"detail" : "朝阳区   |  鸟巢",
+			}, 
+			{
+				"img" : "../img/pic2.jpg",
+				"title" : "如家精选东四店",
+				"comments" : "100%",
+				"price" : "594",
+				"type" : "高档型",
+				"detail" : "东城区   |  东直门",
+			}, 
+			{
+				"img" : "../img/pic3.jpg",
+				"title" : "贝尔特酒店",
+				"comments" : "96%",
+				"price" : "638",
+				"type" : "高档型",
+				"detail" : "东城区   |  崇文门",
+			}, 
+			{
+				"img" : "../img/pic4.jpg",
+				"title" : "机场快捷酒店",
+				"comments" : "71%",
+				"price" : "109",
+				"type" : "舒适性",
+				"detail" : "朝阳区   |  首都机场",
+			}, 
+			{
+				"img" : "../img/pic5.jpg",
+				"title" : "如家新国展睿柏.云酒店",
+				"comments" : "80%",
+				"price" : "200",
+				"type" : "舒适性",
+				"detail" : "顺义区  |  新国展",
+			}, 
+			{
+				"img" : "../img/pic6.jpg",
+				"title" : "若金酒店",
+				"comments" : "99%",
+				"price" : "1211",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  望京",
+			}, 
+			{
+				"img" : "../img/pic7.jpg",
+				"title" : "日坛宾馆",
+				"comments" : "96%",
+				"price" : "607",
+				"type" : "豪华型",
+				"detail" : "朝阳区   |  秀水市场",
+			}, 
+			{
+				"img" : "../img/pic8.jpg",
+				"title" : "亚龙湾美高梅度假酒店",
+				"comments" : "10%",
+				"price" : "800",
+				"type" : "豪华型",
+				"detail" : "亚龙湾度假区   |  亚龙湾",
+			}
+		];
+			
+				$("#um-list").html(arrText(jsonArray));
+			}
+
+			if (name == 2) {
+				jsonArray = [
+					{
+						"img" : "../img/pic5.jpg",
+						"title" : "如家新国展睿柏.云酒店",
+						"comments" : "80%",
+						"price" : "200",
+						"type" : "舒适性",
+						"detail" : "顺义区  |  新国展",
+					}, 
+					{
+						"img" : "../img/pic6.jpg",
+						"title" : "若金酒店",
+						"comments" : "99%",
+						"price" : "1211",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  望京",
+					}, 
+					{
+						"img" : "../img/pic7.jpg",
+						"title" : "日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, 
+					{
+						"img" : "../img/pic8.jpg",
+						"title" : "亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}
+				];
+		
+				$("#um-list").html(arrText(jsonArray));
+			}
+			if (name == 3) {
+				jsonArray = [					
+					{
+						"img" : "../img/pic7.jpg",
+						"title" : "日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, 
+					{
+						"img" : "../img/pic8.jpg",
+						"title" : "亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}
+				];
+				
+				$("#um-list").html(arrText(jsonArray));
+			}
+			if (name == 4) {
+				jsonArray = [	
+					{
+						"img" : "../img/pic2.jpg",
+						"title" : "如家精选东四店",
+						"comments" : "100%",
+						"price" : "594",
+						"type" : "高档型",
+						"detail" : "东城区   |  东直门",
+					}, 
+					{
+						"img" : "../img/pic3.jpg",
+						"title" : "贝尔特酒店",
+						"comments" : "96%",
+						"price" : "638",
+						"type" : "高档型",
+						"detail" : "东城区   |  崇文门",
+					}, 
+					{
+						"img" : "../img/pic4.jpg",
+						"title" : "机场快捷酒店",
+						"comments" : "71%",
+						"price" : "109",
+						"type" : "舒适性",
+						"detail" : "朝阳区   |  首都机场",
+					}, 
+				];
+		
+				$("#um-list").html(arrText(jsonArray));
+
+			}
+
 		}
 
-		if(name==2){
-		jsonArray = [
-		{
-		"img": "../img/news1.png",
-		"title": "三亚亚龙湾美高梅度假酒店",
-		"comments":"100%",
-		"price":"14800",
-		"type":"豪华型",
-		"detail": "亚龙湾度假区   |  亚龙湾",
-		}];
-		}
-		if(name==3){
-		jsonArray = [
-		{
-		"img": "../img/sun.png",
-		"title": "三亚亚龙湾美高梅度假酒店",
-		"comments":"99%",
-		"price":"14800",
-		"type":"豪华型",
-		"detail": "亚龙湾度假区   |  亚龙湾",
-		}];
-		}
-		if(name==4){
-		jsonArray = [
-		{
-		"img": "../img/love.png",
-		"title": "三亚亚龙湾美高梅度假酒店",
-		"comments":"10%",
-		"price":"14800",
-		"type":"豪华型",
-		"detail": "亚龙湾度假区   |  亚龙湾",
-		}];
-		}
-		viewModel.data = ko.observableArray(jsonArray);
-		ko.applyBindings(viewModel);
-		}
-
-		function tLoad(){
+		function tLoad() {
 			$('#load').show();
-			setTimeout("$('#load').hide()",2000);
+			setTimeout("$('#load').hide()", 1000);
 		}
-            //zl
-            $(function() {
-            /* 本UM.Calendar插件基于jquery的fullCalendar1.6.4插件编写
-			  * UM.calendar在fullcalendar1.6.4基础上添加了getDayEvents方法,可在实例化之后调用
-			  * UM.calendar有两个参数，第一个参数是日历容器的选择器，比如下面的"#calendar",第二个参数是日历配置对象，与fullCalendar1.6.4配置对象等同
-			  */
+		
+		$('.um-back').click(function(){
+			$('.tabbar li').eq(0).addClass('active').siblings().removeClass('active');
+			jsonArray ={
+				'北京': [{
+						"img" : "../img/pic1.jpg",
+						"title" : "北京亚奥国际酒店",
+						"comments" : "96%",
+						"price" : "891",
+						"type" : "四星级",
+						"detail" : "朝阳区   |  鸟巢",
+					}, {
+						"img" : "../img/pic2.jpg",
+						"title" : "北京如家精选东四店",
+						"comments" : "100%",
+						"price" : "594",
+						"type" : "高档型",
+						"detail" : "东城区   |  东直门",
+					},{
+						"img" : "../img/pic3.jpg",
+						"title" : "北京贝尔特酒店",
+						"comments" : "96%",
+						"price" : "638",
+						"type" : "高档型",
+						"detail" : "东城区   |  崇文门",
+					},{
+						"img" : "../img/pic4.jpg",
+						"title" : "北京机场快捷酒店",
+						"comments" : "71%",
+						"price" : "109",
+						"type" : "舒适性",
+						"detail" : "朝阳区   |  首都机场",
+					},{
+						"img" : "../img/pic5.jpg",
+						"title" : "北京如家新国展睿柏.云酒店",
+						"comments" : "80%",
+						"price" : "200",
+						"type" : "舒适性",
+						"detail" : "顺义区  |  新国展",
+					},{
+						"img" : "../img/pic6.jpg",
+						"title" : "北京若金酒店",
+						"comments" : "99%",
+						"price" : "1211",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  望京",
+					}, {
+						"img" : "../img/pic7.jpg",
+						"title" : "北京日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, {
+						"img" : "../img/pic8.jpg",
+						"title" : "北京亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}],
+					'上海':[{
+						"img" : "../img/pic1.jpg",
+						"title" : "上海亚奥国际酒店",
+						"comments" : "96%",
+						"price" : "891",
+						"type" : "四星级",
+						"detail" : "朝阳区   |  鸟巢",
+					}, {
+						"img" : "../img/pic2.jpg",
+						"title" : "上海如家精选东四店",
+						"comments" : "100%",
+						"price" : "594",
+						"type" : "高档型",
+						"detail" : "东城区   |  东直门",
+					},{
+						"img" : "../img/pic3.jpg",
+						"title" : "上海贝尔特酒店",
+						"comments" : "96%",
+						"price" : "638",
+						"type" : "高档型",
+						"detail" : "东城区   |  崇文门",
+					},{
+						"img" : "../img/pic4.jpg",
+						"title" : "上海机场快捷酒店",
+						"comments" : "71%",
+						"price" : "109",
+						"type" : "舒适性",
+						"detail" : "朝阳区   |  首都机场",
+					},{
+						"img" : "../img/pic5.jpg",
+						"title" : "上海如家新国展睿柏.云酒店",
+						"comments" : "80%",
+						"price" : "200",
+						"type" : "舒适性",
+						"detail" : "顺义区  |  新国展",
+					},{
+						"img" : "../img/pic6.jpg",
+						"title" : "上海若金酒店",
+						"comments" : "99%",
+						"price" : "1211",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  望京",
+					}, {
+						"img" : "../img/pic7.jpg",
+						"title" : "上海日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, {
+						"img" : "../img/pic8.jpg",
+						"title" : "上海亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}],
+					'广州':[{
+						"img" : "../img/pic1.jpg",
+						"title" : "广州亚奥国际酒店",
+						"comments" : "96%",
+						"price" : "891",
+						"type" : "四星级",
+						"detail" : "朝阳区   |  鸟巢",
+					}, {
+						"img" : "../img/pic2.jpg",
+						"title" : "广州如家精选东四店",
+						"comments" : "100%",
+						"price" : "594",
+						"type" : "高档型",
+						"detail" : "东城区   |  东直门",
+					},{
+						"img" : "../img/pic3.jpg",
+						"title" : "广州贝尔特酒店",
+						"comments" : "96%",
+						"price" : "638",
+						"type" : "高档型",
+						"detail" : "东城区   |  崇文门",
+					},{
+						"img" : "../img/pic4.jpg",
+						"title" : "广州机场快捷酒店",
+						"comments" : "71%",
+						"price" : "109",
+						"type" : "舒适性",
+						"detail" : "朝阳区   |  首都机场",
+					},{
+						"img" : "../img/pic5.jpg",
+						"title" : "广州如家新国展睿柏.云酒店",
+						"comments" : "80%",
+						"price" : "200",
+						"type" : "舒适性",
+						"detail" : "顺义区  |  新国展",
+					},{
+						"img" : "../img/pic6.jpg",
+						"title" : "广州若金酒店",
+						"comments" : "99%",
+						"price" : "1211",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  望京",
+					}, {
+						"img" : "../img/pic7.jpg",
+						"title" : "广州日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, {
+						"img" : "../img/pic8.jpg",
+						"title" : "广州亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}],
+					'深圳':[{
+						"img" : "../img/pic1.jpg",
+						"title" : "深圳亚奥国际酒店",
+						"comments" : "96%",
+						"price" : "891",
+						"type" : "四星级",
+						"detail" : "朝阳区   |  鸟巢",
+					}, {
+						"img" : "../img/pic2.jpg",
+						"title" : "深圳如家精选东四店",
+						"comments" : "100%",
+						"price" : "594",
+						"type" : "高档型",
+						"detail" : "东城区   |  东直门",
+					},{
+						"img" : "../img/pic3.jpg",
+						"title" : "深圳贝尔特酒店",
+						"comments" : "96%",
+						"price" : "638",
+						"type" : "高档型",
+						"detail" : "东城区   |  崇文门",
+					},{
+						"img" : "../img/pic4.jpg",
+						"title" : "深圳机场快捷酒店",
+						"comments" : "71%",
+						"price" : "109",
+						"type" : "舒适性",
+						"detail" : "朝阳区   |  首都机场",
+					},{
+						"img" : "../img/pic5.jpg",
+						"title" : "深圳如家新国展睿柏.云酒店",
+						"comments" : "80%",
+						"price" : "200",
+						"type" : "舒适性",
+						"detail" : "顺义区  |  新国展",
+					},{
+						"img" : "../img/pic6.jpg",
+						"title" : "深圳若金酒店",
+						"comments" : "99%",
+						"price" : "1211",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  望京",
+					}, {
+						"img" : "../img/pic7.jpg",
+						"title" : "深圳日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, {
+						"img" : "../img/pic8.jpg",
+						"title" : "深圳亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}],
+					'香港':[{
+						"img" : "../img/pic1.jpg",
+						"title" : "香港亚奥国际酒店",
+						"comments" : "96%",
+						"price" : "891",
+						"type" : "四星级",
+						"detail" : "朝阳区   |  鸟巢",
+					}, {
+						"img" : "../img/pic2.jpg",
+						"title" : "香港如家精选东四店",
+						"comments" : "100%",
+						"price" : "594",
+						"type" : "高档型",
+						"detail" : "东城区   |  东直门",
+					},{
+						"img" : "../img/pic3.jpg",
+						"title" : "香港贝尔特酒店",
+						"comments" : "96%",
+						"price" : "638",
+						"type" : "高档型",
+						"detail" : "东城区   |  崇文门",
+					},{
+						"img" : "../img/pic4.jpg",
+						"title" : "香港机场快捷酒店",
+						"comments" : "71%",
+						"price" : "109",
+						"type" : "舒适性",
+						"detail" : "朝阳区   |  首都机场",
+					},{
+						"img" : "../img/pic5.jpg",
+						"title" : "香港如家新国展睿柏.云酒店",
+						"comments" : "80%",
+						"price" : "200",
+						"type" : "舒适性",
+						"detail" : "顺义区  |  新国展",
+					},{
+						"img" : "../img/pic6.jpg",
+						"title" : "香港若金酒店",
+						"comments" : "99%",
+						"price" : "1211",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  望京",
+					}, {
+						"img" : "../img/pic7.jpg",
+						"title" : "香港日坛宾馆",
+						"comments" : "96%",
+						"price" : "607",
+						"type" : "豪华型",
+						"detail" : "朝阳区   |  秀水市场",
+					}, {
+						"img" : "../img/pic8.jpg",
+						"title" : "香港亚龙湾美高梅度假酒店",
+						"comments" : "10%",
+						"price" : "800",
+						"type" : "豪华型",
+						"detail" : "亚龙湾度假区   |  亚龙湾",
+					}]
+				}
+		})
+		
+		function topage(id, name) {
+			UM.page.changePage({target : id})
+			if(name){
+				$('.city').html(name);	
+				$("#um-list").html(arrText(jsonArray[name]));
+			}	
+		}
 
-            var calendar = UM.calendar("#calendar", {
-                buttonText: {
-                    prev: "<img src='../img/cal_arrow_l.png' width=30></img>",
-                    next: "<img src='../img/cal_arrow_r.png' width=30></img>"
-                },
-                //行点击
-                dayClick: function(date, jsEvent, view) {
-                    /*
-						var events = calendar.getDayEvents(date); //获取某天事件数组
-						console.log(events);		
-                      */
-                },
-
-                //事件源,可在日历控件初始化之后加载这些事件
-                events: [{
-                    title: "XX产品发布会",
-                    desc: "不可错过",
-                    start: "2015-12-21 10:40",
-                    end: "2015-12-23 11:50",
-                    allDay: true
-                },
-                {
-                    title: "XX座谈会",
-                    desc: "非常重要",
-                    end: "2015-12-25T10:50",
-                    start: "2015-12-24T10:50",
-                    allDay: false
-                }]
-            });
-        });
-
-	$(function() {
-		var list = [{
-			content: "../img/g1.jpg"
-		}, {
-			content: "../img/g2.jpg"
-		}, {
-			content: "../img/g3.jpg"
-		}];
-
-		var islider = new iSlider({
-			type: 'pic',
-			data: list,
-			dom: document.getElementById("iSlider-wrapper"),
-			isLooping: true,
-			animateType: 'default',
-			isAutoplay: true,
-			animateTime: 800
-		});
-		islider.addDot();
-	})
-//首页顶部轮播Js
-
-	function topage(id){
-		UM.page.changePage({target:id});
+		//zl
 		 
-	}
-	//page4 显示价格函数
-	function showPrice(){
-		$('#chooseprice').css('display','block');
-		$('#cover').css('display','block');
-	}
-            
-        	
-    </script>
+
+		$(function() {
+			var list = [{
+				content : "../img/g1.jpg"
+			}, {
+				content : "../img/g2.jpg"
+			}, {
+				content : "../img/g3.jpg"
+			}];
+
+			var islider = new iSlider({
+				type : 'pic',
+				data : list,
+				dom : document.getElementById("iSlider-wrapper"),
+				isLooping : true,
+				animateType : 'default',
+				isAutoplay : true,
+				animateTime : 800
+			});
+			islider.addDot();
+		})
+		 
+//page4页面数据获取
+    $('#page4 ul li:not(.angle-down)').on('click',function(){
+		    topage('#main'); 
+			$('#choosehotel div:first-child span').html($(this).html());
+			$('#choosehotel div:first-child span').css('font-size','1.063rem');
+			$('#choosehotel div:first-child span').css('color','#555');
+			$('#choosehotel div:last-child img').css('display','inline-block');
+	})
+	$('#choosehotel div:last-child img').click(function(){
+		$(this).css('display','none');
+		$('#choosehotel div:first-child span').html('酒店名称/位置不限');
+		$('#choosehotel div:first-child span').css('font-size','1.063rem');
+		$('#choosehotel div:first-child span').css('color','#ccc');
+	});
+	                
+	/*日历插件*/		
+	  $(function () {
+            // var curr = new Date().getFullYear();
+            var opt = {
+                'date': {
+                    preset: 'date'
+                },
+                'select': {
+                    preset: 'select'
+                }
+            };
+       
+            $('.demo-test-date').scroller('destroy').scroller(
+            	$.extend(opt['date'], {
+                    theme: "ios7",
+                    mode: "scroller",
+                    display: "bottom",
+                    animate: ""
+                })
+            );
+        });
+		/*日期的获取*/
+		(function addDay(){
+			var now=(new Date()).format('yyyy/MM/dd');
+			var days=(new Date()).getTime()+3600*1000*24;
+		 
+			var end0=(new Date(days)).format('yyyy/MM/dd');
+			$('.s_start').val(now+'今天');
+			$('.s_end').val(end0+'明天');
+
+		})();
+		function addFun(){
+			var now=(new Date()).format('yyyy/MM/dd');			 
+			var start = $('.s_start').val();
+			var end = $('.s_end').val();
+			var week1=(new Date(start)).getDay();
+			//alert(week1);
+			var week2=(new Date(end)).getDay();
+			//alert(week2);
+			function weekshift(week){
+					switch(week){
+					case 0:
+					week='周日'; break;
+					case 1:
+					week='周一'; break;
+					case 2:
+					week='周二'; break;
+					case 3:
+					week='周三'; break;
+					case 4:
+					week='周四'; break;
+					case 5:
+					week='周五'; break;
+					case 6:
+					week='周六'; break;
+					 default:
+					 week=''
+				}
+				return week;
+			}
+			week1=weekshift(week1);
+			week2=weekshift(week2);
+			$('.s_start').val(start+week1);
+			$('.s_end').val(end+week2);
+			if (end == "" || start == "") {
+				return false;
+			};	 
+			start=new Date(start.slice(0,10)).format('yyyy/MM/dd');
+			console.log(start);
+			end=new Date(end.slice(0,10)).format('yyyy/MM/dd');  
+			if(now > start){
+			 alert("开始时间不能小于现在时间");
+			 }
+			if(start >= end){
+				alert("开始时间不能小于等于结束时间");
+				return false;
+			}	 
+			 
+			if(start < end){
+				start = String(Date.parse(new Date(start)));
+				end = String(Date.parse(new Date(end)));
+				var difference = Math.ceil((end - start)/3600000/24);	 
+				//alert(difference);
+				$('#livetime').html(difference);
+			}
+			 
+		};
+ 
+		 
+	</script>
 </html>

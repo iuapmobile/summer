@@ -1,15 +1,24 @@
-/* box model */
-.um-box { @include flex-align; }
-.um-bf1 { @include flex-count; }
-.um-bf2 { @include flex-count(2); }
-.um-bf3 { @include flex-count(3); }
-.um-bf4 { @include flex-count(4); }
+/*** from scss/um/Layout/_box.scss ***/
+.um-box { @include flex; }         //from Mixins/_box.scss
+.um-bf1 { @include flex-count; }   //from Mixins/_box.scss
+.um-bf2 { @include flex-count(2); }//from Mixins/_box.scss
+.um-bf3 { @include flex-count(3); }//from Mixins/_box.scss
+.um-bf4 { @include flex-count(4); }//from Mixins/_box.scss
 .um-direction-h {
 	@include flex-orient(h);
 }
 .um-direction-v {
 	@include flex-orient(v);
 }
+.um-vbox {
+	@include flex;
+	@include flex-orient(v);
+}
+.um-hbox {
+	@include flex;
+	@include flex-orient(h);
+}
+
 .um-box-justify { 
 	@include flex-align-justify;
 	>a { 

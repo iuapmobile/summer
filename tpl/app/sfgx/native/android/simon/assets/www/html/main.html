@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>search</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style>
+        .list{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            background:#ffffff;
+        }
+        .i-box{
+            box-sizing:content-box;
+            width:0.65rem;
+            height:0.65rem;
+            padding:0.26rem 0.2rem;
+        }
+        .i-box img{
+            display:block;
+            width:100%;
+            height:100%;
+            border-radius:50% 50%;
+        }
+        .l-con{
+            line-height:0.65rem;
+            font-size:0.3rem;
+            -webkit-box-flex: 1; 
+            -webkit-flex: 1;
+            flex: 1;
+            padding:0.26rem 0;
+            padding-right:0.6rem;
+            border-bottom:1px solid #e8e8e8;
+            background:url(../icon/right.png) no-repeat 95% center;
+            background-size:0.17rem 0.3rem;
+        }
+    </style>
+  </head>
+<body>
+   <div class="wrap">
+       <ul class="item">
+           <li class="list" onclick="openWin(this)">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list">
+               <div class=" i-box">
+                   <img src="../icon/2.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list">
+               <div class=" i-box">
+                   <img src="../icon/3.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list">
+               <div class=" i-box">
+                   <img src="../icon/4.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list">
+               <div class=" i-box">
+                   <img src="../icon/2.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list" onclick="openWin(this)">
+               <div class=" i-box">
+                   <img src="../icon/4.png" alt="" />
+               </div>
+               <div class="clearfix l-con" >
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+       </ul>
+   </div>
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script>
+    function openWin(obj){
+        summer.openWin({
+           id : 'order-head',
+            url : 'html/order-head.html'
+        });
+    }
+</script>
+</html>

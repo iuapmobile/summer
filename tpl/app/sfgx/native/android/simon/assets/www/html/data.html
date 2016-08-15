@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>summer</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <link rel="stylesheet" href="../css/iscroll.css">
+    <style type="text/css" media="screen">
+        html,body,.wrap{
+            width:100%;
+            height:100%;
+        }
+        .mark{
+            position:fixed;
+            z-index:9;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+        }   
+        .opa{
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.4);
+        }
+        .icon{
+            color:#09c206;
+            width:0.8rem;
+            height:100%;
+        }
+        .icon-back{
+            background:url(../icon/back.png) no-repeat center center;
+            background-size:0.24rem 0.42rem;
+        }
+        .main{
+            position:absolute;
+            width:85%;
+            height:100%;
+            top:0;
+            right:0;
+            background:#ffffff;
+        }
+        .header{
+            height:0.88rem;
+            border-bottom:0.02rem solid #e8e8e8;
+        }
+        .content{
+            padding:0 0.2rem;
+        }
+        .content h5{
+            line-height:0.9rem;
+            font-size:0.32rem;
+            font-weight:400;
+        }
+        .demo-test-date{
+            width:2.7rem;
+            height:0.6rem;
+            font-size:0.28rem;
+            background:#f2f2f2;
+            padding-left:0.2rem;
+            line-height:0.6rem;
+            float:left;
+        }
+        .zhi{
+            float:left;
+            color:#bec4c9;
+            font-size:0.36rem;
+            line-height:0.6rem;
+        }
+        .btn-b{
+            margin-top:0.9rem;
+        }
+        .btn-b .btn{
+            display:block;
+            width:100%;
+            height:0.8rem;
+            text-align:center;
+            line-height:0.8rem;
+            font-size:0.32rem;
+            color:#ffffff;
+            background:#09c206;
+            border-radius:4px;
+        }
+    </style>
+  </head>
+<body>
+    <div class="wrap">
+        <div class="mark">
+            <div class="opa"></div>
+            <div class="main">
+                <div class="header">
+                    <a class="fl icon icon-back" onclick="summer.closeWin()"></a>
+                </div>
+                <div class="content">
+                    <h5>订单日期</h5>
+                    <div class="data-box clearfix">
+                        <input name="" id="start" class="demo-test-date" readonly placeholder="开始日期"/>
+                        <div class="zhi">—</div>
+                        <input name="" id="end" class="demo-test-date" readonly placeholder="结束日期"/>
+                    </div>
+                    <div class="btn-b">
+                        <a class="btn">查询</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/summer.js"></script>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../js/iscroll.js"></script>
+<script type="text/javascript" charset="utf-8">
+    summerready = function(){
+        
+    };
+    $(function () {
+        var opt = {
+            'date': {
+                preset: 'date'
+            }
+        };
+        $('.demo-test-date').scroller('destroy').scroller(
+            $.extend(opt['date'], {
+                theme: "ios7",
+                mode: "scroller",
+                display: "bottom",
+                animate: ""
+            })
+        );
+    });
+</script>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>search</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/summer.css">
+    <style>
+
+     .bar{
+            height:0.88rem;
+            position:relative;
+            background:#ffffff;
+        }
+        .icon{
+            position:absolute;
+            color:#09c206;
+            width:0.8rem;
+            height:100%;
+        }
+        .icon-person{
+            left:0;
+            top:0;
+            background:url(../icon/my.png) no-repeat center center;
+            background-size:0.34rem 0.38rem;
+        }
+        .icon-search{
+            right:0;
+            top:0;
+            background:url(../icon/seache.png) no-repeat center center;
+            background-size:0.36rem 0.37rem;
+        }
+        .title{
+            text-align:center;
+            font-size:0.32rem;
+            line-height:0.88rem;
+            width:100%;
+        }
+        .item li{
+            float:left;
+            width:25%;
+            font-size:0.24rem;
+            text-align:center;
+            background:#06bc03;
+            padding:0.15rem 0.3rem;
+        }
+        .item li a{
+            display:block;
+            line-height:0.5rem;
+            border:1px solid #06bc03;
+            color:#b9e6b8;
+            border-radius:5px 5px;
+        }
+        .item li a.active{
+            border:1px solid #ffffff;
+            color:#FFFFFF;
+        }
+        .nav .list{
+            float:left;
+            width:25%;
+            background:#09c206;
+            text-align:center;
+            padding-top:0.1rem;
+        }
+        .nav .list a{
+            padding-top:0.6rem;
+            color:#ffffff;
+            font-size:0.26rem;
+        }
+        .all{
+            background:url(../icon/all1.png) no-repeat center top;
+            background-size:0.34rem 0.42rem;
+        }
+        .distribution{
+            background:url(../icon/distribution1.png) no-repeat center top;
+            background-size: 0.42rem 0.34rem;
+        }
+        .rejected{
+            background:url(../icon/rejected1.png) no-repeat center top;
+            background-size:0.4rem 0.4rem;
+        }
+        .wait{
+            background:url(../icon/wait1.png) no-repeat center top;
+            background-size:0.53rem 0.46rem;
+        }
+        .nav .list.active{
+            background:#2ecb2b;
+        }
+  
+        
+        .nav .list.active a{
+            color:#f9ff57;
+        }
+        .nav .list.active .all{
+            background:url(../icon/all2.png) no-repeat center top;
+            background-size:0.34rem 0.42rem;
+        }
+        .nav .list.active .distribution{
+            background:url(../icon/distribution2.png) no-repeat center top;
+            background-size: 0.42rem 0.34rem;
+        }
+        .nav .list.active .rejected{
+            background:url(../icon/rejected2.png) no-repeat center top;
+            background-size:0.4rem 0.4rem;
+        }
+        .nav .list.active .wait{
+            background:url(../icon/wait2.png) no-repeat center top;
+            background-size:0.53rem 0.46rem;
+        }
+        .list1{
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            background:#ffffff;
+
+        }
+        .i-box{
+            box-sizing:content-box;
+            width:0.65rem;
+            height:0.65rem;
+            padding:0.26rem 0.2rem;
+        }
+        .i-box img{
+            display:block;
+            width:100%;
+            height:100%;
+            border-radius:50% 50%;
+        }
+        .l-con{
+            line-height:0.65rem;
+            font-size:0.3rem;
+            -webkit-box-flex: 1; 
+            -webkit-flex: 1;
+            flex: 1;
+            padding:0.26rem 0;
+            padding-right:0.6rem;
+            border-bottom:1px solid #e8e8e8;
+            background:url(../icon/right.png) no-repeat 95% center;
+            background-size:0.17rem 0.3rem;
+        }
+            .item1{display: none;}
+    </style>
+  </head>
+<body>
+   <div class="wrap">
+   		<header id="header">
+            <div class="bar clearfix">
+                <a class="icon icon-person" href="../index.html"> </a>
+                <h1 class="title">订单汇总</h1>
+                <a class="icon icon-search" href="search.html"> </a>
+            </div>
+            <div class="item">
+                <ul class="clearfix">
+                	<li><a >近一个月</a></li>
+                	<li><a >近三个月</a></li>
+                	<li><a >近一年</a></li>
+                	<li><a href="data.html">更多  ></a></li>
+                </ul>
+            </div>
+            <nav class="nav clearfix">
+                <div class="list active">
+                    <a class="all">全部</a>
+                </div>
+                <div class="list">
+                    <a class="wait">待配送</a>
+                </div>
+                <div class="list">
+                    <a class="distribution">配送中</a>
+                </div>
+                <div class="list">
+                    <a class="rejected">已收货</a>
+                </div>
+            </nav>
+        </header>
+       <ul class="item1" style="display: block">
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/2.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/3.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/4.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+       </ul>
+        <ul class="item1">
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/2.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+
+       </ul>
+        <ul class="item1">
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+       </ul>
+        <ul class="item1" >
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/1.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+           <li class="list1" onclick="location.href='order.html'">
+               <div class=" i-box">
+                   <img src="../icon/2.png" alt="" />
+               </div>
+               <div class="clearfix l-con">
+                   <p class="fl">复旦大学</p>
+                   <span class="fr">300</span>
+               </div>
+           </li>
+
+       </ul>
+
+   </div>
+</body>
+<script type="text/javascript" src="../js/font.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script>
+	var eq,num;
+	$('.item li').click(function(){
+		eq = $(this).index();
+		num=$('.nav .active').attr("num");
+		if (eq == 3){
+			return;
+		}
+		$('.item li a').removeClass('active');
+		$(this).find('a').addClass('active');
+		$('.item li').removeClass('active');
+		$(this).addClass('active');
+		$('.item1').eq(eq).show().siblings('.item1').hide();
+	});
+	
+	$('.list').click(function(){	
+		eq = $('.item li.active').index();
+		num = $(this).attr("num");
+		$('.list').removeClass('active');
+		$(this).addClass('active');
+		$('.item1').eq($(this).index()).show().siblings('.item1').hide();
+	});
+	
+</script>
+</html>

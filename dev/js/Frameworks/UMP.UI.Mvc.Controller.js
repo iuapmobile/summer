@@ -1,4 +1,4 @@
-﻿
+//controller.js
 //=================================================== UMP.UI.Mvc.Router =========================================================
 Type.registerNamespace('UMP.UI.Mvc');
 UMP.UI.Mvc.Router = function UMP$UI$Mvc$Router(){
@@ -10,15 +10,15 @@ function UMP$UI$Mvc$Router$route(controllerBaseId, actionid, ctx){
 	if(typeof ctx =="string"){
 	    json = $stringToJSON(ctx);
 	}	
-	var cBase = __$getInstance(controllerBaseId);
+	var cBase = UM.__getInstance(controllerBaseId);
 	cBase.execute(actionid, json);
 }
 function UMP$UI$Mvc$Router$eval(controllerid, js, ctx, sender, args, uicontrols){
 	//if($isWeb && false){
 	if(false){
-		$__controller.eval(js, ctx, sender, args);
+		UM.__controller.eval(js, ctx, sender, args);
 	}else{
-		var c = __$getInstance(controllerid);
+		var c = UM.__getInstance(controllerid);
 		if(c){
 			c.eval(js, ctx, sender, args, uicontrols);
 		}else{			
@@ -30,15 +30,15 @@ function UMP$UI$Mvc$Router$eval(controllerid, js, ctx, sender, args, uicontrols)
 function UMP$UI$Mvc$Router$debug(controllerid, js, ctx, sender, args, custom){
 	//if($isWeb && false){
 	if(false){
-		$__controller.eval(js, ctx, sender, args);
+		UM.__controller.eval(js, ctx, sender, args);
 	}else{
-		var c = __$getInstance(controllerid);
+		var c = UM.__getInstance(controllerid);
 		if(c){
 			if(!custom) alert("调试发生异常");
 			custom["debug"] = "begin";//custom内已经含有id信息，用于标识该次执行JS的唯一标识
 			$service.call("UMJS.debug",custom,true);//同步通知安卓原生调试开始
 			
-			c.eval(js, ctx, sender, args, {});
+			c.eval(js, ctx, sender, args, {});//执行Controller中的eval方法
 			
 			custom["debug"] = "end";
 			$service.call("UMJS.debug",custom,true);//同步通知安卓原生调试结束
@@ -60,7 +60,9 @@ if(typeof $router == "undefined")  {
 }
 function $pageReady(){
 	//$document.fireEvent("pageReady");
-	$document.fireEvent("pageReady");
+	if(typeof $document != "undefined"){
+		$document.fireEvent("pageReady");
+	}
 }
 
 //================================== UMP.UI.Mvc.ControllerBase ==========================================================================
@@ -79,7 +81,7 @@ UMP.UI.Mvc.ControllerBase = function UMP$UI$Mvc$ControllerBase(args) {
 		var controllerFullName = eval(namespace + "." + controller);
 		var cT = eval(controllerFullName);	
 		if(cT){
-			this._controller = __$getInstance(cT);
+			this._controller = UM.__getInstance(cT);
 			if(cT.initializeBase){
 				cT.initializeBase(this._controller);
 			}
@@ -151,8 +153,9 @@ function UMP$UI$Mvc$Controller$method(methodName, args){
 function UMP$UI$Mvc$Controller$eval(js, json, sender, args, uiMD){
 	try{
 		$ctx._setUMContext4debug(json);//debug Context
-		$document.uiMD(uiMD);//debug UIControl MetaData
-		
+		if(typeof $document != "undefined"){//H5工程无需$document
+			$document.uiMD(uiMD);//debug UIControl MetaData
+		}
 		js = js.trim();
 		if(js.indexOf("this.")==0 && js.indexOf("(")>0 && js.indexOf(")")>js.indexOf("(") ){
 			//this.xxx()
@@ -178,22 +181,21 @@ function UMP$UI$Mvc$Controller$eval(js, json, sender, args, uiMD){
 					func.apply(this, [sender, args]);					
 				}else{
 					try{
-						var func = eval(funcName);
+						var func = null;
+						try{
+							func = eval(funcName);
+						}catch(e){
+							var info = "找不到方法["+funcName+"]的定义\n\n";
+							e.stack ? alert(info + e.stack) : alert(info + e);
+							return;
+						}
 						if($isFunction(func)){
 							func.apply(this, [sender, args]);		
 						}else{
-							$exception(e,"执行了一个未定义的方法["+funcName+"]，请检查该方法的定义，并且确保语法问题");
+							alert("要执行的["+funcName+"]不是一个有效的function，请检查");
 						}
 					}catch(e){
-						if(e){
-							if(e.stack){
-								alert(e.stack);
-							}else{
-								alert(e);
-							}
-						}else{
-							alert("执行方法["+funcName+"]发生未知异常...")
-						}
+						e.stack ? alert(e.stack) : alert(e);						
 					}		
 				}
 			}			
@@ -207,7 +209,7 @@ UMP.UI.Mvc.Controller.prototype = {
 	eval: UMP$UI$Mvc$Controller$eval	
 };
 UMP.UI.Mvc.Controller.registerClass('UMP.UI.Mvc.Controller');
-$__controller = new UMP.UI.Mvc.Controller();
+UM.__controller = new UMP.UI.Mvc.Controller();
 /*
 //================================== UMP.UI.Mvc.Action ==========================================================================
 Type.registerNamespace('UMP.UI.Mvc');

@@ -2,11 +2,15 @@
 /* *
 CSS base
 * @name : iUAP Mobile CSS Libary
-* @version : 3.0
+* @version : 3.0.20160726
 * @type : Mobile Development
 * @author : gct@yonyou.com
 */
-/*20160706*/
+/*********20160810 *********/
+/*** from scss/um/Common/variables.scss ***/
+/*** from scss/um/Mixins/_commin.scss ***/
+/*** from scss/um/Common/base.scss ***/
+/*    v3.0.20160726   */
 dl, dt, dd, ul, ol, li, pre, form, p, fieldset, input, textarea, blockquote, th, td, button {
   margin: 0;
   padding: 0;
@@ -461,7 +465,7 @@ a {
   height: 500px;
 }
 
-/* margin */
+/* margin and padding */
 .m5 {
   margin: 5px;
 }
@@ -782,20 +786,6 @@ a {
   padding-left: 40px;
 }
 
-/* 兼容上一版
-.mt50{margin-top:50px}
-.mt100{margin-top:100px}
-.mb50{margin-bottom:50px}
-.mb100{margin-bottom:100px}
-.ml50{margin-left:50px}
-.ml100{margin-left:100px}
-.mr50{margin-right:50px}
-.mr100{margin-right:100px}
-.pt50{padding-top:50px}
-.pb50{padding-bottom:50px}
-.pl50{padding-left:50px}
-.pr50{padding-right:50px}
- */
 /* overflow 溢出处理 */
 .oh {
   overflow: hidden;
@@ -2614,7 +2604,7 @@ a {
   font-weight: normal;
 }
 
-/* box model */
+/*** from scss/um/Layout/_box.scss ***/
 .um-box {
   display: -webkit-box;
   display: box;
@@ -2662,6 +2652,28 @@ a {
   box-orient: vertical;
   -webkit-flex-direction: column;
   flex-direction: column;
+}
+
+.um-vbox {
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.um-hbox {
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
 }
 
 .um-box-justify {
@@ -3350,8 +3362,8 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
 
 .um-content {
   /* position:absolute;top:44px;right:0;bottom:50px;left:0; */
-  padding-left: 15px;
-  padding-right: 15px;
+  /*	padding-left: 15px;  */
+  /*	padding-right: 15px;  */
   overflow: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -3372,26 +3384,50 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
 }
 
 /* 适用于frame    */
-html {
-  height: auto;
-  overflow: auto;
+/*
+html1 {
+    height:auto;
+    overflow: auto;
 }
-
+*/
 /* 适用于frame的um-page*/
-.um-page {
-  position: static;
-  /*不出现单页滚动*/
-}
-
+	/*
+  	.um-page1 {
+    	position: static;
+  	}
+	*/
 /* 适用于win的html*/
-html.um-win {
-  height: 100%;
-  overflow: hidden;
+/*
+html1.um-win1 {
+	height:100%;
+	overflow: hidden;
+}
+*/
+/* 适用于win的um-page*/
+/*
+.um-page1.um-win1 {
+	position: absolute;
+}
+*/
+.um-win {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #efeff4;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
 }
 
-/* 适用于win的um-page*/
-.um-page.um-win {
-  position: absolute;
+.um-frame {
+  background-color: #efeff4;
 }
 
 /*********gct dev**********************/
@@ -3490,7 +3526,8 @@ html.um-win {
   min-height: 44px;
   z-index: 9;
   text-align: center;
-  background-color: #f5f5f7;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eeeeee;
 }
 
 .um-footer-fixed {
@@ -3743,7 +3780,6 @@ input[type="number"].form-control {
 }
 
 .um-list {
-  margin: 30px -15px;
   background: #fff;
   overflow: hidden;
   position: relative;

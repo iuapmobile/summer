@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通信开放平台-登录</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/um.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/Frameworks/json.js"></script>
+    <script src="js/Frameworks/UMP.MACore.js"></script>
+    <script src="js/Frameworks/UMP.Container.js"></script>
+    <script src="js/Frameworks/UMP.UI.Mvc.Controller.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/um.js"></script>
+    <script>
+        $isWeb = true
+    </script>
+    <script>
+        var Constant = {
+            account: "",
+            password: "",
+        };
+        //用户登录
+        // function login(account, pwd) {
+        // $service.post({
+        // "url" : "http://opentest.yonyoutelecom.cn/mobile/doLogin.do",
+        // "data" : {
+        // "account" : account,
+        // "password" : pwd
+        // },
+        // "callback" : "callback_login()",
+        // "timeout" : "5"//可选参数，超时时间，单位为秒
+        //
+        // });
+        // }
+
+        //登录回调函数
+        // function callback_login() {
+        // var result = $stringToJSON($ctx.param("result"));
+        // //登陆成功
+        // if (result.retFlag) {
+        // //自动登录复选框被选中，将用户登录信息更新到本地数据库
+        // var userInfo = {
+        // account : Constant.account,
+        // password : Constant.password,
+        // name : result.userInfo.name,
+        // autoLogin : document.getElementById("autoLogin").checked
+        // };
+        // localStorage.userInfo = JSON.stringify(userInfo);
+        // UModal.alert(result.retMsg);
+        // //跳转到应用主界面
+        // setTimeout(function() {
+        // location.href = "enterpriseAudit.html";
+        // }, 1400);
+        // } else {//登录失败
+        // UModal.confirm({
+        // title : "提示",
+        // text : result.retMsg,
+        // ok : function() {
+        // $("#user").val("");
+        // $("#psw").val("");
+        // }
+        // });
+        // }
+        // }
+        //
+        // function $pageReady() {
+        // }
+
+        $(function () {
+            //判断数据库communicate是否存在
+
+            if (typeof (localStorage.userInfo) != "undefined") {
+                var userInfo = $.parseJSON(localStorage.userInfo);
+                document.getElementById("user").value = userInfo.account;
+                document.getElementById("psw").value = userInfo.password;
+                if (userInfo.autoLogin == true) {
+                    document.getElementById("autoLogin").checked = true;
+                    setTimeout(function () {
+                        location.href = "enterpriseAudit.html";
+                    }, 1400);
+                }
+            }
+            document.getElementById("loginBtn").addEventListener("touchstart", function () {
+                Constant.account = $("#user").val();
+                Constant.password = $("#psw").val();
+                if (Constant.account == "" || Constant.password == "") {
+                    UModal.alert("请输入用户名和密码！");
+                    return false;
+                } else {
+                    var userInfo = {
+                        account: Constant.account,
+                        password: Constant.password,
+                        autoLogin: document.getElementById("autoLogin").checked,
+                        name:'用友科技'
+                    }
+                    localStorage.userInfo = JSON.stringify(userInfo);
+                    //跳转到应用主界面
+                    setTimeout(function () {
+                        location.href = "enterpriseAudit.html";
+                    }, 1400);
+                }
+                //login(Constant.account, Constant.password);
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="um-page">
+    <div class="um-content">
+        <h2 class="appname">通信开放平台</h2>
+
+        <div class="login um-css3-center">
+            <div class="input-group">
+                <span class="user"></span>
+                <input id="user" type="text" class="form-control" placeholder="用户名">
+            </div>
+            <div class="input-group">
+                <span class="psw"></span>
+                <input id="psw" type="password" class="form-control" placeholder="密码">
+            </div>
+            <div class="clearfix um-block">
+                <label class="fl">
+                    <input type="checkbox" class="none" name="" id="autoLogin">
+                    <span class="check"></span> 自动登录 </label>
+                <a href="#" class="fr">忘记密码?</a>
+            </div>
+            <button id="loginBtn" class="btn um-btn-success btn-lg um-block">
+                登录
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

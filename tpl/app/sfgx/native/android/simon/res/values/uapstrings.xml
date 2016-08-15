@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loadingData">"数据加载中..."</string>
+    <string name="locationing">"努力定位中，请稍候……"</string>
+    <string name="withoutMapKey">"地图无法使用，请先申请百度mapkey！！！"</string>
+    <string name="latitude">"纬度"</string>
+    <string name="longitude">"经度"</string>
+    <string name="errorNumber">"错误号"</string>
+    <string name="sorryformap1">"很抱歉，未查到含有“ "</string>
+    <string name="sorryformap2">"关键字的兴趣点！"</string>
+    <string name="selectDatetime">"请选择"</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="message">消息</string>
+    <string name="textDown">下拉可以刷新</string>
+    <string name="textUp">松开立即刷新</string>
+    <string name="textDo">正在刷新数据中...</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    <string name="sunday">周日</string>
+    
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="second">秒</string>
+     <!-- 图片浏览 -->
+    <string name="only_choose_num">超出可选图片张数</string>
+    <string name="finish">完成</string>
+    <string name="invalidSD">sdcard无效或没有插入！</string>
+    <string name="photo">选择相册</string>
+    <string name="album">相册</string>
+    <string name="preview">预览</string>
+    <string name="unfinished">完成</string>
+    <string name="camera_cancel">取消</string>
+    <string name="no_photo">相册没有图片</string>
+
+</resources>
