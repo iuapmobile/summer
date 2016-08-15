@@ -281,17 +281,17 @@
         return this.getStorage("application");
     };
 	
-	s.setConfigure = function(key, value){
+	s.writeConfigure = function(key, value){
         return this.setStorage(key, value, "configure");
     };
-	s.setConfig = function(key, value){
-        return this.setConfigure(key, value, "configure");
+	s.writeConfig = function(key, value){
+        return this.writeConfigure(key, value, "configure");
     };
-	s.getConfigure = function(key){
+	s.readConfigure = function(key){
         return this.getStorage("configure");
     };
-	s.getConfig = function(key){
-        return this.getStorage("configure");
+	s.readConfig = function(key){
+        return this.readConfigure("configure");
     };
 	
 	s.setWindowStorage = function(key, value){
