@@ -936,12 +936,6 @@
             return s.cordova.require('summer-plugin-frame.XFrame').closeFrame(json, successFn, errFn);
         },
         openWin : function(json, successFn, errFn){
-//            if(json["url"]){
-//                var idx = json["url"].indexOf("www/html/");
-//                if(idx < 0){
-//                    json["url"] = "www/html/" + json["url"];
-//                }
-//            }
 			if(s.canrequire()){
 				return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
                 //return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
@@ -1046,24 +1040,7 @@
 		}
     };
 	
-	//持久化本地存储
-	s.setStorage = function(json, successFn, errFn) {
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').setStorage(json, successFn, errFn);
-	};
-	s.getStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').getStorage(json, successFn, errFn);
-	};
-	s.rmStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').rmStorage(json, successFn, errFn);
-	};
-	s.clearStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').clearStorage(json, successFn, errFn);
-	};
-	
+	//持久化本地存储	
 	var umStorage = function(type){
 		type = type || "localStorage";
 		if(type == "localStorage"){
@@ -1162,17 +1139,17 @@
         return this.getStorage("application");
     };
 	
-	s.setConfigure = function(key, value){
+	s.writeConfigure = function(key, value){
         return this.setStorage(key, value, "configure");
     };
-	s.setConfig = function(key, value){
-        return this.setConfigure(key, value, "configure");
+	s.writeConfig = function(key, value){
+        return this.writeConfigure(key, value, "configure");
     };
-	s.getConfigure = function(key){
+	s.readConfigure = function(key){
         return this.getStorage("configure");
     };
-	s.getConfig = function(key){
-        return this.getStorage("configure");
+	s.readConfig = function(key){
+        return this.readConfigure("configure");
     };
 	
 	s.setWindowStorage = function(key, value){
@@ -1194,17 +1171,6 @@
             ls.clear();
         }
     };
-	
-	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
-		if(this.canrequire()){
-            var plug = this.cordova.require(cordovaPlugName);
-			if(plug[plugFnName]){
-				plug[plugFnName](json, successFn, errFn);
-			}else{
-				alert("the cordova plug ["+cordovaPlugName+"]'s method[" + plugFnName + "] not implementation");
-			}
-		}
-	}
 	
 	s.sysInfo = function(json, successFn, errFn){
 		if(s.canrequire())
@@ -1290,4 +1256,17 @@
 		}
 		return summerBridge.callSync(serivceName, strParam);
 	}
+	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
+		if(this.canrequire() && !this._debug){
+            var plug = this.cordova.require(cordovaPlugName);
+			if(plug[plugFnName]){
+				plug[plugFnName](json, successFn, errFn);
+			}else{
+				alert("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] not implementation");
+			}
+		}else{
+			console.log("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] executed!");
+		}
+	}
+	
 }(window,summer);

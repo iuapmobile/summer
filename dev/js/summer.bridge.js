@@ -72,4 +72,17 @@
 		}
 		return summerBridge.callSync(serivceName, strParam);
 	}
+	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
+		if(this.canrequire() && !this._debug){
+            var plug = this.cordova.require(cordovaPlugName);
+			if(plug[plugFnName]){
+				plug[plugFnName](json, successFn, errFn);
+			}else{
+				alert("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] not implementation");
+			}
+		}else{
+			console.log("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] executed!");
+		}
+	}
+	
 }(window,summer);
