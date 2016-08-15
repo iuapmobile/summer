@@ -955,7 +955,7 @@
 	}
 	//20160815
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
-		if(this.canrequire() && !this._debug){
+		if(this.canrequire() && !this.__debug){
             var plug = this.cordova.require(cordovaPlugName);
 			if(plug[plugFnName]){
 				plug[plugFnName](json, successFn, errFn);
@@ -1026,21 +1026,16 @@
             return s.cordova.require('summer-plugin-frame.XFrame').closeFrame(json, successFn, errFn);
         },
         openWin : function(json, successFn, errFn){
-			if(s.canrequire()){
-				return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
-                //return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
-			}
+			return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
         closeWin : function(json, successFn, errFn){
-			if(s.canrequire()){
-				//support closeWin('xxx') and closeWin({id:'xxx'})
-				if(typeof json == "string"){
-					json = {"id" : json};
-				}else if(typeof json == "undefined"){
-					json = {};
-				}				
-				return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json, successFn, errFn);
-			}
+			//support closeWin('xxx') and closeWin({id:'xxx'})
+			if(typeof json == "string"){
+				json = {"id" : json};
+			}else if(typeof json == "undefined"){
+				json = {};
+			}				
+			return this.callCordova('summer-plugin-frame.XFrame', 'closeWin', json, successFn, errFn);
 		},
 		getSysInfo : function(json, successFn, errFn){
 			if(s.canrequire()){
@@ -1229,17 +1224,11 @@
         return this.getStorage("application");
     };
 	
-	s.writeConfigure = function(key, value){
+	s.writeConfig = function(key, value){
         return this.setStorage(key, value, "configure");
     };
-	s.writeConfig = function(key, value){
-        return this.writeConfigure(key, value, "configure");
-    };
-	s.readConfigure = function(key){
-        return this.getStorage("configure");
-    };
 	s.readConfig = function(key){
-        return this.readConfigure("configure");
+        return this.getStorage("configure");
     };
 	
 	s.setWindowStorage = function(key, value){

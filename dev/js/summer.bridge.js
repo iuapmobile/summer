@@ -74,7 +74,7 @@
 	}
 	//20160815
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
-		if(this.canrequire() && !this._debug){
+		if(this.canrequire() && !this.__debug){
             var plug = this.cordova.require(cordovaPlugName);
 			if(plug[plugFnName]){
 				plug[plugFnName](json, successFn, errFn);
