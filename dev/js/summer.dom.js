@@ -405,69 +405,8 @@
 
    
     /******************** Native API BEGIN ********************/
-	var umStorage = function(type){
-		type = type || "localStorage";
-		if(type == "localStorage"){
-			if(!window.localStorage){
-		        alert('your device do not support the localStorage');
-				return;
-		    }
-			return window.localStorage;
-		}else if(type == "sessionStorage"){
-			if(!window.sessionStorage){
-		        alert('your device do not support the sessionStorage');
-				return;
-		    }
-			return window.sessionStorage;
-		}else{
-			return null;
-			/*
-			if($summer.os == "android"){
-				ls = summer.localStorage();
-			}
-			*/
-		}
-    };
-	u.setStorage = function(key, value){
-        if(arguments.length === 2){
-            var v = value;
-            if(typeof v == 'object'){
-                v = JSON.stringify(v);
-                v = 'obj-'+ v;
-            }else{
-                v = 'str-'+ v;
-            }
-            var ls = umStorage();
-            if(ls){
-                ls.setItem(key, v);
-            }
-        }
-    };
-    u.getStorage = function(key){
-        var ls = umStorage();
-        if(ls){
-            var v = ls.getItem(key);
-            if(!v){return;}
-            if(v.indexOf('obj-') === 0){
-                v = v.slice(4);
-                return JSON.parse(v);
-            }else if(v.indexOf('str-') === 0){
-                return v.slice(4);
-            }
-        }
-    };
-    u.rmStorage = function(key){
-        var ls = umStorage();
-        if(ls && key){
-            ls.removeItem(key);
-        }
-    };
-    u.clearStorage = function(){
-        var ls = umStorage();
-        if(ls){
-            ls.clear();
-        }
-    };
+	//20160810
+	
     u.fixStatusBar = function(el){
         if(!u.isElement(el)){
             alert('$summer.fixStatusBar Function need el param, el param must be DOM Element');

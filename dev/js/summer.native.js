@@ -43,8 +43,11 @@
 				$summer.alert(json);
 				delete json["alert"];
 			}
-			if(s.canrequire())
-				return s.cordova.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
+			if(s.canrequire()){
+				return this.callCordova('summer-plugin-frame.XFrame','openFrame',json, successFn, errFn);
+				//return s.cordova.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
+			}
+				
 			//等价于return s.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
         },
         closeFrame : function(json, successFn, errFn){
@@ -52,14 +55,10 @@
             return s.cordova.require('summer-plugin-frame.XFrame').closeFrame(json, successFn, errFn);
         },
         openWin : function(json, successFn, errFn){
-//            if(json["url"]){
-//                var idx = json["url"].indexOf("www/html/");
-//                if(idx < 0){
-//                    json["url"] = "www/html/" + json["url"];
-//                }
-//            }
-			if(s.canrequire())
-                return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
+			if(s.canrequire()){
+				return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
+                //return s.cordova.require('summer-plugin-frame.XFrame').openWin(json, successFn, errFn);
+			}
         },
         closeWin : function(json, successFn, errFn){
 			if(s.canrequire()){
@@ -70,6 +69,17 @@
 					json = {};
 				}				
 				return s.cordova.require('summer-plugin-frame.XFrame').closeWin(json, successFn, errFn);
+			}
+		},
+		getSysInfo : function(json, successFn, errFn){
+			if(s.canrequire()){
+				//support closeWin('xxx') and closeWin({id:'xxx'})
+				if(typeof json == "string"){
+					json = {"id" : json};
+				}else if(typeof json == "undefined"){
+					json = {};
+				}				
+				return s.cordova.require('summer-plugin-frame.XFrame').getSysInfo(json, successFn, errFn);
 			}
 		},
         setFrameAttr : function(json, successFn, errFn){
@@ -136,56 +146,150 @@
 			frameId:'yyy',
 			script:'do()'
 		}*/
-		if(s.canrequire())
-            return s.require('summer-plugin-frame.XFrame').execScript(json,null,null);
-    };
-	
-	//持久化本地存储
-	s.setStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').setStorage(json, successFn, errFn);
-	};
-	s.getStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').getStorage(json, successFn, errFn);
-	};
-	s.rmStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').rmStorage(json, successFn, errFn);
-	};
-	s.clearStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').clearStorage(json, successFn, errFn);
-	};
-	
-	//应用级Storage
-	s.setAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').setAppStorage(json, successFn, errFn);
-	};
-	s.getAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').getAppStorage(json, successFn, errFn);
-	};
-	s.rmAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').rmAppStorage(json, successFn, errFn);
-	};
-	s.clearAppStorage = function(json, successFn, errFn){
-		if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XService').clearAppStorage(json, successFn, errFn);
-	};
-	
-	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
-		if(s.canrequire() || true){
-            var plug = s.cordova.require(cordovaPlugName);
-			if(plug[plugFnName]){
-				plug[plugFnName](json, successFn, errFn);
+		if(typeof json == "object"){
+			if(json.script){
+				json.script = "try{"+json.script+"}catch(e){alert(e)}";
 			}else{
-				alert("the cordova plug ["+cordovaPlugName+"]'s method[" + plugFnName + "] not implementation");
+				alert("the parameter script of the execScript function is " + json.script);
 			}
 		}
-	}
+		if(s.canrequire()){
+            //return s.require('summer-plugin-frame.XFrame').execScript(json,null,null);
+			return this.callCordova('summer-plugin-frame.XFrame','execScript',json, null, null);
+		}
+    };
+	
+	//持久化本地存储	
+	var umStorage = function(type){
+		type = type || "localStorage";
+		if(type == "localStorage"){
+			if(!window.localStorage){
+		        alert('your device do not support the localStorage');
+				return;
+		    }
+			return window.localStorage;
+		}else if(type == "sessionStorage"){
+			if(!window.sessionStorage){
+		        alert('your device do not support the sessionStorage');
+				return;
+		    }
+			return window.sessionStorage;
+		}else if(type == "application"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: value
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "configure"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readConfigure", JSON.stringify(json));
+				}				
+			};
+		}else if(type == "window"){
+			return {
+				setItem : function(key, value){
+					var json = {
+						key: key,
+						value: typeof value == "string" ? value : JSON.stringify(value)
+					};
+					return summerBridge.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
+				},
+				getItem : function(key){
+					var json = {
+						key: key
+					};
+					return summerBridge.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
+				}				
+			};
+		}
+    };
+	s.setStorage = function(key, value, storageType){
+		var v = value;
+		if(typeof v == 'object'){
+			v = JSON.stringify(v);
+			v = 'obj-'+ v;
+		}else{
+			v = 'str-'+ v;
+		}
+		var ls = umStorage(storageType);
+		if(ls){
+			ls.setItem(key, v);
+		}
+    };
+	s.getStorage = function(key, storageType){
+        var ls = umStorage(storageType);
+        if(ls){
+            var v = ls.getItem(key);
+            if(!v){return;}
+            if(v.indexOf('obj-') === 0){
+                v = v.slice(4);
+                return JSON.parse(v);
+            }else if(v.indexOf('str-') === 0){
+                return v.slice(4);
+            }
+        }
+    };
+	
+	s.setAppStorage = function(key, value){
+        return this.setStorage(key, value, "application");
+    };
+	s.getAppStorage = function(key){
+        return this.getStorage("application");
+    };
+	
+	s.writeConfigure = function(key, value){
+        return this.setStorage(key, value, "configure");
+    };
+	s.writeConfig = function(key, value){
+        return this.writeConfigure(key, value, "configure");
+    };
+	s.readConfigure = function(key){
+        return this.getStorage("configure");
+    };
+	s.readConfig = function(key){
+        return this.readConfigure("configure");
+    };
+	
+	s.setWindowStorage = function(key, value){
+        return this.setStorage(key, value, "window");
+    };
+	s.getWindowStorage = function(key){
+        return this.getStorage("window");
+    };
+	
+    s.rmStorage = function(key){
+        var ls = umStorage();
+        if(ls && key){
+            ls.removeItem(key);
+        }
+    };
+    s.clearStorage = function(){
+        var ls = umStorage();
+        if(ls){
+            ls.clear();
+        }
+    };
 	
 	s.sysInfo = function(json, successFn, errFn){
 		if(s.canrequire())

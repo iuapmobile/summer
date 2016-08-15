@@ -4,8 +4,8 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-//var sass = require('gulp-sass');
-
+var sass = require('gulp-sass');
+var rename = require('gulp-rename');
 var YOURPATH = {
 	gitPath : '../../gityy',//改写成你的真实路径
 	studioPath : '../../iUAPMobile-Standard-Summer-SR4-Windows/iUAPMobile'//改写成你的真实路径
@@ -60,6 +60,8 @@ gulp.task('default',function(){
 	gulp.watch('dev/css/iuapmobile.um.css', ['init','umcss']);
 	
 	
+	gulp.watch('dev/scss/**/*.scss', ['sass']);
+
 	return;
 	
 	gulp.watch('dev/js/Frameworks/*.js', function(event) {
@@ -76,8 +78,21 @@ gulp.task('uglify',function(){
   //do something
    console.log('uglify123');
 });
+
+gulp.task('sass',function(){
+
+	//var srcFiles = [];//需合并的源文件数组
+	//srcFiles.push("dev/js/summer.cordova.js");//1
+	//srcFiles.push("dev/js/summer.util.js");//2
+	gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/css/'));
+	console.log('rename ok')
+
+});
+
 gulp.task('umcss',function(){
-	//gulp.src('dev/scss/um.scss').pipe(sass()).pipe(gulp.dest('dist/css/'));
+	
+	
+
 	var src = 'dev/css/iuapmobile.um.css'
 	console.log('iuapmobile.um.css update github dist end');
 
