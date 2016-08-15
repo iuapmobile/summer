@@ -260,17 +260,7 @@
 			ls.setItem(key, v);
 		}
     };
-	s.setAppStorage = function(key, value){
-        return this.setStorage(key, value, "application");
-    };
-	s.setConfigureStorage = function(key, value){
-        return this.setStorage(key, value, "configure");
-    };
-	s.setWindowStorage = function(key, value){
-        return this.setStorage(key, value, "window");
-    };
-	
-    s.getStorage = function(key, storageType){
+	s.getStorage = function(key, storageType){
         var ls = umStorage(storageType);
         if(ls){
             var v = ls.getItem(key);
@@ -283,15 +273,34 @@
             }
         }
     };
+	
+	s.setAppStorage = function(key, value){
+        return this.setStorage(key, value, "application");
+    };
 	s.getAppStorage = function(key){
         return this.getStorage("application");
     };
-	s.getConfigureStorage = function(key){
+	
+	s.setConfigure = function(key, value){
+        return this.setStorage(key, value, "configure");
+    };
+	s.setConfig = function(key, value){
+        return this.setConfigure(key, value, "configure");
+    };
+	s.getConfigure = function(key){
         return this.getStorage("configure");
+    };
+	s.getConfig = function(key){
+        return this.getStorage("configure");
+    };
+	
+	s.setWindowStorage = function(key, value){
+        return this.setStorage(key, value, "window");
     };
 	s.getWindowStorage = function(key){
         return this.getStorage("window");
     };
+	
     s.rmStorage = function(key){
         var ls = umStorage();
         if(ls && key){

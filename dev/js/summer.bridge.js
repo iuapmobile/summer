@@ -5,16 +5,20 @@
     var adrinvoker = {};
     if(w.adrinvoker && w.adrinvoker.call2) alert(w.adrinvoker.call2);
 
+	//Asynchronous call run as corodva bridge
     adrinvoker.call = function(srvName, strJson){
 		if(navigator.platform.toLowerCase().indexOf("win")>=0){
 			alert("执行"+srvName+"完毕\n参数是："+strJson);
 			return;
 		}
-
+		
+		strJson = strJson || '{}';
+		
 		var plug = summer.require('summer-plugin-service.XService');
 		plug.call(srvName,$summer.strToJson(strJson));
     }
 
+	//Synchronous call as summer bridge
     adrinvoker.call2 = function(srvName, strJson){
 		if(navigator.platform.toLowerCase().indexOf("win")>=0){
 			alert("执行"+srvName+"完毕\n参数是："+strJson);
@@ -29,6 +33,7 @@
     w.adrinvoker = adrinvoker;
 	
 	//2、兼容ios
+	//ios Synchronous
 	if(typeof CurrentEnvironment != "undefined"){
 		if($summer.os == "ios"){
 			CurrentEnvironment.DeviceType = CurrentEnvironment.DeviceIOS;
@@ -46,6 +51,7 @@
 	}
 	w.UM_callNativeService = UM_callNativeService;
 	
+	//ios Asynchronous
 	if(typeof UM_callNativeServiceNoraml == "undefined"){
 		UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用，和安卓统一接口
 			return adrinvoker.call(serviceType,strParams);
@@ -54,5 +60,16 @@
 		alert("UM_callNativeServiceNoraml is exist! fatal error!");
 		alert(UM_callNativeServiceNoraml);
 	}
-	w.UM_callNativeServiceNoraml = UM_callNativeServiceNoraml;			
+	w.UM_callNativeServiceNoraml = UM_callNativeServiceNoraml;	
+
+	//3、
+	s.callSync = function(serivceName, strJson){
+		var strParam = strJson;
+		if(typeof strJson == "object"){
+			strParam = JSON.stringify(strJson);
+		}else if(typeof strJson != "string"){
+			strParam = strJson.toString();
+		}
+		return summerBridge.callSync(serivceName, strParam);
+	}
 }(window,summer);
