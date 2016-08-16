@@ -4,8 +4,9 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-var sass = require('gulp-sass');
+//var sass = require('gulp-sass');
 var rename = require('gulp-rename');
+
 var YOURPATH = {
 	gitPath : '../../gityy',//改写成你的真实路径
 	studioPath : '../../iUAPMobile-Standard-Summer-SR4-Windows/iUAPMobile'//改写成你的真实路径
@@ -59,7 +60,7 @@ gulp.task('default',function(){
 	//监听umcss
 	gulp.watch('dev/css/iuapmobile.um.css', ['init','umcss']);
 	
-	
+	//if you have installed gulp-sass, you can run these script below
 	//gulp.watch('dev/scss/**/*.scss', ['sass']);
 
 	return;
@@ -120,8 +121,9 @@ gulp.task('summer',function(){
 	srcFiles.push("dev/js/summer.cordova.js");//1
 	srcFiles.push("dev/js/summer.util.js");//2
 	srcFiles.push("dev/js/summer.dom.js");//3
-	srcFiles.push("dev/js/summer.native.js");//4
-	srcFiles.push("dev/js/summer.bridge.js");//5
+	srcFiles.push("dev/js/summer.bridge.js");//4
+	srcFiles.push("dev/js/summer.service.js");//5
+
 
 	var fileName =  "summer";//目标文件名
 	var distPath = 'dist/js/';//目标文件夹

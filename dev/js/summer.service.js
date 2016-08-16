@@ -38,21 +38,15 @@
 //                    }
 //                }
 //            }
-			var _test = json["alert"];
-			if(_test){
+			if(json["alert"]){
 				$summer.alert(json);
 				delete json["alert"];
 			}
-			if(s.canrequire()){
-				return this.callCordova('summer-plugin-frame.XFrame','openFrame',json, successFn, errFn);
-				//return s.cordova.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
-			}
-				
-			//等价于return s.require('summer-plugin-frame.XFrame').openFrame(json, successFn, errFn);
+
+			return this.callCordova('summer-plugin-frame.XFrame','openFrame',json, successFn, errFn);
         },
         closeFrame : function(json, successFn, errFn){
-			if(s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').closeFrame(json, successFn, errFn);
+			return this.callCordova('summer-plugin-frame.XFrame','closeFrame',json, successFn, errFn);
         },
         openWin : function(json, successFn, errFn){
 			return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
@@ -176,13 +170,13 @@
 						key: key,
 						value: value
 					};
-					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+					return this.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
 				},
 				getItem : function(key){
 					var json = {
 						key: key
 					};
-					return summerBridge.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+					return this.callSync("SummerStorage.readApplicationContext", JSON.stringify(json));
 				}				
 			};
 		}else if(type == "configure"){
@@ -192,13 +186,13 @@
 						key: key,
 						value: typeof value == "string" ? value : JSON.stringify(value)
 					};
-					return summerBridge.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
+					return this.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
 				},
 				getItem : function(key){
 					var json = {
 						key: key
 					};
-					return summerBridge.callSync("SummerStorage.readConfigure", JSON.stringify(json));
+					return this.callSync("SummerStorage.readConfigure", JSON.stringify(json));
 				}				
 			};
 		}else if(type == "window"){
@@ -208,13 +202,13 @@
 						key: key,
 						value: typeof value == "string" ? value : JSON.stringify(value)
 					};
-					return summerBridge.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
+					return this.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
 				},
 				getItem : function(key){
 					var json = {
 						key: key
 					};
-					return summerBridge.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
+					return this.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
 				}				
 			};
 		}
