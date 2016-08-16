@@ -8,27 +8,9 @@ CSS base
 */
 /*********20160810 *********/
 /*** from scss/um/Common/variables.scss ***/
-/*/!*第一组颜色搭配 blue*!/
-$um-theme-color:		 #00a1ea !default; //ios blue
-$um-theme-color2:		 #ffffff !default; //ios white
-$um-body-bg-color:       #efeff4 !default;*/
-/*/!*第二组颜色搭配 gray*!/
-$um-theme-color:		 #5e7489 !default; //ios blue
-$um-theme-color2:		 #ffffff !default; //ios white
-$um-body-bg-color:       #efeff4 !default;*/
-/*/!*第三组颜色搭配 green*!/
-$um-theme-color:		 #2dbb69 !default; //ios blue
-$um-theme-color2:		 #ffffff !default; //ios white
-$um-body-bg-color:       #efeff4 !default;*/
-/*/!*第四组颜色搭配 orange*!/
-$um-theme-color:		 #FF7800 !default; //ios blue
-$um-theme-color2:		 #ffffff !default; //ios white
-$um-body-bg-color:       #efeff4 !default;*/
-/*/!*第五组颜色搭配 red*!/
-$um-theme-color:		 #E40011 !default; //ios blue
-$um-theme-color2:		 #ffffff !default; //ios white
-$um-body-bg-color:       #efeff4 !default;*/
-
+/*** from scss/um/Mixins/_commin.scss ***/
+/*** from scss/um/Common/base.scss ***/
+/*    v3.0.20160726   */
 dl, dt, dd, ul, ol, li, pre, form, p, fieldset, input, textarea, blockquote, th, td, button {
   margin: 0;
   padding: 0;
@@ -3477,6 +3459,7 @@ html.um-frame {
 }
 
 .um-header-btns {
+  color: #ffffff;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -5092,6 +5075,10 @@ input[type=range]::-webkit-slider-thumb:before {
 .um-grade-half {
   background-image: url(../img/grade-half.png);
   background-size: 100%;
+}
+
+.um-picker {
+  color: #007aff;
 }
 
 /*# sourceMappingURL=iuapmobile.um.css.map */
