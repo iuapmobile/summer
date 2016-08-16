@@ -83,20 +83,23 @@
 	*/
 	
 .um-win {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: $um-body-bg-color;
-	@include flex-align;
-	@include flex-orient(v);
+	@extend .um-page;
+
 }
 
 
 .um-frame {
-	
-	background-color: $um-body-bg-color;
+  position: static;
+  /*不出现单页滚动*/
+  @include flex-align;
+  @include flex-orient(v);
+  visibility: visible;
+  z-index: 2;
+  background-color: $um-body-bg-color;
+}
+html.um-frame {
+  height: auto;
+  overflow: auto;
 }
 
 

@@ -40,6 +40,12 @@
     opacity: .6;
   }
 }
+/*带填充的btn*/
+.btn-bg {
+  @extend .btn;
+  background-color: $um-theme-color;
+  color: $um-theme-color2;
+}
 .btn-gray {
   @include button-variant($font-color, #fff, #e6e6e6);
 }
