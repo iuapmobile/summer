@@ -60,7 +60,7 @@ gulp.task('default',function(){
 	gulp.watch('dev/css/iuapmobile.um.css', ['init','umcss']);
 	
 	
-	gulp.watch('dev/scss/**/*.scss', ['sass']);
+	//gulp.watch('dev/scss/**/*.scss', ['sass']);
 
 	return;
 	
