@@ -84,7 +84,8 @@
 				
 				appParam:"",
 			};
-			return this.callSync('SummerDevice.getSysInfo', param);
+			return s.callSync('SummerDevice.getSysInfo', param);
+			
 		},
         setFrameAttr : function(json, successFn, errFn){
 			if(s.canrequire())
@@ -121,6 +122,8 @@
     s.closeFrame = s.window.closeFrame;
     s.openWin = s.window.openWin;
     s.closeWin = s.window.closeWin;
+	
+	s.getSysInfo = s.window.getSysInfo;
 
     s.winParam = s.window.winParam;
     s.frameParam = s.window.frameParam;
