@@ -1032,15 +1032,30 @@
 			return this.callCordova('summer-plugin-frame.XFrame', 'closeWin', json, successFn, errFn);
 		},
 		getSysInfo : function(json, successFn, errFn){
-			if(s.canrequire()){
-				//support closeWin('xxx') and closeWin({id:'xxx'})
-				if(typeof json == "string"){
-					json = {"id" : json};
-				}else if(typeof json == "undefined"){
-					json = {};
-				}				
-				return s.cordova.require('summer-plugin-frame.XFrame').getSysInfo(json, successFn, errFn);
+			//support closeWin('xxx') and closeWin({id:'xxx'})
+			if(typeof json == "string"){
+				json = alert("parameter json is required json object type, but is string type");
 			}
+			var param = json || {
+				systemType:"android",//"ios"
+				systemVersion:7,// ios--> 7    android-->21
+				iOS7StatusBarAppearance:true,//false
+				fullScreen:true,
+				pageParam:{param0:123,param1:"abc"},
+				screenWidth:"",
+				screenHeight:"",
+				
+				winId:"",
+				winWidth:"",
+				winHeight:"",
+				
+				frameId:"",
+				frameWidth:"",
+				frameHeight:"",
+				
+				appParam:"",
+			};
+			return this.callSync('SummerDevice.getSysInfo', param);
 		},
         setFrameAttr : function(json, successFn, errFn){
 			if(s.canrequire())
