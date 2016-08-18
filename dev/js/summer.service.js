@@ -68,7 +68,7 @@
 			var param = json || {
 				systemType:"android",//"ios"
 				systemVersion:7,// ios--> 7    android-->21
-				iOS7StatusBarAppearance:true,//false
+				statusBarAppearance:true,//false
 				fullScreen:true,
 				pageParam:{param0:123,param1:"abc"},
 				screenWidth:"",
