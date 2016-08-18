@@ -902,7 +902,7 @@ a {
   border-radius: 50%;
 }
 
-.um-page .um-square, .um-win .um-square {
+.um-page .um-square {
   border-radius: 0;
 }
 
@@ -3330,7 +3330,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
     opacity: 0;
   }
 }
-.um-page, .um-win {
+.um-page {
   position: absolute;
   top: 0;
   right: 0;
@@ -3348,14 +3348,14 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
   z-index: -1;
   background-color: #ffffff;
 }
-.um-page.active, .active.um-win {
+.um-page.active {
   visibility: visible;
   z-index: 2;
 }
-.um-page.um-page-forward, .um-page-forward.um-win {
+.um-page.um-page-forward {
   z-index: 99;
 }
-.um-page.in:before, .in.um-win:before, .um-page.out:before, .out.um-win:before {
+.um-page.in:before, .um-page.out:before {
   content: "";
   position: absolute;
   left: 0;
@@ -3415,6 +3415,22 @@ html1.um-win1 {
 	position: absolute;
 }
 */
+.um-win {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
 .um-frame {
   position: static;
   /*不出现单页滚动*/
@@ -3427,7 +3443,6 @@ html1.um-win1 {
   -webkit-flex-direction: column;
   flex-direction: column;
   visibility: visible;
-  z-index: 2;
   background-color: #efeff4;
 }
 
