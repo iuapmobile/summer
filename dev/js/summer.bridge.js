@@ -70,7 +70,14 @@
 		}else if(typeof strJson != "string"){
 			strParam = strJson.toString();
 		}
+		try{
 		return summerBridge.callSync(serivceName, strParam);
+		}catch(e){
+			if($summer.os == "pc"){
+				return strJson;
+			}
+			alert(e);
+		}
 	}
 	//20160815
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
