@@ -174,6 +174,29 @@ gulp.task('sass',function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*********************** gct's task begin **********************/
 gulp.task('gct',function(){
 	gulp.watch('dev/js/summer.*.js', ['init_gct','summer', 'summer_update_gct']);
@@ -382,5 +405,6 @@ gulp.task('umcss_copy_gct',function(){
 	console.log('iuapmobile.um.css is updated to studio end');
 });
 /*********************** gct's task end **********************/
+
 
 
