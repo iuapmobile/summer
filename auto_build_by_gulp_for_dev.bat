@@ -1,2 +1,2 @@
-gulp
+gulp gct
 pause
