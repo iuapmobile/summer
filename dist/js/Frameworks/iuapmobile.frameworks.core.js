@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------
 // Copyright (C) Yonyou Corporation. All rights reserved.
 // Author： gct@yonyou.com
-// iUAP Mobile JS Framework 3.0.0.20160805
+// iUAP Mobile JS Framework 3.0.0.20160823.1552
 
 (function(window){
 	window._UM = window.UM;

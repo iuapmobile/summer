@@ -1,2 +1,0 @@
-gulp gct
-pause
