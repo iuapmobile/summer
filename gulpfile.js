@@ -19,7 +19,6 @@ var rename = require('gulp-rename');
 
 /*********************** common task begin **********************/
 gulp.task('summer',function(){
-	
 	//1 update github
 	var srcFiles = [];//需合并的源文件数组
 	srcFiles.push("dev/js/summer.cordova.js");//1
@@ -29,7 +28,6 @@ gulp.task('summer',function(){
 	srcFiles.push("dev/js/summer.service.js");//5
 	srcFiles.push("dev/js/summer.plugins.js");//6
 	
-
 	var fileName =  "summer";//目标文件名
 	var distPath = 'dist/js/';//目标文件夹
 	//var distPath = 'test/**/**/css';
@@ -125,6 +123,8 @@ gulp.task('sass',function(){
 	console.log('sass and rename ok');
 });
 /*********************** common task end **********************/
+
+
 
 
 
