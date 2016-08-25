@@ -126,6 +126,22 @@ gulp.task('sass',function(){
 
 
 
+/*********************** xyc's task begin **********************/
+
+gulp.task('xyc',function(){
+	gulp.watch('dev/js/summer.*.js', ['summer']);
+	
+	gulp.watch('dev/js/Frameworks/**/*.js', ['iuapmobile.frameworks.core']);
+	
+	gulp.watch('dev/js/plugins/*.js', ['iuapmobile.frameworks.ui']);
+
+	gulp.watch('dev/js/Frameworks/UM.Listview.js', ['iuapmobile.frameworks.listview']);
+
+	//监听umcss
+	gulp.watch('dev/css/iuapmobile.um.css', ['umcss']);
+});
+/*********************** xyc's task end **********************/
+
 
 
 
@@ -405,9 +421,3 @@ gulp.task('umcss_copy_gct',function(){
 	console.log('iuapmobile.um.css is updated to studio end');
 });
 /*********************** gct's task end **********************/
-
-
-
-/*********************** xyc's task begin **********************/
-
-/*********************** xyc's task end **********************/

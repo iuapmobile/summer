@@ -15,7 +15,6 @@
     s.openRef = function(json,fn){
         var ref = new s.umRef();
         var info = s.getSysInfo();
-        $summer.alert(info)
         ref.param = {
             ref_id : "Fn" + $s.UUID(),//Fn_CA12BA
             ref_winId : info.winId,
