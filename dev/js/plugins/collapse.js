@@ -1,6 +1,6 @@
 /* 折叠菜单 */ 
 ;
-+ function($) {
++function($) {
   'use strict';
   $(function() {
     var openBtn = '.um-collapse-btn';
