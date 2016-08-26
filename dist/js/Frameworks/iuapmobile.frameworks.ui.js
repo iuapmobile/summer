@@ -66,7 +66,7 @@ $(function() {
 });*/
 /* 折叠菜单 */ 
 ;
-+ function($) {
++function($) {
   'use strict';
   $(function() {
     var openBtn = '.um-collapse-btn';
@@ -1333,3 +1333,9 @@ $(function() {
         return new _picker(selector,json);
     }
 })(UM)
+$(document).ready(function(){
+    var opts = {'date': {preset: 'date'},'datetime': {preset: 'datetime'},'time': {preset: 'time'},'select': {preset: 'select'}};
+    $.each(opts,function(value,item){
+        UM.picker(".um-scroller-"+ value,item);
+    });    
+});
