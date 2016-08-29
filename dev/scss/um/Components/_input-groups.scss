@@ -26,6 +26,9 @@
     &:first-child {
       @include border-right-radius(0);
     }
+	&:last-child {
+      @include border-left-radius(0);
+    }
   }
   span[class^="ti-"]{
 	position:absolute;
@@ -38,5 +41,7 @@
   } 
   span[class^="ti-"]+input.form-control{
 	padding-left:39px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius:5px;
   }
 }
