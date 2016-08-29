@@ -3791,7 +3791,7 @@ input[type="number"].form-control {
 .um-input-text .um-input-left-icon {
   display: block;
   margin-top: 15px;
-  margin-right: 5px;
+  margin-right: 10px;
   z-index: 2;
 }
 .um-input-text .form-control {
@@ -4867,9 +4867,17 @@ input[type=range]::-webkit-slider-thumb:before {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-.um-input-group .btn:last-child, .um-input-group .btn-bg:last-child, .um-input-group .um-btn:last-child, .um-input-group .form-control:last-child {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+.um-input-group span[class^="ti-"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 11px 11px;
+  z-index: 5;
+  color: #007aff;
+  font-weight: bold;
+}
+.um-input-group span[class^="ti-"] + input.form-control {
+  padding-left: 39px;
 }
 
 @-webkit-keyframes progress-bar-stripes {

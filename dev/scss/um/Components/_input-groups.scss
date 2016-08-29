@@ -26,8 +26,17 @@
     &:first-child {
       @include border-right-radius(0);
     }
-    &:last-child {
-      @include border-left-radius(0);
-    }
+  }
+  span[class^="ti-"]{
+	position:absolute;
+	left:0;
+	top:0;
+	padding:11px 11px;
+	z-index:5;
+	color:$um-theme-color;
+	font-weight:bold;
+  } 
+  span[class^="ti-"]+input.form-control{
+	padding-left:39px;
   }
 }
