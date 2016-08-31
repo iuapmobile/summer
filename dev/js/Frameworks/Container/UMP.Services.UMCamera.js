@@ -23,6 +23,8 @@ function UMP$UI$Container$UMCamera$openPhotoAlbum(json){
 		args["bindfield"] = json["bindfield"];
 	if(json.callback)
 		args["callback"] = json["callback"];
+	if(json.compressionRatio)
+		args["compressionRatio"] = json["compressionRatio"];
 	return $service.call(this._UMDevice_openPhotoAlbum, args, false)//异步调用服务
 }
 UMP.UI.Container.UMCamera.prototype ={
