@@ -1,5 +1,5 @@
 (function(w,s,$s,prefix){
-	//构建函数，用作实例化
+	//构建函数,用作实例化
     s.umRef = function(){}
     //储值对象，用作判断重复性
     var refManager = {

@@ -36,27 +36,10 @@ $(function() {
 	//消除点击click延迟
 	//FastClick.attach(document.body);
 	
-	$(document).on("click", ".um-list-left-icon", function(e) {
-		e.stopPropagation();
-	}).on("touchmove", ".overlay", function(e) {
+	$(document).on("touchmove", ".overlay", function(e) {
 		e.preventDefault();
 		return false;
-	}).on("click", ".um-tabbar li,.um-footerbar-item",function(){
-		$(this).addClass("active").siblings().removeClass("active");
 	})
-	
-	// 多行文本自适应高度
-	$("textarea.form-control").elastic();
-
-	if(UM.UI.isMobile) {
-		// 解决IOS和低端安卓设备 checkbox和radio bug
-		$("label").on("change", function(e){
-			$(this).addClass("um-label-change").siblings("label").addClass("um-label-change");
-			setTimeout(function(){
-				$(this).removeClass("um-label-change").siblings("label").removeClass("um-label-change");
-			}.bind(this), 100);
-		})
-	}
 	
 });
 /*window.addEventListener('load', function() {
@@ -247,6 +230,8 @@ $(function() {
         } 
     }); 
 })(jQuery);
+// 多行文本自适应高度的调用
+$("textarea.form-control").elastic();
 ;
 (function(global, factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
@@ -1339,3 +1324,13 @@ $(document).ready(function(){
         UM.picker(".um-scroller-"+ value,item);
     });    
 });
+$(document).on("click", ".um-tabbar li,.um-footerbar-item",function(){
+	$(this).addClass("active").siblings().removeClass("active");
+})
+// 解决IOS和低端安卓设备 checkbox和radio bug
+$("label").on("change", function(e){
+	$(this).addClass("um-label-change").siblings("label").addClass("um-label-change");
+	setTimeout(function(){
+		$(this).removeClass("um-label-change").siblings("label").removeClass("um-label-change");
+	}.bind(this), 100);
+})

@@ -548,3 +548,6 @@
 			return new ListView(selector, opts);
 		};
 	}));
+$(document).on("click", ".um-list-left-icon", function(e) {
+	e.stopPropagation();
+})

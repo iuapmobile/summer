@@ -159,3 +159,5 @@
         } 
     }); 
 })(jQuery);
+// 多行文本自适应高度的调用
+$("textarea.form-control").elastic();
