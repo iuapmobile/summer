@@ -44,10 +44,15 @@
 		}
 	}
 	.form-control {
+	  margin-top:10px;
 		font-size: $font-size-small;
 		padding-top: $padding-base-vertical - 4px;
 		padding-bottom: $padding-base-vertical - 4px;
 		height: $input-height-base - 8px;
+	  &:focus {
+		border-color: $um-theme-color;
+		box-shadow:none;
+	  }
 	}
 	
 	&.um-modal-in {
