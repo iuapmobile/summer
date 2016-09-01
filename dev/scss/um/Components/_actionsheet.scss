@@ -32,6 +32,18 @@
 		}
 	}
 }
+.um-share {
+  @extend .um-actionsheet;
+  left: 0;
+  right: 0;
+  .um-grid {
+	background-color: #fff;
+  }
+  .btn {
+	border-color:$um-theme-color ;
+	border-radius: 5px;
+  }
+}
 .um-poppicker {
 	position: absolute;
 	left: 0;

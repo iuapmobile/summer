@@ -881,6 +881,14 @@
 
 //summerBridge serivce 3.0.0.20160802
 +function(w,s){
+	if(!summerBridge){
+		summerBridge = {
+			callSync:function(){
+				alert("请将执行的逻辑放入summerready中");
+			}
+		}
+	}
+	
 	//1、兼容Android
     if(w.adrinvoker) alert(w.adrinvoker);
     var adrinvoker = {};
@@ -1124,6 +1132,10 @@
     	json = json || {};
         invoker.call("UMJS.hideLoadingBar",json);
     };
+
+    s.eval = function(script){
+    	var t = setTimeout("try{eval(" + script + ")}catch(e){alert(e)}", 10);
+    };
 	//仅支持当前Win中的 各个frame和当前win之间的相互执行脚本
 	s.execScript = function(json){
 		/*{
@@ -1132,6 +1144,7 @@
 			script:'do()'
 		}*/
 		if(typeof json == "object"){
+			//json.execFn = "summer.eval"
 			if(json.script){
 				json.script = "try{"+json.script+"}catch(e){alert(e)}";
 			}else{
@@ -1277,6 +1290,28 @@
 	s.addEventListener = function(json, successFn, errFn){
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
+	};
+
+	s.getAppVersion = function(json, successFn, errFn){
+		return s.callSync('XUpgrade.getVersion', param);
+	};	
+	s.getApp = function(json, successFn, errFn){
+		return s.callSync('XUpgrade.getVersion', param);
+	};
+	
+	//网络请求服务
+	s.ajax = function(json, successFn, errFn){
+		if(json.type == "get"){
+			return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+		}else if(json.type == "post"){
+			return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+		}
+	};
+	s.get = function(url, param, header, successFn, errFn){
+		return cordovaHTTP.get(url || "", param || {}, header || {}, successFn, errFn);
+	};
+	s.post = function(url, param, header, successFn, errFn){
+		return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
 	};
 }(window,summer);
 
