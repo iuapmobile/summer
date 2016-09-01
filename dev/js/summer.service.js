@@ -300,4 +300,5 @@
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
 	};
+	/*  ++ xyc ++ */  
 }(window,summer);

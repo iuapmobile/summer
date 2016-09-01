@@ -10,13 +10,6 @@ var rename = require('gulp-rename');
 
 
 
-
-
-
-
-
-
-
 /*********************** common task begin **********************/
 gulp.task('summer',function(){
 	//1 update github
@@ -141,73 +134,6 @@ gulp.task('xyc',function(){
 	gulp.watch('dev/css/iuapmobile.um.css', ['umcss']);
 });
 /*********************** xyc's task end **********************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
