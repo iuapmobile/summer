@@ -1,5 +1,13 @@
 ﻿//summerBridge serivce 3.0.0.20160802
 +function(w,s){
+	if(!summerBridge){
+		summerBridge = {
+			callSync:function(){
+				alert("请将执行的逻辑放入summerready中");
+			}
+		}
+	}
+	
 	//1、兼容Android
     if(w.adrinvoker) alert(w.adrinvoker);
     var adrinvoker = {};
