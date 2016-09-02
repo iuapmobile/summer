@@ -62,7 +62,7 @@ html {
 
 html, body {
   margin: 0;
-  overflow: hidden;
+  /*overflow:hidden;*/
   padding: 0;
   font-size: 100%;
   width: 100%;

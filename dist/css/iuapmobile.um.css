@@ -62,7 +62,7 @@ html {
 
 html, body {
   margin: 0;
-  overflow: hidden;
+  /*overflow:hidden;*/
   padding: 0;
   font-size: 100%;
   width: 100%;
@@ -1610,13 +1610,8 @@ a {
 }
 
 .um-ani-rotate:before {
-  content: "";
-  border-radius: 50%;
-  margin-right: 10px;
-  border: 2px solid #06FF00;
-  border-bottom-color: transparent;
-  height: 30px;
-  width: 30px;
+  color: #007aff;
+  font-size: 20.4px;
   display: inline-block;
   vertical-align: middle;
   -webkit-animation: rotate .75s 0s linear infinite;
@@ -1639,11 +1634,11 @@ a {
     transform: rotate(360deg);
   }
 }
-.um-list .btn, .um-list .btn-bg, .um-list .um-btn, .um-actionsheet .btn, .um-actionsheet .btn-bg, .um-actionsheet .um-btn, .um-poppicker .btn, .um-poppicker .btn-bg, .um-poppicker .um-btn, .um-modal .um-modal-btns .btn, .um-modal .um-modal-btns .btn-bg, .um-modal .um-modal-btns .um-btn {
+.um-list .btn, .um-list .btn-bg, .um-list .um-btn, .um-actionsheet .btn, .um-share .btn, .um-actionsheet .btn-bg, .um-share .btn-bg, .um-actionsheet .um-btn, .um-share .um-btn, .um-poppicker .btn, .um-poppicker .btn-bg, .um-poppicker .um-btn, .um-modal .um-modal-btns .btn, .um-modal .um-modal-btns .btn-bg, .um-modal .um-modal-btns .um-btn {
   border-color: transparent;
   border-radius: 0;
 }
-.um-list .btn:active, .um-list .btn-bg:active, .um-list .um-btn:active, .um-actionsheet .btn:active, .um-actionsheet .btn-bg:active, .um-actionsheet .um-btn:active, .um-poppicker .btn:active, .um-poppicker .btn-bg:active, .um-poppicker .um-btn:active, .um-modal .um-modal-btns .btn:active, .um-modal .um-modal-btns .btn-bg:active, .um-modal .um-modal-btns .um-btn:active, .um-list .active.btn, .um-list .active.btn-bg, .um-list .active.um-btn, .um-actionsheet .active.btn, .um-actionsheet .active.btn-bg, .um-actionsheet .active.um-btn, .um-poppicker .active.btn, .um-poppicker .active.btn-bg, .um-poppicker .active.um-btn, .um-modal .um-modal-btns .active.btn, .um-modal .um-modal-btns .active.btn-bg, .um-modal .um-modal-btns .active.um-btn {
+.um-list .btn:active, .um-list .btn-bg:active, .um-list .um-btn:active, .um-actionsheet .btn:active, .um-share .btn:active, .um-actionsheet .btn-bg:active, .um-share .btn-bg:active, .um-actionsheet .um-btn:active, .um-share .um-btn:active, .um-poppicker .btn:active, .um-poppicker .btn-bg:active, .um-poppicker .um-btn:active, .um-modal .um-modal-btns .btn:active, .um-modal .um-modal-btns .btn-bg:active, .um-modal .um-modal-btns .um-btn:active, .um-list .active.btn, .um-list .active.btn-bg, .um-list .active.um-btn, .um-actionsheet .active.btn, .um-share .active.btn, .um-actionsheet .active.btn-bg, .um-share .active.btn-bg, .um-actionsheet .active.um-btn, .um-share .active.um-btn, .um-poppicker .active.btn, .um-poppicker .active.btn-bg, .um-poppicker .active.um-btn, .um-modal .um-modal-btns .active.btn, .um-modal .um-modal-btns .active.btn-bg, .um-modal .um-modal-btns .active.um-btn {
   box-shadow: none;
   background-color: rgba(230, 230, 230, 0.95);
 }
@@ -3791,7 +3786,7 @@ input[type="number"].form-control {
 .um-input-text .um-input-left-icon {
   display: block;
   margin-top: 15px;
-  margin-right: 5px;
+  margin-right: 10px;
   z-index: 2;
 }
 .um-input-text .form-control {
@@ -4354,7 +4349,7 @@ input[type="number"].form-control {
 }
 
 /* 弹窗popup */
-.um-actionsheet {
+.um-actionsheet, .um-share {
   position: absolute;
   bottom: 0;
   left: 5px;
@@ -4365,27 +4360,39 @@ input[type="number"].form-control {
   -webkit-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
 }
-.um-actionsheet .um-list.um-list-corner {
+.um-actionsheet .um-list.um-list-corner, .um-share .um-list.um-list-corner {
   margin-bottom: 6px;
 }
-.um-actionsheet.active {
+.um-actionsheet.active, .active.um-share {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.um-actionsheet .btn, .um-actionsheet .btn-bg, .um-actionsheet .um-btn {
+.um-actionsheet .btn, .um-share .btn, .um-actionsheet .btn-bg, .um-share .btn-bg, .um-actionsheet .um-btn, .um-share .um-btn {
   color: #007aff;
   padding-top: 7px;
   padding-bottom: 7px;
   text-align: center;
   font-size: 20.4px;
 }
-.um-actionsheet .btn.popup-title, .um-actionsheet .popup-title.btn-bg, .um-actionsheet .popup-title.um-btn {
+.um-actionsheet .btn.popup-title, .um-share .btn.popup-title, .um-actionsheet .popup-title.btn-bg, .um-share .popup-title.btn-bg, .um-actionsheet .popup-title.um-btn, .um-share .popup-title.um-btn {
   font-size: 14.45px;
   white-space: normal;
   color: #000;
 }
-.um-actionsheet .btn:after, .um-actionsheet .btn-bg:after, .um-actionsheet .um-btn:after {
+.um-actionsheet .btn:after, .um-share .btn:after, .um-actionsheet .btn-bg:after, .um-share .btn-bg:after, .um-actionsheet .um-btn:after, .um-share .um-btn:after {
   display: none;
+}
+
+.um-share {
+  left: 0;
+  right: 0;
+}
+.um-share .um-grid {
+  background-color: #fff;
+}
+.um-share .btn, .um-share .btn-bg, .um-share .um-btn {
+  border-color: #007aff;
+  border-radius: 5px;
 }
 
 .um-poppicker {
@@ -4632,10 +4639,15 @@ input[type=range]::-webkit-slider-thumb:before {
   border-bottom-right-radius: 12px;
 }
 .um-modal .form-control {
+  margin-top: 10px;
   font-size: 14.45px;
   padding-top: 5px;
   padding-bottom: 5px;
   height: 31.9px;
+}
+.um-modal .form-control:focus {
+  border-color: #007aff;
+  box-shadow: none;
 }
 .um-modal.um-modal-in {
   z-index: 9999;
@@ -4870,6 +4882,20 @@ input[type=range]::-webkit-slider-thumb:before {
 .um-input-group .btn:last-child, .um-input-group .btn-bg:last-child, .um-input-group .um-btn:last-child, .um-input-group .form-control:last-child {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+}
+.um-input-group span[class^="ti-"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 11px 11px;
+  z-index: 5;
+  color: #007aff;
+  font-weight: bold;
+}
+.um-input-group span[class^="ti-"] + input.form-control {
+  padding-left: 39px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 @-webkit-keyframes progress-bar-stripes {
