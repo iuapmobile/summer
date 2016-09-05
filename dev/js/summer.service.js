@@ -327,4 +327,29 @@
 	s.post = function(url, param, header, successFn, errFn){
 		return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
 	};
+
+	s.call = function(string, successFn, errFn){
+		return window.PhoneCaller.call(string, successFn, errFn);
+	};
+	
+	s.getLocation=function(successFn, errFn){
+		return navigator.geolocation.getCurrentPosition(successFn, errFn);
+	};
+	
+	s.fContacts=function(json, successFn, errFn){	
+		var options      = new ContactFindOptions();
+		options.filter   = json.filter;
+		options.multiple = json.multiple;
+		options.desiredFields =[navigator.contacts.fieldType.id];
+		options.hasPhoneNumber = json.hasPhoneNumber;
+		var fields  =json.fieldType || [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+		return navigator.contacts.find(fields, successFn, errFn, options);
+	};
+	
+	s.sContacts=function(json, successFn, errFn){
+		var contact = navigator.contacts.create();
+		contact.displayName = json.displayName;
+		contact.nickname = json.nickName;   
+		return contact.save(successFn,errFn);
+	};
 }(window,summer);
