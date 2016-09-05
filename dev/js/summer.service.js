@@ -305,12 +305,19 @@
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
 	};
-
-	s.getAppVersion = function(json, successFn, errFn){
-		return s.callSync('XUpgrade.getVersion', param);
-	};	
-	s.getApp = function(json, successFn, errFn){
-		return s.callSync('XUpgrade.getVersion', param);
+	
+	//app upgrade API
+	s.getAppVersion = function(json){
+		return s.callSync('XUpgrade.getAppVersion', json || {});
+	};
+	s.upgradeApp = function(json, successFn, errFn){
+		return s.callCordova('summer-plugin-core.XUpgrade', 'upgradeApp', json, successFn, errFn);
+	};
+	s.getVersion = function(json){
+		return s.callSync('XUpgrade.getVersion', json || {});
+	};
+	s.upgrade = function(json, successFn, errFn){
+		return s.callCordova('summer-plugin-core.XUpgrade', 'upgrade', json, successFn, errFn);
 	};
 	
 	//网络请求服务

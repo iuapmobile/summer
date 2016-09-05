@@ -879,9 +879,9 @@
     window.$api = window.$summer;
 })(window);
 
-//summerBridge serivce 3.0.0.20160802
+//summerBridge 3.0.0.20160905
 +function(w,s){
-	if(!summerBridge){
+	if(typeof summerBridge == "undefined"){
 		summerBridge = {
 			callSync:function(){
 				alert("请将执行的逻辑放入summerready中");
@@ -1291,12 +1291,19 @@
 		if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
 	};
-
-	s.getAppVersion = function(json, successFn, errFn){
-		return s.callSync('XUpgrade.getVersion', param);
-	};	
-	s.getApp = function(json, successFn, errFn){
-		return s.callSync('XUpgrade.getVersion', param);
+	
+	//app upgrade API
+	s.getAppVersion = function(json){
+		return s.callSync('XUpgrade.getAppVersion', json || {});
+	};
+	s.upgradeApp = function(json, successFn, errFn){
+		return s.callCordova('summer-plugin-core.XUpgrade', 'upgradeApp', json, successFn, errFn);
+	};
+	s.getVersion = function(json){
+		return s.callSync('XUpgrade.getVersion', json || {});
+	};
+	s.upgrade = function(json, successFn, errFn){
+		return s.callCordova('summer-plugin-core.XUpgrade', 'upgrade', json, successFn, errFn);
 	};
 	
 	//网络请求服务
@@ -1313,6 +1320,33 @@
 	s.post = function(url, param, header, successFn, errFn){
 		return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
 	};
+
+	s.call = function(string, successFn, errFn){
+		return window.PhoneCaller.call(string, successFn, errFn);
+	};
+	
+	s.getLocation=function(successFn, errFn){
+		return navigator.geolocation.getCurrentPosition(successFn, errFn);
+	};
+	
+	s.contacts ={
+		find:function(json, successFn, errFn){	
+			var options      = new ContactFindOptions();
+			options.filter   = json.filter;
+			options.multiple = json.multiple;
+			options.desiredFields =[navigator.contacts.fieldType.id];
+			options.hasPhoneNumber = json.hasPhoneNumber;
+			var fields  =json.fieldType || [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			return navigator.contacts.find(fields, successFn, errFn, options);
+		},
+		
+		save:function(json, successFn, errFn){
+			var contact = navigator.contacts.create();
+			contact.displayName = json.displayName;
+			contact.nickname = json.nickName;   
+			return contact.save(successFn,errFn);
+		}
+	}
 }(window,summer);
 
 (function(w,s,$s,prefix){

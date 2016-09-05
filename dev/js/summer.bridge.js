@@ -1,6 +1,6 @@
-﻿//summerBridge serivce 3.0.0.20160802
+﻿//summerBridge 3.0.0.20160905
 +function(w,s){
-	if(!summerBridge){
+	if(typeof summerBridge == "undefined"){
 		summerBridge = {
 			callSync:function(){
 				alert("请将执行的逻辑放入summerready中");
