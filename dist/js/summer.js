@@ -1377,7 +1377,15 @@
 	//电池状态
 	s.batterystatus = function (fn){
 		return window.addEventListener("batterystatus", fn, false);
-	}
+	};
+	//camera
+	s.camera = function (json,ret,err){
+		return navigator.camera.getPicture(ret,err,json);
+	};
+	//Inappbrowser
+	s.inappbrowser = function(url, target, options){
+		return cordova.InAppBrowser.open(url, target, options);
+	};
 }(window,summer);
 
 (function(w,s,$s,prefix){
