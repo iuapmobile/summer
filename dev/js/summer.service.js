@@ -361,4 +361,35 @@
 			return contact.save(successFn,errFn);
 		}
 	}
+	//加速计
+	s.getAcceleration = function (onSuccess,onError){
+		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
+	};
+	s.watchAcceleration = function (options,onSuccess,onError){
+		var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);  
+		return watchID;  
+	};
+	//手机信息
+	s.model = function (){
+		return device.model;
+	};
+	s.uuid  = function (){
+		return device.uuid;
+	};
+	s.version = function (){
+		return device.version;
+	};
+	s.platform = function(){
+		return device.platform;
+	};
+	s.manufacturer = function (){
+		return device.manufacturer;
+	};
+	s.serial = function (){
+		return device.serial;
+	};
+	//电池状态
+	s.batterystatus = function (fn){
+		return window.addEventListener("batterystatus", fn, false);
+	}
 }(window,summer);
