@@ -216,6 +216,8 @@ gulp.task('summer_update_gct',function(){
 	srcFiles.push("dev/js/summer.dom.js");//3
 	srcFiles.push("dev/js/summer.bridge.js");//4
 	srcFiles.push("dev/js/summer.service.js");//5
+	srcFiles.push("dev/js/summer.plugins.js");//6
+		
 	var fileName =  "summer";//目标文件名
 	//2 update gityy
 	var path1 = TASKPATH_gct.git["tpl_ump_js"];
