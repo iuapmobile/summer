@@ -3226,14 +3226,14 @@ UMP.Services.Sqlite.prototype = {
 		return this.openOrCreateDB(json);
 	},
 	openOrCreateDB:function(json){
-		if($isJSONObject(json) && $isEmpty(json["db"])){	
+		if($isJSONObject(json) && !$isEmpty(json["db"])){	
 			return $service.call(this.UMSQLite_openDB, json, false);
 		}else{
 			alert("参数不是一个有效的JSONObject，请确保参数是一个有效的JSON且含有db键值");
 		}
 	},
 	openDB:function(args){
-		if($isJSONObject(args) && $isEmpty(args["db"])){			
+		if($isJSONObject(args) && !$isEmpty(args["db"])){			
 			return $service.call(this.UMSQLite_openDB, args, false);
 		}else{
 			alert("参数不是一个有效的JSONObject，请使用openDB({...})形式的API");
