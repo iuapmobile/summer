@@ -40,7 +40,28 @@
 	-webkit-animation: fadeOut .35s ease-out forwards;
 	animation: fadeOut .35s ease-out forwards;
 }
-
+/*slide_scale*/
+.um-moveFromRight {
+  -webkit-animation: moveFromRight .35s ease-out forwards;
+  animation: moveFromRight .35s ease-out forwards;
+  -webkit-transform-origin: right;
+  transform-origin: right;
+}
+.um-moveFromLeft {
+  -webkit-animation: moveFromLeft .55s ease-out forwards;
+  animation: moveFromLeft .55s ease-out forwards;
+  -webkit-transform-origin: left;
+  transform-origin: left;
+}
+/*rotate*/
+.um-rotateOutNewspaper {
+  -webkit-animation: rotateOutNewspaper .35s forwards ease;
+  animation: rotateOutNewspaper .35s forwards ease;
+}
+.um-rotateInNewspaper {
+    -webkit-animation: rotateInNewspaper .35s forwards ease;
+  animation: rotateInNewspaper .35s forwards ease;
+}
 /********************************* keyframes **************************************/
 @-webkit-keyframes noeffect {
 	from {opacity: 1;}
@@ -83,7 +104,77 @@
 	100% {
 		transform: scaleY(1);
 	}		
-} 
+}
+@-webkit-keyframes moveFromRight {
+  from {
+    -webkit-transform:translate(100% ,0);
+    transform:translate(100% ,0);
+  }
+  to {
+    -webkit-transform:translate(0,0) ;
+    transform:translate(0,0) ;
+  }
+}
+@keyframes moveFromRight {
+  from {
+    transform:translate(100% ,0);
+  }
+  to {
+    -webkit-transform:translate(0,0) ;
+    transform:translate(0,0) ;
+  }
+}
+@-webkit-keyframes rotateOutNewspaper {
+  to {
+    -webkit-transform:rotateY(-180deg) ;
+    transform:rotateY(-180deg) ;
+  }
+}
+@keyframes rotateOutNewspaper {
+  to {
+    -webkit-transform:rotateY(-180deg) ;
+    transform:rotateY(-180deg) ;
+  }
+}
+@-webkit-keyframes rotateInNewspaper {
+  from {
+    -webkit-transform:rotateY(180deg) ;
+    transform:rotateY(180deg) ;
+  }
+  to {
+    -webkit-transform:rotateY(0deg) ;
+    transform:rotateY(0deg) ;
+  }
+}@keyframes rotateInNewspaper {
+   from {
+     -webkit-transform:rotateY(180deg) ;
+     transform:rotateY(180deg) ;
+   }
+   to {
+     -webkit-transform:rotateY(0deg) ;
+     transform:rotateY(0deg) ;
+   }
+ }
+@-webkit-keyframes moveFromLeft {
+  from {
+    -webkit-transform:translate(-100% ,0);
+    transform:translate(-100% ,0);
+  }
+  to {
+    -webkit-transform:translate(0,0) ;
+    transform:translate(0,0) ;
+  }
+}
+@keyframes moveFromLeft {
+  from {
+    -webkit-transform:translate(-100% ,0);
+    transform:translate(-100% ,0);
+  }
+  to {
+    -webkit-transform:translate(0,0) ;
+    transform:translate(0,0) ;
+  }
+}
 
 @-webkit-keyframes moveToBottom {
 	from { }
