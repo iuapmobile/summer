@@ -80,7 +80,7 @@
 			strParam = strJson.toString();
 		}
 		try{
-		return summerBridge.callSync(serivceName, strParam);
+			return summerBridge.callSync(serivceName, strParam);
 		}catch(e){
 			if($summer.os == "pc"){
 				return strJson;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/um.css">
+		<link rel="stylesheet" href="css/islider.css">
+		<script src="../../js/jquery.min.js"></script>
+		<script src="js/islider.js"></script>
+		<script src="../../js/um.js"></script>
+		<style>
+		/* Arrow */
+		#iSlider-arrow {
+			position: absolute;
+			width: 3em;
+			height: 3em;
+			left: 0;
+			right: 0;
+			bottom: 5%;
+			margin: 0 auto;
+			border-top: 2px solid #fff;
+			border-right: 2px solid #fff;
+			z-index: 10000;
+			opacity: 0.8;
+			-webkit-animation: nextPage 1.2s linear infinite;
+		}
+		@-webkit-keyframes nextPage {
+		  	0% {
+		    	-webkit-transform: translateY(40px) rotate(-45deg);
+		    	opacity: 0.8;
+		  	}
+		  	50% {
+		  		-webkit-transform: translateY(20px) rotate(-45deg);
+		  		opacity: 0.4;
+		  	}
+		  	100% {
+		    	-webkit-transform: translateY(10px) rotate(-45deg);
+		    	opacity: 0;
+		  	}
+		}
+		</style>
+		<script>
+		$(function(){
+			var list = [
+			{content: "../../img/love.png"},
+			{content: "../../img/sun.png"},
+			{content: "../../img/waite.png"}];
+		
+			var	islider = new iSlider({
+				type: 'pic',
+			    data: list,
+			    dom: document.getElementById("iSlider-wrapper"),
+			    isVertical: true,
+			    isLooping: true,
+			    animateType: 'card',
+			    onslidechange: function(idx) {
+			    	if (this.isLooping === false) {
+				    	if (idx === this.data.length - 1) {
+				    		document.getElementById('iSlider-arrow').style.display = 'none';
+				    	}
+				    	else {
+				    		document.getElementById('iSlider-arrow').style.display = 'block';
+				    	}
+				    }
+			    }
+			});
+		})
+		
+	</script>
+	</head>
+	<body>
+		<div class="um-page" id="page">
+			<div class="um-header">
+				<a href="../../index.html" class="um-back"  data-transitio>返回</a>
+				<h3>导航栏</h3>
+			</div>
+			<!-- Outer Canvas 外层画布 -->
+			<div id="iSlider-wrapper" class="iSlider-wrapper"></div>
+			<div id="iSlider-arrow"></div>
+		</div>
+	</body>
+	</html>
+	

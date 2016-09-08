@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="css/um.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/um.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$(".um-switch1").on("change","input[type=checkbox]",function(){
+				if(this.checked) {
+					UM.modal("alert","开关1状态为:开");
+				}else {
+					UM.modal("alert","开关1状态为:关");
+				}
+			})
+			$(".um-switch2").on("change","input[type=checkbox]",function(){
+				if(this.checked) {
+					UM.modal("alert","开关2状态为:开");
+				}else {
+					UM.modal("alert","开关3状态为:关");
+				}
+			})
+			document.body.addEventListener('touchstart', function() {
+				//...空函数即可
+			});
+		})
+		</script>
+	</head>
+	<body>
+		<div class="um-page">
+			<div class="um-header" >
+				<a href="index.html"  class="um-back">返回</a>
+				<h3>开关</h3>
+			</div>
+			<div class="um-content">
+				<h4>开关</h4>
+				自动登录
+				<label class="um-switch1">
+					<input type="checkbox" value="on" checked="checked">
+					<div class="um-track">
+						<div class="um-handle">
+						</div>
+					</div>
+				</label>
+
+				<label class="um-switch2 um-box-vc">
+					<input type="checkbox" class="um-switch2" />
+					<span class="um-switch2-check" data-on-text="打开" data-off-text="关闭"></span>
+				</label>
+
+			</div>
+		</div>
+</body>
+</html>

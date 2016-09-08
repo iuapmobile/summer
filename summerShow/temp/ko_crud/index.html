@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/iuapmobile.um-2.7.0.css">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/knockout-2.2.0.js"></script>
+		<script src="js/Frameworks/iuapmobile.frameworks.ui-2.7.0.js"></script>
+		<style>
+		#check,.del,.um-header-btns a {
+			color: #007aff;
+		}
+		.list-item:last-child .um-list-item .um-list-item-inner:after {
+			border-width:0;
+		}
+		</style>
+		<script src="js/crud.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+		<div class="um-header">
+			<a href="../../index.html" class="um-back">返回</a>
+			<h3>标题</h3>
+			<div class="um-header-btns">
+				<a href="#" class="ti-pencil-alt f18 mr10" id="edite_list" data-bind="click: edite"></a>
+				<a class="ti-plus" href="#edite" data-bind="click: addlist" data-transition="pop"></a>
+			</div>
+			
+		</div>
+		<div class="um-content">
+			<ul class="um-list" id="shopContent"  data-bind="foreach: listData">
+				<li class="list-item">
+					<a href="#edite" class="um-list-item">
+						<div class="um-list-item-media">
+							<label class="um-check-inline um-list-left-icon">
+								<input name="um-checkbox-inline" type="checkbox">
+								<span class="um-icon-checkbox um-css3-vc"></span>
+							</label>
+							<img height=40 width=40 data-bind="attr:{src:imgsrc}" alt="...">
+						</div>
+						<div class="um-list-item-inner" data-bind="click: $parent.lineClick">
+							<div class="um-list-item-body">
+								<h4 class="media-heading" data-bind="text: title"></h4>
+								<p data-bind="text: content"></p>
+								<p data-bind='visible: $parent.tipsVisible() > 0.5, text: tips' class="um-red"></p>
+							</div>
+							<div class="um-list-item-right">
+								<div class="mr15" data-bind="text: status"></div>
+								<span class="f12 mr15" data-bind="text: time"></span>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="none" id="check">
+			<div class="um-box-justify p10">
+				<a href="#" data-bind="click: checkAll">
+					全选
+				</a>
+				<a href="#" data-bind="click: remove">
+					删除
+				</a>
+			</div>
+		</div>
+		</div>
+		<div class="um-page" id="edite">
+			<div class="um-header" >
+			<a href="#"  class="um-back">返回</a>
+			<h3>导航栏</h3>
+			<a class="um-header-right ti-save" href="#" data-bind="click: save"></a>
+			</div>
+			<div class="um-content">
+			<ul class="um-list" data-bind="with: line">
+				<li>
+					<div class="um-list-item">
+						<div class="um-list-item-inner">
+							<div class="um-list-item-left">
+								企业:
+							</div>
+							<div class="um-list-item-right">
+								<input type="text" class="form-control" data-bind="value: title">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="um-list-item">
+						<div class="um-list-item-inner">
+							<div class="um-list-item-left">
+								经营范围:
+							</div>
+							<div class="um-list-item-right">
+								<input type="text" class="form-control"  data-bind="value: content">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="um-list-item">
+						<div class="um-list-item-inner">
+							<div class="um-list-item-left">
+								状态:
+							</div>
+							<div class="um-list-item-right">
+								<select name="" class="form-control" data-bind="value: status">
+									<option value="审阅中">审阅中</option>
+									<option value="已批准">已批准</option>
+									<option value="未提交">未提交</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</body>
+</html>

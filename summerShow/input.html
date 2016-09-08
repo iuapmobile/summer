@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="css/um.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/um.js"></script>
+		<style>
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="um-page">
+			<div class="um-header" >
+				<a href="index.html"  class="um-back">返回</a>
+				<h3>输入框控件</h3>
+			</div>
+			<div class="um-content">
+				<h3>输入框</h3>
+				<h4>普通輸入框</h4>
+				<input type="text" value="" placeholder="输入文字" class="form-control">
+				<h4>自定义宽度</h4>
+				<input type="text"  style="width:200px;" placeholder="width:200px;" class="form-control">
+				<h4>数字輸入框</h4>
+				<input type="number" value="31" placeholder="輸入數字" class="form-control">
+				
+				<h4>禁止輸入</h4>
+				<input type="text" value="31" placeholder="輸入數字" disabled class="form-control">
+				
+				<h4>输入框文字清除</h4>
+				<div class="pr">
+					<input type="text" class="form-control" placeholder="该输入框文本可以清除">
+					<span class="um-input-clear ti-close"></span>
+				</div>
+				<script>
+					$(".um-input-clear").click(function() {
+						var that = $(this);
+						UM.modal("confirm", {
+							text:"是否清除文字",
+							ok:function(){
+								that.prev("input").val("");
+							}
+						})
+					})
+				</script>
+				<div class="um-row">
+					<div class="um-sm-6">
+						<h4>用戶名輸入框</h4>
+						<div class="um-input-group">
+							<span class="btn ti-user"></span>
+							<input type="text" class="form-control" placeholder="用户名">
+						</div>
+					</div>
+					<div class="um-sm-6">
+						<h4>密码输入框</h4>
+						<div class="um-input-group">
+							<span class="btn ti-lock"></span>
+							<input type="password" class="form-control" placeholder="密码">
+						</div>
+					</div>
+					
+				</div>
+				<br>
+				<div class="um-input-group">
+							<span class="btn ti-lock"></span>
+							<input type="password" class="form-control">
+							<span class="btn ti-lock"></span>
+						</div>
+				<br>
+				<ul class="um-list">
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-media">
+								<span class="ti-user"  style="color: #fff;background-color: #2F9BE8;border-radius: 50%;padding: 5px;"></span>
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									用户名
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" placeholder="请输入邮箱//手机号//QQ号">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-media">
+								<span class="ti-lock" style="color: #fff;background-color: #21D831;border-radius: 50%;padding: 5px;"></span>
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									密码
+								</div>
+								<div class="um-list-item-right">
+									<input type="password" class="form-control" placeholder="请输入密码***">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<br>
+				<h4>搜索输入框</h4>
+				<div class="um-input-group">
+					<span class="btn ti-search"></span>
+					<input type="search" class="form-control" placeholder="搜索">
+				</div>
+
+				<br>
+				<div class="um-input-group">
+					<input type="password" class="form-control" placeholder="password">
+					<span class="btn ti-search"></span>
+				</div>
+				<br>
+				<div class="um-input-search">
+					<input type="search" class="form-control" placeholder="search">
+					<span class="um-input-cancle">取消</span>
+				</div>
+				<br>
+				<h4>仅底部边框输入框</h4>
+				<div class="um-input-text">
+					<span class="ti-lock um-input-left-icon"></span>
+					<input type="text" class="form-control" placeholder="Username">
+				</div>
+				<h4>textarea</h4>
+				<textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+				<br>
+				<script>
+					document.body.addEventListener('touchstart', function() {
+						//...空函数即可
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

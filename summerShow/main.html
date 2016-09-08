@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>UAP Mobile CSS Framework 1.0 Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="external/prism/prism.css">
+		<link rel="stylesheet" href="css/um.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="external/prism/prism.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/um.js"></script>
+		<script src="js/doc.js"></script>
+	</head>
+	<body>		
+<!-- <div class="loading um-flex-center">
+	<div class="rotate">
+<div class="rotate1"></div>
+<div class="rotate2"></div>
+<div class="rotate3"></div>
+	</div>
+	<div class="rotate">
+<div class="rotate1"></div>
+<div class="rotate2"></div>
+<div class="rotate3"></div>
+	</div>
+</div> -->
+<a class="backTop ti-arrow-circle-up" href="#structor"></a>
+	<div class="wrap clearfix">
+	<nav id="nav" class="um-xs-12 um-md-3" data-action="collapse">
+			<a href="#" id="menu" class="ti-menu um-collapse-btn"></a>
+			<ul class="um-list um-collapse-content" id="dropmenu">
+				<li><a class="btn" href="#structor">框架结构</a></li>
+				<li data-action="collapse">
+					<a href="javascript:void(0);" class="um-collapse-btn btn">按钮</a>
+					<ul class="um-list um-collapse-content">
+						<li><a class="btn" href="#commonBtn">普通按钮</a></li>
+						<li><a class="btn" href="#iconBtn">按钮图标</a></li>
+						<li><a class="btn" href="#btnSize">按钮尺寸</a></li>
+						<li><a class="btn" href="#uploadBtn">文件上传按钮</a></li>
+						<li><a class="btn" href="#customBtn">按钮颜色</a></li>
+						<li><a class="btn" href="#btnGroup">按钮组</a></li>
+						<li><a class="btn" href="#moreBtn">更多按钮</a></li>
+					</ul>
+				</li>
+				<li class="um-list-divider">输入框</li>
+				<li><a class="btn" href="#commonInput">普通输入框</a></li>
+				<li><a class="btn" href="#userInput">用户名输入框</a></li>
+				<li><a class="btn" href="#searchInput">搜索框</a></li>
+				<li><a class="btn" href="#formInput">表单输入</a></li>
+
+				<li class="um-list-divider">单选框复选框</li>
+				<li><a class="btn" href="#vRadio">垂直单选框</a></li>
+				<li><a class="btn" href="#vCheckbox">垂直复选框</a></li>
+
+				<li class="um-list-divider">开关</li>
+				<li><a class="btn" href="#switch">开关</a></li>
+
+				<li class="um-list-divider">日期控件</li>
+				<li><a class="btn" href="#date">日期控件</a></li>
+
+				<li class="um-list-divider">滑块</li>
+				<li><a class="btn" href="#slider">滑块控件</a></li>
+
+				<li class="um-list-divider">导航栏</li>
+				<li><a class="btn" href="#header">导航栏</a></li>
+
+				<li class="um-list-divider">进度条</li>
+				<li><a class="btn" href="#progress">进度条</a></li>
+
+				<li class="um-list-divider">下拉框</li>
+				<li><a class="btn" href="#select">下拉框</a></li>
+
+				<li class="um-list-divider">选项卡</li>
+				<li data-action="collapse">
+					<a href="javascript:void(0);" class="um-collapse-btn btn">选项卡</a>
+					<ul class="um-list um-collapse-content">
+						<li><a class="btn" href="#textTabbar">文字选项卡</a></li>
+						<li><a class="btn" href="#iconTabbar">图标选项卡</a></li>
+						<li><a class="btn" href="#textIconTabbar">文字和图标选项卡</a></li>
+						<li><a class="btn" href="#underlineTabbar">底部下划线选项卡</a></li>
+						<li><a class="btn" href="#footerTabbar">底部选项卡</a></li>
+					</ul>
+				</li>
+				<li><a class="btn" href="#img">图片控件</a></li>
+				<li class="um-list-divider"></li>
+				<li data-action="collapse">
+					<a href="javascript:void(0);" class="btn um-collapse-btn">列表</a>
+					<ul class="um-list um-collapse-content">
+						<li><a class="btn" href="#commonList">普通列表</a></li>
+						<li><a class="btn" href="#navList">全屏导航列表</a></li>
+						<li><a class="btn" href="#dropList">下拉列表</a></li>
+						<li><a class="btn" href="#slideList">滑动删除列表</a></li>
+						<li><a class="btn" href="#divideList">全屏分栏列表</a></li>
+						<li><a class="btn" href="#detailList">详情列表</a></li>
+						<li><a class="btn" href="#cornorList">圆角列表</a></li>
+						<li><a class="btn" href="#secondList">第二种列表</a></li>
+					</ul>
+				</li>
+				<li class="um-list-divider"></li>
+				<li class="um-list-divider">布局</li>
+				<li><a class="btn" href="#col">栅格系统</a></li>
+				<li><a class="btn" href="#layout">四宫格布局</a></li>
+				<li><a class="btn" href="#layout9">九宫格布局</a></li>
+				<li><a class="btn" href="#pagetransition">页面切换动画</a></li>
+				<li><a class="btn" href="#modal">模态框插件</a></li>
+				<li><a class="btn" href="#progressjs">进度条插件</a></li>
+			</ul>
+		</nav>
+		<div class="content um-xs-12 um-md-8 um-md-push-3">
+		<div class="item">
+			<h3 id="structor">框架结构</h3>
+<pre class="language-markup"><code>
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+	&lt;head>
+		&lt;meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		&lt;meta charset="UTF-8">
+		&lt;title>&lt;/title>
+		&lt;link rel="stylesheet" href="css/iuapmobile.um-2.7.0.css">
+		&lt;link rel="stylesheet" href="css/themify-icons/themify-icons.css">	
+		&lt;script src="js/Frameworks/iuapmobile.frameworks.core-2.7.0.js" >&lt;/script>		
+		&lt;script src="js/jquery-2.1.4.min.js" >&lt;/script>
+		&lt;script src="js/Frameworks/iuapmobile.frameworks.ui-2.7.0.js" >&lt;/script>
+	&lt;/head>
+	&lt;body>
+		&lt;div class="um-page" id="index">
+			&lt;div class="um-header" >
+				&lt;h3>导航栏&lt;/h3>
+				&lt;a href="#" class="um-header-right ti-settings">&lt;/a>
+			&lt;/div>
+
+			&lt;div class="um-content">
+				在该处编辑您的页面
+			&lt;/div>
+
+			&lt;div class="um-footer">
+				
+			&lt;/div>
+		&lt;/div>
+	&lt;/body>
+&lt;/html>
+</code></pre>
+<h4>移动设备优先</h4>
+<p>
+在 um.css 1.0中，我们对框架中的某些关键部分增加了对移动设备友好的样式,其一开始就是对移动设备友好的。这次不是简单的增加一些可选的针对移动设备的样式，而是直接融合进了框架的内核中。
+
+为了确保适当的绘制和触屏缩放，需要在 <head> 之中添加 viewport 元数据标签。
+<pre class="language-markup"><code>
+&lt;meta name="viewport" content="width=device-width,initial-scale=1">
+</code></pre>
+在移动设备浏览器上，通过为视口（viewport）设置 meta 属性为 user-scalable=no 可以禁用其缩放（zooming）功能。这样禁用缩放功能后，用户只能滚动屏幕，就能让你的网站看上去更像原生应用的感觉。注意，这种方式我们并不推荐所有网站使用，还是要看你自己的情况而定！</p>
+<pre class="language-markup"><code>&lt;meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=no"></code></pre>
+
+<p>项目中需要引入um.css文件，该文件下载地址为
+<br><br>
+<a href="css/um.css" class="um-btn" download="um.css">下载um.css</a>
+<br>
+</p>
+
+<blockquote><code class="language-markup">&lt;div class="um-page">&lt;/div></code>为页面的最外层，代表页面整体，一个html可以有多个um-page页面，但一般只有一个处于激活状态，默认为第一个um-page页面</blockquote>
+
+<blockquote><code class="language-markup">&lt;div class="um-header">&lt;/div></code>为该页面的头部导航栏，在该页面起到导航效果</blockquote>
+
+<blockquote><code class="language-markup">&lt;div class="um-content">&lt;/div></code>为该页面的主要内容区，可在该区域编辑页面的内容</blockquote>
+
+<blockquote><code class="language-markup">&lt;div class="um-footer">&lt;/div></code>为该页面的底部工具栏，可放置该页面的工具条</blockquote>
+	
+注意：um-header，um-content，um-footer必须放置在um-page内
+ </div>
+		<div class="item">
+			<h3 id="commonBtn">按钮</h3>
+			<h4>普通按钮</h4>
+			<blockquote>设置class为btn即定义html元素为按钮样式，一般是button和a标签，也可以是input、div或者span等</blockquote>
+			<button class="btn btn-inline">
+			普通按钮
+			</button>
+			<button class="btn btn-inline">
+			徽章按钮<span class="um-badge">42</span>
+			</button>
+			<pre class="language-markup"><code>&lt;button class="btn btn-inline">普通按钮&lt;/button>
+
+&lt;button class="btn btn-inline">
+	徽章按钮
+	&lt;span class="um-badge">42&lt;/span>
+&lt;/button></code></pre>
+<h4>带图标的按钮</h4>
+
+<blockquote>按钮默认为块级(block),可以通过添加btn-inline设置按钮为行内样式</blockquote>
+			<button class="btn btn-inline">
+	<span class="ti-save"></span>
+	左图标按钮
+</button>
+			<button class="btn btn-inline">
+			右图标按钮<span class="ti-arrow-right"></span>
+			</button>
+<a href="#" class="um-tabbar-item">
+	<i class="ti-menu-alt f24"></i>
+	<div class="f12">企业审核</div>
+</a>
+			<pre class="language-markup"><code>
+&lt;button class="btn btn-inline">
+	&lt;span class="ti-save">&lt;/span>
+	左图标按钮
+&lt;/button>
+
+&lt;button class="btn btn-inline">
+	右图标按钮&lt;span class="ti-arrow-right">&lt;/span>
+&lt;/button>
+
+&lt;a href="#" class="um-tabbar-item">
+	&lt;i class="ti-menu-alt f24">&lt;/i>
+	&lt;div class="f12">企业审核&lt;/div>
+&lt;/a>
+</code></pre>
+<h4 id="circleBtn">圓形按鈕</h4>
+<button class="um-btn um-btn-success btn-inline btn-circle"><i class="ti-headphone"></i></button>
+<button class="um-btn ti-close btn-inline btn-circle"></button>
+<button class="um-btn um-btn-danger btn-inline ti-heart btn-circle"></button>
+<button class="um-btn um-btn-primary ti-twitter btn-inline btn-circle"></button>
+<button class="um-btn um-btn-primary ti-facebook btn-inline btn-circle"></button>
+<button class="um-btn um-btn-primary ti-sharethis btn-inline btn-circle"></button>
+				<h4>按鈕鏈接</h4>
+				<input type="button" class="btn btn-inline btn-link" value="链接按钮">
+<pre class="language-markup"><code>		
+&lt;button class="um-btn um-btn-success btn-inline btn-circle">&lt;i class="ti-headphone">&lt;/i>&lt;/button>
+&lt;button class="um-btn ti-close btn-inline btn-circle">&lt;/button>
+&lt;button class="um-btn um-btn-danger btn-inline ti-heart btn-circle">&lt;/button>
+&lt;button class="um-btn um-btn-primary ti-twitter btn-inline btn-circle">&lt;/button>
+&lt;button class="um-btn um-btn-primary ti-facebook btn-inline btn-circle">&lt;/button>
+&lt;button class="um-btn um-btn-primary ti-sharethis btn-inline btn-circle">&lt;/button>
+</code></pre>		
+			<h4 id="btnSize">按钮尺寸</h4>
+			<p>btn-lg,btn-sm,btn-xs分别控制按钮尺寸为大，小，超小级别</p>
+			<button class="btn btn-inline btn-lg">大按钮</button>
+			<button class="btn btn-inline">按钮</button>
+			<button class="btn btn-inline btn-sm">小按钮</button>
+			<button class="btn btn-inline btn-xs">超小按钮</button>
+			<pre class="language-markup"><code>
+&lt;button class="btn btn-inline btn-lg">大按钮&lt;/button>
+&lt;button class="btn btn-inline">按钮&lt;/button>
+&lt;button class="btn btn-inline btn-sm">小按钮&lt;/button>
+&lt;button class="btn btn-inline btn-xs">超小按钮&lt;/button>
+			</code></pre>
+<button class="btn btn-inline um-btn btn-lg">大按钮</button>
+<button class="btn btn-inline um-btn">按钮</button>
+<button class="btn btn-inline um-btn btn-sm">小按钮</button>
+<button class="btn btn-inline um-btn btn-xs">超小按钮</button>
+<pre class="language-markup"><code>
+&lt;button class="um-btn btn-inline btn-lg">大按钮&lt;/button>
+&lt;button class="btn-inline um-btn">按钮&lt;/button>
+&lt;button class="um-btn btn-inline btn-sm">小按钮&lt;/button>
+&lt;button class="um-btn btn-inline btn-xs">超小按钮&lt;/button>
+</code></pre>
+<h4 id="uploadBtn">上传文件按钮</h4>
+
+			<input type="file" name="file" id="file">
+			<pre class="language-markup"><code>
+&lt;input type="file" name="file" id="file"></code></pre>
+			<h3 id="customBtn">按钮颜色</h3>
+			<button class="btn">
+			default btn
+			</button>
+			<br>
+			<button class="btn btn-info">
+			info
+			</button>
+			<br>
+			<button class="btn btn-success">
+			success
+			</button>
+			<br>
+			<button class="btn btn-primary">primary</button>
+			<br>
+			<button class="btn btn-warning">warning</button>
+			<br>
+			<button class="btn btn-danger">danger</button>
+			<pre class="language-markup"><code>&lt;button class="btn">default btn&lt;/button>
+			
+&lt;button class="btn btn-info">info&lt;/button>
+
+&lt;button class="btn btn-success">success&lt;/button>
+
+&lt;button class="btn btn-primary">primary&lt;/button>
+
+&lt;button class="btn btn-warning">warning&lt;/button>
+
+&lt;button class="btn btn-danger">danger&lt;/button></code></pre>
+<h4>个性按钮</h4>
+<button class="um-btn">um-btn</button><br>
+			<button class="um-btn um-btn-primary">um-btn-primary</button><br>
+			<button class="um-btn um-btn-success">um-btn-success</button><br>
+			<button class="um-btn um-btn-info">um-btn-info</button><br>
+			<button class="um-btn um-btn-warning">um-btn-warning</button><br>
+			<button class="um-btn um-btn-danger">um-btn-danger</button>
+			<pre class="language-markup"><code>
+&lt;button class="um-btn">um-btn&lt;/button>
+&lt;button class="um-btn um-btn-primary">um-btn-primary&lt;/button>
+&lt;button class="um-btn um-btn-success">um-btn-success&lt;/button>
+&lt;button class="um-btn um-btn-info">um-btn-info&lt;/button>
+&lt;button class="um-btn um-btn-warning">um-btn-warning&lt;/button>
+&lt;button class="um-btn um-btn-danger">um-btn-danger&lt;/button>
+			</code></pre>
+			<h4 id="btnGroup">按钮组(水平)</h4>
+						<div class="btn-group">
+			<button type="button" class="btn btn-inline">
+			Left
+			</button>
+			<button type="button" class="btn btn-inline">
+			Middle
+			</button>
+			<button type="button" class="btn btn-inline">
+			Right
+			</button>
+						</div><pre class="language-markup"><code>&lt;div class="btn-group">
+	&lt;button type="button" class="btn btn-inline">Left&lt;/button>
+	&lt;button type="button" class="btn btn-inline">Middle&lt;/button>
+	&lt;button type="button" class="btn btn-inline">Right&lt;/button>
+&lt;/div></code></pre>
+			
+			<h4>按钮组(垂直)</h4>
+						<div class="btn-group btn-group-vertical">
+			<button type="button" class="btn">
+			Left
+			</button>
+			<button type="button" class="btn">
+			Middle
+			</button>
+			<button type="button" class="btn btn-inline">
+			Right
+			</button>
+						</div>
+			<pre class="language-markup"><code>&lt;div class="btn-group btn-group-vertical">
+	&lt;button type="button" class="btn">Left&lt;/button>
+	&lt;button type="button" class="btn">Middle&lt;/button>
+	&lt;button type="button" class="btn">Right&lt;/button>
+&lt;/div></code></pre>
+			<h4>按钮组(水平对其)</h4>
+						<div class="btn-group btn-group-justify" role="group">
+			<button type="button" class="btn">
+			Left
+			</button>
+			<button type="button" class="btn">
+			Middle
+			</button>
+			<button type="button" class="btn">
+			Right
+			</button></div>
+			<pre class="language-markup"><code>&lt;div class="btn-group btn-group-justify" role="group">
+	&lt;button type="button" class="btn">
+	Left
+	&lt;/button>
+	&lt;button type="button" class="btn">
+	Middle
+	&lt;/button>
+	&lt;button type="button" class="btn">
+	Right
+	&lt;/button>
+&lt;/div>
+			</code></pre>
+<h4 id="moreBtn">更多按钮表示</h4>
+						<br>
+						<input type="submit" value="submit按钮" class="btn">
+						<br>
+						<div class="btn">div按钮</div>
+						<br>
+						<pre class="language-markup"><code>
+&lt;input type="submit" value="submit按钮" class="btn">
+
+&lt;div class="btn">div按钮&lt;/div></code></pre>
+			
+</div>
+			<div class="item">
+				<h3>输入框</h3>
+			<h4 id="commonInput">普通輸入框</h4>
+			<input type="text" value="" placeholder="输入文字" class="form-control">
+			
+			<h4>自定义宽度</h4>
+			<input type="text"  style="width:200px;" placeholder="width:200px;" class="form-control">
+
+			<h4>数字輸入框</h4>
+			<input type="number" value="31" placeholder="輸入數字" class="form-control">
+			<pre class="language-markup"><code>&lt;input type="text" value="input value" placeholder="输入文字" class="form-control">
+
+&lt;input type="text"  style="width:200px;" placeholder="width:200px;" class="form-control">
+
+&lt;input type="number" value="31" placeholder="輸入數字" class="form-control"></code></pre>
+			<h4 id="clearInput">输入框文字清除</h4>
+			<div class="pr">
+				<input type="text" class="form-control" placeholder="该输入框文本可以清除">
+				<span class="um-input-clear ti-close"></span>
+			</div>
+			<script>
+				$(".um-input-clear").click(function() {
+					confirm("是否清除文字") && $(this).prev("input").val("");
+				})
+			</script>
+<pre class="language-markup"><code>&lt;div class="pr">
+	&lt;input type="text" class="form-control" placeholder="该输入框文本可以清除">
+	&lt;span class="um-input-clear ti-close">&lt;/span>
+&lt;/div>
+</code></pre>
+
+<pre class="language-javascript"><code>&lt;script>
+	$(".um-input-clear").click(function() {
+		confirm("是否清除文字") && $(this).prev("input").val("");
+	})
+&lt;/script>
+</code></pre>
+			<h4 id="userInput">用戶名输入框</h4>
+			<div class="um-input-group">
+				<span class="btn ti-user"></span>
+				<input type="text" class="form-control" placeholder="Username">
+			</div>
+
+			<h4>密码输入框</h4>
+			<div class="um-input-group">
+				<span class="btn ti-lock"></span>
+				<input type="password" class="form-control" placeholder="password">
+			</div>
+<pre class="language-markup"><code>&lt;div class="um-input-group">
+	&lt;span class="btn ti-user">&lt;/span>
+	&lt;input type="text" class="form-control" placeholder="Username">
+&lt;/div>
+
+&lt;div class="um-input-group">
+	&lt;span class="btn ti-lock">&lt;/span>
+	&lt;input type="password" class="form-control" placeholder="password">
+&lt;/div>
+</code></pre>
+<br>
+<h4 id="formInput">表单输入</h4>
+				<ul class="um-list">
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-media">
+								<img class="media-object um-circle" height=35 width=35 src="img/portal.jpg" alt="...">
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									用户名
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" placeholder="请输入用户名...">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-media">
+								<img class="media-object um-circle" height=35 width=35 src="img/portal.jpg" alt="...">
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									密码
+								</div>
+								<div class="um-list-item-right">
+									<input type="password" class="form-control" placeholder="请输入密码...">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li>
+		&lt;div class="um-list-item">
+			&lt;div class="um-list-item-media">
+				&lt;img class="media-object um-circle" height=35 width=35 src="img/portal.jpg" alt="...">
+			&lt;/div>
+			&lt;div class="um-list-item-inner">
+				&lt;div class="um-list-item-body">
+					用户名
+				&lt;/div>
+				&lt;div class="um-list-item-right">
+					&lt;input type="text" class="form-control" placeholder="...">
+				&lt;/div>
+			&lt;/div>
+		&lt;/div>
+	&lt;/li>
+	...
+&lt;/ul>
+</code></pre>
+			<hr>
+			<h4 id="searchInput">搜索框</h4>
+			<div class="um-input-group">
+				<span class="btn ti-search"></span>
+				<input type="search" class="form-control" placeholder="search">
+			</div>
+			<pre class="language-markup"><code>
+&lt;div class="um-input-group">
+	&lt;span class="btn ti-search">&lt;/span>
+	&lt;input type="search" class="form-control" placeholder="search">
+&lt;/div>
+			</code></pre>
+			<div class="um-input-group">
+				<input type="search" class="form-control" placeholder="search">
+				<span class="btn ti-search"></span>
+			</div>
+			<pre class="language-markup"><code>
+&lt;div class="um-input-group">
+	&lt;input type="search" class="form-control" placeholder="search">
+	&lt;span class="btn ti-search">&lt;/span>
+&lt;/div>
+			</code></pre>
+			<h4>自定义icon</h4>
+			<style>
+			.um-input-center-icon {
+background: 8px center no-repeat url(img/search.png);
+background-size: 16px;
+padding-left: 30px;
+			}
+			</style>
+			<input type="search" class="form-control um-input-center-icon" placeholder="search...">
+<pre class="language-markup"><code>
+&lt;style>
+.um-input-center-icon {
+	background-image: url(css/uap-blue-icons/tab_search.png);
+}
+&lt;/style>
+
+&lt;input type="search" class="form-control um-input-center-icon" placeholder="search...">
+</code></pre>
+<h4>仅底部边框输入框</h4>
+			<div class="um-input-text">
+				<span class="ti-lock um-input-left-icon"></span>
+				<input type="text" class="form-control" placeholder="Username">
+			</div>
+	<pre class="language-markup"><code>
+&lt;div class="um-input-text">
+	&lt;span class="ti-lock um-input-left-icon">&lt;/span>
+	&lt;input type="text" class="form-control" placeholder="Username">
+&lt;/div>
+</code></pre>		
+			<h4>多行文本输入</h4>
+			<textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+<pre class="language-markup"><code>
+&lt;textarea name="" id="" cols="30" rows="10" class="form-control">&lt;/textarea>
+</code></pre>			
+			</div>
+			<div class="item">
+				<h3>单选框</h3>
+			<h4 id="vRadio">垂直单选框1</h4>
+			<div class="um-check-group">
+					<label class="um-check-group-item">
+						<input name="um-radio" checked type="radio" value="男生">
+						男生 <span class="um-icon-check um-css3-vc"></span>
+					</label>
+					<label class="um-check-group-item">
+						<input name="um-radio" type="radio" value="女生">
+						女生 <span class="um-icon-check um-css3-vc"></span>
+						<img src="img/portal.jpg" width=25 alt="" class="fr mr15 um-rounded">
+					</label>
+				</div>
+				<pre class="language-markup"><code>
+&lt;div class="um-check-group">
+	&lt;label class="um-check-group-item">
+		&lt;input name="um-radio" checked type="radio" value="男生">
+		男生 &lt;span class="um-icon-check um-css3-vc">&lt;/span>
+	&lt;/label>
+	&lt;label class="um-check-group-item">
+		&lt;input name="um-radio" type="radio" value="女生">
+		女生 &lt;span class="um-icon-check um-css3-vc">&lt;/span>
+		&lt;img src="img/portal.jpg" width=25 alt="" class="fr mr15 um-rounded">
+	&lt;/label>
+&lt;/div>
+&lt;/div></code></pre>
+
+					<h4>垂直单选框2</h4>
+					<div class="um-check-group um-check-group-left">
+					<label class="um-check-group-item">
+						<input name="um-radio" checked type="radio">
+						<h3 class="media-heading">物流助手</h3>
+								<p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！</p>
+								<div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货</div> <span class="um-icon-checkbox um-css3-vc"></span>
+					</label>
+					<label class="um-check-group-item">
+						<input name="um-radio" type="radio">
+						<h3 class="media-heading">物流助手</h3>
+								<p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！</p>
+								<div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货</div> <span class="um-icon-checkbox um-css3-vc"></span>
+					</label>
+				</div><pre class="language-markup"><code>
+&lt;div class="um-check-group um-check-group-left">
+	&lt;label class="um-check-group-item">
+		&lt;input name="um-radio" checked type="radio">
+		&lt;h3 class="media-heading">物流助手&lt;/h3>
+				&lt;p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！&lt;/p>
+				&lt;div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货&lt;/div> &lt;span class="um-icon-checkbox um-css3-vc">&lt;/span>
+	&lt;/label>
+	&lt;label class="um-check-group-item">
+		&lt;input name="um-radio" type="radio">
+		&lt;h3 class="media-heading">物流助手&lt;/h3>
+				&lt;p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！&lt;/p>
+				&lt;div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货&lt;/div> &lt;span class="um-icon-checkbox um-css3-vc">&lt;/span>
+	&lt;/label>
+&lt;/div>
+					</code></pre>
+					<h3>行内单选框</h3>
+				<label class="um-check-inline">
+					<input name="um-checkbox-inline" type="checkbox" value="自动登录" checked>
+					自动登录
+					<span class="um-icon-checkbox um-css3-vc"></span>
+				</label>
+		<pre class="language-markup"><code>
+&lt;label class="um-check-inline">
+	&lt;input name="um-checkbox-inline" type="checkbox" value="自动登录" checked>
+	自动登录
+	&lt;span class="um-icon-checkbox um-css3-vc">&lt;/span>
+&lt;/label>
+		</code></pre>			
+<h3>js获取单选框的值</h3>
+<pre class="language-javascript"><code>
+$(".um-list-group").find("input:radio").on("change",function(){
+	if(this.checked) {
+		alert("您选择的是：" + $(this).val())
+	}
+})
+</code></pre>
+					<h4 id="vCheckbox">垂直复选框</h4>
+<div class="um-check-group um-check-group-left" id="checkbox">
+					<label class="um-check-group-item">
+						<input name="um-checkbox" type="checkbox" value="学校知名度" checked>
+						学校知名度 <span class="um-icon-checkbox um-css3-vc"></span>
+					</label>
+					<label class="um-check-group-item">
+						<input name="um-checkbox" type="checkbox" value="专业知识">
+						专业知识 <span class="um-icon-checkbox um-css3-vc"></span>
+					</label>
+				</div>
+					<pre class="language-markup"><code>
+&lt;div class="um-check-group um-check-group-left" id="checkbox">
+	&lt;label class="um-check-group-item">
+		&lt;input name="um-checkbox" type="checkbox" value="学校知名度" checked>
+		学校知名度 &lt;span class="um-icon-checkbox um-css3-vc">&lt;/span>
+	&lt;/label>
+	&lt;label class="um-check-group-item">
+		&lt;input name="um-checkbox" type="checkbox" value="专业知识">
+		专业知识 &lt;span class="um-icon-checkbox um-css3-vc">&lt;/span>
+	&lt;/label>
+&lt;/div>
+					</code></pre>
+					<h3>js获取复选框的值</h3>
+<pre class="language-javascript"><code>
+$("#checkbox").on("change",function(){
+	var arr = [];
+	$.each($(this).find("input:checkbox"),function(){
+		if(this.checked)
+		arr.push($(this).val());
+	})
+	alert("您选择的是：" + arr.toString())
+})
+</code></pre>
+</div>
+
+								<div class="item">
+									<h4 id="switch">开关</h4>
+
+			<label class="um-switch1">
+					<input type="checkbox" value="on" checked="checked">
+					<div class="um-track">
+						<div class="um-handle">
+						</div>
+					</div>
+				</label>
+			<label class="um-switch2 um-box-vc">
+					<input type="checkbox" class="um-switch2" />
+					<span class="um-switch2-check" data-on-text="打开" data-off-text="关闭"></span>
+				</label>
+<pre class="language-markup"><code>
+&lt;label class="um-switch1">
+	&lt;input type="checkbox" value="on" checked="checked">
+	&lt;div class="um-track">
+		&lt;div class="um-handle">
+		&lt;/div>
+	&lt;/div>
+&lt;/label>
+
+&lt;label class="um-switch2 um-box-vc">
+	&lt;input type="checkbox" class="um-switch2" />
+	&lt;span class="um-switch2-check" data-on-text="打开" data-off-text="关闭">&lt;/span>
+&lt;/label>
+</code></pre>
+
+								
+<script>
+	$(".um-switch1").on("change","input[type=checkbox]",function(){
+				if(this.checked) {
+					alert("开关1状态为:开");
+				}else {
+					alert("开关1状态为:关");
+				}
+			})
+			$(".um-switch2").on("change","input[type=checkbox]",function(){
+				if(this.checked) {
+					alert("开关2状态为:开");
+				}else {
+					alert("开关3状态为:关");
+				}
+			})
+</script>
+<h3>js获取switch开关值</h3>
+<pre class="language-javascript"><code>
+$(".um-switch1").on("change","input[type=checkbox]",function(){
+	if(this.checked) {
+		alert("开关1状态为:开");
+	}else {
+		alert("开关1状态为:关");
+	}
+})
+$(".um-switch2").on("change","input[type=checkbox]",function(){
+	if(this.checked) {
+		alert("开关2状态为:开");
+	}else {
+		alert("开关3状态为:关");
+	}
+})
+</code></pre>
+</div>
+								<div class="item">
+			<h3 id="date">日期控件</h3>
+			<input type="date" name="date" value="2013/2/2" class="form-control" id="date">
+<pre class="language-markup"><code>
+&lt;input type="date" name="date" value="2013/2/2" class="form-control"></code></pre>
+		</div>
+		<div class="item" >
+			<h3 id="slider">滑块range</h3>
+			<form class="oh">
+				<output for="range" name="x" class=ib></output><input type="range" oninput="x.value=parseInt(range.value)" id="range" name="range" value=40 min="0" max="100" step="0.1">
+			</form>
+<pre class="language-markup"><code>
+&lt;form class="oh">
+	&lt;output for="range" name="x" class=ib>&lt;/output>
+	&lt;input type="range" oninput="x.value=parseInt(range.value)" 
+	id="range" name="range" value=40 min="0" max="100" step="0.1">
+&lt;/form></code></pre>
+		</div>
+		<div class="item">
+		<h3 id="header">导航栏</h3>
+		<style>
+		.um-header {
+			position: relative;
+		}
+		</style>
+		<h4>普通导航</h4>
+			<div class="um-header" >
+			<h3>导航栏</h3>
+		</div>
+		<h4>带返回导航</h4>
+		<div class="um-header" >
+			<a href="#"  class="um-back">返回</a>
+			<h3>导航栏</h3>
+		</div>
+		<h4>带返回和按钮</h4>
+		<div class="um-header" >
+			<a href="#"  class="um-back">返回</a>
+			<h3>导航栏</h3>
+			<a class="um-header-right" href="#">按钮</a>
+		</div>
+		<h4>右侧多个文字或图标</h4>
+		<div class="um-header">
+	<a href="#" class="um-back"></a>
+	<h3>标题</h3>
+	<div class="um-header-btns">
+		<i class="ti-pencil-alt f20 um-green mr5"></i>
+		<i class="ti-menu f20 um-blue"></i>
+	</div>
+</div>
+<h4>左侧不为返回按钮</h4>
+<div class="um-header">
+	<a href="#" class="ti-menu um-header-left"></a>
+	<h3>标题</h3>
+	<a href="#" class="um-header-right">编辑</a>
+</div>
+		<pre class="language-markup"><code>
+&lt;div class="um-header" >
+	&lt;h3>导航栏&lt;/h3>
+&lt;/div>
+
+&lt;div class="um-header" >
+	&lt;a href="#"  class="um-back">返回&lt;/a>
+	&lt;h3>导航栏&lt;/h3>
+&lt;/div>
+
+&lt;div class="um-header" >
+	&lt;a href="#"  class="um-back">返回&lt;/a>
+	&lt;h3>导航栏&lt;/h3>
+	&lt;a class="um-header-right" href="#">按钮&lt;/a>
+&lt;/div>
+
+&lt;div class="um-header">
+	&lt;a href="#" class="um-back">&lt;/a>
+	&lt;h3>标题&lt;/h3>
+	&lt;div class="um-header-btns">
+		&lt;i class="ti-pencil-alt f20 um-green mr5">&lt;/i>
+		&lt;i class="ti-menu f20 um-blue">&lt;/i>
+	&lt;/div>
+&lt;/div>
+
+&lt;div class="um-header">
+	&lt;a href="#" class="ti-menu um-header-left">&lt;/a>
+	&lt;h3>标题&lt;/h3>
+	&lt;a href="#" class="um-header-right">编辑&lt;/a>
+&lt;/div>
+</code></pre>
+		</div>
+
+		<div class="item">
+			<h3 id="progress">进度条</h3>
+			<h4>普通进度条</h4>
+			<div class="progress">
+				<div class="progress-bar" role="progressbar" style="width: 60%;">
+					60%
+				</div>
+			</div>
+			<h4>个性化进度条</h4>
+			<div class="progress">
+				<div class="progress-bar progress-bar-info" role="progressbar" style="width: 20%">
+					20% Complete
+				</div>
+			</div>
+			<pre class="language-markup"><code>
+&lt;div class="progress">
+	&lt;div class="progress-bar" role="progressbar" style="width: 60%;">
+		60%
+	&lt;/div>
+&lt;/div>
+
+&lt;div class="progress">
+	&lt;div class="progress-bar progress-bar-info" role="progressbar" style="width: 20%">
+		20% Complete
+	&lt;/div>
+&lt;/div>
+			</code></pre>
+		</div>	
+
+		<div class="item">
+			<h3 id="select">下拉框</h3>
+			<h4>默认单选下拉框</h4>
+			<select class="form-control">
+				<option>Option1</option>
+				<option>Option2</option>
+				<option>Option3</option>
+			</select>
+			<pre class="language-markup"><code>
+&lt;select class="form-control">
+	&lt;option>Option1&lt;/option>
+	&lt;option>Option2&lt;/option>
+	&lt;option>Option3&lt;/option>
+&lt;/select></code></pre>
+		</div>
+		<div class="item pr">
+			<h3 id="textTabbar">tab bar</h3>
+			<h4>文字选项卡</h4>
+			<ul class="um-tabbar">
+			    <li><a href="#">分段一</a></li>
+			    <li class="active"><a href="#">分段二</a></li>
+			    <li><a href="#">分段三</a></li>
+			    <li><a href="#">分段四</a></li>
+			</ul>
+			<pre class="language-markup"><code>
+&lt;ul class="um-tabbar">
+    &lt;li>&lt;a href="#">分段一&lt;/a>&lt;/li>
+    &lt;li class="active">&lt;a href="#">分段二&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="#">分段三&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="#">分段四&lt;/a>&lt;/li>
+&lt;/ul>
+</code></pre>
+			<h4 id="iconTabbar">图标选项卡</h4>
+			<ul class="um-tabbar">
+    <li><a href="#"><div class="f18 ti-home"></div></a></li>
+    <li class="active"><a href="#"><div class="f18 ti-menu-alt"></div></a></li>
+    <li><a href="#"><div class="f18 ti-layout-grid2"></div></a></li>
+    <li><a href="#"><div class="f18 ti-bar-chart"></div></a></li>
+</ul>
+			<pre class="language-markup"><code>
+&lt;ul class="um-tabbar">
+    &lt;li>&lt;a href="#">&lt;div class="f18 ti-home">&lt;/div>&lt;/a>&lt;/li>
+    &lt;li class="active">&lt;a href="#">&lt;div class="f18 ti-menu-alt">&lt;/div>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="#">&lt;div class="f18 ti-layout-grid2">&lt;/div>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href="#">&lt;div class="f18 ti-bar-chart">&lt;/div>&lt;/a>&lt;/li>
+&lt;/ul>
+			</code></pre>
+			<h4 id="textIconTabbar">文字图标选项卡</h4>
+			<div class="um-tabbar um-tabbar-foot">
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-menu-alt f24"></i>
+					<div class="um-tabbar-item-text">企业审核</div>
+				</a>
+				<a href="#" class="um-tabbar-item active">
+					<i class="ti-bar-chart f24"></i>
+					<div class="um-tabbar-item-text">业绩分析</div>
+				</a>
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-pencil-alt f24"></i>
+					<div class="um-tabbar-item-text">新增统计</div>
+				</a>
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-user f24"></i>
+					<div class="um-tabbar-item-text">个人中心</div>
+				</a>
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-settings f24"></i>
+					<div class="um-tabbar-item-text">设置</div>
+				</a>
+			</div>
+<pre class="language-markup"><code>
+&lt;div class="um-tabbar um-tabbar-foot">
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-menu-alt f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">企业审核&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item active">
+		&lt;i class="ti-bar-chart f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">业绩分析&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-pencil-alt f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">新增统计&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-user f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">个人中心&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-settings f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">设置&lt;/div>
+	&lt;/a>
+&lt;/div></code></pre>
+<h3 id="underlineTabbar">底部下划线选项卡</h3>
+			<ul class="um-tabbar um-tabbar-underline">
+					<li>
+						<a href="javascript:;">用户</a>
+					</li>
+					<li class="active">
+						<a href="javascript:;">应用</a>
+					</li>
+					<li>
+						<a href="javascript:;">社区</a>
+					</li>
+					<li>
+						<a href="javascript:;">企业</a>
+					</li>
+				</ul>
+		<pre class="language-markup"><code>	
+&lt;ul class="um-tabbar um-tabbar-underline">
+	&lt;li>&lt;a href="javascript:;">用户&lt;/a>&lt;/li>
+	&lt;li class="active">&lt;a href="javascript:;">应用&lt;/a>&lt;/li>
+	&lt;li>&lt;a href="javascript:;">社区&lt;/a>&lt;/li>
+	&lt;li>&lt;a href="javascript:;">企业&lt;/a>&lt;/li>
+&lt;/ul>
+		</code></pre>			
+			<h4 id="footerTabbar">固定底部选项卡</h4>
+			<div class="um-tabbar-foot">
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-menu-alt f24"></i>
+					<div class="um-tabbar-item-text">企业审核</div>
+				</a>
+				<a href="#" class="um-tabbar-item active">
+					<i class="ti-bar-chart f24"></i>
+					<div class="um-tabbar-item-text">业绩分析</div>
+				</a>
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-pencil-alt f24"></i>
+					<div class="um-tabbar-item-text">新增统计</div>
+				</a>
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-user f24"></i>
+					<div class="um-tabbar-item-text">个人中心</div>
+				</a>
+				<a href="#" class="um-tabbar-item">
+					<i class="ti-settings f24"></i>
+					<div class="um-tabbar-item-text">设置</div>
+				</a>
+			</div>
+			<pre class="language-markup"><code>
+&lt;div class="um-tabbar-foot">
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-menu-alt f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">企业审核&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item active">
+		&lt;i class="ti-bar-chart f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">业绩分析&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-pencil-alt f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">新增统计&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-user f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">个人中心&lt;/div>
+	&lt;/a>
+	&lt;a href="#" class="um-tabbar-item">
+		&lt;i class="ti-settings f24">&lt;/i>
+		&lt;div class="um-tabbar-item-text">设置&lt;/div>
+	&lt;/a>
+&lt;/div>
+</code></pre>
+<script>
+	$(function(){
+		$(".um-tabbar,.um-tabbar-foot").on("click","li",function(e){
+			e.preventDefault();
+			$(this).siblings("li").removeClass("active").end().addClass("active");
+			return false;
+		})
+	})
+</script>
+		</div>
+		<div class="item" id="img">
+			<img src="http://dl.bizhi.sogou.com/images/2012/05/2/6376.jpg" alt="..." class="um-rounded um-img-responsive" width="800" height="450">
+				<img src="http://dl.bizhi.sogou.com/images/2012/05/2/6376.jpg" alt="..." class="um-circle" width="280" height="280">
+				<img src="http://dl.bizhi.sogou.com/images/2012/05/2/6376.jpg" alt="..." class="um-img-thumbnail um-img-responsive" width="800" height="450">
+			<pre class="language-markup"><code>	
+&lt;img src="..." alt="..." class="um-rounded um-img-responsive">
+&lt;img src="..." alt="..." class="um-circle">
+&lt;img src="..." alt="..." class="um-img-thumbnail um-img-responsive">
+			</code></pre>
+		</div>
+<div class="item">
+	<h3 id="listview">列表</h3>
+	
+	<h4 id="commonList">普通列表</h4>
+	<ul class="um-list um-list-static">
+		<li>Media body Cras sit amet nibh libero </li>
+		<li>Media body Cras sit amet nibh libero </li>
+	</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list um-list-static">
+	&lt;li>Media body Cras sit amet nibh libero &lt;/li>
+	&lt;li>Media body Cras sit amet nibh libero &lt;/li>
+&lt;/ul>
+</code></pre>
+		<h4 id="navList">全屏导航列表</h4>
+		<ul class="um-list">
+			<li><a class="btn" href="javascript:;">Media body Cras sit amet nibh libero </a></li>
+			<li><a class="btn" href="javascript:;">Media body Cras sit amet nibh libero </a></li>
+		</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li>&lt;a class="btn" href="javascript:;">Media body Cras sit amet nibh libero &lt;/a>&lt;/li>
+	&lt;li>&lt;a class="btn" href="javascript:;">Media body Cras sit amet nibh libero &lt;/a>&lt;/li>
+&lt;/ul>
+</code></pre>
+<h4 id="dropList">下拉列表</h4>	
+<ul class="um-list">
+	<li data-action="collapse" class="um-open">
+		<a href="javascript:void(0);" class="um-collapse-btn btn" data-target="p3">伸缩按钮+</a>
+		<div class="um-collapse-content um-open" id="p3">
+			<div class="um-collapse-text">Fusce dolor sem, suscipit in iacdivis id, pharetra at urna. Pellentesque tempor congue massa quis faucibus. Vestibdivum nunc eros, coneros sapien nec libero. Mauris dapibus laoreet nibh quis bibendum. Fusce dolor sem, suscipit in iacdivis id, pharetra at urna. Pellentesque tempor congue massa quis faucibus. Vestibdivum nunc eros, coneros sapien nec libero. Mauris dapibus laoreet nibh quis bibendum. Fusce dolor sem, suscipi</div>
+		</div>
+	</li>
+	<li data-action="collapse">
+		<a href="javascript:void(0);" class="um-collapse-btn btn" data-target="p4">伸缩按钮+</a>
+		<ul class="um-list um-collapse-content" id="p4">
+			<li><a class="btn" href="#commonBtn">普通按钮</a></li>
+			<li><a class="btn" href="#iconBtn">按钮图标</a></li>
+			<li><a class="btn" href="#customBtn">个性按钮</a></li>
+			<li><a class="btn" href="#moreBtn">更多按钮</a></li>
+			<li><a class="btn" href="#btnGroup">按钮组</a></li>
+		</ul>
+	</li>
+</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li data-action="collapse" class="um-open">
+		&lt;a href="javascript:void(0);" class="um-collapse-btn btn" data-target="p3">伸缩按钮+&lt;/a>
+		&lt;div class="um-collapse-content um-open" id="p3">
+			&lt;div class="collapse-text">...&lt;/div>
+		&lt;/div>
+	&lt;/li>
+	&lt;li data-action="collapse">
+		&lt;a href="javascript:void(0);" class="um-collapse-btn btn" data-target="p4">伸缩按钮+&lt;/a>
+		&lt;ul class="um-list um-collapse-content" id="p4">
+			&lt;li>&lt;a class="btn" href="#commonBtn">普通按钮&lt;/a>&lt;/li>
+			&lt;li>&lt;a class="btn" href="#iconBtn">按钮图标&lt;/a>&lt;/li>
+			&lt;li>&lt;a class="btn" href="#customBtn">个性按钮&lt;/a>&lt;/li>
+			&lt;li>&lt;a class="btn" href="#moreBtn">更多按钮&lt;/a>&lt;/li>
+			&lt;li>&lt;a class="btn" href="#btnGroup">按钮组&lt;/a>&lt;/li>
+		&lt;/ul>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+<h4 id="slideList">滑动删除列表</h4>
+<ul class="um-list">
+	<li onclick='$(this).find(".btn").toggleClass("um-swipe-open-test")'>
+		<a class="btn" href="javascript:;">
+			<div class="um-swipe-btns">
+				<span class="um-swipe-btn">取消</span>
+				<span class="um-swipe-btn">确定</span>
+			</div>
+			订单详情
+		</a>
+	</li>
+	<li onclick='$(this).find(".btn").toggleClass("um-swipe-open-test")'>
+		<a class="btn" href="javascript:;">
+			<div class="um-swipe-btns">
+				<span class="um-swipe-btn">取消</span>
+				<span class="um-swipe-btn">确定</span>
+			</div>
+			<h4  class="media-heading">好运来饼干</h4>
+			<p>货到付款包邮啊亲... </p>
+		</a>
+	</li>
+</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li onclick='$(this).find(".btn").toggleClass("um-swipe-open-test")'>
+		&lt;a class="btn" href="javascript:;">
+			&lt;div class="um-swipe-btns">
+				&lt;span class="um-swipe-btn">取消&lt;/span>
+				&lt;span class="um-swipe-btn">确定&lt;/span>
+			&lt;/div>
+			订单详情
+		&lt;/a>
+	&lt;/li>
+	&lt;li onclick='$(this).find(".btn").toggleClass("um-swipe-open-test")'>
+		&lt;a class="btn" href="javascript:;">
+			&lt;div class="um-swipe-btns">
+				&lt;span class="um-swipe-btn">取消&lt;/span>
+				&lt;span class="um-swipe-btn">确定&lt;/span>
+			&lt;/div>
+			&lt;h4  class="media-heading">好运来饼干&lt;/h4>
+			&lt;p>货到付款包邮啊亲... &lt;/p>
+		&lt;/a>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+<h4 id="divideList">全屏分栏列表</h4>	
+		<ul class="um-list">
+			<li class="um-list-divider">list-divider</li>
+			<li><a class="btn" href="javascript:;">Media body Cras sit amet nibh libero </a></li>
+			<li><a class="btn" href="javascript:;">Media body Cras sit amet nibh libero </a></li>
+		</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li class="um-list-divider">list-divider&lt;/li>
+	&lt;li>&lt;a class="btn" href="javascript:;">Media body Cras sit amet nibh libero &lt;/a>&lt;/li>
+	&lt;li>&lt;a class="btn" href="javascript:;">Media body Cras sit amet nibh libero &lt;/a>&lt;/li>
+&lt;/ul></code></pre>
+
+<h4 id="detailList">详情列表</h4>
+		<ul class="um-list">
+			<li>
+				<a class="btn" href="javascript:;">
+					<h4  class="media-heading">Media body Cras</h4>
+					<p>Media body Cras sit amet nibh libero </p>
+				</a>
+			</li>
+			<li>
+				<a class="btn" href="javascript:;">
+					<h4  class="media-heading">amet nibh libero</h4>
+					<p>Media body Cras sit amet nibh libero </p>
+				</a>
+			</li>
+			<li>
+				<a class="btn" href="javascript:;">
+					<h4  class="media-heading">sit amet nibh libero</h4>
+					<p>Media body Cras sit amet nibh libero </p>
+				</a>
+			</li>
+		</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li>
+		&lt;a class="btn" href="javascript:;">
+			&lt;h4  class="media-heading">Media body Cras&lt;/h4>
+			&lt;p>Media body Cras sit amet nibh libero &lt;/p>
+		&lt;/a>
+	&lt;/li>
+	&lt;li>
+		&lt;a class="btn" href="javascript:;">
+			&lt;h4  class="media-heading">amet nibh libero&lt;/h4>
+			&lt;p>Media body Cras sit amet nibh libero &lt;/p>
+		&lt;/a>
+	&lt;/li>
+	&lt;li>
+		&lt;a class="btn" href="javascript:;">
+			&lt;h4  class="media-heading">sit amet nibh libero&lt;/h4>
+			&lt;p>Media body Cras sit amet nibh libero &lt;/p>
+		&lt;/a>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+<h3 id="cornorList"></h3>
+<ul class="um-list um-list-corner">
+	<li>
+		<a href="javascript:;" class="btn">
+			<div class="media-left">
+				<img class="media-object um-circle" height=40 width=40 src="img/portal.jpg" alt="...">
+			</div>
+			<div class="media-body">
+				<h4 class="media-heading">Media heading</h4>
+				<p>Media body Cras sit amet nibh </p>
+			</div>
+		</a>
+	</li>
+</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list um-list-corner">
+	&lt;li>
+		&lt;a href="javascript:;" class="btn">
+			&lt;div class="media-left">
+				&lt;img class="media-object um-circle" height=40 width=40 src="img/portal.jpg" alt="...">
+			&lt;/div>
+			&lt;div class="media-body">
+				&lt;h4 class="media-heading">Media heading&lt;/h4>
+				&lt;p>Media body Cras sit amet nibh &lt;/p>
+			&lt;/div>
+		&lt;/a>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+<h3 id="secondList">第二种列表</h3>
+<h4>普通列表</h4>
+<ul class="um-list">
+	<li  class="um-list-item">
+		<div class="um-list-item-media">
+			<img src="img/portal.jpg" width=30 alt="">
+		</div>
+		<div class="um-list-item-inner">
+			<div class="um-list-item-left">左侧文字</div>
+			<div class="um-list-item-body">通知</div>
+			<div class="um-list-item-right">
+				<span class="um-badge">4</span>
+			</div>
+		</div>
+	</li>
+</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li  class="um-list-item">
+		&lt;div class="um-list-item-media">
+			&lt;img src="img/portal.jpg" width=30 alt="">
+		&lt;/div>
+		&lt;div class="um-list-item-inner">
+			&lt;div class="um-list-item-left">左侧文字&lt;/div>
+			&lt;div class="um-list-item-body">通知&lt;/div>
+			&lt;div class="um-list-item-right">
+				&lt;span class="um-badge">4&lt;/span>
+			&lt;/div>
+		&lt;/div>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+<h3>带右箭头</h3>
+<div class="um-list">
+	<a href="#" class="um-list-item">
+		<div class="um-list-item-media">
+			<img src="img/select.png" width=24 class="um-round" alt="">
+		</div>
+		<div class="um-list-item-inner">
+			<div class="um-list-item-body">
+				无线局域网
+			</div>
+			<div class="um-list-item-right">
+				<span class="um-gray mr15">用友</span>
+			</div>
+		</div>
+	</a>
+</div>
+<pre class="language-markup"><code>
+&lt;div class="um-list">
+	&lt;a href="#" class="um-list-item">
+		&lt;div class="um-list-item-media">
+			&lt;img src="img/select.png" width=24 class="um-round" alt="">
+		&lt;/div>
+		&lt;div class="um-list-item-inner">
+			&lt;div class="um-list-item-body">
+				无线局域网
+			&lt;/div>
+			&lt;div class="um-list-item-right">
+				&lt;span class="um-gray mr15">用友&lt;/span>
+			&lt;/div>
+		&lt;/div>
+	&lt;/a>
+&lt;/div>
+</code></pre>
+<h3>删除列表</h3>
+<ul class="um-list">
+	<li>
+		<a href="#" class="um-list-item um-swipe-open-test">
+			<div class="um-swipe-btns">
+				<span class="um-swipe-btn">取消</span>
+				<span class="um-swipe-btn">确定</span>
+			</div>
+			<div class="um-list-item-inner">
+				<div class="um-list-item-body">
+					这是内容区域这是内容区域
+				</div>
+				<div class="um-list-item-right">
+					<div class="um-badge mr10">32</div>
+				</div>
+			</div>
+		</a>
+	</li>
+</ul>
+<pre class="language-markup"><code>
+&lt;ul class="um-list">
+	&lt;li>
+		&lt;a href="#" class="um-list-item um-swipe-open-test">
+			&lt;div class="um-swipe-btns">
+				&lt;span class="um-swipe-btn">取消&lt;/span>
+				&lt;span class="um-swipe-btn">确定&lt;/span>
+			&lt;/div>
+			&lt;div class="um-list-item-inner">
+				&lt;div class="um-list-item-body">
+					这是内容区域这是内容区域
+				&lt;/div>
+				&lt;div class="um-list-item-right">
+					&lt;div class="um-badge mr10">32&lt;/div>
+				&lt;/div>
+			&lt;/div>
+		&lt;/a>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+</div>
+		<div class="item" id="layout">
+	<h3 id="col">栅格系统</h4>
+	<div class="um-row">
+		<div class="um-xs-12 um-sm-6 um-md-8">.um-xs-12 .um-sm-6 .um-md-8</div>
+		<div class="um-xs-6 um-md-4">.um-xs-6 .um-md-4</div>
+	</div>
+	<div class="um-row">
+		<div class="um-xs-6 um-sm-4">.um-xs-6 .um-sm-4</div>
+		<div class="um-xs-6 um-sm-4">.um-xs-6 .um-sm-4</div>
+		<div class="clearfix"></div>
+		<div class="um-xs-6 um-sm-4">.um-xs-6 .um-sm-4</div>
+	</div>
+<pre class="language-markup"><code>&lt;div class="um-row">
+	&lt;div class="um-xs-12 um-sm-6 um-md-8">.um-xs-12 .um-sm-6 .um-md-8&lt;/div>
+	&lt;div class="um-xs-6 um-md-4">.um-xs-6 .um-md-4&lt;/div>
+&lt;/div>
+&lt;div class="um-row">
+	&lt;div class="um-xs-6 um-sm-4">.um-xs-6 .um-sm-4&lt;/div>
+	&lt;div class="um-xs-6 um-sm-4">.um-xs-6 .um-sm-4&lt;/div>
+	&lt;div class="clearfix">&lt;/div>
+	&lt;div class="um-xs-6 um-sm-4">.col-xs-6 .col-sm-4&lt;/div>
+&lt;/div>
+</code></pre>
+<blockquote>
+	栅格系统默认带有左右各15px的内填充，若需要去除内填充，可以在里面或者外面包裹一层类为um-row或者um-fill的div,或者在其外层父元素中添加类um-row和um-fill
+</blockquote>
+如下所示：
+<pre class="language-markup"><code>
+&lt;div class="um-row">
+	&lt;div class="um-sm-6">.um-sm-6&lt;/div>
+	&lt;div class="um-xs-6">.um-xs-6&lt;/div>
+&lt;/div>
+</code></pre>
+<h4>四宫格</h4>
+			<div class="um-box-center tc h100">
+	<div class="um-xs-6">四宫格</div>
+	<div class="um-xs-6">四宫格</div>
+</div>
+<div class="um-box-center tc h100">
+	<div class="um-xs-6">四宫格</div>
+	<div class="um-xs-6">四宫格</div>
+</div>
+<pre class="language-markup"><code>
+&lt;div class="um-box-center tc h100">
+	&lt;div class="um-xs-6">四宫格&lt;/div>
+	&lt;div class="um-xs-6">四宫格&lt;/div>
+&lt;/div>
+&lt;div class="um-box-center tc h100">
+	&lt;div class="um-xs-6">四宫格&lt;/div>
+	&lt;div class="um-xs-6">四宫格&lt;/div>
+&lt;/div>
+			</code></pre>
+		<h4>四宫格2</h4>
+			<div class="um-grid h200">
+	<div class="um-grid-row">
+		<div><div class="btn btn-circle">按</div></div>
+		<div><div class="btn btn-circle">按</div></div>
+	</div>
+	<div class="um-grid-row">
+		<div><div class="btn btn-circle">按</div></div>
+		<div><div class="btn btn-circle">按</div></div>
+	</div>
+</div>    
+<pre class="language-markup"><code>
+&lt;div class="um-grid h200">
+	&lt;div class="um-grid-row">
+		&lt;div>&lt;div class="btn btn-circle">按&lt;/div>&lt;/div>
+		&lt;div>&lt;div class="btn btn-circle">按&lt;/div>&lt;/div>
+	&lt;/div>
+	&lt;div class="um-grid-row">
+		&lt;div>&lt;div class="btn btn-circle">按&lt;/div>&lt;/div>
+		&lt;div>&lt;div class="btn btn-circle">按&lt;/div>&lt;/div>
+	&lt;/div>
+&lt;/div>    
+			</code></pre>	
+			<h4 id="layout9">九宫格布局</h4>
+							<div class="um-row tc p10">
+					<div class="um-xs-4">项目一</div>
+					<div class="um-xs-4">项目二</div>
+					<div class="um-xs-4">项目三</div>
+				</div>
+<pre class="language-markup"><code>
+&lt;div class="um-row tc p10">
+	&lt;div class="um-xs-4">项目一&lt;/div>
+	&lt;div class="um-xs-4">项目二&lt;/div>
+	&lt;div class="um-xs-4">项目三&lt;/div>
+&lt;/div>
+</code></pre>
+<h4>第二种九宫格</h4>
+<div class="um-grid">
+	<div class="um-grid-row tc">
+		<div>
+			<div>北风</div>
+			<div class="fb f24 um-blue">3/4</div>
+		</div>
+		<div>
+			<div>穿衣指数</div>
+			<div class="fb f24 um-blue">3</div>
+		</div>
+		<div>
+			<div>洗车指数</div>
+			<div class="fb f24 um-blue">5</div>
+		</div>
+	</div>
+</div>
+<pre class="language-markup"><code>
+&lt;div class="um-grid">
+	&lt;div class="um-grid-row tc">
+		&lt;div>
+			&lt;div>北风&lt;/div>
+			&lt;div class="fb f24 um-blue">3/4&lt;/div>
+		&lt;/div>
+		&lt;div>
+			&lt;div>穿衣指数&lt;/div>
+			&lt;div class="fb f24 um-blue">3&lt;/div>
+		&lt;/div>
+		&lt;div>
+			&lt;div>洗车指数&lt;/div>
+			&lt;div class="fb f24 um-blue">5&lt;/div>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+</code></pre>
+<h4>16宫格</h4>
+<div class="um-grid">
+	<div class="um-grid-row tc">
+		<div>
+			<a href="#">
+				<img src="img/ldh.png" class="w um-img-responsive um-circle" alt="">
+				<span>刘德华</span>
+			</a>
+		</div>
+		<div>
+			<a href="#">
+				<img src="img/ljr.png" class="w um-img-responsive um-circle" alt="">
+				<span>梁静茹</span>
+			</a>
+		</div>
+		<div>
+			<a href="#">
+				<img src="img/portal.jpg" class="w um-img-responsive um-circle" alt="">
+				<span>辣椒哥</span>
+			</a>
+		</div>
+		<div>
+			<a href="#">
+				<img src="img/dzq.png" class="w um-img-responsive um-circle" alt="">
+				<span>邓紫棋</span>
+			</a>
+		</div>
+	</div>
+</div>
+<pre class="language-markup"><code>
+&lt;div class="um-grid">
+	&lt;div class="um-grid-row tc">
+		&lt;div>
+			&lt;a href="#">
+				&lt;img src="img/ldh.png" class="w um-img-responsive um-circle" alt="">
+				&lt;span>刘德华&lt;/span>
+			&lt;/a>
+		&lt;/div>
+		&lt;div>
+			&lt;a href="#">
+				&lt;img src="img/ljr.png" class="w um-img-responsive um-circle" alt="">
+				&lt;span>梁静茹&lt;/span>
+			&lt;/a>
+		&lt;/div>
+		&lt;div>
+			&lt;a href="#">
+				&lt;img src="img/portal.jpg" class="w um-img-responsive um-circle" alt="">
+				&lt;span>辣椒哥&lt;/span>
+			&lt;/a>
+		&lt;/div>
+		&lt;div>
+			&lt;a href="#">
+				&lt;img src="img/dzq.png" class="w um-img-responsive um-circle" alt="">
+				&lt;span>邓紫棋&lt;/span>
+			&lt;/a>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+</code></pre>
+		</div>
+		<div class="item" id="pagetransition">
+			<h4>页面切换动画</h4>
+可通过A标签上在各个um-page间相互跳转，*每个um-page必须有id
+data-transition为切换效果，取值如下：<br>
+um f7 slideup fade pop slide_scale scale_down_up stretch flip rotate push_left  push_top
+只需要在需要动画的地方添加如data-transition="pop"即可
+<pre class="language-markup"><code>
+&lt;a href="#item2" data-transition="pop">pop&lt;/a>
+</code></pre>
+可以通过如下js设置默认默认动画
+<pre class="language-javascript"><code>
+UM.page.defaults.transition = "push_left";
+</code></pre>
+对于ajax请求的html页面，可以在不刷新页面切换到新页面
+(目前只对a便签有效，且新页面最外层元素为&lt;div class="um-page">&lt;/div>>)
+需要在a标签中使用data-url="url",如
+<pre class="language-markup"><code>
+&lt;a href="#" data-url="pop.html">pop&lt;/a>
+</code></pre>
+
+注意：a标签的href必须以#开头<br>
+<h4>反向动画</h4>
+导航栏的返回按钮.um-back类默认动画为反向,或者添加data-reverse="true"即可,如下
+<pre class="language-markup"><code>
+&lt;a href="#item1" data-reverse="true" data-transition="door">&lt;door&lt;/a>
+</code></pre>
+<h4>js代码控制</h4>
+使用UM.page类，该类对外接口有changePage,back方法
+如：
+<pre class="language-javascript"><code>
+var settings =  {
+    target: null,
+    isReverse: 0,
+    transition: "um"
+}
+UM.page.changePage(settings);
+</code></pre>
+target为下一页的jQuery元素,为必填项，其他设置均为可选值，必须为带.um-page类的单页面；<br>
+isReverse设置页面切换动画是否逆向进行；<br>
+transition设置动画效果，使用上面几种效果的一个即可，默认为“um”;<br>
+<!-- beforePageIn函数:假设下一个要进入的页面为$("#page1")，当该页面进入之前会触发beforePageIn，
+同上，该页面进入之后会触发afterPageIn，该页面移出窗口之前会触发afterPageOut，该页面移出窗口之后会触发afterPageOut，<br>调用方式如下
+<pre class="language-javascript"><code>
+$("#settingsPage").on("beforePageIn", function(){
+	alert("开始加载设置页面");
+}).on("afterPageIn", function(){
+	alert("设置页面加载完成")
+});
+</code></pre> -->
+当要返回上一个页面时，可以调用<code class="language-javascript">UM.page.back();</code>函数
+		</div>
+
+		<div class="item" id="modal">
+			<h3>仿IOS8模态框</h3>
+			<p>模态框在UM.modal类下，具有alert,confirm,prompt,tips,loading,login几个属性,默认设置为：</p>
+<pre class="language-javascript"><code>
+{
+   title: window.location.host || "",
+   text: "",
+   btnText: ["取消", "确定"],
+   delay: null,//Number
+   overlay: true,
+   cancle: function() {},
+   ok: function(data) {},
+   callback: null // Function
+}  
+</code></pre>
+<p>
+	title为弹出框标题;<br>
+	text为文本内容;
+	btnText为按钮文本;
+	delay,callback为默认延迟和回调,延迟delay秒执行callback函数，只有delay为数字，callback为函数时才有效;
+	overlay为true时具有半透明遮罩;
+	cancle为confirm和login对话框取消的回调函数;
+	ok: 为confirm或login对话框确认的回调函数,带有data参数，可获取到confirm或login对话框的值;
+</p>
+
+<h4>警告框alert</h4>
+可设置属性如下<br>
+<pre class="language-javascript"><code>
+UM.modal("alert",{
+  title : "",
+  text : "",
+  overlay: "true",
+  ok: function() {},
+  delay: Number,
+  callback: Function
+});
+</code></pre>
+<h4>确认对话框confirm</h4>
+可设置属性如下<br>
+<pre class="language-javascript"><code>
+UM.modal("confirm",{
+   title: window.location.host || "",
+   text: "",
+   btnText: ["取消", "确定"],
+   overlay: true,
+   cancle: function() {},
+   ok: function(data) {},
+  delay: Number,
+  callback: Function
+});
+</code></pre>
+<h4>输入文字对话框prompt</h4>
+可设置属性如下<br>
+<pre class="language-javascript"><code>
+UM.modal("prompt",{
+   title: window.location.host || "",
+   text: "",
+   btnText: ["取消", "确定"],
+   overlay: true,
+   ok: function(data) {},
+   delay: Number,
+   callback: Function
+});
+</code></pre>
+<h4>提示对话框tips</h4>
+可设置属性如下<br>
+<pre class="language-javascript"><code>
+UM.modal("tips",{
+   title: window.location.host || "",
+   text: "",
+   overlay: true,
+   delay: Number,
+   callback: Function
+});
+</code></pre>
+<h4>加载对话框loading</h4>
+可设置属性如下<br>
+<pre class="language-javascript"><code>
+UM.modal("loading",{
+  delay: Number,
+  callback: Function
+});
+</code></pre>
+<h4>登录对话框login</h4>
+可设置属性如下<br>
+<pre class="language-javascript"><code>
+UM.modal("login",{
+   title: window.location.host || "",
+   text: "",
+   btnText: ["取消", "确定"],
+   overlay: true,
+   cancle: function() {},
+   ok: function(data) {},
+   delay: Number,
+   callback: Function
+});
+</code></pre>
+<h4>移出对话框使用destory</h4>
+<pre class="language-javascript"><code>
+var alertModal = UM.modal("alert",{
+   title : "提示",
+   text : "这是弹出框这是弹出框",
+   delay: 1000,
+   callback:function(){
+     alertModal.destory();
+   }
+});
+</code></pre>
+		</div>
+		<div class="item" id="progressjs">
+			<h3>进度条Progress</h3>
+
+html结构如下: <br>
+<pre class="language-markup"><code>
+&lt;div class="um-progress">
+	&lt;div class="um-progress-bar"  style="">
+	&lt;/div>
+&lt;/div>
+</code></pre>
+js调用: <br>
+<pre class="language-javascript"><code>
+var prog = UM.progress(3000);
+// 先定义好事件监听
+var bar = $(".um-progress-bar").eq(0);
+
+handle.start(function() {
+    console.log("动画开始");
+}).step(function(percent, restime) {
+   bar.width(percent.toPrecision(3) * 100+'%')
+   .parent().prev(".msg")
+   .html("剩余时间：" + ("" + restime/1000).slice(0, 3) + "秒")
+   bar.find(".count").html((percent * 100).toPrecision(3) + "% 完成")
+})
+
+// 最后执行动画
+handle.start();
+</code></pre>
+<p>如下监听动画开始start,可监听的事件还有<br>动画停止事件stop,
+动画完成事件finish,动画进行事件step</p>
+
+step函数会在动画执行过程中执行，可通过step函数参数获取dom元素、进度和剩余时间
+
+		</div>
+		<div class="item">
+			<h3>开发实战</h3>
+			<h4>开发简单的crud应用</h4>
+			<p>我们来使用knockout开发一个具备增删改功能的列表，首先确保如下文件的引入</p>
+<pre class="language-markup"><code>
+&lt;link rel="stylesheet" href="css/iuapmobile.um-2.7.0.css">
+&lt;link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+&lt;script src="jquery-2.1.4.min.js">&lt;/script>
+&lt;script src="js/knockout-2.2.0.js">&lt;/script>
+&lt;script src="js/Frameworks/iuapmobile.frameworks.ui-2.7.0.js">&lt;/script>
+</code></pre>
+<p>添加首页id后增加导航栏，然后绑定事件</p>
+<pre class="language-markup"><code>
+&lt;div class="um-header">
+	&lt;a href="#" class="ti-pencil-alt f18 um-header-left" id="edite_list" data-bind="click: edite">&lt;/a>
+	&lt;h3>标题&lt;/h3>
+	&lt;a class="um-header-right ti-plus" href="#edite" data-bind="click: addlist" data-transition="pop">&lt;/a>
+&lt;/div>
+</code></pre>
+<p>在内容区新增列表行模板</p>
+<pre class="language-markup"><code>
+&lt;ul class="um-list" id="shopContent"  data-bind="foreach: listData">
+	&lt;li class="list-item">
+		&lt;a href="#edite" class="um-list-item">
+			&lt;div class="um-list-item-media">
+				&lt;label class="um-check-inline um-list-left-icon">
+					&lt;input name="um-checkbox-inline" type="checkbox">
+					&lt;span class="um-icon-checkbox um-css3-vc">&lt;/span>
+				&lt;/label>
+				&lt;img height=40 width=40 data-bind="attr:{src:imgsrc}" alt="...">
+			&lt;/div>
+			&lt;div class="um-list-item-inner" data-bind="click: $parent.lineClick">
+				&lt;div class="um-list-item-body">
+					&lt;h4 class="media-heading" data-bind="text: title">&lt;/h4>
+					&lt;p data-bind="text: content">&lt;/p>
+					&lt;p data-bind='visible: $parent.tipsVisible() > 0.5, text: tips' class="um-red">&lt;/p>
+				&lt;/div>
+				&lt;div class="um-list-item-right">
+					&lt;div class="mr15" data-bind="text: status">&lt;/div>
+					&lt;span class="f12 mr15" data-bind="text: time">&lt;/span>
+				&lt;/div>
+			&lt;/div>
+		&lt;/a>
+	&lt;/li>
+&lt;/ul>
+</code></pre>
+<p>该列表设置了a标签指向id为edite的页面，后面我们再增加edite页面</p>
+<p>在内容区外(或者um-footer里)增加2个编辑操作的按钮</p>
+<pre class="language-markup"><code>
+&lt;div class="none" id="check">
+	&lt;div class="um-box-justify p10">
+		&lt;a href="#" data-bind="click: checkAll">
+			全选
+		&lt;/a>
+		&lt;a href="#" data-bind="click: remove">
+			删除
+		&lt;/a>
+	&lt;/div>
+&lt;/div>
+</code></pre>
+<p>新增edite页面</p>
+<pre class="language-markup"><code>
+&lt;div class="um-page" id="edite">
+	&lt;div class="um-header" >
+		&lt;a href="#"  class="um-back">返回&lt;/a>
+		&lt;h3>导航栏&lt;/h3>
+		&lt;a class="um-header-right ti-save" href="#" data-bind="click: save">&lt;/a>
+	&lt;/div>
+	&lt;div class="um-content">
+		&lt;ul class="um-list" data-bind="with: line">
+			&lt;li>
+				&lt;div class="um-list-item">
+					&lt;div class="um-list-item-inner">
+						&lt;div class="um-list-item-left">
+							企业:
+						&lt;/div>
+						&lt;div class="um-list-item-right">
+							&lt;input type="text" class="form-control" data-bind="value: title">
+						&lt;/div>
+					&lt;/div>
+				&lt;/div>
+			&lt;/li>
+			&lt;li>
+				&lt;div class="um-list-item">
+					&lt;div class="um-list-item-inner">
+						&lt;div class="um-list-item-left">
+							经营范围:
+						&lt;/div>
+						&lt;div class="um-list-item-right">
+							&lt;input type="text" class="form-control"  data-bind="value: content">
+						&lt;/div>
+					&lt;/div>
+				&lt;/div>
+			&lt;/li>
+			&lt;li>
+				&lt;div class="um-list-item">
+					&lt;div class="um-list-item-inner">
+						&lt;div class="um-list-item-left">
+							状态:
+						&lt;/div>
+						&lt;div class="um-list-item-right">
+							&lt;select name="" class="form-control" data-bind="value: status">
+								&lt;option value="审阅中">审阅中&lt;/option>
+								&lt;option value="已批准">已批准&lt;/option>
+								&lt;option value="未提交">未提交&lt;/option>
+							&lt;/select>
+						&lt;/div>
+					&lt;/div>
+				&lt;/div>
+			&lt;/li>
+		&lt;/ul>
+	&lt;/div>
+&lt;/div>
+</code></pre>
+<p>生成带有多个字段的多条数据</p>
+<pre class="language-javascript"><code>
+var shopData = {
+	data : []
+};
+for (var i = 0; i < 35; i++) {
+	var j = {};
+	j.title = "ZJT股份有限公司" + i;
+	j.content = ["生产","加工","销售","包装","采购"][parseInt(Math.random() * 5)];
+	j.time = "星期" + ["一","二","三","四","五","六","七"][parseInt(Math.random() * 7)];
+	j.status = ["审阅中","已批准","未提交"][i%3];
+	j.imgsrc = "img/s" + (i % 9 + 2) + ".png";
+	j.tips = "提示" + i;
+	shopData.data.push(j);
+}
+</code></pre>
+<p>绑定模型</p>
+<pre class="language-javascript"><code>
+function shopModal(){
+	var self = this;
+	// 设置默认值
+	self.defaults = {
+		activeIndex: 0,
+		isAdd: false,
+		isAllcheck: false,
+		isCancle: true,
+		initData: {
+			title: "",
+			content: "",
+			status: "",
+			time: "星期一",
+			imgsrc: "img/s5.png",
+			tips: ""
+		}
+	}
+	// 将数据数组绑定到模型的listData上，通过foreach可以遍历并渲染出来
+	self.listData = ko.observableArray(shopData.data);
+
+	// 绑定edite页面的输入框的数据为初始值
+	self.line = ko.observable(self.defaults.initData);
+
+	// 设置tips字段为随机显示
+	self.tipsVisible = function() {
+		return Math.random();
+	}
+
+	// 定义行点击事件监听
+	self.lineClick = function(data, e) {
+		var lineData = $.extend({},self.defaults.initData,data);
+		self.line(lineData);
+		var index = $(e.target).closest("li").index();
+		self.defaults.activeIndex = index;
+		self.defaults.isAdd = false;
+	}
+
+	// 增加列表数据
+	self.addlist = function () {
+		initData = {
+			title: "",
+			content: "",
+			status: "",
+			time: "星期一",
+			imgsrc: "img/s5.png",
+			tips: ""
+		}
+		self.line(initData);
+		self.defaults.activeIndex = 0;//self.listData().length;
+		self.defaults.isAdd = true;
+	}
+
+	// 保存列表数据
+	self.save = function() {
+		var newLine = new self.line();
+		if(!newLine.title || !newLine.content) {
+			UM.modal("alert","亲，输入数据后才能保存哦！");
+			return;
+		}
+		if(self.defaults.isAdd) {
+			self.listData.splice(self.defaults.activeIndex, 0, newLine);
+		} else {
+			self.listData.splice(self.defaults.activeIndex, 1, newLine);
+		}
+		UM.page.back();
+	}
+	
+	// 全选
+	self.checkAll = function(){
+		self.defaults.isAllcheck = !self.defaults.isAllcheck;
+		$("#shopContent").find("input:checkbox").prop("checked", self.defaultsisAllcheck);
+	}
+
+	// 编辑列表
+	self.edite = function(modal, e) {
+		var target = $(e.target);
+		if(self.defaults.isCancle) {
+				openCheck();
+				target.removeClass("ti-pencil-alt").html("取消");
+			}else {
+				closeCheck();
+				target.html("").addClass("ti-pencil-alt");
+			}
+			self.defaults.isCancle = !self.defaults.isCancle;
+		}
+		self.remove = function() {
+			$.each($("#shopContent").find("input:checkbox:checked"),function(){
+				var checkItem = $(this).closest(".list-item");
+				var i = checkItem.index()
+				checkItem.slideUp(400, function(){
+					closeCheck();
+					var index = checkItem.index();
+					checkItem.remove();
+				});
+			});
+			$("#edite_list").trigger("click");
+		}
+	}
+
+// 绑定模型	
+ko.applyBindings(new shopModal());
+
+// 打开底部编辑工具栏和列表选择框
+function openCheck() {
+	$("#shopContent").find(".um-list-item").addClass("um-list-left-open");
+	$("#index #check").removeClass("none");
+}
+// 关闭底部编辑工具栏和列表选择框
+function closeCheck() {
+	$("#shopContent").find(".um-list-item").removeClass("um-list-left-open");
+	$("#index #check").addClass("none");
+}
+</code></pre>
+		</div>
+		<div class="item example clearfix">
+		<h3>通信应用平台</h3>
+			<img src="img/1/1.png" alt="">
+			<img src="img/1/2.png" alt="">
+			<img src="img/1/3.png" alt="">
+			<img src="img/1/4.png" alt="">
+			<img src="img/1/5.png" alt="">
+			<img src="img/1/6.png" alt="">
+			<h3>电商平台</h3>
+			<img src="img/2/1.png" alt="">
+			<img src="img/2/2.png" alt="">
+			<img src="img/2/3.png" alt="">
+			<img src="img/2/4.png" alt="">
+			<img src="img/2/5.png" alt="">
+			<h3>结合Framework 7，支持第三方扩展</h3>
+			<img src="img/3/1.png" alt="">
+			<img src="img/3/2.png" alt="">
+			<img src="img/3/3.png" alt="">
+			<img src="img/3/4.png" alt="">
+			<img src="img/3/5.png" alt="">
+			<img src="img/3/6.png" alt="">
+			<img src="img/3/7.png" alt="">
+			<img src="img/3/8.png" alt="">
+			<img src="img/3/9.png" alt="">
+			<img src="img/3/10.png" alt="">
+			<img src="img/3/11.png" alt="">
+		</div>
+		<!-- div content end here -->
+		</div>
+
+		</body>
+	</html>

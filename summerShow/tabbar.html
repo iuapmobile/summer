@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="css/um.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/um.js"></script><script>
+		
+		</script>
+		<style>
+		</style>
+	</head>
+	<body>
+		<div class="um-page">
+			<div class="um-header" >
+				<a href="index.html"  class="um-back">返回</a>
+				<h3>选项卡</h3>
+			</div>
+			<div class="um-content">
+				<h3>tab bar</h3>
+				<h4>文字选项卡1</h4>
+				<div class="p5">
+					<ul class="um-tabbar">
+						<li>
+							<a href="javascript:;">分段一</a>
+						</li>
+						<li class="active">
+							<a href="javascript:;">分段二</a>
+						</li>
+						<li>
+							<a href="javascript:;">分段三</a>
+						</li>
+						<li>
+							<a href="javascript:;">分段四</a>
+						</li>
+					</ul>
+				</div>
+				<br><br>
+				<h4>文字选项卡2</h4>
+				<div class="um-box-justify p10">
+					<a class="active" href="javascript:;">收藏</a>
+					<a href="javascript:;">编辑</a>
+					<a href="javascript:;">转发</a>
+					<a href="javascript:;">记录</a>
+					<a href="javascript:;">删除</a>
+				</div>
+				<br>
+				<h4>图标选项卡</h4>
+				<ul class="um-tabbar">
+					<li>
+						<a href="javascript:;"><div class="f20 ti-home"></div></a>
+					</li>
+					<li class="active">
+						<a href="javascript:;"><div class="f20 ti-menu-alt"></div></a>
+					</li>
+					<li>
+						<a href="javascript:;"><div class="f20 ti-layout-grid2"></div></a>
+					</li>
+					<li>
+						<a href="javascript:;"><div class="f20 ti-bar-chart"></div></a>
+					</li>
+				</ul><br>	
+				<h4>图标选项卡2</h4>
+				<div class="um-tabbar-foot">
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-menu-alt f24"></i>
+					</a>
+					<a href="#" class="um-tabbar-item active">
+						<i class="ti-bar-chart f24"></i>
+					</a>
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-pencil-alt f24"></i>
+					</a>
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-user f24"></i>
+					</a>
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-settings f24"></i>
+					</a>
+					</div>
+				<br>
+				<h4>文字图标选项卡</h4>
+				<div class="um-footer">
+					<div class="um-tabbar um-tabbar-foot">
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-menu-alt f24"></i>
+							<div class="um-tabbar-item-text">企业审核</div>
+						</a>
+						<a href="#" class="um-tabbar-item active">
+							<i class="ti-bar-chart f24"></i>
+							<div class="um-tabbar-item-text">业绩分析</div>
+						</a>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-pencil-alt f24"></i>
+							<div class="um-tabbar-item-text">新增统计</div>
+						</a>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-user f24"></i>
+							<div class="um-tabbar-item-text">个人中心</div>
+						</a>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-settings f24"></i>
+							<div class="um-tabbar-item-text">设置</div>
+						</a>
+					</div>
+				</div>
+				<h4>文字下划线选项卡</h4>
+				<ul class="um-tabbar um-tabbar-underline">
+					<li>
+						<a href="javascript:;">用户</a>
+					</li>
+					<li class="active">
+						<a href="javascript:;">应用</a>
+					</li>
+					<li>
+						<a href="javascript:;">社区</a>
+					</li>
+					<li>
+						<a href="javascript:;">企业</a>
+					</li>
+				</ul>
+				<br>
+				<h4>固定底部选项卡</h4>
+			</div>
+			
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-menu-alt f24"></i>
+						<div class="um-tabbar-item-text">企业审核</div>
+					</a>
+					<a href="#" class="um-tabbar-item active">
+						<i class="ti-bar-chart f24"></i>
+						<div class="um-tabbar-item-text">业绩分析</div>
+					</a>
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-pencil-alt f24"></i>
+						<div class="um-tabbar-item-text">新增统计</div>
+					</a>
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-user f24"></i>
+						<div class="um-tabbar-item-text">个人中心</div>
+					</a>
+					<a href="#" class="um-tabbar-item">
+						<i class="ti-settings f24"></i>
+						<div class="um-tabbar-item-text">设置</div>
+					</a>
+				</div>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
+		<script>
+		$(function(){
+			$(".um-box-justify a").on("touchstart mousedown",function(){
+				$(this).siblings("a").removeClass("active").end().addClass("active");
+			})
+		})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="../../css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="../../css/um.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/um.js"></script>
+		<script src="js/swipe.js"></script>
+		<script src="js/swipeTab.js"></script>
+		<script>
+			$isWeb = true
+		</script>
+		<style>
+		#slider1 .swipe-wrap > div {
+		padding: 20px 0;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="um-page">
+			<div class="um-header" >
+				<a href="../../index.html"  class="um-back">返回</a>
+				<h3>滑动导航</h3>
+				<a href="#" class="um-header-right">按钮</a>
+			</div>
+			<div class="um-content">
+				<ul class="um-tabbar" id='scroll_position' data-action="swipeTab"  data-target="slider">
+					<li name="1" class="active">
+						<a href="#"><div class="ti-home f18"></div></a>
+					</li>
+					<li name="2">
+						<a href="#"><div class="ti-google f18"></div></a>
+					</li>
+					<li name="3">
+						<a href="#"><div class="ti-layout-grid2 f18"></div></a>
+					</li>
+					<li name="4">
+						<a href="#"><div class="ti-settings f18"></div></a>
+					</li>
+				</ul>
+				<div id='slider' class='swipe' >
+					<div class='swipe-wrap'>
+						<div>
+							综合新华社电 尼泊尔官员28日证实，强震致死人数迄今超过5000人，另有超过1万人受伤。强震致使一些地方道路阻断，成为“孤岛”，尚无法获知相关伤亡人数。总理苏希尔·柯伊拉腊预计，死亡人数可能突破1万。
+							柯伊拉腊宣布，自28日起，尼泊尔举行3天全国哀悼，以悼念地震遇难者。
+						</div>
+						<div>
+							当地时间2015年4月28日，尼泊尔加德满都，加德满都当地民众和外国游客等待乘坐巴士或飞机离开当地。尼泊尔遭遇强震两天来，余震不断，失去家园的民众露宿街头，缺水少粮，亟待救援。4月27日，数以百计当地居民拖家带口，逃离这座几乎变为废墟的河谷城市。图为当地时间4月28日，尼泊尔加德满都，尼泊尔民众等待乘巴士离开加德满都。
+						</div>
+						<div>
+							尼泊尔内政部国家应灾部门主管拉梅什沃尔·丹加尔28日告诉法新社记者，地震遇难人数已升至5057人，另外已知超过1万人受伤。在印度和中国西藏，分别有61人和25人因这次地震丧生。另外，强震波及珠穆朗玛峰，引发雪崩，部分登山营地被掩埋，致使至少18人丧生。
+						</div>
+						<div>
+							<ul class="um-list um-list-corner">
+								<li data-action="collapse" class="um-open">
+									<a href="javascript:void(0);" class="um-collapse-btn btn">伸缩按钮+</a>
+									<ul class="um-list um-collapse-content">
+										<li data-action="collapse">
+											<a href="javascript:void(0);" class="um-collapse-btn btn">伸缩按钮+</a>
+											<ul class="um-list um-collapse-content">
+												<li>
+													<a class="btn" href="#commonBtn">普通按钮</a>
+												</li>
+												<li>
+													<a class="btn" href="#iconBtn">按钮图标</a>
+												</li>
+												<li>
+													<a class="btn" href="#customBtn">个性按钮</a>
+												</li>
+												<li>
+													<a class="btn" href="#moreBtn">更多按钮</a>
+												</li>
+												<li>
+													<a class="btn" href="#btnGroup">按钮组</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div id='slider1' style="" class='swipe'>
+					<div class='swipe-wrap'>
+						<div>
+							<img src="../../img/bg.jpg" alt="">
+						</div>
+						<div>
+							<img src="../../img/html.png" alt="">
+						</div>
+						<div>
+							<img src="../../img/bg.jpg" alt="">
+						</div>
+						<div>
+							<img src="../../img/html.png" alt="">
+						</div>
+						<div>
+							<img src="../../img/bg.jpg" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="um-footer">
+				<ul id='scroll_position1' class="um-tabbar-foot" data-action="swipeTab" data-target="slider1">
+					<li>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-menu-alt f24"></i>
+							<div class="um-tabbar-item-text">企业审核</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-bar-chart f24"></i>
+							<div class="um-tabbar-item-text">业绩分析</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-pencil-alt f24"></i>
+							<div class="um-tabbar-item-text">新增统计</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-user f24"></i>
+							<div class="um-tabbar-item-text">个人中心</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="um-tabbar-item">
+							<i class="ti-settings f24"></i>
+							<div class="um-tabbar-item-text">设置</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

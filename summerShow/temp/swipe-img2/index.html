@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/um.css">
+		<link rel="stylesheet" href="css/islider.css">
+		<script src="../../js/jquery.min.js"></script>
+		<script src="js/islider.js"></script>
+		<script src="../../js/um.js"></script>
+		<style>
+		.iSlider-wrapper {
+			height: 300px;
+		}
+		</style>
+		<script>
+			$(function() {
+			    var list = [{
+			        content: "../../img/love.png"
+			    }, {
+			        content: "../../img/sun.png"
+			    }, {
+			        content: "../../img/waite.png"
+			    }, ];
+			
+			    var islider = new iSlider({
+			        type: 'pic',
+			        data: list,
+			        dom: document.getElementById("iSlider-wrapper"),
+			        isLooping: true,
+			        animateType: 'default',
+			        isAutoPlay: true,
+			        duration: 1000
+			    });
+			    islider.addDot();
+			})
+		</script>
+	</head>
+	<body>
+		<div class="um-page" id="">
+			<div class="um-header">
+				<a href="../../index.html" class="um-back"  data-transitio>返回</a>
+				<h3>导航栏</h3>
+			</div>
+			<div id="iSlider-wrapper" class="iSlider-wrapper"></div>
+		</div>
+	</body>
+	</html>

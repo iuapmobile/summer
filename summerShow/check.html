@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/themify-icons/themify-icons.css">
+		<link rel="stylesheet" href="css/um.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/um.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+		$(function(){
+			$(".um-check-group").find("input:radio").on("change",function(){
+				if(this.checked) {
+					UM.modal("alert", "您选择的是：" + $(this).val())
+				}
+			})
+			$(".checkbox").on("change",function(){
+				var arr = [];
+				$.each($(this).find("input:checkbox"),function(){
+					if(this.checked)
+					arr.push($(this).val());
+				})
+				UM.modal("alert", "您选择的是：" + arr.toString())
+			})
+		})
+		</script>
+		<div class="um-page">
+			<div class="um-header" >
+				<a href="index.html"  class="um-back">返回</a>
+				<h3>单选框和复选框</h3>
+			</div>
+			<div class="um-content">
+				<h3>单选框</h3>
+				<h4>垂直单选框</h4>
+				<form>
+					<p class="um-list-divider">您的性别：</p>
+					<div class="um-check-group">
+						<label class="um-check-group-item">
+							<input name="um-radio1" type="radio" value="男生">
+							男生 <span class="um-icon-check um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-radio1" type="radio">
+							女生 <span class="um-icon-check um-css3-vc" value="女生"></span>
+							<img src="img/portal.jpg" width=25 alt="" class="fr mr15 um-rounded">
+						</label>
+					</div>
+					<div class="um-check-group um-check-group-left">
+						<label class="um-check-group-item">
+							<input name="um-radio2" type="radio">
+							<h3 class="media-heading">物流助手</h3>
+							<p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！</p>
+							<div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货</div>
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-radio2" type="radio">
+							<h3 class="media-heading">物流助手</h3>
+							<p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！</p>
+							<div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货</div>
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+					</div>
+					<h3>行内单选框</h3>
+					<label class="um-check-inline">
+						<input name="um-checkbox-inline" type="checkbox" value="自动登录" checked>
+						自动登录
+						<span class="um-icon-checkbox um-css3-vc"></span>
+					</label>
+					<h3>行内单选框组</h3>
+					<div class="um-check-group">
+						<label class="um-check-inline">
+							<input name="um-radio-group" type="radio" value="选项一" checked>
+							选项一
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-inline">
+							<input name="um-radio-group" type="radio" value="选项二">
+							选项二
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-inline">
+							<input name="um-radio-group" type="radio" value="选项三">
+							选项三
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+					</div>
+					<br>
+					<p class="um-list-divider">您在读学校：</p>
+					<div class="um-check-group um-check-group-left">
+						<label class="um-check-group-item">
+							<input name="um-radio3" type="radio" value="北京大学">
+							北京大学<span class="um-icon-check um-css3-vc"></span>
+							<img src="img/portal.jpg" width=30 alt="" class="fr um-rounded">
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-radio3" type="radio" value="浙江大学">
+							浙江大学 <span class="um-icon-check um-css3-vc"></span>
+							<img src="img/portal.jpg" width=30 alt="" class="fr um-rounded">
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-radio3" type="radio" value="电子科技大学">
+							电子科技大学 <span class="um-icon-check um-css3-vc"></span>
+							<img src="img/portal.jpg" width=30 alt="" class="fr um-rounded">
+						</label>
+					</div>
+					<br>
+					<p class="um-list-divider">你就读的学校所在省份是？</p>
+					<div class="um-check-group um-check-group-media">
+						<label class="um-check-group-item">
+							<img src="img/portal.jpg" class="um-check-group-item-icon um-css3-vc" alt="">
+							<input name="um-radio4" type="radio" value="北京市">
+							北京市 <span class="um-icon-check um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<img src="img/portal.jpg" class="um-check-group-item-icon um-css3-vc" alt="">
+							<input name="um-radio4" type="radio" value="上海市">
+							上海市 <span class="um-icon-check um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<img src="img/portal.jpg" class="um-check-group-item-icon um-css3-vc" alt="">
+							<input name="um-radio4" type="radio" value="黑龙江省">
+							黑龙江省 <span class="um-icon-check um-css3-vc"></span>
+						</label>
+					</div>
+					<br>
+					<br>
+					<h4>垂直复选框</h4>
+					<p class="um-list-divider">你认为影响就业的因素有哪些？</p>
+					<div class="um-check-group um-check-group-left checkbox">
+						<label class="um-check-group-item">
+							<input name="um-checkbox" type="checkbox" value="学校知名度" checked>
+							学校知名度 <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-checkbox" type="checkbox" value="专业知识">
+							专业知识 <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-checkbox" type="checkbox" value="外语能力">
+							外语能力 <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-checkbox" type="checkbox" value="外表形象">
+							外表形象 <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-checkbox" type="checkbox" value="实践和工作经验">
+							实践和工作经验 <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+					</div>
+					<br>
+					<div class="um-check-group um-check-group-left checkbox">
+						<label class="um-check-group-item">
+							<input name="um-checkbox2" type="checkbox">
+							<h3 class="media-heading">物流助手</h3>
+							<p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！</p>
+							<div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货</div> <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-group-item">
+							<input name="um-checkbox2" type="checkbox">
+							<h3 class="media-heading">物流助手</h3>
+							<p class="um-text-overflow f14">您购买的【2只装正品羽毛球拍】已经签收，快递单号：3100029993332，记得好评哦！</p>
+							<div class="um-gray um-text-overflow2 f12">本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货本商品支持7天无理由退货</div> <span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+					</div>
+					<h3>行内复选框组</h3>
+					<div class="um-check-group checkbox">
+						<label class="um-check-inline">
+							<input name="um-checkbox-group" type="checkbox" value="选项一">
+							选项一
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-inline">
+							<input name="um-checkbox-group" type="checkbox" value="选项二">
+							选项二
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+						<label class="um-check-inline">
+							<input name="um-checkbox-group" type="checkbox" value="选项三" checked>
+							选项三
+							<span class="um-icon-checkbox um-css3-vc"></span>
+						</label>
+					</div>
+				</form>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
+	</body>
+</html>

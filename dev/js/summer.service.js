@@ -314,8 +314,14 @@
 		return s.callCordova('summer-plugin-core.XUpgrade', 'upgradeApp', json, successFn, errFn);
 	};
 	s.getVersion = function(json){
-		return s.callSync('XUpgrade.getVersion', json || {});
-	};
+		var ver = s.callSync('XUpgrade.getVersion', json || {});
+		if(typeof ver == "string"){
+			return JSON.parse(versionInfo);
+		}else{
+			alert("getVersion' return value is not string!")
+			return ver;
+		}
+	}
 	s.upgrade = function(json, successFn, errFn){
 		return s.callCordova('summer-plugin-core.XUpgrade', 'upgrade', json, successFn, errFn);
 	};

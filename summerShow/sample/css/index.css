@@ -1,0 +1,200 @@
+            html, body {
+				font-family: '黑体';
+			}
+			/*basic styles*/
+			.grey {
+				background: grey;
+			}
+			.ui-bar-a, .ui-page-theme-a .ui-bar-inherit {
+				background-color: white;
+			}
+
+			.order-header-fixed {
+				width: 100%;
+				position: fixed;
+				background: white;
+				z-index: 100;
+			}
+			.order-header {
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+			}
+			.order-header h1 {
+				position: relative;
+				display: inline-block;
+				height: 50px;
+				line-height: 50px;
+				font-size: 18px;
+			}
+			.order-header .order-more, .order-header .order-find, .order-header .order-screen {
+				position: absolute;
+				top: 5px;
+			}
+			.order-header .order-more {
+				left: 50%;
+				top: 50%;
+				margin-top: -12px;
+				margin-left: 40px;
+				height: 26px;
+				z-index: 10;
+			}
+			.order-header .order-screen {
+				left: 50%;
+				top: 50%;
+				margin-top: -14px;
+				margin-left: 80px;
+				height: 30px;
+				z-index: 10;
+			}
+			.order-header .order-search-box {
+				position: absolute;
+				top: 8px;
+				left: 180px;
+				z-index: 7;
+				padding: 0 10px;
+			}
+			.ui-input-search {
+				display: block;
+				margin: 10px;
+			}
+			.ui-input-search:focus {
+				outline: 0;
+			}
+			.order-navi {
+				position: relative;
+				height: 42px;
+				border-top: 1px solid grey;
+				border-bottom: 1px solid grey;
+			}
+			.order-navi ul {
+				position: absolute;
+				left: 0;
+				background: white;
+				box-sizing: content-box;
+				overflow: hidden;
+				width: 100%;
+				transition: all 0.3s ease-in-out;
+			}
+
+			.order-navi ul li {
+				display: inline-block;
+				width: 67px;
+				height: 38px;
+				line-height: 38px;
+				margin-left: 12px;
+				font-family: '黑体';
+				font-size: 16px;
+				font-weight: bolder;
+				text-align: center;
+				color: grey;
+			}
+			.order-navi ul li.active, .order-navi ul li:hover {
+				border-top: 2px solid transparent;
+				border-bottom: 2px solid #00A1EA;
+				color: #00A1EA;
+				cursor: pointer;
+			}
+			.order-list-container {
+				position: absolute;
+				width: 100%;
+				top: 150px;
+				z-index: 1;
+			}
+			.order-list {
+				position: absolute;
+				display: inline-block;
+				width: 100%;
+				display:none;
+				left: 0;
+			}
+			.order-list#all {
+				display:block;
+			}
+			.order-list ul {
+				padding-left: 10px;
+			}
+
+			.order-list ul li > a {
+				display: -webkit-box;
+				display: box;
+				box-sizing: content-box;
+				border-bottom: 1px solid grey;
+				padding-top: 18px;
+				padding-right: 20px;
+			}
+			.order-list li div.order-list-left {
+				-webkit-box-flex: 1.0;
+			}
+			.order-list li div.order-list-right {
+				-webkit-box-flex: 2.0;
+			}
+			.order-list-left p.first {
+				margin: 0px auto 10px 0px;
+			}
+			.order-list-company {
+				font-size: 16px;
+				font-weight: bolder;
+				color: #2C3742;
+			}
+			.order-list-left p.second {
+				margin: 0 auto auto 0;
+				height: 36px;
+			}
+			.order-list-code {
+				display: inline-block;
+				height: 36px;
+				font-size: 18px;
+				font-weight: bolder;
+				color: #848D98;
+			}
+			.order-list-status {
+				display: inline-block;
+				width: 61px;
+				height: 20px;
+				line-height: 20px;
+				margin-left: 12px;
+				border: 1px solid #B3B3B3;
+				font-size: 14px;
+				color: #848D98;
+				text-align: center;
+			}
+			.order-list-right p {
+				width: 100%;
+				text-align: right;
+			}
+
+			.order-list-right p.first {
+				margin: 0px 0 10px auto;
+			}
+			.order-list-count {
+				font-size: 16px;
+				color: #F45D49;
+			}
+			.order-list-right p.second {
+				margin: 0 0 auto auto;
+			}
+			.order-list-date {
+				font-size: 14px;
+				color: #A9B4C2;
+			}
+			.order-list-status {
+				border-radius: 8px;
+			}
+			.order-list-status.approving {
+				color: red;
+				border-color: red;
+			}
+			.order-list-status.delivering {
+				color: blue;
+				border-color: blue;
+			}
+			.order-list-status.getting {
+				color: green;
+				border-color: green;
+			}
+			.order-list-status.closed {
+				color: #A9B4C2;
+				border-color: #A9B4C2;
+			}
+			::-webkit-scrollbar{width:0px}
