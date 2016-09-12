@@ -3982,11 +3982,9 @@ function UMP$Services$Telephone$saveContact(tel, employeename, jobname, orgname,
 }
 */
 function UMP$Services$Telephone$call(tel){
-	if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS){
-    	UM_callNativeService(this._CALLTEL, tel);
+	if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS || CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid){
+    	$service.call("UMDevice.callPhone", "{tel:'"+tel+"'}");
 		//UM_callNativeServiceNoraml
-	}else if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid) {
-   		$service.call("UMDevice.callPhone", "{tel:'"+tel+"'}");
 	}else{
 		alert("Not implementate UMP$Services$Telephone$call in CurrentEnvironment.DeviceType == " + CurrentEnvironment.DeviceType);
 	}
@@ -3994,16 +3992,11 @@ function UMP$Services$Telephone$call(tel){
 function UMP$Services$Telephone$sendMsg(tel, body){
 	if(arguments.length == 1 && $isJSONObject(arguments[0])){
 		var args = tel;		
-		if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS){
-			return UM_callNativeService(this._SENDMSG, args.tel, args.body);
-		}else if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid) {
+		if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS || CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid){
 			return $service.call("UMDevice.sendMsg", args);
 		}
 	}else{
-		if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS){
-			UM_callNativeService(this._SENDMSG, tel, body);
-		}else if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid) {
-			//$service.call("UMDevice.sendMessage", "{recevie:'"+tel+"',message:'"+body+"'}");
+		if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS || CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid){
 			$service.call("UMDevice.sendMsg", "{tel:'"+tel+"',body:'"+body+"'}");
 		}
 	}
