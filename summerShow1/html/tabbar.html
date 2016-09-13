@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css"/>
+        <style>
+        	div.Artical>div {
+        		display:none;
+        		color:#555;
+        	}
+        	div.Artical>div.active {
+        		display:block;
+        	}
+        	div.Artical>div.news {
+        		background:lightblue;
+        	}
+        	div.Artical>div.product {
+        		background:lightgreen;
+        	}
+        	div.Artical>div.game {
+        		background:lightyellow;
+        	}
+        	div.Artical>div.download {
+        		background:lightpink;
+        	}
+        	div.um-content {
+        		display: -webkit-box;
+        		display: box;
+        		display: -webkit-flex;
+        		display: flex;
+        		-webkit-flex-direction: column;
+        		flex-direction: column;
+        	}
+        	div.Artical {
+        		-webkit-box-flex: 1;
+        		box-flex: 1;
+        		-webkit-flex: 1;
+        		flex: 1;
+        	}
+        </style>
+
+        <style>
+        	.um-nav-item{color:#777}
+        	.um-nav-item.active{color:#007aff}
+        </style>
+
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+        <script src="../js/knockout-2.2.0.js" type="text/javascript" charset="utf-8"></script>	
+        <script>
+        	$(function(){
+        		var arrData = [{title:"军事",src: "#item1" },{title: "社会",src: "#item2" },{title: "体育",src: "#item3" },{title: "娱乐",src: "#item4" },{title: "财经",src: "#item5" },{title: "科技",src: "#item6" },{title: "专题",src: "#item7" },{title: "图片",src: "#item8" },{title: "视频",src: "#item9" },{title: "国内",src: "#item10" },{title: "国际",src: "#item11" },{title: "视界",src: "#item12"}];
+        		function Model(){
+        			this.arrData = ko.observableArray(arrData);
+        		}
+        		ko.applyBindings(new Model());
+        		$('.um-nav-item').click(function(){
+        			$(this).addClass('active').siblings().removeClass('active');
+        		})
+        	})
+        </script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../index.html" class="um-back">返回</a>
+				<h3>选项卡</h3>
+			</div>
+			<div id="main" class="um-content">
+				<h4>普通文字选项卡</h4>	
+	                <ul class="um-tabbar">
+	                    <li><a>待付款</a></li>
+	                    <li class="active"><a>待发货</a></li>
+	                    <li><a>待收货</a></li>
+	                    <li><a>待收货</a></li>
+	                </ul>
+	             <h4>图标选项卡</h4>	  
+                    <ul class="um-tabbar">
+                    	<li><a><div class="f20 ti-palette"></div></a></li>
+                    	<li class="active"><a><div class="f20 ti-shopping-cart-full"></div></a></li>
+                    	<li><a><div class="f20 ti-gift"></div></a></li>
+                    	<li><a><div class="f20 ti-comments-smiley"></div></a></li>
+                    </ul>
+                 <h4>带下划线选项卡</h4>	   
+                    <ul class="um-tabbar um-tabbar-underline">
+                        <li><a>用户</a></li>
+                        <li class="active"><a>应用</a></li>
+                        <li><a>社区</a></li>
+                        <li><a>企业</a></li>
+                    </ul>
+                 <h4>可滚动菜单选项卡</h4>	 
+                    <div class="um-nav f14">
+                    	<div class="um-nav-inner" data-bind="foreach:arrData">
+                    		<a href="#" class="um-nav-item" data-bind="text: title, attr:{href:src}"></a>
+                    	</div>
+                    </div>
+                 <h4>可切换不同选项选项卡</h4>	  
+                    <ul class="um-tabbar um-tabbar-underline pt10 pb10">
+                    	<li class="active" data-tar='.news'><a>全部</a></li>
+                    	<li data-tar='.product'><a>待审批</a></li>
+                    	<li data-tar='.game'><a>待收货</a></li>
+                    	<li data-tar='.download'><a>被驳回</a></li>
+                    </ul>
+                    <div class="Artical   um-box um-direction-v">        
+                    	<div class="news active  um-bf1"></div>
+                    	<div class="product  um-bf1"></div>
+                    	<div class="game   um-bf1"></div>
+                    	<div class="download   um-bf1"></div>				
+                    </div>
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+
+        <script>
+        	$(function () {			 
+        		 /*导航更换js*/
+        		 $('#main ul Li').click(function(){
+        			$(this).addClass('active').siblings('.active').removeClass('active');
+        			var tar=$(this).attr('data-tar');
+        			$(tar).addClass('active').siblings('.active').removeClass('active');
+        		}); 
+        	});
+        </script>
+	</body>
+</html>

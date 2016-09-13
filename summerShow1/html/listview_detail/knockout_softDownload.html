@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/font-icons.css">
+		<link rel="stylesheet" href="../../css/iuapmobile.um.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/iuapmobile.um.listview.css">
+
+        <style>
+           .downloadBtn {
+              padding:5px;
+        	  border:1px solid #28C0C6;
+        	  border-radius:4px;
+        	  font-size:14px;color:#28C0C6;
+           }
+        </style>
+
+		<script src="../../js/jquery.min.js" ></script>
+		<script src="../../js/summer.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+        <script type="text/javascript" src="../../js/knockout.js"></script>
+        <script type="text/javascript" src="../../js/Frameworks/iuapmobile.frameworks.listview.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../listview.html" class="um-back">返回</a>
+				<h3>软件下载动态列表</h3>
+			</div>
+			<div id="main" class="um-content">
+				
+                <div class="um-listview-wrap" id="listview">
+                	<ul class="um-list um-no-active" data-bind="foreach:data">
+                		<li class="um-listview-row">
+                			<a href="#" class="um-list-item um-no-icon">
+                				<div class="um-list-item-media">
+                					<img width=70 data-bind="attr:{src: img}" class="um-rounded">					
+                				</div>
+                				<div class="um-list-item-inner">
+                					<div class="um-list-item-body">
+                						<div data-bind="text:name" class="f16 fb">
+                						</div>
+                						<div class="um-gray f14">
+                							<span data-bind="text:size" ></span>/<span data-bind="text:download"></span>
+                						</div>							
+                						<p data-bind="text:descri" class="mt5 f14 um-text-overflow"></p>
+                					</div>
+                					<div class="um-list-item-right">
+                						<span class="downloadBtn">下载</span>
+                					</div>
+                				</div>
+                			</a>
+                		</li>
+                	</ul>					
+                </div>
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+
+        <script>
+        	$(function () {			
+        		//Knockout绑定
+        		var ViewModel = function () {                    
+        		};			
+        		var jsonArray = [
+        			{
+        				"img": "../../img/gowhere.png",
+        				"name": "去哪儿网",
+        				"size": "23.1M",
+        				"download":"3.5亿次下载",
+        				"descri": "全国酒店，五折起~",
+        			}, {
+        				"img": "../../img/kuwo.png",
+        				"name": "酷我音乐",
+        				"size": "40.2M",
+        				"download":"3.0亿次下载",
+        				"descri": "听音乐，用酷我",
+        			}]; 
+        		var viewModel = new ViewModel();
+        		viewModel.data = ko.observableArray(jsonArray);
+        		ko.applyBindings(viewModel);
+        		 //构造控件实例
+        		var listview = UM.listview("#listview");			
+        		//添加控件方法
+        		listview.on("pullDown", function (sender) {
+        			//这是可以编写列表下拉加载逻辑，参数sender即为当前列表实例对象
+        			/*var row = {
+        				"img": "../../img/weipinhui.png",
+        				"name": "唯品会",
+        				"size": "28.5M",
+        				"download":"3.5亿次下载",
+        				"descri": "一家专门做特卖的网站",
+        			};
+        			viewModel.data.unshift(row); */
+        			sender.refresh();
+        		});
+        		listview.on("pullUp", function (sender) {
+        			 //这是可以编写列表上拉刷新逻辑，参数sender即为当前列表实例对象
+        			 /*var row = {
+        				"img": "../../img/meilishuo.png",
+        				"name": "美丽说",
+        				"size": "12.6M",
+        				"download":"2.8亿次下载",
+        				"descri": "美丽说，全球值得买商品",
+        			};
+        			viewModel.data.push(row); */
+        			sender.refresh();
+        		});
+        		listview.on("itemClick", function (sender, args) {
+        			//这里可以处理行点击事件，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
+        			//alert("您点击了第"+ (args.rowIndex+1) + "行！");
+        		});
+        		listview.on("tapHold", function () {
+        		   //这里可以处理长按事件
+        		   //console.log("您长按了列表！");
+        		});
+        	});
+        </script>
+	</body>
+</html>

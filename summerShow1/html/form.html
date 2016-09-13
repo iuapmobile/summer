@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css"/>
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../index.html" class="um-back">返回</a>
+				<h3>表单</h3>
+			</div>
+			<div id="main" class="um-content p10 ">
+				<h4>单行数据录入</h4>	
+	                <label class="um-label um-box-justify">
+	                	<div>部门</div>
+	                	<div>
+	                		<input type="text" class="form-control tr" placeholder="请输入所在部门">
+	                	</div>
+	                </label>
+	           <h4>必填数据录入</h4>     
+	                <label class="um-label um-box-justify">
+	                	<div>
+	                		<span class="um-red f20 um-box-vc pa" style="margin-left: -10px;">*</span>部门
+	                	</div>
+	                	<div>
+	                		<input type="text" class="form-control tr" placeholder="请输入部门名称">
+	                	</div>
+	                </label>
+	            <h4>录入数据右对齐</h4>    
+                    <ul class="um-list">
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-left">
+                    				海关编号
+                    			</div>
+                    			<div class="um-list-item-right">
+                    				<input type="text" class="form-control tr" placeholder="请输入海关编号">
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-left">
+                    				经营单位
+                    			</div>
+                    			<div class="um-list-item-right">
+                    				<input type="password" class="form-control tr" placeholder="请输入经营单位">
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-left">
+                    				提运单号
+                    			</div>
+                    			<div class="um-list-item-right">
+                    				<input type="tel" class="form-control tr" placeholder="请输入提运单号">
+                    			</div>
+                    		</div>
+                    	</li>
+                    </ul>
+               <h4>录入数据左对齐</h4>     
+                    <ul class="um-list">
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-left">
+                    				报销金额(元)
+                    			</div>
+                    			<div class="um-list-item-right">
+                    				<input type="text" class="form-control" placeholder="请输入数字(必填)">
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-left">
+                    				报销类别
+                    			</div>
+                    			<div class="um-list-item-right">
+                    				<input type="password" class="form-control" placeholder="如采购经费、活动经费(必填)">
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-left">
+                    				费用明细
+                    			</div>
+                    			<div class="um-list-item-right">
+                    				<input type="tel" class="form-control" placeholder="请输入费用明细描述">
+                    			</div>
+                    		</div>
+                    	</li>
+                    </ul>
+               <h4>提交表单</h4>     
+                    <ul class="um-list">
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-body">
+                    				<input type="text" class="form-control" placeholder="请输入审核单位">
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li class="um-list-item">
+                    		<div class="um-list-item-inner">
+                    			<div class="um-list-item-body">
+                    				<input type="password" class="form-control" placeholder="请输入审核人">
+                    			</div>
+                    		</div>
+                    	</li>
+                    </ul>
+                    <div class="um-row">
+                    	<button class="um-btn um-no-brs">提交</button>
+                    </div>
+		<h4>一般会议表单</h4>		
+                <form action="" >
+                    <ul class="um-list">
+                        <li class="um-list-item">
+                            <div class="um-list-item-inner">
+                                <div class="um-list-item-body">
+                                    主题
+                                </div>
+                                <div class="um-list-item-right">
+                                    <input type="text" class="form-control tr" placeholder="请输入会议主题">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="um-list-item">
+                            <div class="um-list-item-inner">
+                                <div class="um-list-item-body">
+                                    是否重要
+                                </div>
+                                <div class="um-list-item-right">
+                                    <label class="um-switch1">
+                                        <input type="checkbox" value="on" checked="checked">
+                                        <div class="um-track">
+                                            <div class="um-handle">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="um-list-item">
+                            <div class="um-list-item-inner">
+                                <div class="um-list-item-body">
+                                    会议时长
+                                </div>
+                                <div class="um-list-item-right">
+                                    <input type="range" />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="um-list-item">
+                            <div class="um-list-item-inner">
+                                <div class="um-list-item-body">
+                                    发起人
+                                </div>
+                                <div class="um-list-item-right">
+                                    王兵
+                                </div>
+                            </div>
+                        </li>
+                        <li class="um-list-item">
+                            <div class="um-list-item-inner">
+                                <div class="um-list-item-body">
+                                    会议室
+                                </div>
+                                <div class="um-list-item-right">
+                                    <input type="text" class="form-control tr" placeholder="请输入会议室">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+		<h4>订单录入</h4>	
+            <ul class="um-list">
+                <li>
+                    <div class="um-list-item">
+                        <div class="um-list-item-inner">
+                            <span class="h pa um-box-vc um-red f20" style="margin-left:-10px;">*</span>
+                            <div class="um-list-item-left">
+                                公司名称：
+                            </div>
+                            <div class="um-list-item-right">
+                                <input type="text" class="form-control" placeholder="请输入公司名称">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="um-list-item">
+                        <div class="um-list-item-inner">
+                            <div class="um-list-item-left">
+                                订单编号：
+                            </div>
+                            <div class="um-list-item-right">
+                                <input type="text" class="form-control" placeholder="请输入订单编号">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="um-list-item">
+                        <div class="um-list-item-inner">
+                            <div class="um-list-item-left">
+                                订单金额：
+                            </div>
+                            <div class="um-list-item-right">
+                                <input type="text" class="form-control" placeholder="请输入订单金额">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="um-list-item">
+                        <div class="um-list-item-inner">
+                            <div class="um-list-item-left">
+                                下单日期：
+                            </div>
+                            <div class="um-list-item-right">
+                                <input type="date" name="date" value="2015-01-01" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="um-list-item">
+                        <div class="um-list-item-inner">
+                            <span class="h pa um-box-vc um-red f20" style="margin-left:-10px;">*</span>
+                            <div class="um-list-item-left">
+                                业务员：
+                            </div>
+                            <div class="um-list-item-right">
+                                <input type="text" class="form-control" placeholder="请输入业务员名字">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="um-list-item">
+                        <div class="um-list-item-inner">
+                            <div class="um-list-item-left">
+                                联系电话：
+                            </div>
+                            <div class="um-list-item-right">
+                                <input type="text" class="form-control" placeholder="请输入业务员联系电话">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+	<h4>办公用品申报
+	</h4>	
+        <ul class="um-list">
+            <li>
+                <div class="um-list-item">
+                    <div class="um-list-item-inner">
+                        <div class="um-list-item-left">
+                            物品用途
+                        </div>
+                        <div class="um-list-item-right">
+                            <input type="text" class="form-control" placeholder="如日常办公(必填)">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="um-list-item">
+                    <div class="um-list-item-inner">
+                        <div class="um-list-item-left">
+                            物品名称
+                        </div>
+                        <div class="um-list-item-right">
+                            <input type="text" class="form-control" placeholder="请输入物品名称(必填)">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="um-list-item">
+                    <div class="um-list-item-inner">
+                        <div class="um-list-item-left">
+                            数量
+                        </div>
+                        <div class="um-list-item-right">
+                            <input type="text" class="form-control" placeholder="请输入数量">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="um-list-item">
+                    <div class="um-list-item-inner">
+                        <div class="um-list-item-left">
+                            审批人
+                        </div>
+                        <div class="um-list-item-right">
+                            <input type="text" class="form-control" placeholder="请输入审批人姓名">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="um-list-item">
+                    <div class="um-list-item-inner">
+                        <div class="um-list-item-left" style="-webkit-box-align: start;-webkit-align-self: flex-start;">
+                            领用详情
+                        </div>
+                        <div class="um-list-item-right">
+                            <textarea name="" id="" style="height:80px;padding: 10px 0;" class="form-control" placeholder="请在此输入物品领用详情说明"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

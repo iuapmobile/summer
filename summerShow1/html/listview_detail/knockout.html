@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/font-icons.css">
+		<link rel="stylesheet" href="../../css/iuapmobile.um.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/iuapmobile.um.listview.css">
+        <style>
+        	.msg-info {
+        		position: relative;
+        	}
+        	.msg-info .um-badge {
+        		position: absolute;
+        		right: -10px;
+        		font-size: 12px;
+        	}
+        	.msg-header {
+        		width: 40px;
+        		height: 40px;
+        		line-height: 40px;
+        		background: blue;
+        		border-radius: 50%;
+        		text-align: center;
+        		color: white;
+        	}
+        </style>
+		<script src="../../js/jquery.min.js" ></script>
+		<script src="../../js/summer.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+        <script type="text/javascript" src="../../js/knockout.js"></script>
+        <script type="text/javascript" src="../../js/Frameworks/iuapmobile.frameworks.listview.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../listview.html" class="um-back">返回</a>
+				<h3>knockout创建动态列表</h3>
+			</div>
+			<div id="main" class="um-content">
+	
+			    <div class="um-listview-wrap" id="listview">
+			    	<ul class="um-list um-no-active" data-bind="foreach: data">
+			    		<li class="um-listview-row">
+			    			<a href="#" class="um-list-item um-swipe-action um-no-icon">
+			    				<div class="um-swipe-btns">
+			    					<span class="um-swipe-btn um-delete">删除</span>
+			    				</div>
+			    				<div class="um-list-item-media msg-info">
+			    					<img alt="" data-bind="attr:{'src': img}" width=50>
+			    					<span class="um-badge" data-bind="text:msgNum,visible:msgNum>0"></span>
+			    				</div>
+			    				<div class="um-list-item-inner">
+			    					<div class="um-list-item-body">
+			    						<h4 class="um-media-heading fb f16 um-text-overflow" data-bind="text:sender"></h4>
+			    						<p class="um-gray f14 um-text-overflow" data-bind="text:lastMsg"></p>
+			    					</div>
+			    					<div class="pr10">
+			    						<span class="um-gray f12" data-bind="text:lastTime"></span>
+			    					</div>
+			    				</div> 
+			    			</a>
+			    		</li>
+			    	</ul>
+			    </div>
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+
+        <script>
+        	$(function() {
+        		//构造控件实例
+        		var listview = UM.listview("#listview");
+        		//Knockout绑定
+        		var ViewModel = function() {
+        		};
+        		var jsonArray = [{
+        			"sender" : "集团IT服务台",
+        			"img" : "../../img/listview/org1.png",
+        			"msgNum" : 0,
+        			"lastMsg" : "因无线网络后台故障，暂停服务。",
+        			"lastTime" : "15:24"
+        		}, {
+        			"sender" : "集团行政部",
+        			"img" : "../../img/listview/org2.png",
+        			"msgNum" : 4,
+        			"lastMsg" : "各位同仁，2015年4季度油料报销标准5.85元/升。",
+        			"lastTime" : "12:40"
+        		}, {
+        			"sender" : "集团人力资源部",
+        			"img" : "../../img/listview/org3.png",
+        			"msgNum" : 5,
+        			"lastMsg" : "各位同仁，跟据国务院发布的放假安排，2016年元旦、春节放假安排如下。",
+        			"lastTime" : "12:21"
+        		}];
+        		for(var i=0,len=20;i<len;i++){
+        			jsonArray.push({
+        				"sender" : "集团行政部",
+        				"img" : "../../img/listview/b"+i%3+".png",
+        				"msgNum" : i%5,
+        				"lastMsg" : "各位同仁，2015年4季度油料报销标准5.85元/升。",
+        				"lastTime" : "12:40"
+        			});
+                }
+        		var viewModel = new ViewModel();
+        		viewModel.data = ko.observableArray(jsonArray);
+        		ko.applyBindings(viewModel);
+        		//添加控件方法
+        		/*listview.on("pullDown", function(sender) {
+        			//这是可以编写列表下拉加载逻辑，参数sender即为当前列表实例对象
+        			var row = {
+        				"sender" : "集团技术部",
+        				"img" : "../../img/org4.png",
+        				"msgNum" : 2,
+        				"lastMsg" : "各位同仁，2015年4季度油料报销标准5.85元/升。",
+        				"lastTime" : "16:22",
+        			};
+        			viewModel.data.unshift(row);
+        			sender.refresh();
+        		});*/
+        		/*listview.on("pullUp", function(sender) {
+        			//这是可以编写列表上拉刷新逻辑，参数sender即为当前列表实例对象
+        			var row = {
+        				"sender" : "集团咨询部",
+        				"img" : "../../img/org5.png",
+        				"msgNum" : 6,
+        				"lastMsg" : "各位同仁，2015年4季度油料报销标准5.85元/升。",
+        				"lastTime" : "12月22日"
+        			};
+        			viewModel.data.push(row);
+        			sender.refresh();
+        		});*/
+        		listview.on("itemClick", function(sender, args) {
+        			//这里可以处理行点击事件，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
+        			alert("您点击了列表第" + (args.rowIndex + 1) + "行！");
+        		});
+        		listview.on("itemDelete", function(sender, args) {
+        			//这是可以编写行删除逻辑，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
+        			var item = viewModel.data()[args.rowIndex];
+        			alert("您点击了删除按钮!这一行的数据是" + JSON.stringify(item));
+        			/* args.$target.slideUp(500, function() {
+        			 viewModel.data.remove(item);
+        			 }); */
+        		});
+        		listview.on("itemSwipeLeft", function(sender, args) {
+        			//这里可以处理行左滑事件，参数sender即为当前列表实例对象，args对象有2个属性，即rowIndex(行索引)和$target(目标行的jquery对象)
+        			/*sender.showItemMenu(args.$target);*/
+        
+        		});
+        		listview.on("tapHold", function() {
+        			//这里可以处理长按事件
+        			/*console.log("您长按了列表！");*/
+        		});
+        	});		
+        </script>
+	</body>
+</html>

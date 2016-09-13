@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../../css/font-icons.css">
+		<link rel="stylesheet" href="../../../css/iuapmobile.um.css"/>
+        <link rel="stylesheet" type="text/css" href="../../../css/iuapmobile.um.sortlist-2.7.0.css">
+
+		<script src="../../../js/jquery.min.js" ></script>
+		<script src="../../../js/summer.js" ></script>
+		<script src="../../../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+        <script type="text/javascript" src="../../../js/knockout-2.2.0.js"></script>
+        <script type="text/javascript" src="../../../js/Frameworks/iuapmobile.frameworks.sortlist-2.7.0.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+			<a href="../listview.html" class="um-back">返回</a>
+				<h3>联系人动态列表</h3>
+			</div>
+			<div id="main" class="um-content">
+	
+			    <div class="um-sortlist" id="sortList">
+			    	<ul class="um-sortlist-content" data-bind="foreach:contacts">
+			    		<li class="um-sortlist-group">
+			    			<a  class="um-box-vc  um-sortlist-title"><span class="um-sortlist-icon"><i class="ti-angle-down"></i></span><span data-bind="text:gname"></span></a>
+			    			<ul class="um-list um-no-active" data-bind="foreach:row">
+			    				<li class="um-sortlist-row">
+			    					<a href="#" class="um-list-item um-swipe-action">
+			    						<div class="um-list-item-media">
+			    							<img alt="" class="um-circle" width=50 data-bind="attr:{src: img}">
+			    						</div>
+			    						<div class="um-list-item-inner">
+			    							<div class="um-list-item-body">
+			    								<h4 data-bind="text:name" class="f14"></h4>
+			    								<p class="f14 um-text-overflow"><i class="ti-mobile um-blue vm"></i><span class="ml5" data-bind="text:tel"></span></p>
+			    								<p class="f14 um-text-overflow"><i class="ti-email um-blue vm"></i><span class="ml5" data-bind="text:email"></span></p>
+			    							</div>       
+			    						</div>
+			    					</a>
+			    				</li>
+			    			</ul>
+			    		</li>
+			        </ul>            
+			    </div>
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+
+        <script>
+        	$(function () {		    		
+        		//Knockout绑定
+        		var ViewModel = function () {               
+        		};
+        		var jsonArray = [{
+        				"gname": "A", "row": [
+        				{
+        					"name": "爱丽丝",
+        					"img": "../../../img/listview/contact1.jpg",
+        					"tel": "1375101***1",
+        					"email": "xyz1@yonyou.com"
+        				},
+        				{
+        					"name": "安徒生",
+        					"img": "../../../img/listview/contact2.jpg",
+        					"tel": "1375101***2",
+        					"email": "xyz2@yonyou.com"
+        				}]
+        			}, {
+        				"gname": "B", "row": [
+        					{
+        						"name": "拜伦",           
+        						"img": "../../../img/listview/contact3.jpg",
+        						"tel": "1375101***3",
+        						"email": "xyz3@yonyou.com"
+        					},
+        					{
+        						"name": "包拯",             
+        						"img": "../../../img/listview/contact4.jpg",
+        						"tel": "1375101***4",
+        						"email": "xyz4@yonyou.com"
+        					}]
+        			}];
+        		var viewModel = new ViewModel();
+        		viewModel.contacts = ko.observableArray(jsonArray);
+        		ko.applyBindings(viewModel);
+        		//构造控件实例
+        		var sortList = UM.sortList("#sortList");			
+        		//添加控件方法
+        		sortList.on("itemClick",function(sender,args){
+        			//这里可以处理行点击事件，参数sender即为当前列表实例对象，args对象有4个属性，即groupIndex(当前行所在分组的索引),childIndex(当前行在所在分组内的索引),rowIndex(当前行在整个列表中的行索引),$target(目标行的jquery对象)
+        			//alert("您点击了分组列表第" + (args.groupIndex+1) + "分组的第" + (args.childIndex+1) + "行！");
+        		});
+        		//设置右侧导航
+        		//sortList.setNaviItems(["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]);
+        	});
+        </script>
+	</body>
+</html>

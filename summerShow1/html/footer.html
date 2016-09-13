@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css"/>
+        <style>
+        	/* 设置背景图片 */
+        	.icon-home, .icon-msg, .icon-share {
+        	    height: 25px;
+        	    background: url(../img/Home-25.png) center no-repeat;
+        	}
+        	.icon-msg {
+        	    background-image: url(../img/About-25.png);
+        	}
+        	.icon-share {
+        	    background-image: url(../img/Share-25.png);
+        	}
+        	/* 设置激活状态 */
+        	.um-footerbar-item.active .icon-home {
+        	    background-image: url(../img/Home-25-active.png);
+        	}
+        	.um-footerbar-item.active .icon-msg {
+        	    background-image: url(../img/About-25-active.png);
+        	}
+        	.um-footerbar-item.active .icon-share {
+        	    background-image: url(../img/Share-25-active.png);
+        	}
+        </style>
+
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../index.html" class="um-back">返回</a>
+				<h3>底部工具栏</h3>
+			</div>
+			<div id="main" class="um-content">
+				<h4>普通底部</h4>	
+	                <div class="um-footer" style="line-height: 44px;">底部工具栏</div>
+	            <h4>带编辑删除的底部</h4>	    
+	                <div class="um-box-justify p5">
+	                    <a href="#">编辑</a>
+	                    <a href="#">删除</a>
+	                </div>
+	            <h4>文字居中排列的底部</h4>	 	    
+                    <div class="um-footerbar">
+                        <a class="um-footerbar-item">收藏</a>
+                        <a class="um-footerbar-item active">编辑</a>
+                        <a class="um-footerbar-item">转发</a>
+                        <a class="um-footerbar-item">记录</a>
+                        <a class="um-footerbar-item">删除</a>
+                    </div>
+                 <h4>带图标的底部</h4>	    
+                    <div class="um-footer">
+                        <div class="um-footerbar pt5">
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-angle-left f20"></i>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-angle-right f20"></i>
+                            </a>
+                            <a href="#" class="um-footerbar-item active">
+                                <i class="ti-export f20"></i>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-book f20"></i>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-layers f20"></i>
+                            </a>
+                        </div>
+                    </div>
+                <h4>带图标和文字的底部</h4>	     
+                    <div class="um-footer">
+                        <div class="um-footerbar">
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-comments f20"></i>
+                                <div class="f12 lh1">消息</div>
+                            </a>
+                            <a href="#" class="um-footerbar-item active">
+                                <i class="ti-notepad f20"></i>
+                                <div class="f12 lh1">日程</div>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-id-badge f20"></i>
+                                <div class="f12 lh1">通讯录</div>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <i class="ti-user f20"></i>
+                                <div class="f12 lh1">我</div>
+                            </a>
+                        </div>
+                    </div>
+               <h4>自定义图标底部</h4>	      
+                    <div class="um-footer">
+                        <div class="um-footerbar">
+                            <a href="#" class="um-footerbar-item active">
+                                <div class="icon-home mb5"></div>
+                                <div class="f12 lh1">首页</div>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <div class="icon-msg mb5"></div>
+                                <div class="f12 lh1">消息</div>
+                            </a>
+                            <a href="#" class="um-footerbar-item">
+                                <div class="icon-share mb5"></div>
+                                <div class="f12 lh1">分享</div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

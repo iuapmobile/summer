@@ -1,0 +1,135 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../../css/font-icons.css">
+        <style>
+        	.msg-info {
+        		position: relative;
+        	}
+        	.msg-info .um-badge {
+        		position: absolute;
+        		right: -10px;
+        		font-size: 12px;
+        	}
+        	.msg-header {
+        		width: 40px;
+        		height: 40px;
+        		line-height: 40px;
+        		background: blue;
+        		border-radius: 50%;
+        		text-align: center;
+        		color: white;
+        	}
+        </style>
+
+		<script src="../../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../../js/summer.js" ></script>
+		<script src="../../js/jquery.min.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script type="text/javascript" src="../../js/artTemplate.js"></script>
+		<script id="list" type="text/html">
+			<div class="um-listview-wrap" id="listview">
+				<ul class="um-list um-no-active">
+					{{each list as value i}}
+					<li class="um-listview-row">
+						<a href="#" class="um-list-item um-swipe-action um-no-icon">
+							<div class="um-swipe-btns">
+								<span class="um-swipe-btn um-delete">删除</span>
+							</div>
+							<div class="um-list-item-media msg-info">
+								<img alt="" src="{{value.img}}" width=50>
+								<span class="um-badge">{{value.msgNum}}</span>
+							</div>
+							<div class="um-list-item-inner">
+								<div class="um-list-item-body">
+									<h4 class="um-media-heading fb f16 um-text-overflow">{{value.sender}}</h4>
+									<p class="um-gray f14 um-text-overflow">{{value.lastMsg}}</p>
+								</div>
+								<div class="pr10">
+									<span class="um-gray f12">{{value.lastTime}}</span>
+								</div>
+							</div>
+						</a>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+		</script>
+	</head>
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header" >
+				<a href="../listview.html" class="um-back">返回</a>
+				<h3>artTemplate创建动态列表</h3>
+			</div>
+			<div class="um-content" id="main">
+				
+
+
+			</div>
+			<div class="um-footer">
+				<div class="um-footer">
+				    <div class="um-footerbar">
+				        <a href="#" class="um-footerbar-item">
+				            <i class="ti-comments f20"></i>
+				            <div class="f12 lh1">消息</div>
+				        </a>
+				        <a href="#" class="um-footerbar-item active">
+				            <i class="ti-notepad f20"></i>
+				            <div class="f12 lh1">日程</div>
+				        </a>
+				        <a href="#" class="um-footerbar-item">
+				            <i class="ti-id-badge f20"></i>
+				            <div class="f12 lh1">通讯录</div>
+				        </a>
+				        <a href="#" class="um-footerbar-item">
+				            <i class="ti-user f20"></i>
+				            <div class="f12 lh1">我</div>
+				        </a>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+        <script>
+        	$(function() {
+       		var jsonArray = [{
+        			"sender" : "集团IT服务台",
+        			"img" : "../../img/listview/org1.png",
+        			"msgNum" : 0,
+        			"lastMsg" : "因无线网络后台故障，暂停服务。",
+        			"lastTime" : "15:24"
+        		}, {
+        			"sender" : "集团行政部",
+        			"img" : "../../img/listview/org2.png",
+        			"msgNum" : 4,
+        			"lastMsg" : "各位同仁，2015年4季度油料报销标准5.85元/升。",
+        			"lastTime" : "12:40"
+        		}, {
+        			"sender" : "集团人力资源部",
+        			"img" : "../../img/listview/org3.png",
+        			"msgNum" : 5,
+        			"lastMsg" : "各位同仁，跟据国务院发布的放假安排，2016年元旦、春节放假安排如下。",
+        			"lastTime" : "12:21"
+        		}];
+        		for(var i=0,len=20;i<len;i++){
+        			jsonArray.push({
+        				"sender" : "集团行政部",
+        				"img" : "../../img/listview/b"+i%3+".png",
+        				"msgNum" : i%5,
+        				"lastMsg" : "各位同仁，2015年4季度油料报销标准5.85元/升。",
+        				"lastTime" : "12:40"
+        			});
+                }
+				var data={list:jsonArray}
+				var html = template('list', data);
+				$('.um-content').html(html);
+        	});		
+        </script>
+	</body>
+</html>
+ 

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../../css/font-icons.css">
+		<link rel="stylesheet" href="../../../css/iuapmobile.um.css"/>
+        <style>
+        	.um-process {
+        				margin-left: 15px;
+        			}
+        	.um-process .um-list-item {
+        				position: relative;
+        				border-left: 2px dotted green;
+        			}			
+        	.um-process .um-list-item:last-child {
+        				border-left:none;
+        			}			
+        	.um-process .um-list-item:before {
+        			    content: none !important;
+        			}
+        	.um-process .um-list-item:after {
+        				content: url("../../../img/listview/marker5.jpg");
+        				position: absolute;
+        				left: -12px;
+        				top: 2px;
+        				width:14px;
+        			}
+        	.um-process .um-list-item:first-child:after {
+        				content: url("../../../img/listview/marker6.jpg");
+        			}
+        	.um-process .um-list-item:last-child:after {
+        				content: url("../../../img/listview/marker4.jpg");
+        			}
+        </style>
+
+		<script src="../../../js/jquery.min.js" ></script>
+		<script src="../../../js/summer.js" ></script>
+		<script src="../../../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+        <script type="text/javascript" src="../../../js/knockout.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../listview.html" class="um-back">返回</a>
+				<h3>审批流程动态列表</h3>
+			</div>
+			<div id="main" class="um-content">
+				
+                <div class="um-list">
+                	<div class="um-process" data-bind="foreach: data">
+                		<a href="#" class="um-list-item">
+                			<div class="um-list-item-inner">
+                				<div class="um-list-item-body ml15">
+                					<p class="f14">审批人：<span data-bind="text:approver" class="fb"></span><span data-bind="text: status" class="ml10 um-green"></span></p>
+                					<p class="f14 mt5">意&nbsp;&nbsp;&nbsp;&nbsp;见：<span data-bind="text:opinion" class="um-blue"></span></p>
+                					<p class="um-gray um-text-overflow2 f12 mt5" data-bind="text: time"></p>
+                				</div>
+                			</div> 
+                		</a>
+                	</div>
+                </div>
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+
+        <script>
+        	$(function() {
+        		var data = [{
+        			"approver" : "集团中心副总裁",
+        			"status":"已审批",
+        			"opinion" : "审批通过",
+        			"time" : "2016/1/13 12:10:00"
+        		}, {
+        			"approver" : "采购部总经理",
+        			"status":"已审批",
+        			"opinion" : "审批通过",
+        			"time" : "2016/1/13 08:50:20"
+        		}, {
+        			"approver" : "财务部负责人",
+        			"status":"已审批",
+        			"opinion" : "审批通过",
+        			"time" : "2016/1/13 01:40:25"
+        		}, {
+        			"approver" : "部门经理",
+        			"status":"已审批",
+        			"opinion" : "审批通过",
+        			"time" : "2016/1/12 23:45:10"
+        		}];
+        		var ViewModel = function() {
+        		};
+        		var viewModel = new ViewModel();
+        		viewModel.data = ko.observableArray(data);
+        		ko.applyBindings(viewModel);
+        	});						
+        </script>
+	</body>
+</html>

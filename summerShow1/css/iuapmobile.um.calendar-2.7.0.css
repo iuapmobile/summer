@@ -1,0 +1,97 @@
+.fc {
+	margin: 5px -15px;
+}
+
+.fc-header-title h2 {
+	font-size: 16px;
+}
+
+.fc th {
+	font-weight: normal;
+}
+
+.um-calendar.fc .fc-state-default {
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+
+.um-calendar.fc .fc-state-default:active {
+	border: none;
+	background: none;
+	box-shadow: none;
+	opacity: .5;
+}
+
+.um-calendar.fc .fc-text-arrow {
+	color: #007aff;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px black;
+}
+
+.um-calendar.fc .fc-header-title {
+	vertical-align: middle;
+}
+
+.um-calendar.fc .fc-event-vert .fc-event-time {
+	white-space: normal;
+}
+
+.um-calendar.fc .fc-event-vert .fc-event-title {
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.um-calendar.fc td {
+	vertical-align: middle;
+}
+
+.um-calendar.fc td > div {
+	text-align: center;
+}
+
+.um-calendar.fc .fc-day-number {
+	float: none;
+}
+
+.um-calendar .fc-day:first-child > div:first-child {
+	position: relative;
+}
+
+.um-calendar .fc-day:first-child > div:first-child .fc-day-number {
+	position: absolute;
+	top: 50%;
+	left: 0px;
+	right: 0px;
+	text-align: center;
+	margin-top: -.5em;
+	line-height: 1em;
+}
+
+.um-calendar .fc-view-month .fc-event-container {
+	display: none;
+}
+
+.um-calendar .fc-day .fc-day-content {
+	padding: 0;
+}
+
+.um-calendar .fc-day.exist-event {
+	position: relative;
+}
+
+.um-calendar .fc-day.exist-event:before {
+	content: "•";
+	position: absolute;
+	left: 50%;
+	bottom: -0.5em;
+	margin-left: -2px;
+	font-size: 18px;
+	color: #007aff;
+}
+
+
+
+
+
+

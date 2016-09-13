@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/font-icons.css">
+		<link rel="stylesheet" href="../../css/iuapmobile.um.css"/>
+         <link rel="stylesheet" href="../../css/iscroll.css" /> 
+        <style>
+          #select1_dummy{
+        	border:none;
+        	padding-left:10px;
+        	color:#555;
+        	font-size:17px;
+          }
+          #select1_dummy:disabled{
+        	background:#fff;
+          }
+        </style>
+		<script src="../../js/jquery.min.js" ></script>
+		<script src="../../js/summer.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+        <script src="../../js/iscroll.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index">
+			<div id="header" class="um-header">
+				<a href="../control.html" class="um-back">返回</a>
+				<h3>下拉框</h3>
+			</div>
+			<div id="main" class="um-content p15">
+				
+                <div class="um-input-text">
+                	<span class="um-input-left">学历:</span>
+                	<input type="text"  id='select1_dummy' />
+                	<select id='select1'>
+                		<option>初中</option>
+                		<option>高中</option>
+                		<option>大专</option>
+                		<option>本科</option>
+                		<option>硕士</option>
+                		<option>博士</option>
+                	</select>
+                </div>
+
+			</div>
+			<div class="um-footer">
+				<div class="um-tabbar-foot">
+					<a id="item0" href="#" class="um-footerbar-item active"> <i class="ti-comments f20"></i>
+					<div class="um-tabbar-item-text">
+						消息
+					</div> </a>
+					<a id="item1" href="#" class="um-footerbar-item"> <i class="ti-notepad f20"></i>
+					<div class="um-tabbar-item-text">
+						日程
+					</div> </a>
+					<a id="item2" href="#" class="um-footerbar-item "> <i class="ti-agenda f20"></i>
+					<div class="um-tabbar-item-text">
+						通讯录
+					</div> </a>
+					<a id="item3" href="#" class="um-footerbar-item"> <i class="ti-user f20"></i>
+					<div class="um-tabbar-item-text">
+						我
+					</div> </a>
+				</div>
+			</div>
+		</div>
+        <script>
+        	 $(function () {
+        		// var curr = new Date().getFullYear();
+        	   var opt = {
+        			'date': {
+        				preset: 'date'
+        			},
+        			'select': {
+        			   preset: 'select'
+        		   }
+        		};
+        		$('#select1').scroller('destroy').scroller(
+        			$.extend(opt['select'], {
+        				theme: "ios7",
+        				mode: "scroller",
+        				display: "bottom",
+        				animate: ""
+        			})
+        		);
+        	});
+        </script>
+	</body>
+</html>
