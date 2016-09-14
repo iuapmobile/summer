@@ -113,14 +113,7 @@ function UMP$Services$Cache$read2(key, maxlength, charset){
 function UMP$Services$Cache$writeFile(filePath, content, append, charset, isSync){
 	if($isJSONObject(filePath)){		
 		return $service.call("UMFile.write", filePath, true);
-	}else{
-		if($environment.DeviceType == $environment.DeviceIOS){
-			var str = content;
-			if(typeof content != "string"){
-				str = $jsonToString(content);
-			}
-			return UM_callNativeService(this._store, filePath, str);	
-		}else if($environment.DeviceType == $environment.DeviceAndroid){
+	}else if($environment.DeviceType == $environment.DeviceAndroid || $environment.DeviceType == $environment.DeviceIOS){
 			var args = {};
 			if($isJSONObject(append) && arguments.length == 3){
 				args = append;
@@ -142,14 +135,13 @@ function UMP$Services$Cache$writeFile(filePath, content, append, charset, isSync
 				return UM_NativeCall.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
 			else
 				return UM_NativeCall.callService("UMFile.write", args, isSync);
-		}
 	}
 }
+
+//////
 function UMP$Services$Cache$readFile(filePath, maxlength, charset){
 	var strContent = "";
-	if($environment.DeviceType == $environment.DeviceIOS){
-		strContent = UM_callNativeService(this._restore, filePath);	
-	}else if($environment.DeviceType == $environment.DeviceAndroid){  
+	if($environment.DeviceType == $environment.DeviceAndroid || $environment.DeviceType == $environment.DeviceIOS){  
 		var args ={};
 		if(filePath)
 			args["path"] = filePath;
