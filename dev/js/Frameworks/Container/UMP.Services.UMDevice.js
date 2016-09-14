@@ -1,4 +1,3 @@
-
 //___________________________________________________________________________________________________ $umdevice UMP.Services.UMDevice
 UMP.Services.UMDevice = function UMP$Services$UMDevice(){
 	this._UMDevice_getDeviceInfo="UMDevice.getDeviceInfo";
@@ -336,10 +335,7 @@ function UMP$Services$Telephone$saveContact(tel, employeename, jobname, orgname,
 }
 */
 function UMP$Services$Telephone$call(tel){
-	if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS){
-    	UM_callNativeService(this._CALLTEL, tel);
-		//UM_callNativeServiceNoraml
-	}else if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid) {
+	if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid || CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS) {
    		$service.call("UMDevice.callPhone", "{tel:'"+tel+"'}");
 	}else{
 		alert("Not implementate UMP$Services$Telephone$call in CurrentEnvironment.DeviceType == " + CurrentEnvironment.DeviceType);
@@ -348,15 +344,11 @@ function UMP$Services$Telephone$call(tel){
 function UMP$Services$Telephone$sendMsg(tel, body){
 	if(arguments.length == 1 && $isJSONObject(arguments[0])){
 		var args = tel;		
-		if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS){
-			return UM_callNativeService(this._SENDMSG, args.tel, args.body);
-		}else if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid) {
+	if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid || CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS) {
 			return $service.call("UMDevice.sendMsg", args);
 		}
 	}else{
-		if(CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS){
-			UM_callNativeService(this._SENDMSG, tel, body);
-		}else if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid) {
+	if(CurrentEnvironment.DeviceType == CurrentEnvironment.DeviceAndroid || CurrentEnvironment.DeviceType==CurrentEnvironment.DeviceIOS) {
 			//$service.call("UMDevice.sendMessage", "{recevie:'"+tel+"',message:'"+body+"'}");
 			$service.call("UMDevice.sendMsg", "{tel:'"+tel+"',body:'"+body+"'}");
 		}
