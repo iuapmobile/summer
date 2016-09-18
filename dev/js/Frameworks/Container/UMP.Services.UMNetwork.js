@@ -17,9 +17,7 @@ UMP.Services.Network = function UMP$Services$Network(){
 
 function UMP$Services$Network$isConnect(){
 	var result = false;
-	if($environment.DeviceType == $environment.DeviceIOS){		
-		result = $service.call(this.um_IsConnect, {}, true);	
-	}else if($environment.DeviceType == $environment.DeviceAndroid){		
+    if($environment.DeviceType == $environment.DeviceAndroid || $environment.DeviceType == $environment.DeviceIOS){		
 		result = $service.call(this.UMNetwork_isAvailable, {}, true);
 	}
 	if(result != null && result.toString().toLowerCase() == "true"){
