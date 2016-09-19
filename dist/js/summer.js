@@ -1382,6 +1382,14 @@
 		   "content" : content
 		})
 	};
+
+	s.netState =function(){
+		return $net.available();
+	};
+	
+	s.netInfo =function(){
+		return $net. getNetworkInfo();
+	};
 	//加速计
 	s.getAcceleration = function (onSuccess,onError){
 		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
