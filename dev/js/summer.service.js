@@ -381,14 +381,14 @@
 		return $tel.call(string)
 	};
 	
-	s.sendMsg=function(string,content){
+	s.sms=function(string,content){
 		return $tel.sendMsg({
 		   "tel" : string,
 		   "body" : content
 		})
 	};
 	
-	s.sendMail =function(string,title,content){
+	s.mail =function(string,title,content){
 		return $tel.sendMail({
 		   "receive" :string,
 		   "title" : title,
