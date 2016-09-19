@@ -376,6 +376,25 @@
 	s.readFile=function(key){
 		return $cache.read(key)
 	};
+
+	s.call=function(string){
+		return $tel.call(string)
+	};
+	
+	s.sendMsg=function(string,content){
+		return $tel.sendMsg({
+		   "tel" : string,
+		   "body" : content
+		})
+	};
+	
+	s.sendMail =function(string,title,content){
+		return $tel.sendMail({
+		   "receive" :string,
+		   "title" : title,
+		   "content" : content
+		})
+	};
 	//加速计
 	s.getAcceleration = function (onSuccess,onError){
 		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
