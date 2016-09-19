@@ -961,7 +961,7 @@
 			strParam = strJson.toString();
 		}
 		try{
-		return summerBridge.callSync(serivceName, strParam);
+			return summerBridge.callSync(serivceName, strParam);
 		}catch(e){
 			if($summer.os == "pc"){
 				return strJson;
@@ -1301,8 +1301,14 @@
 		return s.callCordova('summer-plugin-core.XUpgrade', 'upgradeApp', json, successFn, errFn);
 	};
 	s.getVersion = function(json){
-		return s.callSync('XUpgrade.getVersion', json || {});
-	};
+		var ver = s.callSync('XUpgrade.getVersion', json || {});
+		if(typeof ver == "string"){
+			return JSON.parse(versionInfo);
+		}else{
+			alert("getVersion' return value is not string!")
+			return ver;
+		}
+	}
 	s.upgrade = function(json, successFn, errFn){
 		return s.callCordova('summer-plugin-core.XUpgrade', 'upgrade', json, successFn, errFn);
 	};
@@ -1347,7 +1353,16 @@
 			contact.nickname = json.nickName;   
 			return contact.save(successFn,errFn);
 		}
-	}
+	};
+
+
+	s.writeFile=function(key,value){
+		return $cache.write(key,value)
+	};
+	
+	s.readFile=function(key){
+		return $cache.read(key)
+	};
 	//加速计
 	s.getAcceleration = function (onSuccess,onError){
 		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);

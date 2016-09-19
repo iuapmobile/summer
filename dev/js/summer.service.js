@@ -366,7 +366,16 @@
 			contact.nickname = json.nickName;   
 			return contact.save(successFn,errFn);
 		}
-	}
+	};
+
+
+	s.writeFile=function(key,value){
+		return $cache.write(key,value)
+	};
+	
+	s.readFile=function(key){
+		return $cache.read(key)
+	};
 	//加速计
 	s.getAcceleration = function (onSuccess,onError){
 		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
