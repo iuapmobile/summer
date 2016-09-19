@@ -1390,6 +1390,47 @@
 	s.netInfo =function(){
 		return $net. getNetworkInfo();
 	};
+
+	s.getTimeZoneID=function(){
+		return $device.getTimeZoneID()
+	};
+	
+	s.getTimeZoneDisplayName=function(){
+		return $device.getTimeZoneDisplayName()
+	};
+	
+	s.Location=function(callback){
+		return $device.getLocation({
+	     "bindfield" : "location", 
+	     "callback" :  callback,         
+	     "single" : "true",
+	     "isgetaddress" : "true", 
+	     "network" : "true" 
+		}) 
+	};
+    
+    s.openView=function(url){
+    	return $device.openWebView({
+		    "url" : url
+		});
+    };
+    
+    s.getInternalMemoryInfo=function(){
+    	return $device.getInternalMemoryInfo()
+    }
+    
+    s.getExternalStorageInfo=function(){
+    	return $device.getExternalStorageInfo()
+    }
+    
+    s.getMemoryInfo=function(){
+    	return $device.getMemoryInfo()
+    }
+    
+    s.getDeviceInfo=function(){
+    	return $device.getDeviceInfo()
+    }
+    
 	//加速计
 	s.getAcceleration = function (onSuccess,onError){
 		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
