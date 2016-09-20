@@ -1380,7 +1380,7 @@
 		}
 	};
 
-
+/*
 	s.writeFile=function(key,value){
 		alert(123)
 		return $cache.write(key,value)
@@ -1390,7 +1390,7 @@
 		alert(321)
 		return $cache.read(key)
 	};
-
+*/
 	s.call=function(string){
 		return $tel.call(string)
 	};
