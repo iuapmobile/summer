@@ -1429,9 +1429,30 @@
     
     s.getDeviceInfo=function(){
     	return $device.getDeviceInfo()
-    }
+    };
+
+  	s.httpGet=function(url,callback,json,time){
+  		return $service.get({
+		   "url" : url,
+		   "callback" :callback, 
+		   "header":json || {},
+		   "timeout" : time || ""
+		})
+  	};
+
+  	s.httpPost=function(url,callback,data,json,time){
+  		return $service.post({
+		   "url" : url,
+		   "callback" :callback,
+		   "data" : data || {}, 
+		   "header":json || {},
+		   "timeout" : time || ""
+		})
+  	}
+  	
     
 	//加速计
+
 	s.getAcceleration = function (onSuccess,onError){
 		return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
 	};
