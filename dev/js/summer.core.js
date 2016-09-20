@@ -368,7 +368,7 @@
 		}
 	};
 
-/*
+/*  代码转移到summer.service.js中
 	s.writeFile=function(key,value){
 		alert(123)
 		return $cache.write(key,value)
