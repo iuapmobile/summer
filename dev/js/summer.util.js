@@ -234,6 +234,31 @@
         }
         return uid;
     };
+	
+	u.isJSONObject = function (obj) {
+		return Object.prototype.toString.call(obj) === '[object Object]';;
+	}
+	window.$isJSONObject = u.isJSONObject;
+	
+	u.isJSONArray = function (obj) {   
+	  return Object.prototype.toString.call(obj) === '[object Array]';    
+	}
+	window.$isJSONArray = u.isJSONArray;
+	
+	u.isFunction = function (obj) {   
+	  return Object.prototype.toString.call(obj) === '[object Function]';    
+	}
+	window.$isFunction = u.isFunction;
+	
+	//是否为空字符串
+	u.isEmpty = function(obj){
+		if(obj == undefined || obj == null || (obj.toString && obj.toString() == "")){
+			return true;
+		}
+		return false;
+	}
+	window.$isEmpty = u.isEmpty;
+
 
     window.$summer = window.$summer || u;
 })();
