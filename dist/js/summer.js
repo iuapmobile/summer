@@ -1010,9 +1010,7 @@
 	
 }(window,summer);
 
-//summer API
-
-
+//summer native service v3.0.20160920
 +function(w,s){
 	w.$__cbm = [];
 	if(!s){
