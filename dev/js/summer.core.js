@@ -370,10 +370,12 @@
 
 
 	s.writeFile=function(key,value){
+		alert(123)
 		return $cache.write(key,value)
 	};
 	
 	s.readFile=function(key){
+		alert(321)
 		return $cache.read(key)
 	};
 

@@ -1,4 +1,4 @@
-﻿//summer native service v3.0.20160920
+﻿//summer native service v3.0.2016092011
 +function(w,s){
 	w.$__cbm = [];
 	if(!s){
