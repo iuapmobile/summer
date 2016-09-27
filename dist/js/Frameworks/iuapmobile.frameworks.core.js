@@ -3030,7 +3030,15 @@ function UMP$Services$Cache$writeFile(filePath, content, append, charset, isSync
 				if(filePath)
 					args["path"] = filePath;
 				if(content)
-					args["content"] = content;
+					if(typeof content == "object"){
+						content = "obj-"+Json.stringify(content);
+						args["content"] = content;
+					}else if(typeof content == "object"){
+						content = "str-"+content;
+						args["content"] = content;
+					}else{
+						alert("writeFile不支持"+typeof content +"类型的参数");
+					}			
 			}else{				
 				if(filePath)
 					args["path"] = filePath;
@@ -3071,6 +3079,13 @@ function UMP$Services$Cache$readFile(filePath, maxlength, charset){
 			obj = $stringToJSON(strContent);
 			return obj;
 			*/
+			if(strContent.indexof("obj-")==0){
+				 strContent = strContent.slice(4);
+				 return JSON.parse(strContent);
+			}else if(strContent.indexof("str-")==0){
+				strContent = strContent.slice(4);
+				return strContent;
+			}
 			return strContent;
 		}catch(e){
 			return strContent;
