@@ -1054,12 +1054,23 @@
 				$summer.alert(json);
 				delete json["alert"];
 			}
-
 			return this.callCordova('summer-plugin-frame.XFrame','openFrame',json, successFn, errFn);
         },
         closeFrame : function(json, successFn, errFn){
 			return this.callCordova('summer-plugin-frame.XFrame','closeFrame',json, successFn, errFn);
         },
+        openFrameGroup : function(json, successFn, errFn){
+			return this.callCordova('summer-plugin-frame.XFrame', 'openFrameGroup', json, successFn, errFn);
+		},
+		closeFrameGroup : function(json, successFn, errFn){
+			return this.callCordova('summer-plugin-frame.XFrame', 'closeFrameGroup', json, successFn, errFn);
+		},
+		setFrameGroupAttr : function(json, successFn, errFn){
+			return this.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupAttr', json, successFn, errFn);
+		},
+		setFrameGroupIndex : function(json, successFn, errFn){
+			return this.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupIndex', json, successFn, errFn);
+		},
         openWin : function(json, successFn, errFn){
 			return this.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },

@@ -148,6 +148,7 @@ gulp.task('xyc',function(){
 /*********************** qhb's task begin **********************/
 
 gulp.task('qhb',function(){	
+	gulp.watch('dev/js/summer.*.js', ['summer']);
 	gulp.watch('dev/js/Frameworks/**/*.js', ['iuapmobile.frameworks.core']);
 	
 });
