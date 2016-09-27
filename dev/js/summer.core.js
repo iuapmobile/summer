@@ -127,7 +127,8 @@
             return s.cordova.require('summer-plugin-frame.XFrame').refreshFooterLoadDone(json, successFn, errFn);
         }
     };
-
+ 
+ 
     //核心API直接通过 summer.xxx()访问
     s.openFrame = s.window.openFrame;
     s.closeFrame = s.window.closeFrame;
@@ -144,6 +145,11 @@
     s.refreshHeaderLoadDone = s.window.refreshHeaderLoadDone;
     s.setRefreshFooterInfo = s.window.setRefreshFooterInfo;
     s.refreshFooterLoadDone = s.window.refreshFooterLoadDone;
+
+    s.openFrameGroup = s.window.openFrameGroup;
+    s.closeFrameGroup = s.window.closeFrameGroup;
+    s.setFrameGroupAttr = s.window.setFrameGroupAttr;
+    s.setFrameGroupIndex = s.window.setFrameGroupIndex;
 
     s.showProgress = function(json){
 		if(!s.canrequire()) return;
