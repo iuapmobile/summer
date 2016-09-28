@@ -1747,7 +1747,7 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 				return;	
 			}			
 		}else if(typeof jsonArgs == "object"){
-			if(jsonArgs["callback"] && $isFunction(jsonArgs["callback"])){
+			if(jsonArgs["callback"] && $isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
 				//1、 callback:function(){}
 				var newCallBackScript = "fun" + uuid(8, 16) + "()";//anonymous method
 				while($__cbm[newCallBackScript]){
@@ -1777,7 +1777,7 @@ CommonNativeCallService.prototype.callService=function(serviceType, jsonArgs, is
 					}				
 				}
 				jsonArgs["callback"] = newCallBackScript;				
-			}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string"){
+			}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string" && !jsonArgs["__keepCallback"]){
 				//2、 callback:"mycallback()"
 				var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
 				var callbackFn = eval(cbName);
@@ -4461,7 +4461,7 @@ function UMP$Services$UMFile$download(jsonArgs){
 	if($isEmpty(jsonArgs.callback)){
 		alert("参数callback不能为空");
 	}
-	
+	jsonArgs["__keepCallback"] = true;
 	return $service.call(this._UMFile_download, jsonArgs);//默认异步
 }
 

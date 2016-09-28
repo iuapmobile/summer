@@ -62,7 +62,7 @@ function UMP$Services$UMFile$download(jsonArgs){
 	if($isEmpty(jsonArgs.callback)){
 		alert("参数callback不能为空");
 	}
-	
+	jsonArgs["__keepCallback"] = true;
 	return $service.call(this._UMFile_download, jsonArgs);//默认异步
 }
 
