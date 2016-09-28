@@ -102,9 +102,13 @@ function UMP$Services$UMFile$write(args, isSync){
 	}
 	return UM_NativeCall.callService("UMFile.write", args, isSync);
 }
-function UMP$Services$UMFile$remove(args, isSync){
+function UMP$Services$UMFile$remove(args){
 	//参数path支持文件和文件夹两种,$service.call("UMFile.delete",{"path":"filetest/test.txt"},true);
-	return $service.call("UMFile.delete", args, typeof isSync == "undefined" ? false : true);//默认异步删除
+	//return $service.call("UMFile.delete", args, typeof isSync == "undefined" ? false : true);//默认异步删除
+	return $service.call("UMFile.remove", args, false);//默认异步
+}
+function UMP$Services$UMFile$exists(args){
+	return $service.call("UMFile.exists", args, true);//调用的是UMDevice的方法
 }
 function UMP$Services$UMFile$getFileInfo(args){
 	//return $service.call("UMFile.getFileInfo",{"path":"filetest/test.txt"}, true);
@@ -144,6 +148,7 @@ UMP.Services.UMFile.prototype = {
 	writeFile : UMP$Services$UMFile$writeFile,
 	write : UMP$Services$UMFile$write,
 	remove : UMP$Services$UMFile$remove,
+	exists : UMP$Services$UMFile$exists,
 	getFileInfo: UMP$Services$UMFile$getFileInfo,
 	open: UMP$Services$UMFile$open,
 	ftpUpload : UMP$Services$UMFile$ftpUpload,

@@ -346,7 +346,16 @@
 		}
 		
 	};
+	s.UMFile = {
+		remove : function(args){
+			return $service.call("UMFile.remove", args, false);//默认异步
+		},
+		exists : function(args){
+			return $service.call("UMFile.exists", args, true);
+		}
+	};
 	s.writeFile = s.UMDevice.writeFile;
 	s.readFile = s.UMDevice.readFile;
 	s.openCamera = s.UMDevice.openCamera;
+	s.file = s.UMFile;
 }(window,summer);
