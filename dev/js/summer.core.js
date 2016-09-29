@@ -284,21 +284,21 @@
         return this.setStorage(key, value, "application");
     };
 	s.getAppStorage = function(key){
-        return this.getStorage("application");
+        return this.getStorage(key, "application");
     };
 	
 	s.writeConfig = function(key, value){
         return this.setStorage(key, value, "configure");
     };
 	s.readConfig = function(key){
-        return this.getStorage("configure");
+        return this.getStorage(key, "configure");
     };
 	
 	s.setWindowStorage = function(key, value){
         return this.setStorage(key, value, "window");
     };
 	s.getWindowStorage = function(key){
-        return this.getStorage("window");
+        return this.getStorage(key, "window");
     };
 	
     s.rmStorage = function(key){
@@ -344,7 +344,8 @@
 	};
 	//退出
 	s.exitApp = function(json){
-		return s.callCordova('summer-plugin-core.XUpgrade', 'exitApp', json || {}, successFn, errFn);
+		var ver = s.callSync('XUpgrade.exitApp', json || {});
+		return ver;
 	};
 	//网络请求服务
 	s.ajax = function(json, successFn, errFn){
