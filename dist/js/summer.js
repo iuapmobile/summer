@@ -1177,10 +1177,9 @@
     };
     //upload方法
     function uploadCordova(json,sFn,eFn){		
-    	var fileURL = fileURL
+    	var fileURL = json.fileURL,
     		type = json.type,
-			params = json.params,
-			url = json.url;
+			params = json.params;
 	    var options = new FileUploadOptions();
 	    options.fileKey="file";
 	    options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
@@ -1189,9 +1188,9 @@
 	    options.params = params;
 	    options.httpMethod = "POST"; 
 	    options.headers = headers || "";
-	    //alert(JSON.stringify(options));
+
 	    var ft = new FileTransfer();
-	    var SERVER = url;
+	    var SERVER = json.SERVER;
 	    ft.upload(fileURL, encodeURI(SERVER), sFn, eFn, options);
     };
     s.eval = function(script){

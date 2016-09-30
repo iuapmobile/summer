@@ -176,7 +176,7 @@
 	    options.params = params;
 	    options.httpMethod = "POST"; 
 	    options.headers = headers || "";
-	    //alert(JSON.stringify(options));
+
 	    var ft = new FileTransfer();
 	    var SERVER = json.SERVER;
 	    ft.upload(fileURL, encodeURI(SERVER), sFn, eFn, options);
