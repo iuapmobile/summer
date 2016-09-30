@@ -94,7 +94,7 @@
 						return;	
 					}			
 				}else if(typeof jsonArgs == "object"){
-					if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "function"){
+					if(jsonArgs["callback"] && $isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
 						//1、 callback:function(){}
 						var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
 						while($__cbm[newCallBackScript]){
@@ -124,7 +124,7 @@
 							}				
 						}
 						jsonArgs["callback"] = newCallBackScript;				
-					}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string"){
+					}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string" && !jsonArgs["__keepCallback"]){
 						//2、 callback:"mycallback()"
 						var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
 						var callbackFn = eval(cbName);
@@ -352,10 +352,50 @@
 		},
 		exists : function(args){
 			return $service.call("UMFile.exists", args, true);
+		},
+		download : function(jsonArgs){
+			if($isEmpty(jsonArgs.url)){
+				alert("参数url不能为空");
+			}
+			if($isEmpty(jsonArgs.filename)){
+				alert("参数filename不能为空");
+			}
+			if($isEmpty(jsonArgs.locate)){
+				alert("参数locate不能为空");
+			}
+			if($isEmpty(jsonArgs.override)){
+				alert("参数override不能为空");
+			}
+			if($isEmpty(jsonArgs.callback)){
+				alert("参数callback不能为空");
+			}
+			jsonArgs["__keepCallback"] = true;
+			return $service.call(this._UMFile_download, jsonArgs);//默认异步
+		},
+		open : function(args){
+			if(!$isJSONObject(args)){
+				alert("调用$file.open方法时，参数不是一个有效的JSONObject");
+			}
+			return $service.call("UMDevice.openFile", args, false);//调用的是UMDevice的方法
+		},
+		getFileInfo : function(args){
+			var json = args;
+			if(typeof args == "string"){
+				json = {"path" : args};
+			}
+			return $service.call("UMFile.getFileInfo",json, true);
+		},
+		write : function (args, isSync){
+			//$service.call("UMFile.write",{"path":"filetest/test.txt",	"content":"天空中最微弱的星也有权利争取最美的灿烂" },true);
+			if(typeof isSync == "undefined"){
+				isSync = true
+			}
+			return UM_NativeCall.callService("UMFile.write", args, isSync);
 		}
+
 	};
 	s.writeFile = s.UMDevice.writeFile;
 	s.readFile = s.UMDevice.readFile;
 	s.openCamera = s.UMDevice.openCamera;
-	s.file = s.UMFile;
+
 }(window,summer);
