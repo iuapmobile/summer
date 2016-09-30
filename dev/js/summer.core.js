@@ -163,7 +163,24 @@
     	json = json || {};
         invoker.call("UMJS.hideLoadingBar",json);
     };
+    //upload方法
+    function uploadCordova(json,sFn,eFn){		
+    	var fileURL = json.fileURL,
+    		type = json.type,
+			params = json.params;
+	    var options = new FileUploadOptions();
+	    options.fileKey="file";
+	    options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
+	    options.mimeType = type;
 
+	    options.params = params;
+	    options.httpMethod = "POST"; 
+	    options.headers = headers || "";
+	    //alert(JSON.stringify(options));
+	    var ft = new FileTransfer();
+	    var SERVER = json.SERVER;
+	    ft.upload(fileURL, encodeURI(SERVER), sFn, eFn, options);
+    };
     s.eval = function(script){
     	var t = setTimeout("try{eval(" + script + ")}catch(e){alert(e)}", 10);
     };
