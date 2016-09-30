@@ -164,7 +164,7 @@
         invoker.call("UMJS.hideLoadingBar",json);
     };
     //upload方法
-    function uploadCordova(json,sFn,eFn){		
+    s.upload = function(json,sFn,eFn){		
     	var fileURL = json.fileURL,
     		type = json.type,
 			params = json.params;
