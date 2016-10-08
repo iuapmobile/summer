@@ -348,10 +348,10 @@
 	};
 	s.UMFile = {
 		remove : function(args){
-			return s.service.call.call("UMFile.remove", args, false);//默认异步
+			return s.service.call("UMFile.remove", args, false);//默认异步
 		},
 		exists : function(args){
-			return s.service.call.call("UMFile.exists", args, true);
+			return s.service.call("UMFile.exists", args, true);
 		},
 		download : function(jsonArgs){
 			if($validator.isEmpty(jsonArgs.url)){
