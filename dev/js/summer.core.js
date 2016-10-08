@@ -164,7 +164,7 @@
         invoker.call("UMJS.hideLoadingBar",json);
     };
     //upload方法
-    s.upload = function(json,sFn,eFn){		
+    s.upload = function(json,sFn,eFn,headers){		
     	var fileURL = json.fileURL,
     		type = json.type,
 			params = json.params;

@@ -348,49 +348,42 @@
 	};
 	s.UMFile = {
 		remove : function(args){
-			return $service.call("UMFile.remove", args, false);//默认异步
+			return s.service.call.call("UMFile.remove", args, false);//默认异步
 		},
 		exists : function(args){
-			return $service.call("UMFile.exists", args, true);
+			return s.service.call.call("UMFile.exists", args, true);
 		},
 		download : function(jsonArgs){
-			if($isEmpty(jsonArgs.url)){
+			if($validator.isEmpty(jsonArgs.url)){
 				alert("参数url不能为空");
 			}
-			if($isEmpty(jsonArgs.filename)){
+			if($validator.isEmpty(jsonArgs.filename)){
 				alert("参数filename不能为空");
 			}
-			if($isEmpty(jsonArgs.locate)){
+			if($validator.isEmpty(jsonArgs.locate)){
 				alert("参数locate不能为空");
 			}
-			if($isEmpty(jsonArgs.override)){
+			if($validator.isEmpty(jsonArgs.override)){
 				alert("参数override不能为空");
 			}
-			if($isEmpty(jsonArgs.callback)){
+			if($validator.isEmpty(jsonArgs.callback)){
 				alert("参数callback不能为空");
 			}
 			jsonArgs["__keepCallback"] = true;
-			return $service.call(this._UMFile_download, jsonArgs);//默认异步
+			return s.service.call("UMFile.download", jsonArgs);//默认异步
 		},
 		open : function(args){
-			if(!$isJSONObject(args)){
+			if(!$validator.isJSONObject(args)){
 				alert("调用$file.open方法时，参数不是一个有效的JSONObject");
 			}
-			return $service.call("UMDevice.openFile", args, false);//调用的是UMDevice的方法
+			return s.service.call("UMDevice.openFile", args, false);//调用的是UMDevice的方法
 		},
 		getFileInfo : function(args){
 			var json = args;
 			if(typeof args == "string"){
 				json = {"path" : args};
 			}
-			return $service.call("UMFile.getFileInfo",json, true);
-		},
-		write : function (args, isSync){
-			//$service.call("UMFile.write",{"path":"filetest/test.txt",	"content":"天空中最微弱的星也有权利争取最美的灿烂" },true);
-			if(typeof isSync == "undefined"){
-				isSync = true
-			}
-			return UM_NativeCall.callService("UMFile.write", args, isSync);
+			return s.service.call("UMFile.getFileInfo",json, true);
 		}
 
 	};
