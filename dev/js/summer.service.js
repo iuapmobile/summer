@@ -5,9 +5,7 @@
 		s = {};
 		w.summer = s;
 	}
-	
 	//----------------------------------------------------------------------------------- Validator
-	
 	var $validator = {
 		check : function(obj,paramNameArray,msg){
 			for(var i=0,len=paramNameArray.length;i<len;i++){
@@ -29,14 +27,6 @@
 				}			
 			}
 			return true;
-		},
-		isEmpty : function(obj){
-			return $summer.isEmpty(obj);
-		},
-		isJSONObject : function(obj){
-			if ($summer.isJSONObject(obj)) {
-				alert("参数不是一个有效的JSONObject");
-			}
 		},
 		isNamespace : function(ns){
 			/*
@@ -73,9 +63,6 @@
 				}
 			}
 			return true;
-		},
-		isFunction : function (obj) {   
-		  return Object.prototype.toString.call(obj) === '[object Function]';    
 		}
 	}
 	var UM = {
@@ -117,7 +104,7 @@
 			}
 		},
 		jsonToString : function (obj){
-		    var THIS = this;
+		    
 		    switch(typeof(obj)){
 		        case 'string':            
 					try{
@@ -126,7 +113,7 @@
 						return obj;
 		            }
 				case 'array':
-					return '[' + obj.map(THIS.jsonToString).join(',') + ']';
+					return '[' + obj.map(UM.jsonToString).join(',') + ']';
 				case 'object':
 					if(obj instanceof Array){
 						var strArr = [];
@@ -143,9 +130,9 @@
 							if(typeof obj[i] == "string"){
 								item = "\"" + obj[i] + "\"";
 							}else if(typeof obj[i] == "object"){
-								item = THIS.jsonToString(obj[i]);
+								item = UM.jsonToString(obj[i]);
 							}else{						
-								item = THIS.jsonToString(obj[i]);
+								item = UM.jsonToString(obj[i]);
 							}
 							
 							strArr.push(item);
@@ -159,8 +146,8 @@
 					}else{
 						var list = [];
 						for (var property in obj){
-							var vv = THIS.jsonToString(obj[property]);
-							var p = THIS.jsonToString(property);
+							var vv = UM.jsonToString(obj[property]);
+							var p = UM.jsonToString(property);
 							if(p.indexOf("\"")>=0){
 
 							}else{
@@ -228,7 +215,7 @@
 						return;	
 					}			
 				}else if(typeof jsonArgs == "object"){
-					if(jsonArgs["callback"] && $validator.isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
+					if(jsonArgs["callback"] && $summer.isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
 						//1、 callback:function(){}
 						var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
 						while($__cbm[newCallBackScript]){
@@ -487,26 +474,26 @@
 			return s.service.call("UMFile.exists", args, true);
 		},
 		download : function(jsonArgs){
-			if($validator.isEmpty(jsonArgs.url)){
+			if($summer.isEmpty(jsonArgs.url)){
 				alert("参数url不能为空");
 			}
-			if($validator.isEmpty(jsonArgs.filename)){
+			if($summer.isEmpty(jsonArgs.filename)){
 				alert("参数filename不能为空");
 			}
-			if($validator.isEmpty(jsonArgs.locate)){
+			if($summer.isEmpty(jsonArgs.locate)){
 				alert("参数locate不能为空");
 			}
-			if($validator.isEmpty(jsonArgs.override)){
+			if($summer.isEmpty(jsonArgs.override)){
 				alert("参数override不能为空");
 			}
-			if($validator.isEmpty(jsonArgs.callback)){
+			if($summer.isEmpty(jsonArgs.callback)){
 				alert("参数callback不能为空 ");
 			}
 			jsonArgs["__keepCallback"] = true;
 			return s.service.call("UMFile.download", jsonArgs);//默认异步
 		},
 		open : function(args){
-			if(!$validator.isJSONObject(args)){
+			if(!$summer.isJSONObject(args)){
 				alert("调用$file.open方法时，参数不是一个有效的JSONObject");
 			}
 			return s.service.call("UMDevice.openFile", args, false);//调用的是UMDevice的方法
