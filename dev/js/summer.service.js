@@ -463,6 +463,27 @@
 		openCamera : function(args){
 			if($validator.checkIfExist(args, ["callback","compressionRatio"]))
 				return s.service.call("UMDevice.openCamera", args, false);
+		},
+		getTimeZoneID : function(){
+			return	s.service.call("UMDevice.getTimeZoneID", "", true);
+		} ,
+		getTimeZoneDisplayName : function(){
+			return	s.service.call("UMDevice.getTimeZoneDisplayName", "", true);
+		},
+		getLocation : function(json){
+			var args = {};
+			if(arguments.length == 1 && $isJSONObject(arguments[0])){
+				args = json;
+			}else{
+			    alert("调用capturePhoto服务时，参数不是一个有效的JSONObject");
+				return;
+			}
+			var result = s.service.call("UMDevice.getLocation", args);
+			var returnVal = "";
+			if(typeof result == "string"){
+			    returnVal = "状态为"+result+", 可以通过callback获取返回值";
+			}
+			return returnVal;
 		}
 		
 	};
@@ -510,5 +531,8 @@
 	s.writeFile = s.UMDevice.writeFile;
 	s.readFile = s.UMDevice.readFile;
 	s.openCamera = s.UMDevice.openCamera;
+	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
+	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
+	s.getLocation=s.UMDevice.getLocation;
 
 }(window,summer);
