@@ -1759,7 +1759,8 @@
 	$stringToJSON = UM.stringToJSON;
 	s.service = {
 		call:function(serviceType, jsonArgs, isSync){
-			try{		
+			try{
+				jsonArgs = jsonArgs || {};
 				var serviceparams = "";
 				if(typeof jsonArgs == "string"){
 					var json = $stringToJSON(jsonArgs);
@@ -1964,7 +1965,7 @@
 						args[key] = $stringToJSON(args[key]);
 					}
 				}
-				return s.service.call("UMService.callAction", args, false);
+				return s.callService("UMService.callAction", args, false);
 			}else{
 				var args = {};
 				args["viewid"] = controllerName;
@@ -1979,11 +1980,12 @@
 					}
 				}
 				//$service.call("UMService.callAction","{callback:'myback', contextmapping:'data'，viewid:'"+controllerName+"',isDataCollect:'false',params:{demo:'demo'},action:'needPwd'}");
-				return s.service.call("UMService.callAction", args);
+				return s.callService("UMService.callAction", args);
 			}
 		}
 	};//s.service end
-
+	s.callService = s.service.call;
+	s.callAction = s.service.callAction;
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -1996,14 +1998,14 @@
 				args["path"] = filePath;
 			if(content)
 				args["content"] = content;
-			return s.service.call("UMFile.write", args, false);
+			return s.callService("UMFile.write", args, false);
 		},
 		readFile : function(filePath){
 			var strContent = ""; 
 			var args ={};
 			if(filePath)
 				args["path"] = filePath;
-			strContent = s.service.call("UMFile.read", args, true);	
+			strContent = s.callService("UMFile.read", args, true);	
 			
 			//苹果安卓统一返回处理结果
 			if(strContent && strContent != ""){
@@ -2022,13 +2024,13 @@
 		},
 		openCamera : function(args){
 			if($validator.checkIfExist(args, ["callback","compressionRatio"]))
-				return s.service.call("UMDevice.openCamera", args, false);
+				return s.callService("UMDevice.openCamera", args, false);
 		},
 		getTimeZoneID : function(){
-			return	s.service.call("UMDevice.getTimeZoneID", "", true);
+			return	s.callService("UMDevice.getTimeZoneID", "", true);
 		} ,
 		getTimeZoneDisplayName : function(){
-			return	s.service.call("UMDevice.getTimeZoneDisplayName", "", true);
+			return	s.callService("UMDevice.getTimeZoneDisplayName", {}, true);//无参调用统一使用{}
 		},
 		getLocation : function(json){
 			var args = {};
@@ -2038,7 +2040,7 @@
 			    alert("调用capturePhoto服务时，参数不是一个有效的JSONObject");
 				return;
 			}
-			var result = s.service.call("UMDevice.getLocation", args);
+			var result = s.callService("UMDevice.getLocation", args);
 			var returnVal = "";
 			if(typeof result == "string"){
 			    returnVal = "状态为"+result+", 可以通过callback获取返回值";
@@ -2049,10 +2051,10 @@
 	};
 	s.UMFile = {
 		remove : function(args){
-			return s.service.call("UMFile.remove", args, false);//默认异步
+			return s.callService("UMFile.remove", args, false);//默认异步
 		},
 		exists : function(args){
-			return s.service.call("UMFile.exists", args, true);
+			return s.callService("UMFile.exists", args, true);
 		},
 		download : function(jsonArgs){
 			if($summer.isEmpty(jsonArgs.url)){
@@ -2071,20 +2073,20 @@
 				alert("参数callback不能为空 ");
 			}
 			jsonArgs["__keepCallback"] = true;
-			return s.service.call("UMFile.download", jsonArgs);//默认异步
+			return s.callService("UMFile.download", jsonArgs);//默认异步
 		},
 		open : function(args){
 			if(!$summer.isJSONObject(args)){
 				alert("调用$file.open方法时，参数不是一个有效的JSONObject");
 			}
-			return s.service.call("UMDevice.openFile", args, false);//调用的是UMDevice的方法
+			return s.callService("UMDevice.openFile", args, false);//调用的是UMDevice的方法
 		},
 		getFileInfo : function(args){
 			var json = args;
 			if(typeof args == "string"){
 				json = {"path" : args};
 			}
-			return s.service.call("UMFile.getFileInfo",json, true);
+			return s.callService("UMFile.getFileInfo",json, true);
 		}
 
 	};
