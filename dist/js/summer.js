@@ -2030,7 +2030,7 @@
 			return	s.callService("UMDevice.getTimeZoneID", "", true);
 		} ,
 		getTimeZoneDisplayName : function(){
-			return	s.callService("UMDevice.getTimeZoneDisplayName", {}, true);//无参调用统一使用{}
+			return	s.callService("UMDevice.getTimeZoneDisplayName", {}, true); //无参调用统一使用{}
 		},
 		getLocation : function(json){
 			var args = {};
