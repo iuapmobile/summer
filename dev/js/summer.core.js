@@ -361,7 +361,7 @@
 	};
 	//退出
 	s.exitApp = function(json, successFn, errFn){
-		return s.callCordova('summer-plugin-core.XUpgrade', 'exitApp', json, successFn, errFn);
+		return s.callCordova('summer-plugin-core.XUpgrade', 'exitApp', json || {}, successFn, errFn);
 	};
 	
 	//网络请求服务
