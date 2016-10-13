@@ -1288,13 +1288,13 @@
 						key: key,
 						value: value
 					};
-					return this.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
+					return s.callSync("SummerStorage.writeApplicationContext", JSON.stringify(json));
 				},
 				getItem : function(key){
 					var json = {
 						key: key
 					};
-					return this.callSync("SummerStorage.readApplicationContext", JSON.stringify(json));
+					return s.callSync("SummerStorage.readApplicationContext", JSON.stringify(json));
 				}				
 			};
 		}else if(type == "configure"){
@@ -1304,13 +1304,13 @@
 						key: key,
 						value: typeof value == "string" ? value : JSON.stringify(value)
 					};
-					return this.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
+					return s.callSync("SummerStorage.writeConfigure", JSON.stringify(json));
 				},
 				getItem : function(key){
 					var json = {
 						key: key
 					};
-					return this.callSync("SummerStorage.readConfigure", JSON.stringify(json));
+					return s.callSync("SummerStorage.readConfigure", JSON.stringify(json));
 				}				
 			};
 		}else if(type == "window"){
@@ -1320,13 +1320,13 @@
 						key: key,
 						value: typeof value == "string" ? value : JSON.stringify(value)
 					};
-					return this.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
+					return s.callSync("SummerStorage.writeWindowContext", JSON.stringify(json));
 				},
 				getItem : function(key){
 					var json = {
 						key: key
 					};
-					return this.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
+					return s.callSync("SummerStorage.readWindowContext", JSON.stringify(json));
 				}				
 			};
 		}
@@ -1359,24 +1359,24 @@
     };
 	
 	s.setAppStorage = function(key, value){
-        return this.setStorage(key, value, "application");
+        return s.setStorage(key, value, "application");
     };
 	s.getAppStorage = function(key){
-        return this.getStorage(key, "application");
+        return s.getStorage(key, "application");
     };
 	
 	s.writeConfig = function(key, value){
-        return this.setStorage(key, value, "configure");
+        return s.setStorage(key, value, "configure");
     };
 	s.readConfig = function(key){
-        return this.getStorage(key, "configure");
+        return s.getStorage(key, "configure");
     };
 	
 	s.setWindowStorage = function(key, value){
-        return this.setStorage(key, value, "window");
+        return s.setStorage(key, value, "window");
     };
 	s.getWindowStorage = function(key){
-        return this.getStorage(key, "window");
+        return s.getStorage(key, "window");
     };
 	
     s.rmStorage = function(key){
