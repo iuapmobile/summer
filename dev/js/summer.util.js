@@ -187,15 +187,6 @@
 			return "";
 		}
     })(u);
-
-
-    // u.isArray = function(obj){
-    //     if(Array.isArray){
-    //         return Array.isArray(obj);
-    //     }else{
-    //         return obj instanceof Array;
-    //     }
-    // };
     u.isArray = function (obj) {
       return Object.prototype.toString.call(obj) === '[object Array]';
     }
@@ -237,19 +228,13 @@
 	
 	u.isJSONObject = function (obj) {
 		return Object.prototype.toString.call(obj) === '[object Object]';;
-	}
-	window.$isJSONObject = u.isJSONObject;
-	
+	}	
 	u.isJSONArray = function (obj) {   
 	  return Object.prototype.toString.call(obj) === '[object Array]';    
 	}
-	window.$isJSONArray = u.isJSONArray;
-	
 	u.isFunction = function (obj) {   
 	  return Object.prototype.toString.call(obj) === '[object Function]';    
 	}
-	window.$isFunction = u.isFunction;
-	
 	//是否为空字符串
 	u.isEmpty = function(obj){
 		if(obj == undefined || obj == null || (obj.toString && obj.toString() == "")){
@@ -257,7 +242,6 @@
 		}
 		return false;
 	}
-	window.$isEmpty = u.isEmpty;
     u.check = function(obj,paramNameArray,msg){
         for(var i=0,len=paramNameArray.length;i<len;i++){
             if(obj[paramNameArray[i]] == undefined || obj[paramNameArray[i]] == null){
@@ -308,6 +292,9 @@
         }
         return true;
     }
-
+    window.$isJSONObject = u.isJSONObject;
+    window.$isJSONArray = u.isJSONArray;
+    window.$isFunction = u.isFunction;
+    window.$isEmpty = u.isEmpty;
     window.$summer = window.$summer || u;
 })();

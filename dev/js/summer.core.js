@@ -425,7 +425,7 @@
 		alert(321)
 		return $cache.read(key)
 	};
-*/
+
 	s.call=function(string){
 		return $tel.call(string)
 	};
@@ -553,4 +553,7 @@
 	s.inappbrowser = function(url, target, options){
 		return cordova.InAppBrowser.open(url, target, options);
 	};
+
+
+*/
 }(window,summer);
