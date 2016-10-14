@@ -344,5 +344,86 @@
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
 	s.getLocation=s.UMDevice.getLocation;
+	//下边为corddova 插件的封装
+  	s.cordova = {
+		ajax : function(json, successFn, errFn){
+			if(json.type == "get"){
+				return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+			}else if(json.type == "post"){
+				return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+			}
+		},
+		get : function(url, param, header, successFn, errFn){
+			return cordovaHTTP.get(url || "", param || {}, header || {}, successFn, errFn);
+		},
+		post : function(url, param, header, successFn, errFn){
+			return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
+		},
 
+		call : function(string, successFn, errFn){
+			return window.PhoneCaller.call(string, successFn, errFn);
+		},
+		
+		getLocation : function(successFn, errFn){
+			return navigator.geolocation.getCurrentPosition(successFn, errFn);
+		},
+		contacts : {
+			find : function(json, successFn, errFn){	
+				var options      = new ContactFindOptions();
+				options.filter   = json.filter;
+				options.multiple = json.multiple;
+				options.desiredFields =[navigator.contacts.fieldType.id];
+				options.hasPhoneNumber = json.hasPhoneNumber;
+				var fields  =json.fieldType || [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+				return navigator.contacts.find(fields, successFn, errFn, options);
+			},
+			
+			save : function(json, successFn, errFn){
+				var contact = navigator.contacts.create();
+				contact.displayName = json.displayName;
+				contact.nickname = json.nickName;   
+				return contact.save(successFn,errFn);
+			},
+	    },
+		//加速计
+
+		getAcceleration : function (onSuccess,onError){
+			return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
+		},
+		watchAcceleration : function (options,onSuccess,onError){
+			var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);  
+			return watchID;  
+		},
+		//手机信息
+		model : function (){
+			return device.model;
+		},
+		uuid : function (){
+			return device.uuid;
+		},
+		version : function (){
+			return device.version;
+		},
+		platform : function(){
+			return device.platform;
+		},
+		manufacturer : function (){
+			return device.manufacturer;
+		},
+		serial : function (){
+			return device.serial;
+		},
+		//电池状态
+		batterystatus : function (fn){
+			return window.addEventListener("batterystatus", fn, false);
+		},
+		//camera
+		camera : function (json,ret,err){
+			return navigator.camera.getPicture(ret,err,json);
+		},
+		//Inappbrowser
+		inappbrowser : function(url, target, options){
+			return cordova.InAppBrowser.open(url, target, options);
+		}	
+  	};
 }(window,summer);
