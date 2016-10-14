@@ -1421,49 +1421,10 @@
 		return s.callCordova('summer-plugin-core.XUpgrade', 'exitApp', json || {}, successFn, errFn);
 	};
 	
-	//网络请求服务
-	s.ajax = function(json, successFn, errFn){
-		if(json.type == "get"){
-			return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
-		}else if(json.type == "post"){
-			return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
-		}
-	};
-	s.get = function(url, param, header, successFn, errFn){
-		return cordovaHTTP.get(url || "", param || {}, header || {}, successFn, errFn);
-	};
-	s.post = function(url, param, header, successFn, errFn){
-		return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
-	};
-
-	s.call = function(string, successFn, errFn){
-		return window.PhoneCaller.call(string, successFn, errFn);
-	};
 	
-	s.getLocation=function(successFn, errFn){
-		return navigator.geolocation.getCurrentPosition(successFn, errFn);
-	};
-	
-	s.contacts ={
-		find:function(json, successFn, errFn){	
-			var options      = new ContactFindOptions();
-			options.filter   = json.filter;
-			options.multiple = json.multiple;
-			options.desiredFields =[navigator.contacts.fieldType.id];
-			options.hasPhoneNumber = json.hasPhoneNumber;
-			var fields  =json.fieldType || [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-			return navigator.contacts.find(fields, successFn, errFn, options);
-		},
-		
-		save:function(json, successFn, errFn){
-			var contact = navigator.contacts.create();
-			contact.displayName = json.displayName;
-			contact.nickname = json.nickName;   
-			return contact.save(successFn,errFn);
-		}
-	};
 
-/*  代码转移到summer.service.js中
+/*  
+// 代码转移到summer.service.js中
 	s.writeFile=function(key,value){
 		alert(123)
 		return $cache.write(key,value)
@@ -1559,7 +1520,48 @@
 		   "timeout" : time || ""
 		})
   	}
-  	
+//下边为corddova 插件的封装
+  	//网络请求服务
+	s.ajax = function(json, successFn, errFn){
+		if(json.type == "get"){
+			return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+		}else if(json.type == "post"){
+			return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+		}
+	};
+	s.get = function(url, param, header, successFn, errFn){
+		return cordovaHTTP.get(url || "", param || {}, header || {}, successFn, errFn);
+	};
+	s.post = function(url, param, header, successFn, errFn){
+		return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
+	};
+
+	s.call = function(string, successFn, errFn){
+		return window.PhoneCaller.call(string, successFn, errFn);
+	};
+	
+	s.getLocation=function(successFn, errFn){
+		return navigator.geolocation.getCurrentPosition(successFn, errFn);
+	};
+	
+	s.contacts ={
+		find:function(json, successFn, errFn){	
+			var options      = new ContactFindOptions();
+			options.filter   = json.filter;
+			options.multiple = json.multiple;
+			options.desiredFields =[navigator.contacts.fieldType.id];
+			options.hasPhoneNumber = json.hasPhoneNumber;
+			var fields  =json.fieldType || [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			return navigator.contacts.find(fields, successFn, errFn, options);
+		},
+		
+		save:function(json, successFn, errFn){
+			var contact = navigator.contacts.create();
+			contact.displayName = json.displayName;
+			contact.nickname = json.nickName;   
+			return contact.save(successFn,errFn);
+		}
+	};
     
 	//加速计
 
@@ -1601,8 +1603,6 @@
 	s.inappbrowser = function(url, target, options){
 		return cordova.InAppBrowser.open(url, target, options);
 	};
-
-
 */
 }(window,summer);
 
