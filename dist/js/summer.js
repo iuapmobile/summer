@@ -1769,7 +1769,7 @@
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
 	s.getLocation=s.UMDevice.getLocation;
-	//下边为corddova 插件的封装
+	// ↓ 为corddova 插件的封装
   	s.cordova = {
 		ajax : function(json, successFn, errFn){
 			if(json.type == "get"){
