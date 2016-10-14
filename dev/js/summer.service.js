@@ -89,7 +89,7 @@
 						jsonArgs["callback"] = newCallBackScript;
 					}
 					
-					this.callBackProxy(jsonArgs , "error");
+					s.service.callBackProxy(jsonArgs , "error");
 				
 					serviceparams = $summer.jsonToStr(jsonArgs);
 					if(typeof serviceparams == "object"){
