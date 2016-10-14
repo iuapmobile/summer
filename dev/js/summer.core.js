@@ -71,6 +71,15 @@
 			}				
 			return this.callCordova('summer-plugin-frame.XFrame', 'closeWin', json, successFn, errFn);
 		},
+		closeToWin : function(json, successFn, errFn){
+			//support closeWin('xxx') and closeWin({id:'xxx'})
+			if(typeof json == "string"){
+				json = {"id" : json};
+			}else if(typeof json == "undefined"){
+				json = {};
+			}				
+			return this.callCordova('summer-plugin-frame.XFrame', 'closeToWin', json, successFn, errFn);
+		},
 		getSysInfo : function(json, successFn, errFn){
 			//support closeWin('xxx') and closeWin({id:'xxx'})
 			if(typeof json == "string"){
