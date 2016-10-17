@@ -2193,9 +2193,9 @@
 						args["charset"] = charset;
 				}
 				if(typeof isSync == "undefined")
-					return UM_NativeCall.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
+					return s.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
 				else{
-					return UM_NativeCall.callService("UMFile.write", args, isSync);
+					return s.callService("UMFile.write", args, isSync);
 				}
 			}
 		},
