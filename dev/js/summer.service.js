@@ -240,6 +240,7 @@
 	//summser.UMDevie.writeFile()
 	//summer.camera.open() --->summer.openCamera()
 	s.UMDevice = {
+		_deviceInfo_Screen :null,
 		writeFile : function(filePath, content){
 			var args = {};
 			if(filePath)
@@ -249,19 +250,19 @@
 			return s.callService("UMFile.write", args, false);
 		},
 		readFile : function(filePath){
-			var strContent = ""; 
+			var strContent = "";
 			var args ={};
 			if(filePath)
 				args["path"] = filePath;
-			strContent = s.callService("UMFile.read", args, true);	
-			
+			strContent = s.callService("UMFile.read", args, true);
+
 			//苹果安卓统一返回处理结果
 			if(strContent && strContent != ""){
 				try{
 					/*  取出缓存的值不再强行转化为json，按照绝大多数平台通常的处理方式，缓存取出来后必要时需自行类型转化
-					obj = $stringToJSON(strContent);
-					return obj;
-					*/
+					 obj = $stringToJSON(strContent);
+					 return obj;
+					 */
 					return strContent;
 				}catch(e){
 					return strContent;
@@ -285,17 +286,171 @@
 			if(arguments.length == 1 && $summer.isJSONObject(arguments[0])){
 				args = json;
 			}else{
-			    alert("调用capturePhoto服务时，参数不是一个有效的JSONObject");
+				alert("调用capturePhoto服务时，参数不是一个有效的JSONObject");
 				return;
 			}
 			var result = s.callService("UMDevice.getLocation", args);
 			var returnVal = "";
 			if(typeof result == "string"){
-			    returnVal = "状态为"+result+", 可以通过callback获取返回值";
+				returnVal = "状态为"+result+", 可以通过callback获取返回值";
 			}
 			return returnVal;
-		}
-		
+		},
+		openAddressBook: function () {
+			return s.callService("UMDevice.openAddressBook",{});
+
+		},
+		getInternalMemoryInfo: function () {
+			return s.callService("UMDevice.getInternalMemoryInfo",{},true);
+		},
+		getExternalStorageInfo: function () {
+			return s.callService("UMDevice.getExternalStorageInfo",{},true);
+		},
+		getMemoryInfo: function () {
+			return s.callService("UMDevice.getMemoryInfo",{},true);
+		},
+		gotoMapView: function (args) {
+			/*
+			 var args = {
+			 posX:"",//位置信息x坐标
+			 posY:"",//位置信息y坐标
+			 bindfield:"",//绑定字段
+			 auto:"false",//是否自动定位
+			 aroundpoi :"",//周围兴趣点
+			 keyword:"",//要定位的关键字
+			 onaroundpoiclick:"",//兴趣点点击触发的JS方法
+			 onmylocationclick:""//我的位置点击触发的JS方法
+			 };
+			 */
+			if(!$summer.isJSONObject(args)){
+				alert("调用gotoMapView服务时，参数不是一个有效的JSONObject");
+			}
+			return s.callService("UMDevice.gotoMapView",args);
+		},
+		openWebView: function (args) {
+			if(!$summer.isJSONObject(args)){
+				alert("调用gotoMapView服务时，参数不是一个有效的JSONObject");
+			}
+			/*
+			 var args = {url:"http://www.baidu.com"};
+			 */
+			return s.callService("UMDevice.openWebView", args);
+		},
+		screenShot: function (args) {
+			if(!$summer.isJSONObject(args)){
+				alert("调用screenshot服务时，参数不是一个有效的JSONObject");
+			}
+			return s.callService("UMDevice.screenshot",args,true);
+		},
+		notify: function (args) {
+			/*var params = {
+			 "sendTime" : "2015-02-03 13:54:30",
+			 "sendBody" : "您设置了消息提醒事件",
+			 "icon": "app.png"
+			 };*/
+			s.callService("UMService.localNotification", args);
+		},
+		getDeviceInfo: function (jsonArgs) {
+			var result = "";
+			if(jsonArgs){
+				result = s.callService("UMDevice.getDeviceInfo", $summer.jsonToStr(jsonArgs), false);
+			}else{
+				result = s.callService("UMDevice.getDeviceInfo", "", true);
+			}
+			return result;
+		},
+		getScreenWidth: function () {
+			if(!this._deviceInfo_Screen){
+				var strd_info = this.getDeviceInfo();
+				var info = $summer.strToJson(strd_info);
+				this._deviceInfo_Screen = info.screen;
+			}
+			if(this._deviceInfo_Screen){
+				return this._deviceInfo_Screen.width;
+			}else{
+				alert("未能获取到该设备的屏幕信息");
+			}
+		},
+		getScreenHeight: function () {
+			if(!this._deviceInfo_Screen){
+				var strd_info = this.getDeviceInfo();
+				var info = $summer.strToJson(strd_info);
+				this._deviceInfo_Screen = info.screen;
+			}
+			if(this._deviceInfo_Screen){
+				return this._deviceInfo_Screen.height;
+			}else{
+				alert("未能获取到该设备的屏幕信息");
+			}
+		},
+		getScreenDensity: function () {
+			if(!this._deviceInfo_Screen){
+				var strd_info = $device.getDeviceInfo();
+				var info = $summer.strToJson(strd_info);
+				this._deviceInfo_Screen = info.screen;
+			}
+			if(this._deviceInfo_Screen){
+				return this._deviceInfo_Screen.density;
+			}else{
+				alert("未能获取到该设备的屏幕信息");
+			}
+		},
+		currentOrientation: function () {
+			return s.callService("UMDevice.currentOrientation", {}, true);
+		},
+		capturePhoto: function (args) {
+			if(!$summer.isJSONObject(args)){
+				alert("调用capturePhoto服务时，参数不是一个有效的JSONObject");
+			}
+			s.callService("UMDevice.capturePhoto", args);
+		},
+		getAlbumPath: function (args) {
+			return s.callService("UMDevice.getAlbumPath", typeof args == "undefined" ? {} : args, true);
+		},
+		getAppAlbumPath: function (jsonArgs) {
+			if(jsonArgs){
+				if(!$summer.isJSONObject(jsonArgs)){
+					alert("调用 getAppAlbumPath 服务时，参数不是一个有效的JSONObject");
+					return;
+				}
+			}else{
+				jsonArgs = {};
+			}
+			return s.callService("UMDevice.getAppAlbumPath", jsonArgs, true);
+		},
+		getContacts: function () {
+			return s.callService("UMDevice.getContactPerson", {}, true);
+		},
+		saveContact: function (args) {
+			if(!$summer.isJSONObject(args)){
+				alert("调用saveContact服务时，参数不是一个有效的JSONObject");
+			}
+			s.callService("UMDevice.saveContact", args);
+		},
+		generateQRCode: function (jsonArgs) {
+			//twocode-size  //二维码大小，默认180*180，二维码为正方形
+			//twocode-content  //二维码内容，字符串
+			if($summer.isJSONObject(jsonArgs)){
+				if(typeof jsonArgs["size"] != "undefined"){
+					jsonArgs["twocode-size"] =  jsonArgs["size"];
+				}
+				if(typeof jsonArgs["content"] != "undefined"){
+					jsonArgs["twocode-content"] =  jsonArgs["content"];
+				}
+				if(typeof jsonArgs["twocode-size"] == "undefined"){
+					jsonArgs["twocode-size"] =  "180";
+				}
+				if(typeof jsonArgs["twocode-content"] == "undefined"){
+					alert("参数twocode-content不能为空，此参数用来标识扫描二维码后的返回值");
+					return;
+				}
+			}else{
+				alert("generateQRCode方法的参数不是一个有效的JSONObject!");
+				return;
+			}
+
+			return s.callService("UMDevice.createTwocodeImage", jsonArgs, true);
+		},
 	};
 	s.UMFile = {
 		remove : function(args){
@@ -338,6 +493,327 @@
 		}
 
 	};
+	s.UMTel = {
+		call: function (tel) {
+			if($summer.os=='android' || $summer.os=='ios') {
+				s.callService("UMDevice.callPhone", '{"tel":"'+tel+'"}');
+			}else{
+				alert("Not implementate UMP$Services$Telephone$call in $summer.os == " + $summer.os);
+			}
+		},
+		sendMsg: function (tel, body) {
+			if(arguments.length == 1 && $summer.isJSONObject(arguments[0])){
+				var args = tel;
+				if($summer.os=='android' || $summer.os=='ios') {
+					return s.callService("UMDevice.sendMsg", args);
+				}
+			}else{
+				if( $summer.os=='android' || $summer.os=='ios') {
+					//$service.call("UMDevice.sendMessage", "{recevie:'"+tel+"',message:'"+body+"'}");
+					s.callService("UMDevice.sendMsg", "{tel:'"+tel+"',body:'"+body+"'}");
+				}
+			}
+		},
+		sendMail: function (receive, title, content) {
+			var args = {};
+			if(arguments.length == 1 && $summer.isJSONObject(arguments[0])){
+				args = receive;
+			}else{
+				args["receive"] = receive;
+				args["title"] = title;
+				args["content"] = content;
+			}
+			return s.callService("UMDevice.sendMail", args);
+		},
+		saveContact: function (args) {
+			if(!$summer.isJSONObject(args)){
+				alert("调用saveContact服务时，参数不是一个有效的JSONObject");
+			}
+			s.callService("UMDevice.saveContact", args);
+		}
+	};
+	s.UMCamera={
+		open: function (args) {
+			if($summer.checkIfExist(args, ["bindfield","callback","compressionRatio"]))
+				return s.callService("UMDevice.openCamera",args,false);
+		},
+		openPhotoAlbum: function (json) {
+			if(!json) return;
+			var args = {};
+			if(json.bindfield)
+				args["bindfield"] = json["bindfield"];
+			if(json.callback)
+				args["callback"] = json["callback"];
+			if(json.compressionRatio)
+				args["compressionRatio"] = json["compressionRatio"];
+			return s.callService("UMDevice.openPhotoAlbum", args, false)//异步调用服务
+		}
+	}
+	s.UMScanner={
+		open: function (jsonArgs) {
+			var result = "";
+			if(jsonArgs){
+				if(jsonArgs["frameclose"] == null){
+					jsonArgs["frameclose"] =  "true";//默认扫描后关闭
+				}
+				result = s.callService("UMDevice.captureTwodcode", jsonArgs, false);
+			}else{
+				result = s.callService("UMDevice.captureTwodcode", "", true);
+			}
+		},
+		generateQRCode: function (jsonArgs) {
+			//twocode-size  //二维码大小，默认180*180，二维码为正方形
+			//twocode-content  //二维码内容，字符串
+			if($summer.isJSONObject(jsonArgs)){
+				if(typeof jsonArgs["size"] != "undefined"){
+					jsonArgs["twocode-size"] =  jsonArgs["size"];
+				}
+				if(typeof jsonArgs["content"] != "undefined"){
+					jsonArgs["twocode-content"] =  jsonArgs["content"];
+				}
+				if(typeof jsonArgs["twocode-size"] == "undefined"){
+					jsonArgs["twocode-size"] =  "180";
+				}
+				if(typeof jsonArgs["twocode-content"] == "undefined"){
+					alert("参数twocode-content不能为空，此参数用来标识扫描二维码后的返回值");
+					return;
+				}
+			}else{
+				alert("generateQRCode方法的参数不是一个有效的JSONObject!");
+				return;
+			}
+
+			return s.callService("UMDevice.createTwocodeImage", jsonArgs, true);
+		},
+	};
+	s.UMNet={
+		available: function () {
+			var result = false;
+			if($summer.os=='android' || $summer.os=='ios'){
+				result = s.callService("UMNetwork.isAvailable", {}, true);
+			}
+			if(result != null && result.toString().toLowerCase() == "true"){
+				return true;
+			}else{
+				return false;
+			}
+		},
+		networkState: function () {
+			var result = s.callService("UMNetwork.networkState", {}, true);
+			if(typeof result == "String"){
+				return $summer.strToJson(result);
+			}else{
+				return result;
+			}
+		},
+		getNetworkInfo: function () {
+			var result = s.callService("UMNetwork.getNetworkInfo", {}, true);//同步
+			if(typeof result == "String"){
+				return $summer.strToJson(result);
+			}else{
+				return result;
+			}
+		}
+	};
+	s.UMService={
+		get: function (json) {
+			/*	参数：
+			 url : 请求的ID
+			 callback : 用于绑定webview的字段名
+			 */
+			if($summer.isJSONObject(json)){
+				if(!json.url){
+					alert("请输入请求的url");
+					return;
+				}
+				return s.callService("UMService.get", json, false);
+			}else{
+				alert("参数不是有效的JSONObject");
+			}
+		},
+		post: function (json) {
+			/*	参数：
+			 url : "http://academy.yonyou.com/api/loginLx.ashx",//请求的url,
+			 data: {key:"6480-4230-27FD-8AA0",user:"apitest",pwd:"123456"},
+			 callback : "mycallback()"
+			 */
+			if($summer.isJSONObject(json)){
+				if(!json.url){
+					alert("请输入请求的url");
+					return;
+				}
+				return s.callService("UMService.post", json, false);
+			}else{
+				alert("参数不是有效的JSONObject");
+			}
+		}
+	};
+	s.UMSqlite={
+		openDB:function(args){
+			if($summer.isJSONObject(args) && !$summer.isEmpty(args["db"])){
+				return s.callService(this.UMSQLite_openDB, args, false);
+			}else{
+				alert("参数不是一个有效的JSONObject，请使用openDB({...})形式的API");
+			}
+		},
+		execSql: function (args) {
+			if($summer.isJSONObject(args)){
+				if($summer.isEmpty(args["db"])){
+					alert("请输入参数db");
+					return;
+				}
+				if($summer.isEmpty(args["sql"])){
+					alert("请输入参数sql");
+					return;
+				}
+				return s.callService("UMSQLite.execSql", args, true);
+			}else{
+				alert("参数不是一个有效的JSONObject，请使用execSql({...})形式的API");
+			}
+		},
+		//查询记录并分页返回
+		//参数db：必选 数据库名字
+		//参数sql：必选   查询sql语句
+		//参数startIndex： 可选  起始记录数索引 默认0
+		//参数endIndex：  可选  结束记录索引（含） 默认9
+		query: function (args) {
+			/*
+			 $sqlite.query({
+			 "db" : dbname,
+			 "sql" : sql,
+			 "startIndex" : 0,   //从第几条记录开始
+			 "endIndex" : 9   //到第几条记录结束(含)
+			 });
+			 */
+			if($summer.isJSONObject(args)){
+				/*
+				 if($isEmpty(args["startIndex"])){
+				 args["startIndex"] = 0;
+				 }
+				 if($isEmpty(args["endIndex"])){
+				 args["endIndex"] = 9;
+				 }
+				 */
+				return s.callService("UMSQLite.query", args, true);
+			}else{
+				alert("参数不是一个有效的JSONObject，请使用query({...})形式的API");
+			}
+		},
+		//查询返回指定页面的数据
+		//参数db：必选 数据库名字
+		//参数sql：必选   查询sql语句
+		//参数pagesize：  可选  每页记录数 默认10
+		//参数pageIndex： 可选  指定页码 默认0
+		queryByPage: function (args) {
+			/*
+			 $sqlite.queryByPage({
+			 "db" : dbName,
+			 "sql" : sql,
+			 "pageSize" : pageSize,   //pageIndex=页号，从0开始
+			 "pageIndex" : pageNo //pageSize=每页的记录数，从1开始
+			 })
+			 */
+			if($summer.isJSONObject(args)){
+				if($summer.isEmpty(args["pageSize"])){
+					args["pageSize"] = 10;
+				}
+				if($summer.isEmpty(args["pageIndex"])){
+					args["pageIndex"] = 0;
+				}
+				return s.callService("UMSQLite.queryByPage", args, true);
+			}else{
+				alert("参数不是一个有效的JSONObject，请使用queryByPage({...})形式的API");
+			}
+		},
+		exist: function (args) {
+			if($summer.isJSONObject(args)){
+				if($summer.isEmpty(args["db"])){
+					alert("请输入参数db");
+					return;
+				}
+				return s.callService("UMSQLite.exist", args, true);
+			}else{
+				alert("参数不是一个有效的JSONObject，请使用exist({...})形式的API");
+			}
+		}
+	};
+	s.UMCache={
+		write: function (filePath, content, append, charset, isSync){
+			if($summer.isJSONObject(filePath)){
+				return s.callService("UMFile.write", filePath, true);
+			}else if($summer.os=='android' || $summer.os=='ios'){
+				var args = {};
+				if($summer.isJSONObject(append) && arguments.length == 3){
+					args = append;
+					if(filePath)
+						args["path"] = filePath;
+					if(content)
+						if(typeof content == "object"){
+							content = "obj-"+JSON.stringify(content);
+							args["content"] = content;
+						}else if(typeof content == "object"){
+							content = "str-"+content;
+							args["content"] = content;
+						}else{
+							alert("writeFile不支持"+typeof content +"类型的参数");
+						}
+				}else{
+					if(filePath)
+						args["path"] = filePath;
+					if(content)
+						args["content"] = content;
+					if(append)
+						args["append"] = append;
+					if(charset)
+						args["charset"] = charset;
+				}
+				if(typeof isSync == "undefined")
+					return UM_NativeCall.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
+				else{
+					return UM_NativeCall.callService("UMFile.write", args, isSync);
+				}
+			}
+		},
+
+		read: function UMP$Services$Cache$readFile(filePath, maxlength, charset){
+			var strContent = "";
+			if($summer.os=='android' || $summer.os=='ios'){
+				var args ={};
+				if(filePath)
+					args["path"] = filePath;
+				if(maxlength)
+					args["maxlength"] = maxlength;
+				if(charset)
+					args["charset"] = charset;
+
+				var str = $summer.jsonToStr(args);
+				strContent = s.callService("UMFile.read", str, true);
+			}
+
+			//苹果安卓统一返回处理结果
+			if(strContent && strContent != ""){
+				try{
+					/*  取出缓存的值不再强行转化为json，按照绝大多数平台通常的处理方式，缓存取出来后必要时需自行类型转化
+					 obj = $stringToJSON(strContent);
+					 return obj;
+					 */
+					if(strContent.indexof("obj-")==0){
+						strContent = strContent.slice(4);
+						return JSON.parse(strContent);
+					}else if(strContent.indexof("str-")==0){
+						strContent = strContent.slice(4);
+						return strContent;
+					}
+					return strContent;
+				}catch(e){
+					return strContent;
+				}
+			}else{
+				return null;
+
+			}
+		}
+	}
 	s.writeFile = s.UMDevice.writeFile;
 	s.readFile = s.UMDevice.readFile;
 	s.openCamera = s.UMDevice.openCamera;
