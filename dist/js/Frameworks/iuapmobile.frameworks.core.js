@@ -3831,6 +3831,7 @@ function UMP$Services$UMDevice$openWebView(args){
 	return $service.call("UMDevice.openWebView", args);
 }
 function UMP$Services$UMDevice$screenShot(args){
+	args = {};
     if(!$isJSONObject(args)){
 		alert("调用screenshot服务时，参数不是一个有效的JSONObject");
 	}
