@@ -821,7 +821,7 @@
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
 	s.getLocation=s.UMDevice.getLocation;
 	// ↓ 为corddova 插件的封装
-  	s.cordova = {
+  	s.cordovaWay = {
 		ajax : function(json, successFn, errFn){
 			if(json.type == "get"){
 				return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
