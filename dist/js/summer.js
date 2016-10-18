@@ -1660,7 +1660,7 @@
 	};//s.service end
 	s.callService = s.service.call;
 	s.callAction = s.service.callAction;
-	
+	s.UMService.callAction= s.service.callAction;
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//summser.UMDevie.writeFile()
 	//summer.camera.open() --->summer.openCamera()
