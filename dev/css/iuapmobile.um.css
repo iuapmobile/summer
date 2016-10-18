@@ -3952,7 +3952,7 @@ input[type="number"].form-control {
   -webkit-align-items: center;
   align-items: center;
   padding: 0;
-  /*padding-left: 15px;*/
+  padding-left: 15px;
   color: #000;
   transition: all ease .3s;
 }
@@ -4850,7 +4850,6 @@ input[type=range]::-webkit-slider-thumb:before {
   background-color: #FFFFFF;
   padding-left: 15px;
   padding-right: 10px;
-  margin: 0 -15px;
   max-width: none;
   height: 44px;
   overflow: hidden;
