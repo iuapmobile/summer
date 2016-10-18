@@ -33,6 +33,7 @@
 
             var that = this;
             this.$target = target && $(target).length && $(target);
+			 this.direction=pushPageDirection;
             if(target=='#actionsheet'){
 
                 this._generateHTMl();
@@ -124,10 +125,14 @@
                 },300)
             } else {
                 this.$target.removeClass("active");
-                setTimeout(function () {
-                    that.$target.css('transform','translate3d(0, 100%, 0)');
+                if(this.direction=='left'||this.direction=='leftCover'){
+              	 that.$target.css('transform','translate3d(-100%, 0, 0)');
+              }else if(this.direction=='right'||this.direction=='rightCover'){
+              	that.$target.css('transform','translate3d(100%, 0, 0)');
+              }else{
+              	that.$target.css('transform','translate3d(0, 100%, 0)');
+              }
                     that.$overlay.remove();
-                },300)
             }
 
 
