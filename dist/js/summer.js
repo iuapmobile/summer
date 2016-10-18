@@ -1193,7 +1193,6 @@
     s.closeWin = s.window.closeWin;
 	s.closeToWin = s.window.closeToWin;
 	s.getSysInfo = s.window.getSysInfo;
-
     s.winParam = s.window.winParam;
     s.frameParam = s.window.frameParam;
     s.setFrameAttr = s.window.setFrameAttr;
@@ -1660,7 +1659,7 @@
 	};//s.service end
 	s.callService = s.service.call;
 	s.callAction = s.service.callAction;
-	s.UMService.callAction= s.service.callAction;
+	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//summser.UMDevie.writeFile()
 	//summer.camera.open() --->summer.openCamera()
