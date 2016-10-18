@@ -287,8 +287,8 @@ $("textarea.form-control").elastic();
     _generateHTML: function() {
 
       var settings = this.settings,
-        type = this.type,
-        html;
+          type = this.type,
+          html;
 
       html = '<div class="um-modal"><div class="um-modal-content um-border-bottom">';
 
@@ -305,24 +305,31 @@ $("textarea.form-control").elastic();
       }
 
       if (type === "login") {
-        html += '<div class="um-modal-input"><input type="text" class="form-control"><input type="text" class="form-control"></div>';
+        html += '<div class="um-modal-input"><input type="text" class="form-control" placeholder="请输入账号"><input type="password" class="form-control" placeholder="请输入密码"></div>';
       }
 
-      type === "tips" ? html += '</div>' : html += '</div><div class="um-modal-btns">';
+      type === "toast" ? html += '</div>' : html += '</div><div class="um-modal-btns">';
 
       if (type === "confirm" || type === "login" || type === "prompt") {
         html += '<a href="#" class="btn cancle">' + settings.btnText[0] + '</a>';
       }
 
-      if (type === "tips") {
+      if (type === "toast") {
         html += '</div>';
+        var that=this;
+        var duration=settings.duration? settings.duration:2000;
+        setTimeout(function(){
+          that.destory(that.modal);
+        },duration)
       } else {
         html += '<a href="#" class="btn ok">' + settings.btnText[1] +
-          '</a></div></div>';
+            '</a></div></div>';
       }
 
       if (type === "loading") {
-        html = '<div class="um-modal" style="background-color: rgba(0, 0, 0, 0.35);width: 150px;margin-left: -75px;padding: 20px;border-radius: 12px;"><span class="um-ani-rotate"></span></div>';
+        var text=settings.text? settings.text:'正在加载';
+        var icons=settings.icons ? settings.icons:'ti-reload';
+        html = '<div class="um-modal" style="background-color: rgba(0, 0, 0, 0.2);width: 150px;margin-left: -75px;padding: 20px;border-radius: 12px;"><div style="color: #ffffff;">'+text+'</div><span class="um-ani-rotate '+icons+'"></span></div>';
       }
       this.html = html;
     },
@@ -331,9 +338,10 @@ $("textarea.form-control").elastic();
       this.settings.overlay && this.overlay.appendTo($('body')).fadeIn(300);
 
       var modal = $(this.html).appendTo($('body')),
-        modalH = modal.outerHeight(),
-        wh = window.innerHeight;
 
+          modalH = modal.outerHeight(),
+          wh = window.innerHeight;
+      console.log(modal);
       modal.css('top', (wh - modalH - 20) / 2);
 
       setTimeout(function() {
@@ -354,8 +362,8 @@ $("textarea.form-control").elastic();
         }
         if ($(this).hasClass('ok')) {
           var input = that.modal.find('.form-control'),
-            inputLen = input.length,
-            data;
+              inputLen = input.length,
+              data;
           if (inputLen) {
             if (inputLen == 1) data = that.modal.find('.form-control').val();
             else {
@@ -392,6 +400,39 @@ $("textarea.form-control").elastic();
       }
     }
   }
+  var loadingModal=null;/*用来接收loading对象*/
+  var api={
+    alert: function (options) {
+      var $alert='alert';
+      return new _UModal($alert,options);
+    },
+    confirm: function (options) {
+      var $confirm='confirm';
+      return new _UModal($confirm,options);
+    },
+    prompt: function (options) {
+      var $prompt='prompt';
+      return new _UModal($prompt,options);
+    },
+    login: function (options) {
+      var $login='login';
+      return new _UModal($login,options);
+    },
+    toast: function (options) {
+      var $toast='toast';
+      return new _UModal($toast,options);
+    },
+    showLoadingBar: function (options) {
+      var $loading='loading';
+      loadingModal = new _UModal($loading,options);
+      //eturn loadingModal;
+    },
+    hideLoadingBar: function () {
+      console.log(loadingModal);
+      loadingModal.destroy();
+    }
+  };
+  $.extend(UM,api);
   UM.modal = function(type, options) {
     return new _UModal(type, options);
   }
@@ -947,8 +988,8 @@ $("textarea.form-control").elastic();
                 }).fail(function() {
                     console.log("链接错误...");
                 });
-            } else if (dataTarget) {
-                UM.actionsheet.open("#" + dataTarget);
+            } else if(dataTarget=='share'){
+                UM.share.open('#' + dataTarget);
             }
         } catch (e) {
             console.log(e);
@@ -1251,50 +1292,134 @@ $("textarea.form-control").elastic();
     }
 
 }(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
-    var activeDom = function(type){
+    var activeDom = function(type,options){
         this.type = type;
+        if(options){
+            this.settings=options;
+            var itemtarget='#actionsheet';
+            this.open(itemtarget);
+        }
+
     }
     activeDom.prototype = {
         constructor: activeDom,
-        open: function(target, pushPageDirection){
+        open: function (target, pushPageDirection) {
+
             var that = this;
             this.$target = target && $(target).length && $(target);
+            if(target=='#actionsheet'){
 
-            if(!this.$target || !this.$target.hasClass("um-" + this.type)) {
+                this._generateHTMl();
+                this._showHtml();
+                this.$target=this.actionSheet;
+            }
+
+            if (!this.$target || !this.$target.hasClass("um-" + this.type)) {
                 return;
-            } 
+            }
             this.$target.addClass("active");
+            var that=this;
+            setTimeout(function () {
+                that.$target.css('transform','translate3d(0, 0, 0)');
+            },100)
             if (pushPageDirection) {
                 var pushPageClass = "um-page-pushfrom" + pushPageDirection;
                 this.$target.data("pushPageClass", pushPageClass);
 
                 $(".um-page.active").addClass("um-transition-default").addClass(pushPageClass);
             }
-            this.$overlay = pushPageDirection? $('<div class="overlay" style="background-color:rgba(0,0,0,0.1)"></div>'): $('<div class="overlay"></div>');
+            this.$overlay = pushPageDirection ? $('<div class="overlay" style="background-color:rgba(0,0,0,0.1)"></div>') : $('<div class="overlay"></div>');
 
             this.$target.before(this.$overlay);
-            
-            this.$overlay.on(UM.UI.eventType.down, function() {
+
+            this.$overlay.on(UM.UI.eventType.down, function () {
                 that.close();
             });
         },
-        close: function(){
-            if(!this.$target) {
+        _generateHTMl: function () {
+            var settings=this.settings ? this.settings :{};
+            var type=this.type,
+                that=this;
+            if(type == 'actionsheet'){
+                var $content=$('<div class="um-actionsheet" id="actionsheet"> <ul class="um-list um-list-corner"> <li> <div class="btn action-cancle">取消</div> </li> </ul> </div>');
+                var $firstUl=$('<ul class="um-list um-list-corner"></ul>');
+                $content.prepend($firstUl);
+                if(settings.title){
+                    var $title=$('<li> <p class="btn popup-title">'+settings.title+' </p> </li>');
+                    $firstUl.append($title)
+                }
+                if(settings.items){
+                    for(var i=0; i<settings.items.length;i++){
+                        var $li=$('<li> <div class="btn action-item">'+settings.items[i]+'</div> </li>');
+                        $firstUl.append($li);
+                    }
+                }
+                that.content=$content;
+            }
+
+
+        },
+        _showHtml: function () {
+            var actionSheet=$(this.content).appendTo($('body'));
+            $(this.content).css('transform','translate3d(0, 100%, 0)');
+            this.actionSheet=actionSheet;
+            this._attachEvent();
+        },
+        _attachEvent: function () {
+            var that=this;
+            that.actionSheet.on('click','.action-item', function (e) {
+                e.preventDefault();
+                var index=$('.um-actionsheet .action-item').index($(this));
+                var callback=that.settings.callbacks[index];
+                setTimeout(function() {
+                    callback();
+                }, 100);
+                that.close();
+                setTimeout(function () {
+                    that.actionSheet.remove();
+                },1000)
+            });
+            that.actionSheet.on('click','.action-cancle',function(){
+                that.close();
+                setTimeout(function () {
+                    that.actionSheet.remove();
+                },1000)
+            })
+        },
+
+        close: function () {
+            var that=this;
+            if (!this.$target) {
                 // 关闭所有
                 $("um-" + this.type).removeClass("active");
+                setTimeout(function () {
+                    $("um-" + this.type).css('transform','translate3d(0, 100%, 0)');
+                    that.$overlay.remove();
+                },300)
             } else {
                 this.$target.removeClass("active");
+                setTimeout(function () {
+                    that.$target.css('transform','translate3d(0, 100%, 0)');
+                    that.$overlay.remove();
+                },300)
             }
-            this.$overlay.remove();
+
+
             var pushPageClass = this.$target.data("pushPageClass");
             if (pushPageClass) {
-                $(".um-page.active").removeClass(pushPageClass).one("webkitTransitionEnd", function(){
+                $(".um-page.active").removeClass(pushPageClass).one("webkitTransitionEnd", function () {
                     $(this).removeClass("um-transition-default");
                 })
             }
         }
     }
-    UM.actionsheet = new activeDom("actionsheet");
+
+    UM.actionsheet= function (options) {
+        var type='actionsheet';
+        return new activeDom(type,options)
+    };
+    //UM.actionsheet = new activeDom("actionsheet");
+    UM.share = new activeDom("share");
     UM.sidebar = new activeDom("sidebar");
     UM.poppicker = new activeDom("poppicker");
 }))
