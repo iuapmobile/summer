@@ -55,7 +55,7 @@
 
                 $(".um-page.active").addClass("um-transition-default").addClass(pushPageClass);
             }
-            this.$overlay = pushPageDirection ? $('<div class="overlay" style="background-color:rgba(0,0,0,0.1)"></div>') : $('<div class="overlay"></div>');
+            this.$overlay = pushPageDirection ? $('<div class="overlay"></div>') : $('<div class="overlay"></div>');
 
             this.$target.before(this.$overlay);
 
