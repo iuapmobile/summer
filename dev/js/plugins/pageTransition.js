@@ -363,8 +363,8 @@
                 }).fail(function() {
                     console.log("链接错误...");
                 });
-            } else if (dataTarget) {
-                UM.actionsheet.open("#" + dataTarget);
+            } else if(dataTarget=='share'){
+                UM.share.open('#' + dataTarget);
             }
         } catch (e) {
             console.log(e);

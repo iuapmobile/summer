@@ -53,8 +53,8 @@
     _generateHTML: function() {
 
       var settings = this.settings,
-        type = this.type,
-        html;
+          type = this.type,
+          html;
 
       html = '<div class="um-modal"><div class="um-modal-content um-border-bottom">';
 
@@ -71,24 +71,31 @@
       }
 
       if (type === "login") {
-        html += '<div class="um-modal-input"><input type="text" class="form-control"><input type="text" class="form-control"></div>';
+        html += '<div class="um-modal-input"><input type="text" class="form-control" placeholder="请输入账号"><input type="password" class="form-control" placeholder="请输入密码"></div>';
       }
 
-      type === "tips" ? html += '</div>' : html += '</div><div class="um-modal-btns">';
+      type === "toast" ? html += '</div>' : html += '</div><div class="um-modal-btns">';
 
       if (type === "confirm" || type === "login" || type === "prompt") {
         html += '<a href="#" class="btn cancle">' + settings.btnText[0] + '</a>';
       }
 
-      if (type === "tips") {
+      if (type === "toast") {
         html += '</div>';
+        var that=this;
+        var duration=settings.duration? settings.duration:2000;
+        setTimeout(function(){
+          that.destory(that.modal);
+        },duration)
       } else {
         html += '<a href="#" class="btn ok">' + settings.btnText[1] +
-          '</a></div></div>';
+            '</a></div></div>';
       }
 
       if (type === "loading") {
-        html = '<div class="um-modal" style="background-color: rgba(0, 0, 0, 0.35);width: 150px;margin-left: -75px;padding: 20px;border-radius: 12px;"><span class="um-ani-rotate"></span></div>';
+        var text=settings.text? settings.text:'正在加载';
+        var icons=settings.icons ? settings.icons:'ti-reload';
+        html = '<div class="um-modal" style="background-color: rgba(0, 0, 0, 0.2);width: 150px;margin-left: -75px;padding: 20px;border-radius: 12px;"><div style="color: #ffffff;">'+text+'</div><span class="um-ani-rotate '+icons+'"></span></div>';
       }
       this.html = html;
     },
@@ -97,9 +104,10 @@
       this.settings.overlay && this.overlay.appendTo($('body')).fadeIn(300);
 
       var modal = $(this.html).appendTo($('body')),
-        modalH = modal.outerHeight(),
-        wh = window.innerHeight;
 
+          modalH = modal.outerHeight(),
+          wh = window.innerHeight;
+      console.log(modal);
       modal.css('top', (wh - modalH - 20) / 2);
 
       setTimeout(function() {
@@ -120,8 +128,8 @@
         }
         if ($(this).hasClass('ok')) {
           var input = that.modal.find('.form-control'),
-            inputLen = input.length,
-            data;
+              inputLen = input.length,
+              data;
           if (inputLen) {
             if (inputLen == 1) data = that.modal.find('.form-control').val();
             else {
@@ -158,6 +166,39 @@
       }
     }
   }
+  var loadingModal=null;/*用来接收loading对象*/
+  var api={
+    alert: function (options) {
+      var $alert='alert';
+      return new _UModal($alert,options);
+    },
+    confirm: function (options) {
+      var $confirm='confirm';
+      return new _UModal($confirm,options);
+    },
+    prompt: function (options) {
+      var $prompt='prompt';
+      return new _UModal($prompt,options);
+    },
+    login: function (options) {
+      var $login='login';
+      return new _UModal($login,options);
+    },
+    toast: function (options) {
+      var $toast='toast';
+      return new _UModal($toast,options);
+    },
+    showLoadingBar: function (options) {
+      var $loading='loading';
+      loadingModal = new _UModal($loading,options);
+      //eturn loadingModal;
+    },
+    hideLoadingBar: function () {
+      console.log(loadingModal);
+      loadingModal.destroy();
+    }
+  };
+  $.extend(UM,api);
   UM.modal = function(type, options) {
     return new _UModal(type, options);
   }
