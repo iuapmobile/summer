@@ -231,7 +231,7 @@
 				//$service.call("UMService.callAction","{callback:'myback', contextmapping:'data'，viewid:'"+controllerName+"',isDataCollect:'false',params:{demo:'demo'},action:'needPwd'}");
 				return s.callService("UMService.callAction", args);
 			}
-		}
+		},
 		get: function (json) {
 			/*	参数：
 			 url : 请求的ID
