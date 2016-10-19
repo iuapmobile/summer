@@ -6,7 +6,7 @@
 		w.summer = s;
 	}
 	//----------------------------------------------------------------------
-	s.service = {
+	s.UMService = {
 		call:function(serviceType, jsonArgs, isSync){
 			try{
 				jsonArgs = jsonArgs || {};
@@ -16,14 +16,14 @@
 					if(typeof json == "string"){
 						//转json后仍然为string，则报错，规定：调用服务的参数如果是字符串，必须是能转为json的字符串才行
 						alert("调用服务[" + serviceType + "]时参数不是一个有效的json字符串。参数是" + jsonArgs);
-						return;	
+						return;
 					}
 					serviceparams = $summer.jsonToStr(json);
 					if(typeof serviceparams == "object"){
 						//转json后仍然为string，则报错，规定：调用服务的参数如果是字符串，必须是能转为json的字符串才行
 						alert("调用服务[" + serviceType + "]时传递的参数不能标准化为json字符串，请检查参数格式。参数是" + jsonArgs);
-						return;	
-					}			
+						return;
+					}
 				}else if(typeof jsonArgs == "object"){
 					if(jsonArgs["callback"] && $summer.isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
 						//1、 callback:function(){}
@@ -32,7 +32,7 @@
 							newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
 						}
 						$__cbm[newCallBackScript] = jsonArgs["callback"];//callback can be global or local, so define a reference function in $__cbm
-						
+
 						//
 						window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
 							try{
@@ -43,7 +43,7 @@
 								if(args == undefined)
 									args = sender;
 								var _func = $__cbm[newCallBackScript];
-								_func(sender, args);	
+								_func(sender, args);
 							}catch(e){
 								alert(e);
 							}finally{
@@ -52,9 +52,9 @@
 								//alert("del ok");
 								//alert(typeof $__cbm[newCallBackScript]);
 								//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
-							}				
+							}
 						}
-						jsonArgs["callback"] = newCallBackScript;				
+						jsonArgs["callback"] = newCallBackScript;
 					}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string" && !jsonArgs["__keepCallback"]){
 						//2、 callback:"mycallback()"
 						var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
@@ -63,7 +63,7 @@
 							alert(cbName + " is not a global function, callback function must be a global function!");
 							return;
 						}
-						
+
 						var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
 						while(window[newCallBackScript]){
 							newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
@@ -77,31 +77,31 @@
 								//$alert(args);
 								if(args == undefined)
 									args = sender;
-								callbackFn(sender, args);	
+								callbackFn(sender, args);
 							}catch(e){
 								alert(e);
 							}finally{
 								delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
 								//alert("del ok");
 								//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
-							}				
+							}
 						}
 						jsonArgs["callback"] = newCallBackScript;
 					}
-					
+
 					s.service.callBackProxy(jsonArgs , "error");
-				
+
 					serviceparams = $summer.jsonToStr(jsonArgs);
 					if(typeof serviceparams == "object"){
 						//转string后仍然为json，则报错，规定：调用服务的参数如果是字符串，必须是能转为json的字符串才行
 						alert("调用服务[" + serviceType + "]时传递的参数不能标准化为json字符串，请检查参数格式" + jsonArgs);
-						return;	
+						return;
 					}
 				}else{
 					alert("调用$service.call("+serviceType+", jsonArgs, "+isSync+")时不合法,参数jsonArgs类型为"+typeof jsonArgs);
 					return;
 				}
-					
+
 				if(isSync){
 					return adrinvoker.call2(serviceType,serviceparams);//call2是同步调用
 				}else{
@@ -110,7 +110,7 @@
 				}
 			}catch(e){
 				var info="";
-				if(isSync)	
+				if(isSync)
 					info = "调用$service.call(\""+serviceType+"\", jsonArgs, "+isSync+")时发生异常,请检查!";
 				else
 					info = "调用$service.call(\""+serviceType+"\", jsonArgs)时发生异常,请检查!";
@@ -126,7 +126,7 @@
 					newCallBackFnName =  callback_KEY + $summer.UUID(8, 16);//anonymous method
 				}
 				$__cbm[newCallBackFnName] = jsonArgs[callback_KEY];//callback can be global or local, so define a reference function in $__cbm
-				
+
 				//
 				window[newCallBackFnName] = function (sender, args){
 					try{
@@ -137,18 +137,18 @@
 						if(args == undefined)
 							args = sender;
 						var _func = jsonArgs[callback_KEY];
-						_func(sender, args);	
+						_func(sender, args);
 					}catch(e){
 						alert(e);
 					}finally{
 						delete $__cbm[newCallBackFnName];
 						delete window[newCallBackFnName];
-						//alert("del ok"); 
+						//alert("del ok");
 						//alert(typeof $__cbm[newCallBackScript]);
 						//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
-					}				
+					}
 				}
-				jsonArgs[callback_KEY] = newCallBackFnName + "()";				
+				jsonArgs[callback_KEY] = newCallBackFnName + "()";
 			}else if(jsonArgs[callback_KEY] && typeof(jsonArgs[callback_KEY]) == "string"){
 				// callback:"mycallback()"
 				var cbName = jsonArgs[callback_KEY].substring(0, jsonArgs[callback_KEY].indexOf("("));
@@ -157,7 +157,7 @@
 					alert(cbName + " is not a global function, callback function must be a global function!");
 					return;
 				}
-				
+
 				var newCallBackFnName = callback_KEY + $summer.UUID(8, 16);//anonymous method
 				while(window[newCallBackFnName]){
 					newCallBackFnName =  callback_KEY + $summer.UUID(8, 16);//anonymous method
@@ -171,33 +171,33 @@
 						//$alert(args);
 						if(args == undefined)
 							args = sender;
-						callbackFn(sender, args);	
+						callbackFn(sender, args);
 					}catch(e){
 						alert(e);
 					}finally{
 						delete window[newCallBackFnName];
 						//alert("del ok");
 						//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
-					}				
+					}
 				}
 				jsonArgs[callback_KEY] = newCallBackFnName + "()";
 			}
-		},        
+		},
 		callAction : function(controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs){
 			if(arguments.length == 1 && typeof arguments[0] == "object"){
 				var args = {};
 				/*
-				args  = {
-					viewid:"xxx.xxx.xx",
-					action:"methodName",
-					params:{a:1,b:2},
-					//isDataCollect:true,
-					autoDataBinding:true,//请求回来会是否进行数据绑定
-					contextmapping:"fieldPath",//将返回结果映射到指定的Context字段上，默认为替换整个Context
-					callback:"actionid",			
-					error:"errorActionId"//失败回调的ActionId			
-				}
-				*/
+				 args  = {
+				 viewid:"xxx.xxx.xx",
+				 action:"methodName",
+				 params:{a:1,b:2},
+				 //isDataCollect:true,
+				 autoDataBinding:true,//请求回来会是否进行数据绑定
+				 contextmapping:"fieldPath",//将返回结果映射到指定的Context字段上，默认为替换整个Context
+				 callback:"actionid",
+				 error:"errorActionId"//失败回调的ActionId
+				 }
+				 */
 				args = controllerName;
 				var sysParam = {
 					viewid:"xxx.xxx.xx",
@@ -206,8 +206,8 @@
 					//isDataCollect:true,
 					autoDataBinding:true,//请求回来会是否进行数据绑定
 					contextmapping:"fieldPath",//将返回结果映射到指定的Context字段上，默认为替换整个Context
-					callback:"actionid",			
-					error:"errorActionId"//失败回调的ActionId			
+					callback:"actionid",
+					error:"errorActionId"//失败回调的ActionId
 				};
 				for(key in args){
 					if(!sysParam.hasOwnProperty(key) && typeof args[key] == "string"){
@@ -232,69 +232,49 @@
 				return s.callService("UMService.callAction", args);
 			}
 		}
+		get: function (json) {
+			/*	参数：
+			 url : 请求的ID
+			 callback : 用于绑定webview的字段名
+			 */
+			if($summer.isJSONObject(json)){
+				if(!json.url){
+					alert("请输入请求的url");
+					return;
+				}
+				return s.callService("UMService.get", json, false);
+			}else{
+				alert("参数不是有效的JSONObject");
+			}
+		},
+		post: function (json) {
+			/*	参数：
+			 url : "http://academy.yonyou.com/api/loginLx.ashx",//请求的url,
+			 data: {key:"6480-4230-27FD-8AA0",user:"apitest",pwd:"123456"},
+			 callback : "mycallback()"
+			 */
+			if($summer.isJSONObject(json)){
+				if(!json.url){
+					alert("请输入请求的url");
+					return;
+				}
+				return s.callService("UMService.post", json, false);
+			}else{
+				alert("参数不是有效的JSONObject");
+			}
+		}
 	};//s.service end
-	s.callService = s.service.call;
-	s.callAction = s.service.callAction;
-	s.UMService.callAction= s.service.callAction;
+
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//summser.UMDevie.writeFile()
 	//summer.camera.open() --->summer.openCamera()
 	s.UMDevice = {
 		_deviceInfo_Screen :null,
-		writeFile : function(filePath, content){
-			var args = {};
-			if(filePath)
-				args["path"] = filePath;
-			if(content)
-				args["content"] = content;
-			return s.callService("UMFile.write", args, false);
-		},
-		readFile : function(filePath){
-			var strContent = "";
-			var args ={};
-			if(filePath)
-				args["path"] = filePath;
-			strContent = s.callService("UMFile.read", args, true);
-
-			//苹果安卓统一返回处理结果
-			if(strContent && strContent != ""){
-				try{
-					/*  取出缓存的值不再强行转化为json，按照绝大多数平台通常的处理方式，缓存取出来后必要时需自行类型转化
-					 obj = $stringToJSON(strContent);
-					 return obj;
-					 */
-					return strContent;
-				}catch(e){
-					return strContent;
-				}
-			}else{
-				return null;
-			}
-		},
-		openCamera : function(args){
-			if($summer.checkIfExist(args, ["callback","compressionRatio"]))
-				return s.callService("UMDevice.openCamera", args, false);
-		},
 		getTimeZoneID : function(){
 			return	s.callService("UMDevice.getTimeZoneID", "", true);
 		} ,
 		getTimeZoneDisplayName : function(){
 			return	s.callService("UMDevice.getTimeZoneDisplayName", {}, true); //无参调用统一使用{}
-		},
-		getLocation : function(json){
-			var args = {};
-			if(arguments.length == 1 && $summer.isJSONObject(arguments[0])){
-				args = json;
-			}else{
-				alert("调用capturePhoto服务时，参数不是一个有效的JSONObject");
-				return;
-			}
-			var result = s.callService("UMDevice.getLocation", args);
-			var returnVal = "";
-			if(typeof result == "string"){
-				returnVal = "状态为"+result+", 可以通过callback获取返回值";
-			}
-			return returnVal;
 		},
 		openAddressBook: function () {
 			return s.callService("UMDevice.openAddressBook",{});
@@ -308,24 +288,6 @@
 		},
 		getMemoryInfo: function () {
 			return s.callService("UMDevice.getMemoryInfo",{},true);
-		},
-		gotoMapView: function (args) {
-			/*
-			 var args = {
-			 posX:"",//位置信息x坐标
-			 posY:"",//位置信息y坐标
-			 bindfield:"",//绑定字段
-			 auto:"false",//是否自动定位
-			 aroundpoi :"",//周围兴趣点
-			 keyword:"",//要定位的关键字
-			 onaroundpoiclick:"",//兴趣点点击触发的JS方法
-			 onmylocationclick:""//我的位置点击触发的JS方法
-			 };
-			 */
-			if(!$summer.isJSONObject(args)){
-				alert("调用gotoMapView服务时，参数不是一个有效的JSONObject");
-			}
-			return s.callService("UMDevice.gotoMapView",args);
 		},
 		openWebView: function (args) {
 			if(!$summer.isJSONObject(args)){
@@ -427,30 +389,6 @@
 			}
 			s.callService("UMDevice.saveContact", args);
 		},
-		generateQRCode: function (jsonArgs) {
-			//twocode-size  //二维码大小，默认180*180，二维码为正方形
-			//twocode-content  //二维码内容，字符串
-			if($summer.isJSONObject(jsonArgs)){
-				if(typeof jsonArgs["size"] != "undefined"){
-					jsonArgs["twocode-size"] =  jsonArgs["size"];
-				}
-				if(typeof jsonArgs["content"] != "undefined"){
-					jsonArgs["twocode-content"] =  jsonArgs["content"];
-				}
-				if(typeof jsonArgs["twocode-size"] == "undefined"){
-					jsonArgs["twocode-size"] =  "180";
-				}
-				if(typeof jsonArgs["twocode-content"] == "undefined"){
-					alert("参数twocode-content不能为空，此参数用来标识扫描二维码后的返回值");
-					return;
-				}
-			}else{
-				alert("generateQRCode方法的参数不是一个有效的JSONObject!");
-				return;
-			}
-
-			return s.callService("UMDevice.createTwocodeImage", jsonArgs, true);
-		},
 	};
 	s.UMFile = {
 		remove : function(args){
@@ -524,13 +462,8 @@
 				args["content"] = content;
 			}
 			return s.callService("UMDevice.sendMail", args);
-		},
-		saveContact: function (args) {
-			if(!$summer.isJSONObject(args)){
-				alert("调用saveContact服务时，参数不是一个有效的JSONObject");
-			}
-			s.callService("UMDevice.saveContact", args);
 		}
+
 	};
 	s.UMCamera={
 		open: function (args) {
@@ -598,53 +531,12 @@
 				return false;
 			}
 		},
-		networkState: function () {
-			var result = s.callService("UMNetwork.networkState", {}, true);
-			if(typeof result == "String"){
-				return $summer.strToJson(result);
-			}else{
-				return result;
-			}
-		},
 		getNetworkInfo: function () {
 			var result = s.callService("UMNetwork.getNetworkInfo", {}, true);//同步
 			if(typeof result == "String"){
 				return $summer.strToJson(result);
 			}else{
 				return result;
-			}
-		}
-	};
-	s.UMService={
-		get: function (json) {
-			/*	参数：
-			 url : 请求的ID
-			 callback : 用于绑定webview的字段名
-			 */
-			if($summer.isJSONObject(json)){
-				if(!json.url){
-					alert("请输入请求的url");
-					return;
-				}
-				return s.callService("UMService.get", json, false);
-			}else{
-				alert("参数不是有效的JSONObject");
-			}
-		},
-		post: function (json) {
-			/*	参数：
-			 url : "http://academy.yonyou.com/api/loginLx.ashx",//请求的url,
-			 data: {key:"6480-4230-27FD-8AA0",user:"apitest",pwd:"123456"},
-			 callback : "mycallback()"
-			 */
-			if($summer.isJSONObject(json)){
-				if(!json.url){
-					alert("请输入请求的url");
-					return;
-				}
-				return s.callService("UMService.post", json, false);
-			}else{
-				alert("参数不是有效的JSONObject");
 			}
 		}
 	};
@@ -738,57 +630,20 @@
 		}
 	};
 	s.UMCache={
-		write: function (filePath, content, append, charset, isSync){
-			if($summer.isJSONObject(filePath)){
-				return s.callService("UMFile.write", filePath, true);
-			}else if($summer.os=='android' || $summer.os=='ios'){
-				var args = {};
-				if($summer.isJSONObject(append) && arguments.length == 3){
-					args = append;
-					if(filePath)
-						args["path"] = filePath;
-					if(content)
-						if(typeof content == "object"){
-							content = "obj-"+JSON.stringify(content);
-							args["content"] = content;
-						}else if(typeof content == "object"){
-							content = "str-"+content;
-							args["content"] = content;
-						}else{
-							alert("writeFile不支持"+typeof content +"类型的参数");
-						}
-				}else{
-					if(filePath)
-						args["path"] = filePath;
-					if(content)
-						args["content"] = content;
-					if(append)
-						args["append"] = append;
-					if(charset)
-						args["charset"] = charset;
-				}
-				if(typeof isSync == "undefined")
-					return s.callService("UMFile.write", args, true);//默认都是同步调用，避免write后read不到最新的结果
-				else{
-					return s.callService("UMFile.write", args, isSync);
-				}
-			}
+		writeFile : function(filePath, content){
+			var args = {};
+			if(filePath)
+				args["path"] = filePath;
+			if(content)
+				args["content"] = content;
+			return s.callService("UMFile.write", args, false);
 		},
-
-		read: function UMP$Services$Cache$readFile(filePath, maxlength, charset){
+		readFile : function(filePath){
 			var strContent = "";
-			if($summer.os=='android' || $summer.os=='ios'){
-				var args ={};
-				if(filePath)
-					args["path"] = filePath;
-				if(maxlength)
-					args["maxlength"] = maxlength;
-				if(charset)
-					args["charset"] = charset;
-
-				var str = $summer.jsonToStr(args);
-				strContent = s.callService("UMFile.read", str, true);
-			}
+			var args ={};
+			if(filePath)
+				args["path"] = filePath;
+			strContent = s.callService("UMFile.read", args, true);
 
 			//苹果安卓统一返回处理结果
 			if(strContent && strContent != ""){
@@ -797,109 +652,70 @@
 					 obj = $stringToJSON(strContent);
 					 return obj;
 					 */
-					if(strContent.indexof("obj-")==0){
-						strContent = strContent.slice(4);
-						return JSON.parse(strContent);
-					}else if(strContent.indexof("str-")==0){
-						strContent = strContent.slice(4);
-						return strContent;
-					}
 					return strContent;
 				}catch(e){
 					return strContent;
 				}
 			}else{
 				return null;
-
 			}
 		}
 	}
-	s.writeFile = s.UMDevice.writeFile;
-	s.readFile = s.UMDevice.readFile;
-	s.openCamera = s.UMDevice.openCamera;
+	/*service*/
+	s.callService = s.UMService.call;
+	s.callAction = s.UMService.callAction;
+	/*device*/
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
-	s.getLocation=s.UMDevice.getLocation;
-	// ↓ 为corddova 插件的封装
-  	s.cordovaWay = {
-		ajax : function(json, successFn, errFn){
-			if(json.type == "get"){
-				return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
-			}else if(json.type == "post"){
-				return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
-			}
-		},
-		get : function(url, param, header, successFn, errFn){
-			return cordovaHTTP.get(url || "", param || {}, header || {}, successFn, errFn);
-		},
-		post : function(url, param, header, successFn, errFn){
-			return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
-		},
+	s.openAddressBook= s.UMDevice.openAddressBook;
+	s.getInternalMemoryInfo = s.UMDevice.getInternalMemoryInfo;
+	s.getExternalStorageInfo = s.UMDevice.getExternalStorageInfo;
+	s.getMemoryInfo = s.UMDevice.getMemoryInfo;
+	s.openWebView = s.UMDevice.openWebView;
+	s.screenShot = s.UMDevice.screenShot;
+	s.notify = s.UMDevice.notify;
+	s.getDeviceInfo = s.UMDevice.getDeviceInfo;
+	s.getScreenWidth = s.UMDevice.getScreenWidth;
+	s.getScreenHeight = s.UMDevice.getScreenHeight;
+	s.getScreenDensity = s.UMDevice.getScreenDensity;
+	s.currentOrientation = s.UMDevice.currentOrientation;
+	s.capturePhoto = s.UMDevice.capturePhoto;
+	s.getAlbumPath = s.UMDevice.getAlbumPath;
+	s.getAppAlbumPath = s.UMDevice.getAppAlbumPath;
+	s.getContacts = s.UMDevice.getContacts;
+	s.saveContact = s.UMDevice.saveContact;
+	/*tel*/
+	s.callPhone= s.UMTel.call;
+	s.sendMsg= s.UMTel.sendMsg;
+	s.sendMail= s.UMTel.sendMail;
+	/*cache*/
+	s.writeFile = s.UMCache.writeFile;
+	s.readFile = s.UMCache.readFile;
+	/*camera*/
+	s.openCamera= s.UMCamera.openCamera;
+	s.openPhotoAlbum = s.UMCamera.openPhotoAlbum;
+	/*scanner*/
+	s.openScanner= s.UMScanner.open;
+	s.generateQRCode= s.UMScanner.generateQRCode;
+	/*net*/
+	s.netAvailable= s.UMNet.available;
+	s.getNetworkInfo= s.UMNet.getNetworkInfo;
 
-		call : function(string, successFn, errFn){
-			return window.PhoneCaller.call(string, successFn, errFn);
-		},
-		
-		getLocation : function(successFn, errFn){
-			return navigator.geolocation.getCurrentPosition(successFn, errFn);
-		},
-		contacts : {
-			find : function(json, successFn, errFn){	
-				var options      = new ContactFindOptions();
-				options.filter   = json.filter;
-				options.multiple = json.multiple;
-				options.desiredFields =[navigator.contacts.fieldType.id];
-				options.hasPhoneNumber = json.hasPhoneNumber;
-				var fields  =json.fieldType || [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-				return navigator.contacts.find(fields, successFn, errFn, options);
-			},
-			
-			save : function(json, successFn, errFn){
-				var contact = navigator.contacts.create();
-				contact.displayName = json.displayName;
-				contact.nickname = json.nickName;   
-				return contact.save(successFn,errFn);
-			},
-	    },
-		//加速计
+	s.ajax=function(json, successFn, errFn){
+		if(json.type == "get"){
+			return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+		}else if(json.type == "post"){
+			return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+		}
+	};
+	s.get=function(url, param, header, successFn, errFn){
+		return cordovaHTTP.get(url || "", param || {}, header || {}, successFn, errFn);
+	};
+	s.post=function(url, param, header, successFn, errFn){
+		return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
+	};
+	s.getLocation=function(successFn, errFn){
+		return navigator.geolocation.getCurrentPosition(successFn, errFn);
+	};
 
-		getAcceleration : function (onSuccess,onError){
-			return navigator.accelerometer.getCurrentAcceleration(onSuccess,onError);
-		},
-		watchAcceleration : function (options,onSuccess,onError){
-			var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);  
-			return watchID;  
-		},
-		//手机信息
-		model : function (){
-			return device.model;
-		},
-		uuid : function (){
-			return device.uuid;
-		},
-		version : function (){
-			return device.version;
-		},
-		platform : function(){
-			return device.platform;
-		},
-		manufacturer : function (){
-			return device.manufacturer;
-		},
-		serial : function (){
-			return device.serial;
-		},
-		//电池状态
-		batterystatus : function (fn){
-			return window.addEventListener("batterystatus", fn, false);
-		},
-		//camera
-		camera : function (json,ret,err){
-			return navigator.camera.getPicture(ret,err,json);
-		},
-		//Inappbrowser
-		inappbrowser : function(url, target, options){
-			return cordova.InAppBrowser.open(url, target, options);
-		}	
-  	};
 }(window,summer);
