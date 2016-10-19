@@ -1193,6 +1193,7 @@
     s.closeWin = s.window.closeWin;
 	s.closeToWin = s.window.closeToWin;
 	s.getSysInfo = s.window.getSysInfo;
+
     s.winParam = s.window.winParam;
     s.frameParam = s.window.frameParam;
     s.setFrameAttr = s.window.setFrameAttr;
@@ -1231,7 +1232,7 @@
 
 	    options.params = params;
 	    options.httpMethod = "POST"; 
-	    options.headers = headers || "";
+	    options.headers = headers || {};
 
 	    var ft = new FileTransfer();
 	    var SERVER = json.SERVER;
