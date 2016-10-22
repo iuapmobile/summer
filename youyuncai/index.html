@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/font-icons.css">
+		<link rel="stylesheet" href="css/iuapmobile.um.css">
+		<style>
+		
+       /* 设置背景图片 */
+        	.icon-home, .icon-msg, .icon-goods,.icon-mine {
+        	    height: 25px;
+        	  background: url(./img/home-25.png) center no-repeat; 
+        	  background-size:22px 22px;
+        	}
+        	.icon-home {
+        	    background-image: url(./img/home-25.png);
+        	}
+        	.icon-msg {
+        	    background-image: url(./img/msg-25.png);
+        	}
+        	.icon-goods {
+        	    background-image: url(./img/goods-25.png);
+        	}
+        	.icon-mine {
+        	    background-image: url(./img/mine-25.png);
+        	}
+        	/* 设置激活状态 */
+        	.um-footerbar-item.active .icon-home {
+        	    background-image: url(./img/Home-25-active.png);
+        	}
+        	.um-footerbar-item.active .icon-msg {
+        	    background-image: url(./img/msg-25-active.png);
+        	}
+        	.um-footerbar-item.active .icon-goods {
+        	    background-image: url(./img/goods-25-active.png);
+        	}
+        	.um-footerbar-item.active .icon-mine {
+        	    background-image: url(./img/mine-25-active.png);
+        	}
+        	.um-footerbar-item.active {
+			    color: rgba(241, 90, 74, 1);
+			}
+			#article>div{display:none;text-align:center;}
+			#article>div.active{display:block;}
+			#home .um-grid-row  a  div{
+				color:rgba(136, 136, 136, 1);
+				font-size:13px;
+			}
+		 	.um-grid-row > div, .um-grid-row > .um-grid-item{
+		 		padding:10px 0;
+		 	}
+			#home .um-grid-row  a  div.title{
+				color:rgba(51, 51, 51, 1);
+				font-size:18px;
+				font-weight:bold;			 
+			}
+			#home .um-grid-row a{
+				display:block;
+			}
+			#home .um-grid-row div.addphoto a{
+				padding:13px;
+			}
+			#home .um-grid-row{
+				border-bottom:1px solid rgba(230, 230, 230, 1);
+			}
+			 
+			#home .um-grid-row a{
+				border-right:1px solid rgba(230, 230, 230, 1);
+			}
+			/*消息列表样式*/
+			.msg-info {
+        		position: relative;
+        	}
+        	.msg-info .um-badge {
+        		position: absolute;
+        		right: -10px;
+        		font-size: 12px;
+        	}
+        	.msg-header {
+        		width: 40px;
+        		height: 40px;
+        		line-height: 40px;
+        		background: blue;
+        		border-radius: 50%;
+        		text-align: center;
+        		color: white;
+        	}
+        	.um-list .um-list-item{
+        		padding-left:0px;
+        	}
+        	.msg-info .um-badge{
+        		top:0px;
+        	}
+        </style>
+
+
+		<script src="js/Frameworks/iuapmobile.frameworks.core.js" ></script>
+		<script src="js/summer.js" ></script>
+		<script src="js/jquery.min.js" ></script>
+		<script src="js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+	 
+	</head>
+	<body id='body0'>
+		<div class="um-page" id="index">
+		 
+			<div id="main" class="um-content">				 
+				<div  id="article">
+					  <div  id="home" class="active" >
+						 	<um-layout-text></um-layout-text>
+					  </div>
+					  <div id="message">
+						 <um-message></um-message>
+					  </div>
+					  <div id="goods">
+						第三个商品页面<!--这里写第三个页面的内容-->
+					  </div>
+					  <div id="mine">
+						第四个个人信息页面<!--这里写第四个页面的内容-->
+					  </div>
+				</div>		 
+			</div>
+		 
+		
+			 <um-footer-custom></um-footer-custom> 
+		</div>
+	</body>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script src="js/workbench.js" ></script>
+	<script src="js/index.js" ></script>
+	<script>	
+	 $('.um-footerbar>a').click(function(){
+	 	$(this).addClass('active').siblings('.active').removeClass('active');
+		var tar=$(this).attr('data-tar');
+		$(tar).addClass('active').siblings('.active').removeClass('active');	
+	});		 
+</script>
+</html>
