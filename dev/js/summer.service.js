@@ -319,7 +319,7 @@
 			}else{
 				result = s.callService("UMDevice.getDeviceInfo", "", true);
 			}
-			return result;
+			return JSON.parse(result);
 		},
 		getScreenWidth: function () {
 			if(!this._deviceInfo_Screen){

@@ -832,21 +832,19 @@
         //         el.style.paddingTop = '20px';
         //     }
         // }
-		if($summer.os == "ios" || $summer.os == "pc"){
-			$(el).children().css("top","20px");
-			var strSV = summer.systemVersion;
-            var numSV = parseInt(strSV,10);
-            var fullScreen = summer.fullScreen;
-            var statusBarAppearance = summer.statusBarAppearance;
-			
-			//if (numSV >= 7 && !fullScreen && statusBarAppearance) {
-			if (true) {
-				el.style.paddingTop = '20px';
-				$(el).children().css("top","20px");
-			}
-        }else{
-			
-		}
+		var sysInfo=$summer.strToJson(summer.getSysInfo());
+        var strST=sysInfo.systemType;
+        var strSV = sysInfo.systemVersion;
+        var fullScreen = sysInfo.fullScreen;
+        var statusBarAppearance = sysInfo.statusBarAppearance;
+        var statusBarHeight = sysInfo.statusBarHeight;
+        if((strST == "ios" && fullScreen && statusBarAppearance=='1') || strST == "pc"){        
+                el.style.paddingTop = '20px';
+                $(el).children().css("top","20px");
+        }else if(strST == "android" && fullScreen && statusBarAppearance){
+                el.style.paddingTop = '20px';
+                $(el).children().css("top",'20px');
+        }
     };
     u.toast = function(title, text, time){
         // var opts = {};
@@ -1065,12 +1063,15 @@
     			json["position"].height = json["rect"].h;
 
     		}
-    		/*if(json["position"].width=="auto"){
+    		
+    		/*
+    		if(json["position"].width=="auto"){
     		    json["position"].width = $summer.offset(document.getElementsByTagName("body")[0]).w;
     		}
     		if(json["position"].height=="auto"){
     		    json["position"].height = $summer.offset(document.getElementsByTagName("body")[0]).h;
-    		}*/
+    		}
+    		*/
 
     		if(json["name"] && !json["id"]){
     			json["id"] = json["name"];
@@ -1152,7 +1153,7 @@
 				
 				appParam:"",
 			};
-			return s.callSync('SummerDevice.getSysInfo', param);
+			return JSON.parse(s.callSync('SummerDevice.getSysInfo', param));
 			
 		},
         setFrameAttr : function(json, successFn, errFn){
@@ -1744,7 +1745,7 @@
 			}else{
 				result = s.callService("UMDevice.getDeviceInfo", "", true);
 			}
-			return result;
+			return JSON.parse(result);
 		},
 		getScreenWidth: function () {
 			if(!this._deviceInfo_Screen){

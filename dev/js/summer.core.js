@@ -17,12 +17,15 @@
     			json["position"].height = json["rect"].h;
 
     		}
-    		/*if(json["position"].width=="auto"){
+    		
+    		/*
+    		if(json["position"].width=="auto"){
     		    json["position"].width = $summer.offset(document.getElementsByTagName("body")[0]).w;
     		}
     		if(json["position"].height=="auto"){
     		    json["position"].height = $summer.offset(document.getElementsByTagName("body")[0]).h;
-    		}*/
+    		}
+    		*/
 
     		if(json["name"] && !json["id"]){
     			json["id"] = json["name"];
@@ -104,7 +107,7 @@
 				
 				appParam:"",
 			};
-			return s.callSync('SummerDevice.getSysInfo', param);
+			return JSON.parse(s.callSync('SummerDevice.getSysInfo', param));
 			
 		},
         setFrameAttr : function(json, successFn, errFn){

@@ -422,21 +422,19 @@
         //         el.style.paddingTop = '20px';
         //     }
         // }
-		if($summer.os == "ios" || $summer.os == "pc"){
-			$(el).children().css("top","20px");
-			var strSV = summer.systemVersion;
-            var numSV = parseInt(strSV,10);
-            var fullScreen = summer.fullScreen;
-            var statusBarAppearance = summer.statusBarAppearance;
-			
-			//if (numSV >= 7 && !fullScreen && statusBarAppearance) {
-			if (true) {
-				el.style.paddingTop = '20px';
-				$(el).children().css("top","20px");
-			}
-        }else{
-			
-		}
+		var sysInfo=$summer.strToJson(summer.getSysInfo());
+        var strST=sysInfo.systemType;
+        var strSV = sysInfo.systemVersion;
+        var fullScreen = sysInfo.fullScreen;
+        var statusBarAppearance = sysInfo.statusBarAppearance;
+        var statusBarHeight = sysInfo.statusBarHeight;
+        if((strST == "ios" && fullScreen && statusBarAppearance=='1') || strST == "pc"){        
+                el.style.paddingTop = '20px';
+                $(el).children().css("top","20px");
+        }else if(strST == "android" && fullScreen && statusBarAppearance){
+                el.style.paddingTop = '20px';
+                $(el).children().css("top",'20px');
+        }
     };
     u.toast = function(title, text, time){
         // var opts = {};
