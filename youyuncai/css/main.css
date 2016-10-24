@@ -1,4 +1,7 @@
-#um-sortable .small{
+#uappmanager{
+	margin-top:10px;
+}
+#um-sortable .small,#um-sortable .more{
 	width:25%;
 	float:left;
 	height:80px;

@@ -1031,14 +1031,14 @@ APPManager.prototype = {
 	},
 	create : function(){
 		var sortableTxtL = "<ul class='clearfix' id='um-sortable'>";
-		var more = "<li class='more'></li>";
+		var more = "<li class='more'><div style='height:40px'><img src='./img/more.png' width=40 class='mt10'></div><div class='f12 mt5'>更多应用</div></li>";
 		var sortableTxtR = "</ul>";
 		var lis = "";
 		var data = this.arr;
 		for (var i = 0; i < data.length; i++){
 			lis += "<li class='small'><a class='um-black'  data-url = '"+data[i].url+"'><img src='"+data[i].img+"' width=40 /><div class='f12 mt5'>"+data[i].label+"</div></a><a class='delete'></a></li>"
 		}
-		var sortableTemp = sortableTxtL + lis + sortableTxtR;
+		var sortableTemp = sortableTxtL + lis + more + sortableTxtR;
 		$(this.id).append(sortableTemp);
 		
 		this.runn();
