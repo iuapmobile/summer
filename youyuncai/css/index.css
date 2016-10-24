@@ -1,7 +1,8 @@
 /* 设置背景图片 */
 .icon-home, .icon-msg, .icon-goods,.icon-mine {
-    height: 25px;
-  background: url(./img/home-25.png) center no-repeat; 
+    height: 22px;  
+  background-position: center center;
+  background-repeat:no-repeat; 
   background-size:22px 22px;
 }
 .icon-home {
@@ -18,7 +19,7 @@
 }
 /* 设置激活状态 */
 .um-footerbar-item.active .icon-home {
-    background-image: url(../img/Home-25-active.png);
+    background-image: url(../img/home-25-active.png);
 }
 .um-footerbar-item.active .icon-msg {
     background-image: url(../img/msg-25-active.png);
@@ -31,6 +32,9 @@
 }
 .um-footerbar-item.active {
     color: rgba(241, 90, 74, 1);
+}
+.um-footerbar-item{
+	padding-top:3.5px;
 }
 #article>div{display:none;text-align:center;}
 #article>div.active{display:block;}

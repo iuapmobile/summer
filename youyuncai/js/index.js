@@ -1,9 +1,12 @@
 ﻿ /*底部导航栏与4个内容区域切换*/
+$(function(){
 	$('.um-footerbar>a').click(function(){
 		 	$(this).addClass('active').siblings('.active').removeClass('active');
 			var tar=$(this).attr('data-tar');
 			$(tar).addClass('active').siblings('.active').removeClass('active');	
 	});	
+});
+	
  //创建标签	  
     workbench.createComponent("um-header", {placeholder:"iuapmobile 3.0"});
 	workbench.createComponent("um-banner", {
