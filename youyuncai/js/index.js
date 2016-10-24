@@ -1,5 +1,70 @@
-﻿   workbench.createComponent("um-header", {title:"iuapmobile 3.0"});
-
+﻿    workbench.createComponent("um-header", {placeholder:"iuapmobile 3.0"});
+	workbench.createComponent("um-banner", {
+		data: [
+			{content: "./img/g1.jpg"}, 
+			{content: "./img/g2.jpg"}, 
+			{content: "./img/g3.jpg"}
+		]
+    });
+    /*
+    var j = {"deviceid":"FBC0BE3F-E2AE-4B7C-B060-777A4C8E5B6E","os":"web","userid":"caoqi"};
+	var s = $summer.jsonToStr(j);
+	var param = {data: s};
+	$.get("http://172.20.7.98:8080/mobem/app/getapplist",param,function(data){
+		
+		//alert(data);
+		var d = ($summer.strToJson(data)).data.apps;
+		
+		for (var i =0;i<d.length;i++){
+			d[i].img = d[i].webiconurl;
+			d[i].label = d[i].title;
+			d[i].url = d[i].weburl;
+		}
+		workbench.createComponent("um-APPManager",{
+			el:"#mycomponents2",
+			data:d,
+			colum:4
+		});
+	});*/
+	workbench.createComponent("um-APPManager",{
+		el:"#uappmanager",
+		data:[{
+			"label" : "询报价",
+			"img" : "img/xbj.png",
+			"url" : ""
+		},
+		{
+			"label" : "招投标",
+			"img" : "img/ztb.png",
+			"url" : ""
+		},
+		{
+			"label" : "超市",
+			"img" : "img/cs.png",
+			"url" : ""
+		},
+		{
+			"label" : "在线竞价",
+			"img" : "img/jj.png",
+			"url" : ""
+		},
+		{
+			"label" : "供应商准入",
+			"img" : "img/zr.png",
+			"url" : ""
+		},
+		{
+			"label" : "收获",
+			"img" : "img/sh.png",
+			"url" : ""
+		},
+		{
+			"label" : "对账",
+			"img" : "img/dz.png",
+			"url" : ""
+		}],
+		colum : 4
+	});
 	workbench.createComponent("um-footer", {
 		data: [{title:"消息", iconfont:"ti-comments"},
 			{title:"日程q", iconfont:"ti-notepad"},

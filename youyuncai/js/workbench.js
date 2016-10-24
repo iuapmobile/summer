@@ -7,19 +7,38 @@ var workbench = {
 		if(type == 'um-header'){
 			// 定义
 			var header = Vue.extend({
-			  	template: '<div id="header" class="um-header">'
-						+'<a href="#" class="um-back">返回</a>'
-						+'<h3>{{aa}}</h3>'
-						+'<a href="#" onclick="openwin()" class="um-header-right ti-plus f20"></a>'
-						+'</div>',
+				template:'<div class="um-header-fixed">'
+    						+'<a class="fl um-scan">'
+    						+'<img src="img/scan.png" alt="" />'
+    						+'<div class="f12">扫一扫</div>'
+    						+'</a>'
+           					+' <div class="um-input-group">'
+	         				+'<span class="t-search"></span>'
+	         				+'<input type="search" class="form-control" placeholder="{{aa}}">'
+	         				+'<span class="t-camera"></span>'
+           				    +'</div>'
+    						+'</div>',
 				data: function(){
 					return {
-						aa : settings.title					
+						aa : settings.placeholder					
 					}
 				}
 			});
 			// 注册
 			Vue.component('um-header', header);
+		}else if (type == "um-banner"){
+			var islider = new iSlider({
+    			type: 'pic',
+    			data: settings.data,
+    			dom: document.getElementById("iSlider-wrapper"),
+    			isLooping: true,
+    			animateType: 'default',
+    			isAutoplay: true,
+    			animateTime: 800
+    		});
+    		islider.addDot();
+		}else if(type == 'um-APPManager'){
+			var v = new APPManager(settings.el,settings);
 		}else if(type == "um-footer"){
 		    // 定义
 			var footer = Vue.extend({
@@ -88,28 +107,6 @@ var workbench = {
 			});
 			// 注册
 			Vue.component('um-footer-custom', footerCustom);
-		}else if(type == 'um-APPManager'){
-			var v = new APPManager(settings.el,settings);
-			/*
-			var app = Vue.extend({
-			  	template: '<ul>'
-				    +'<li v-for="todo in todos">'
-				      +'{{ todo.text }}'
-				    
-				    +'</li>'
-			  	+'</ul>',
-			  	
-				data: function(){
-			  		return{
-			    		info: 'Hello iuap mobile!',
-			  	  		todos:[{text:"aa"},{text:"bb"},{text:"cc"},{text:"dd"}]
-			  		}
-			  	}
-				
-			});
-			// 注册
-			Vue.component('um-appmanager', app);
-			*/
 		}else if(type=='um-applayout'){
 			var AppLayout = Vue.extend({
 				template: '<div class="um-grid">'

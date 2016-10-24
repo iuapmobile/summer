@@ -6,6 +6,8 @@
 		<title></title>
 		<link rel="stylesheet" href="css/font-icons.css">
 		<link rel="stylesheet" href="css/iuapmobile.um.css">
+		<link rel="stylesheet" type="text/css" href="css/islider.css">
+		<link rel="stylesheet" href="css/main.css" />
 		<style>
 		
        /* 设置背景图片 */
@@ -100,7 +102,8 @@
 		<script src="js/summer.js" ></script>
 		<script src="js/jquery.min.js" ></script>
 		<script src="js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
-	 
+		<script src="js/islider.js" ></script>
+	 	<script src="js/Sortable.js" ></script>
 	</head>
 	<body id='body0'>
 		<div class="um-page" id="index">
@@ -108,7 +111,13 @@
 			<div id="main" class="um-content">				 
 				<div  id="article">
 					  <div  id="home" class="active" >
-						 	<um-layout-text></um-layout-text>
+					      <um-header></um-header>
+					      <div class="um-row">
+					      	<div id="iSlider-wrapper" class="iSlider-wrapper"></div>
+					      </div>
+					      
+					      <um-layout-text></um-layout-text>
+					      <div id="uappmanager"></div>
 					  </div>
 					  <div id="message">
 						 <um-message></um-message>
