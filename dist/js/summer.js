@@ -832,6 +832,7 @@
         //         el.style.paddingTop = '20px';
         //     }
         // }
+        
 		var sysInfo=$summer.strToJson(summer.getSysInfo());
         var strST=sysInfo.systemType;
         var strSV = sysInfo.systemVersion;
