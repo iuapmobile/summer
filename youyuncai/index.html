@@ -95,6 +95,26 @@
         	.msg-info .um-badge{
         		top:0px;
         	}
+        	.um-input-group  .form-control{
+        		height:28px;
+        	}
+        	.um-input-group span[class^="ti-"] {
+        		color:rgba(151, 151, 151, 1);
+        		padding: 6px 11px;
+        	}
+        	#message .um-input-search{
+        		padding:5px 9px;background:#fff;
+        	}
+			#message .um-input-search .form-control{
+				background-color:rgba(243, 243, 243, 1);
+				background-position:40% 50%;
+				padding-left:45%;height:30px;
+			}
+			#message .um-input-search .form-control:focus{
+				width:100%;padding-left:8%;
+				background-position:5px 50%;
+			}
+			 
         </style>
 
 
@@ -110,7 +130,7 @@
 		 
 			<div id="main" class="um-content">				 
 				<div  id="article">
-					  <div  id="home" class="active" >
+					  <div  id="home"  >
 					      <um-header></um-header>
 					      <div class="um-row">
 					      	<div id="iSlider-wrapper" class="iSlider-wrapper"></div>
@@ -119,7 +139,14 @@
 					      <um-layout-text></um-layout-text>
 					      <div id="uappmanager"></div>
 					  </div>
-					  <div id="message">
+					  <div id="message" class="active">
+					  	
+                        
+                        <div class="um-input-search">
+                        		<input type="search" class="form-control" placeholder="搜索消息">
+                        </div>
+
+
 						 <um-message></um-message>
 					  </div>
 					  <div id="goods">
