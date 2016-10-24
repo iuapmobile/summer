@@ -7,7 +7,7 @@
 	<frame_name>ump</frame_name>
 	<icon relativePath="css/themes/default/app">app</icon>
 	<target>android-15</target>
-	<platform>android</platform>
+	<platform>ios</platform>
 	<versionCode>1</versionCode>
 	<versionName>1</versionName>
 	<orientation>unspecified</orientation>
