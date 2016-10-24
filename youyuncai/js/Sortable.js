@@ -594,7 +594,7 @@
 			var target = evt.target.parentNode;
 			var url  = target.getAttribute("data-url");
 			var t = target.parentNode;
-			if (target.className == "um-black" && this.options.endTime - this.options.startTime < 800 && !t.classList.contains("dragli") ){
+			if (target.className == "um-black" && this.options.endTime - this.options.startTime < 800 && !t.classList.contains("dragli") && this.options.endTime - this.options.startTime > 222 ){
 				
 				window.location = url;
 			}
