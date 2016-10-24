@@ -89,7 +89,7 @@
 						jsonArgs["callback"] = newCallBackScript;
 					}
 
-					s.service.callBackProxy(jsonArgs , "error");
+					s.UMService.callBackProxy(jsonArgs , "error");
 
 					serviceparams = $summer.jsonToStr(jsonArgs);
 					if(typeof serviceparams == "object"){
@@ -684,13 +684,6 @@
 	s.getAppAlbumPath = s.UMDevice.getAppAlbumPath;
 	s.getContacts = s.UMDevice.getContacts;
 	s.saveContact = s.UMDevice.saveContact;
-
-	s.removeFile = s.UMFile.remove;
-	s.exists = s.UMFile.exists;
-	s.download = s.UMFile.download;
-	s.openFile = s.UMFile.open;
-	s.getFileInfo = s.UMFile.getFileInfo;
-
 	/*tel*/
 	s.callPhone= s.UMTel.call;
 	s.sendMsg= s.UMTel.sendMsg;
