@@ -31,37 +31,37 @@
 		data:[{
 			"label" : "询报价",
 			"img" : "img/xbj.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		},
 		{
 			"label" : "招投标",
 			"img" : "img/ztb.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		},
 		{
 			"label" : "超市",
 			"img" : "img/cs.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		},
 		{
 			"label" : "在线竞价",
 			"img" : "img/jj.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		},
 		{
 			"label" : "供应商准入",
 			"img" : "img/zr.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		},
 		{
 			"label" : "收获",
 			"img" : "img/sh.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		},
 		{
 			"label" : "对账",
 			"img" : "img/dz.png",
-			"url" : ""
+			"url" : "http://uapma.yonyou.com:8443/weixin/summerShow_web/index.html"
 		}],
 		colum : 4
 	});

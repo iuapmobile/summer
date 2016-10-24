@@ -1031,7 +1031,7 @@ APPManager.prototype = {
 	},
 	create : function(){
 		var sortableTxtL = "<ul class='clearfix' id='um-sortable'>";
-		var more = "<li class='more'><div style='height:40px'><img src='./img/more.png' width=40 class='mt10'></div><div class='f12 mt5'>更多应用</div></li>";
+		var more = "<div class='more'><div style='height:40px'><img src='./img/more.png' width=40 class='mt10'></div><div class='f12 mt5'>更多应用</div></div>";
 		var sortableTxtR = "</ul>";
 		var lis = "";
 		var data = this.arr;
@@ -1047,10 +1047,10 @@ APPManager.prototype = {
 	},
 	runn : function(){
 		var el = document.getElementById("um-sortable");
-		Sortable.create(el);
+		Sortable.create(el,{handle:'.small'});
 	},
 	close : function(){
-		$(document).on("click",function(){
+		$(document).on("touchstart",function(){
 			$(".small").removeClass("dragli");
 		});
 	},
