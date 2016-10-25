@@ -319,7 +319,7 @@ $("textarea.form-control").elastic();
         var that=this;
         var duration=settings.duration? settings.duration:2000;
         setTimeout(function(){
-          that.destory(that.modal);
+          that.destroy(that.modal);
         },duration)
       } else {
         html += '<a href="#" class="btn ok">' + settings.btnText[1] +
@@ -377,10 +377,10 @@ $("textarea.form-control").elastic();
             that.settings.ok(data)
           }, 100);
         }
-        that.destory(that.modal);
+        that.destroy(that.modal);
       });
     },
-    destory: function() {
+    destroy: function() {
       var that = this;
       this.modal.removeClass('um-modal-in').addClass('um-modal-out').on('webkitTransitionEnd', function() {
         that.modal.off('webkitTransitionEnd');
