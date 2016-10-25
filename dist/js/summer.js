@@ -833,7 +833,7 @@
         //     }
         // }
         
-		var sysInfo=$summer.strToJson(summer.getSysInfo());
+		var sysInfo=summer.getSysInfo();
         var strST=sysInfo.systemType;
         var strSV = sysInfo.systemVersion;
         var fullScreen = sysInfo.fullScreen;
