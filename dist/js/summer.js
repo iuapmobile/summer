@@ -843,8 +843,8 @@
                 el.style.paddingTop = '20px';
                 $(el).children().css("top","20px");
         }else if(strST == "android" && fullScreen && statusBarAppearance){
-                el.style.paddingTop = '20px';
-                $(el).children().css("top",'20px');
+                el.style.paddingTop = statusBarHeight+'px';
+                $(el).children().css("top",statusBarHeight+'px');
         }
     };
     u.toast = function(title, text, time){
@@ -1143,15 +1143,14 @@
 				pageParam : {param0:123,param1:"abc"},
 				screenWidth:"",
 				screenHeight:"",
-				
 				winId:"",
 				winWidth:"",
-				winHeight:"",
-				
+				winHeight:"",				
 				frameId:"",
 				frameWidth:"",
 				frameHeight:"",
-				
+				statusBarHeight:"",
+				statusBarStyle:"",
 				appParam:"",
 			};
 			return JSON.parse(s.callSync('SummerDevice.getSysInfo', param));

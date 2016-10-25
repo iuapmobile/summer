@@ -433,8 +433,8 @@
                 el.style.paddingTop = '20px';
                 $(el).children().css("top","20px");
         }else if(strST == "android" && fullScreen && statusBarAppearance){
-                el.style.paddingTop = '20px';
-                $(el).children().css("top",'20px');
+                el.style.paddingTop = statusBarHeight+'px';
+                $(el).children().css("top",statusBarHeight+'px');
         }
     };
     u.toast = function(title, text, time){

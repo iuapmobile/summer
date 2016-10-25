@@ -96,15 +96,14 @@
 				pageParam : {param0:123,param1:"abc"},
 				screenWidth:"",
 				screenHeight:"",
-				
 				winId:"",
 				winWidth:"",
-				winHeight:"",
-				
+				winHeight:"",				
 				frameId:"",
 				frameWidth:"",
 				frameHeight:"",
-				
+				statusBarHeight:"",
+				statusBarStyle:"",
 				appParam:"",
 			};
 			return JSON.parse(s.callSync('SummerDevice.getSysInfo', param));
