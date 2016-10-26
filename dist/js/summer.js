@@ -1773,7 +1773,7 @@
 		},
 		getScreenDensity: function () {
 			if(!this._deviceInfo_Screen){
-				var strd_info = $device.getDeviceInfo();
+				var strd_info = this.getDeviceInfo();
 				var info = $summer.strToJson(strd_info);
 				this._deviceInfo_Screen = info.screen;
 			}
