@@ -299,9 +299,7 @@
 			return s.callService("UMDevice.openWebView", args);
 		},
 		screenShot: function (args) {
-			if(!$summer.isJSONObject(args)){
-				alert("调用screenshot服务时，参数不是一个有效的JSONObject");
-			}
+
 			return s.callService("UMDevice.screenshot",args,true);
 		},
 		notify: function (args) {
@@ -698,7 +696,7 @@
 	s.writeFile = s.UMCache.writeFile;
 	s.readFile = s.UMCache.readFile;
 	/*camera*/
-	s.openCamera= s.UMCamera.open;
+	s.openCamera= s.UMCamera.openCamera;
 	s.openPhotoAlbum = s.UMCamera.openPhotoAlbum;
 	/*scanner*/
 	s.openScanner= s.UMScanner.open;
