@@ -63,6 +63,7 @@ html {
 html, body {
   margin: 0;
   /*overflow:hidden;*/
+  -webkit-user-select: none;
   padding: 0;
   font-size: 100%;
   width: 100%;
