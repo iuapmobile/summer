@@ -4,7 +4,7 @@
 * Copyright (C) Yonyou Corporation. All rights reserved.
 * include : UMP.Web.EventMgr
 * Author: gct@yonyou.com
-* version: 2.7.20161027
+* version: 2.7.20161028
 **********************************************************/
 
 (function( window, undefined ) {
