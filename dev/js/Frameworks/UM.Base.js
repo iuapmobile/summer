@@ -1,13 +1,12 @@
 
-//=========================================================================
-//-----------------------------------------------------------------------
-// Copyright (C) Yonyou Corporation. All rights reserved.
-// include : UMP.Web.EventMgr
-// Author gct@yonyou.com
-//-----------------------------------------------------------------------
-/*!
- * UAP Mobile JavaScript Library v2.7.0
- */
+/**********************************************************
+* UAP Mobile JavaScript Library
+* Copyright (C) Yonyou Corporation. All rights reserved.
+* include : UMP.Web.EventMgr
+* Author: gct@yonyou.com
+* version: 2.7.20161027
+**********************************************************/
+
 (function( window, undefined ) {
     UM = window.UM || {};
     UM._inherit = (function () {
