@@ -63,6 +63,7 @@ html {
 html, body {
   margin: 0;
   /*overflow:hidden;*/
+  -webkit-text-size-adjust: none;
   -webkit-user-select: none;
   padding: 0;
   font-size: 100%;
@@ -3903,10 +3904,10 @@ input[type="number"].form-control {
   background: #fff;
   overflow: hidden;
   position: relative;
-  -webkit-border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5JREFUeNpiPnH8zH/G////MzAxAAHTyRNn/wMEGABpvQm9g9TJ1QAAAABJRU5ErkJggg==") 2 0 stretch;
-  border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5JREFUeNpiPnH8zH/G////MzAxAAHTyRNn/wMEGABpvQm9g9TJ1QAAAABJRU5ErkJggg==") 2 0 stretch;
-  border-width: 1px 0 0 0;
-  border-width: 1px 0 1px 0;
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #d8d8d8;
+  /*@include line-img(top);*/
+  /*border-width: 1px 0 1px 0;*/
   /* 圆角列表 */
   /* 底线铺满的列表 */
   /* 嵌套列表 */
@@ -3932,7 +3933,9 @@ input[type="number"].form-control {
   border-width: 0;
   padding-left: 30px;
 }
-.um-list > li:last-child > .um-list-item .um-list-item-inner:after,
+.um-list > li:last-child > .um-list-item .um-list-item-inner:after {
+  height: 0;
+}
 .um-list > .um-list-item:last-child .um-list-item-inner:after, .um-list .um-list li:last-child .um-list-item-inner:after, .um-list .um-list > .um-list-item:last-child {
   border-width: 0;
 }
@@ -4014,11 +4017,10 @@ input[type="number"].form-control {
   content: "";
   position: absolute;
   left: 0;
-  right: 0;
   bottom: 0;
-  -webkit-border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5JREFUeNpiPnH8zH/G////MzAxAAHTyRNn/wMEGABpvQm9g9TJ1QAAAABJRU5ErkJggg==") 2 0 stretch;
-  border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5JREFUeNpiPnH8zH/G////MzAxAAHTyRNn/wMEGABpvQm9g9TJ1QAAAABJRU5ErkJggg==") 2 0 stretch;
-  border-width: 0 0 1px 0;
+  height: 1px;
+  width: 100%;
+  background-color: #d8d8d8;
 }
 .um-list .um-list-item-body {
   -webkit-box-flex: 1;
@@ -4032,7 +4034,7 @@ input[type="number"].form-control {
   width: 0;
 }
 .um-list .um-list-item-left {
-  /*padding: $padding-base-vertical 0; */
+  /*padding: $padding-base-vertical 0;*/
   padding-top: 9px;
   padding-bottom: 9px;
   -webkit-flex-shrink: 0;
