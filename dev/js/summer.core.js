@@ -361,7 +361,7 @@
 	s.getVersion = function(json){
 		var ver = s.callSync('XUpgrade.getVersion', json || {});
 		if(typeof ver == "string"){
-			return JSON.parse(versionInfo);
+			return JSON.parse(ver);
 		}else{
 			alert("getVersion' return value is not string!")
 			return ver;
