@@ -47,7 +47,7 @@
 		position: relative;
 		@include flex-align(null, center);
 		padding: 0;
-		padding-left: 15px;
+		/*padding-left: 15px;*/
 		color: $font-color;
 		transition: all ease .3s;
 	}
@@ -104,7 +104,9 @@
 		width: 0; //需要给一个width
 	}
 	.um-list-item-left {
-		padding: $padding-base-vertical 0;
+		/*padding: $padding-base-vertical 0;*/
+		padding-top:$padding-base-vertical;
+		padding-bottom:$padding-base-vertical;
 		-webkit-flex-shrink: 0;
 		flex-shrink: 0;
 		width: 35%;
