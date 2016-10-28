@@ -4,9 +4,11 @@
 	background: #fff;
 	overflow: hidden;
 	position: relative;
+	border-bottom: 1px solid #d8d8d8;
+    border-top: 1px solid #d8d8d8;
 	// 该设置当ul里面没有行um-list-item时会有上下2边框
-	@include line-img(top);
-	border-width: 1px 0 1px 0;
+	/*@include line-img(top);*/
+	/*border-width: 1px 0 1px 0;*/
 	&:empty {
 		border-width: 0;
 	}
@@ -35,7 +37,9 @@
 		border-width: 0;
 		padding-left: 30px;
 	}
-	>li:last-child>.um-list-item .um-list-item-inner:after,
+	>li:last-child>.um-list-item .um-list-item-inner:after{
+		height:0;
+	}
 	>.um-list-item:last-child .um-list-item-inner:after,
 	& & li:last-child .um-list-item-inner:after,
 	& & >.um-list-item:last-child {
@@ -66,7 +70,6 @@
 			z-index: z("little");
 		}
 	}
-
 	.um-list-item-media {
 		margin-left: 12px;
 		margin-right: 12px;
@@ -75,7 +78,6 @@
 		padding-top: 5px;
 		padding-bottom: 5px;
 	}
-
 	.um-list-item-inner {
 		position: relative;
 		//@include flex-align(null, center);
@@ -88,9 +90,10 @@
 			content:"";
 			position: absolute;
 			left: 0;
-			right: 0;
 			bottom: 0;
-			@include line-img(bottom);
+			height:1px;
+			width:100%;
+			background-color:#d8d8d8;
 		}
 		z-index: 1;
 	}
