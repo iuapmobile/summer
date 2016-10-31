@@ -1,4 +1,4 @@
-﻿//summerBridge 3.0.0.20160906
+﻿//summerBridge 3.0.0.20161031
 +function(w,s){
 	/*  加上如下注释代码，ios无法再声明summerBridge
 	if(typeof summerBridge == "undefined"){
