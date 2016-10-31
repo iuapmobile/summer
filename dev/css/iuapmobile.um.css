@@ -3933,11 +3933,9 @@ input[type="number"].form-control {
   border-width: 0;
   padding-left: 30px;
 }
-.um-list > li:last-child > .um-list-item .um-list-item-inner:after {
-  height: 0;
-}
+.um-list > li:last-child > .um-list-item .um-list-item-inner:after,
 .um-list > .um-list-item:last-child .um-list-item-inner:after, .um-list .um-list li:last-child .um-list-item-inner:after, .um-list .um-list > .um-list-item:last-child {
-  border-width: 0;
+  height: 0;
 }
 .um-list .um-list-item {
   position: relative;

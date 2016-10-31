@@ -37,13 +37,11 @@
 		border-width: 0;
 		padding-left: 30px;
 	}
-	>li:last-child>.um-list-item .um-list-item-inner:after{
-		height:0;
-	}
+	>li:last-child>.um-list-item .um-list-item-inner:after,
 	>.um-list-item:last-child .um-list-item-inner:after,
 	& & li:last-child .um-list-item-inner:after,
 	& & >.um-list-item:last-child {
-		border-width: 0;
+		height:0;
 	} 
 
 	/* 列表行单元 */
