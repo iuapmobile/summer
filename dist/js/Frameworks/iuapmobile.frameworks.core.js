@@ -3033,7 +3033,7 @@ function UMP$Services$Cache$writeFile(filePath, content, append, charset, isSync
 					if(typeof content == "object"){
 						content = "obj-"+Json.stringify(content);
 						args["content"] = content;
-					}else if(typeof content == "object"){
+					}else if(typeof content == "string"){
 						content = "str-"+content;
 						args["content"] = content;
 					}else{
