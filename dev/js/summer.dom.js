@@ -437,47 +437,7 @@
                 $(el).children().css("top",statusBarHeight+'px');
         }
     };
-    u.toast = function(title, text, time){
-        // var opts = {};
-        // var show = function(opts, time){
-        //     api.showProgress(opts);
-        //     setTimeout(function(){
-        //         api.hideProgress();
-        //     },time);
-        // };
-        // if(arguments.length === 1){
-        //     var time = time || 500;
-        //     if(typeof title === 'number'){
-        //         time = title;
-        //     }else{
-        //         opts.title = title+'';
-        //     }
-        //     show(opts, time);
-        // }else if(arguments.length === 2){
-        //     var time = time || 500;
-        //     var text = text;
-        //     if(typeof text === "number"){
-        //         var tmp = text;
-        //         time = tmp;
-        //         text = null;
-        //     }
-        //     if(title){
-        //         opts.title = title;
-        //     }
-        //     if(text){
-        //         opts.text = text;
-        //     }
-        //     show(opts, time);
-        // }
-        // if(title){
-        //     opts.title = title;
-        // }
-        // if(text){
-        //     opts.text = text;
-        // }
-        // time = time || 500;
-        // show(opts, time);
-    };
+   
     u.post = function(/*url,data,fnSuc,dataType*/){
         // var argsToJson = parseArguments.apply(null, arguments);
         // var json = {};

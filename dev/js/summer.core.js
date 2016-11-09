@@ -174,6 +174,12 @@
     	json = json || {};
         invoker.call("UMJS.hideLoadingBar",json);
     };
+    s.toast = function(json){
+		if(!s.canrequire()) return;
+    	var invoker = summer.require('summer-plugin-service.XService');
+    	json = json || {};
+        invoker.call("UMJS.toast",json);
+    };
     //upload方法
     s.upload = function(json,sFn,eFn,headers){		
     	var fileURL = json.fileURL,
