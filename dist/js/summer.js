@@ -1,16 +1,49 @@
 /*
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
+ * Author: gct@yonyou.com
+ * Version: 0.3.0.20161118.1526
+ */
+ (function(global, factory){
+    if ( typeof module === "object" && typeof module.exports === "object" ) {
+        module.exports = global.document ?
+            factory( global, true ) :
+            function( w ) {
+                if ( !w.document ) {
+                    throw new Error( "jQuery requires a window with a document" );
+                }
+                return factory( w );
+            };
+    } else {
+        factory( global );
+    }
+}(window,function(window,noGlobal){
+    var $s = {};
+    var s = {$:$s};
+    if ( typeof define === "function" && define.amd ) {
+        define( "summer", [], function() {
+            return s;
+        });
+    }
+    window.$summer = $s;
+    window.summer = s;
+    return s;
+}))
+
+
+/*
+ * Summer JavaScript Library
+ * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com go
  * Version: 3.0.0.20160823.2047
  */
 ;(function(w){
-    w.$summer = {};
-    w.summer = {};
+    w.$summer = w.$summer || {};
+    w.summer = w.summer || {};
     w.api = w.summer;
     (function(){
     	var url = document.location.pathname.split("www")[0]+"www/cordova.js";
-        _script = document.createElement('script');
+        var _script = document.createElement('script');
         _script.id = "cordova_js";
         _script.type = 'text/javascript';
         _script.charset = 'utf-8';
@@ -199,7 +232,7 @@
             }
             catch (e) {
             }
-            with (Math) {
+            if (Math) {
                 r1 = Number(arg1.toString().replace(".", ""));
                 r2 = Number(arg2.toString().replace(".", ""));
                 return (r1 / r2) * pow(10, t2 - t1);
@@ -963,7 +996,7 @@
 	
 	//ios Asynchronous
 	if(typeof UM_callNativeServiceNoraml == "undefined"){
-		UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用，和安卓统一接口
+		var UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用，和安卓统一接口
 			return adrinvoker.call(serviceType,strParams);
 		}
 	}else{

@@ -5,12 +5,12 @@
  * Version: 3.0.0.20160823.2047
  */
 ;(function(w){
-    w.$summer = {};
-    w.summer = {};
+    w.$summer = w.$summer || {};
+    w.summer = w.summer || {};
     w.api = w.summer;
     (function(){
     	var url = document.location.pathname.split("www")[0]+"www/cordova.js";
-        _script = document.createElement('script');
+        var _script = document.createElement('script');
         _script.id = "cordova_js";
         _script.type = 'text/javascript';
         _script.charset = 'utf-8';
