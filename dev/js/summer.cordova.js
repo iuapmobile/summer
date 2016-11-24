@@ -9,7 +9,24 @@
     w.summer = w.summer || {};
     w.api = w.summer;
     (function(){
-    	var url = document.location.pathname.split("www")[0]+"www/cordova.js";
+    	var url;
+        if(document.location.href.indexOf("http")==0){
+            w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || "..";
+            if($summer.os == "android"){
+                alert("android");
+                url = w.__$_CORDOVA_PATH + "/cordova/android/cordova.js";
+            }else if($summer.os == "ios"){
+                alert("ios");
+                url = w.__$_CORDOVA_PATH + "/cordova/ios/cordova.js";
+            }else{
+                alert("请在移动设备上访问")
+                //url = path + "ios/cordova.js";
+            }
+        
+        }else{
+            url = document.location.pathname.split("www")[0]+"www/cordova.js";
+        }
+        var _script;
         var _script = document.createElement('script');
         _script.id = "cordova_js";
         _script.type = 'text/javascript';
