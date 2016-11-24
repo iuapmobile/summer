@@ -2,7 +2,7 @@
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
  * Author: gct@yonyou.com
- * Version: 0.3.0.20161118.1526
+ * Version: 0.3.0.20161118.1 526
  */
  (function(global, factory){
     if ( typeof module === "object" && typeof module.exports === "object" ) {
