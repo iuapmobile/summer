@@ -387,6 +387,9 @@
 			}
 			s.callService("UMDevice.saveContact", args);
 		},
+		popupKeyboard : function(){
+			return s.callService("UMDevice.popupKeyboard",{},true);
+		}
 	};
 	s.UMFile = {
 		remove : function(args){
@@ -682,6 +685,7 @@
 	s.getAppAlbumPath = s.UMDevice.getAppAlbumPath;
 	s.getContacts = s.UMDevice.getContacts;
 	s.saveContact = s.UMDevice.saveContact;
+	s.popupKeyboard = s.UMDevice.popupKeyboard;
 	//
 	s.removeFile = s.UMFile.remove;
  	s.exists = s.UMFile.exists;
