@@ -429,6 +429,9 @@
 				json = {"path" : args};
 			}
 			return s.callService("UMFile.getFileInfo",json, true);
+		},
+		openFileSelector : function(args){
+			return s.callService("UMFile.openFileSelector", args);
 		}
 
 	};
@@ -692,6 +695,7 @@
  	s.download = s.UMFile.download;
  	s.openFile = s.UMFile.open;
  	s.getFileInfo = s.UMFile.getFileInfo;
+ 	s.openFileSelector = s.UMFile.openFileSelector;
 	/*tel*/
 	s.callPhone= s.UMTel.call;
 	s.sendMsg= s.UMTel.sendMsg;
