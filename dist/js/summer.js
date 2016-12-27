@@ -1625,6 +1625,20 @@
 				jsonArgs[callback_KEY] = newCallBackFnName + "()";
 			}
 		},
+		openHTTPS:function(json){
+			/*	参数：
+			"ishttps" : "true"//是否开启https传输
+			 */
+			if($summer.isJSONObject(json)){
+				if(!json.ishttps){
+					alert("请输入true或者false");
+					return;
+				}
+				return s.callService("UMService.openHTTPS", json, false);
+			}else{
+				alert("参数不是有效的JSONObject");
+			}
+		},		
 		callAction : function(controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs){
 			if(arguments.length == 1 && typeof arguments[0] == "object"){
 				var args = {};
@@ -2108,6 +2122,7 @@
 		}
 	}
 	/*service*/
+	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;
 	s.callAction = s.UMService.callAction;
 	/*device*/
