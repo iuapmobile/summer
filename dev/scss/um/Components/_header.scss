@@ -21,6 +21,25 @@
 		@extend .um-header-title;
 	}
 }
+.um-header-light{
+	position: relative;
+	min-height: 44px;
+	background-color: #f6f6f6;
+	@extend .um-border-bottom;
+	z-index: z("base", "header");
+	h3 {
+		@extend .um-header-title;
+		color:$um-theme-color;
+	}
+
+	.um-back,.um-header-right,.um-header-left{
+		color:$um-theme-color;
+	}
+	.um-back:before{
+		border-left: 2px solid $um-theme-color;
+		border-bottom: 2px solid $um-theme-color;
+	}
+}
 .um-header-personal{
 	width: 100%;
 	background-repeat:no-repeat;
