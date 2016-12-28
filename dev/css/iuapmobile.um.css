@@ -3579,6 +3579,9 @@ html.um-frame {
   border-left: 2px solid #007aff;
   border-bottom: 2px solid #007aff;
 }
+.um-header-light .um-header-btns {
+  color: #007aff;
+}
 
 .um-header-personal {
   width: 100%;
