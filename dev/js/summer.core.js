@@ -65,6 +65,12 @@
         openWin : function(json, successFn, errFn){
 			return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
+        createWin : function(json, successFn, errFn){
+			return s.callCordova('summer-plugin-frame.XFrame', 'createWin', json, successFn, errFn);
+        },
+        showWin : function(json, successFn, errFn){
+			return s.callCordova('summer-plugin-frame.XFrame', 'showWin', json, successFn, errFn);
+        },
         closeWin : function(json, successFn, errFn){
 			//support closeWin('xxx') and closeWin({id:'xxx'})
 			if(typeof json == "string"){
@@ -144,6 +150,8 @@
     s.openFrame = s.window.openFrame;
     s.closeFrame = s.window.closeFrame;
     s.openWin = s.window.openWin;
+    s.createWin = s.window.createWin;
+    s.showWin = s.window.showWin;
     s.closeWin = s.window.closeWin;
 	s.closeToWin = s.window.closeToWin;
 	s.getSysInfo = s.window.getSysInfo;
