@@ -183,6 +183,20 @@
 				jsonArgs[callback_KEY] = newCallBackFnName + "()";
 			}
 		},
+		openHTTPS:function(json){
+			/*	参数：
+			"ishttps" : "true"//是否开启https传输
+			 */
+			if($summer.isJSONObject(json)){
+				if(!json.ishttps){
+					alert("请输入true或者false");
+					return;
+				}
+				return s.callService("UMService.openHTTPS", json, false);
+			}else{
+				alert("参数不是有效的JSONObject");
+			}
+		},		
 		callAction : function(controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs){
 			if(arguments.length == 1 && typeof arguments[0] == "object"){
 				var args = {};
@@ -387,6 +401,9 @@
 			}
 			s.callService("UMDevice.saveContact", args);
 		},
+		popupKeyboard : function(){
+			return s.callService("UMDevice.popupKeyboard",{},true);
+		}
 	};
 	s.UMFile = {
 		remove : function(args){
@@ -426,6 +443,9 @@
 				json = {"path" : args};
 			}
 			return s.callService("UMFile.getFileInfo",json, true);
+		},
+		openFileSelector : function(args){
+			return s.callService("UMFile.openFileSelector", args);
 		}
 
 	};
@@ -660,6 +680,7 @@
 		}
 	}
 	/*service*/
+	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;
 	s.callAction = s.UMService.callAction;
 	/*device*/
@@ -682,12 +703,14 @@
 	s.getAppAlbumPath = s.UMDevice.getAppAlbumPath;
 	s.getContacts = s.UMDevice.getContacts;
 	s.saveContact = s.UMDevice.saveContact;
+	s.popupKeyboard = s.UMDevice.popupKeyboard;
 	//
 	s.removeFile = s.UMFile.remove;
  	s.exists = s.UMFile.exists;
  	s.download = s.UMFile.download;
  	s.openFile = s.UMFile.open;
  	s.getFileInfo = s.UMFile.getFileInfo;
+ 	s.openFileSelector = s.UMFile.openFileSelector;
 	/*tel*/
 	s.callPhone= s.UMTel.call;
 	s.sendMsg= s.UMTel.sendMsg;
