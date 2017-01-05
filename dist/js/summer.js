@@ -343,19 +343,16 @@
     w.summer = w.summer || {};
     w.api = w.summer;
 	
-	w.$summer.getRootPath = function(){
-		var strFullPath = window.document.location.href;
-		var strPath = window.document.location.pathname;
-		var pos = strFullPath.indexOf(strPath);
-		var prePath = strFullPath.substring(0, pos); //domain name
-		var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1); //site name
-		return (prePath + postPath);
-	}
-	
     (function(){
     	var url;
         if(document.location.href.indexOf("http")==0){
-            w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || w.$summer.getRootPath();
+			
+			var strFullPath = window.document.location.href;
+			var strPath = window.document.location.pathname;
+			var pos = strFullPath.indexOf(strPath);
+			var prePath = strFullPath.substring(0, pos); //domain name
+			var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1); //site name
+            w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || (prePath + postPath);
             if($summer.os == "android"){
                 alert("android");
                 url = w.__$_CORDOVA_PATH + "/cordova/android/cordova.js";
