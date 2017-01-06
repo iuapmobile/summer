@@ -197,7 +197,7 @@
 				alert("参数不是有效的JSONObject");
 			}
 		},
-		/*
+		
 		writeConfig: function(key, val){
 			//1、准备参数
 			var args = {};
@@ -224,7 +224,7 @@
 			//2、调用服务
 			return s.callService("UMService.readConfigure", args, false);
 		},
-		*/
+		
 		callAction : function(controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs){
 			if(arguments.length == 1 && typeof arguments[0] == "object"){
 				var args = {};
@@ -711,10 +711,8 @@
 	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;
 	s.callAction = s.UMService.callAction;
-	/*
 	s.writeConfig = s.UMService.writeConfig;
 	s.readConfig = s.UMService.readConfig;
-	*/
 
 	/*device*/
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;

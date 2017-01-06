@@ -337,14 +337,14 @@
 	s.getAppStorage = function(key){
         return s.getStorage(key, "application");
     };
-	
+	/*
 	s.writeConfig = function(key, value){
         return s.setStorage(key, value, "configure");
     };
 	s.readConfig = function(key){
         return s.getStorage(key, "configure");
     };
-	
+	*/
 	s.setWindowStorage = function(key, value){
         return s.setStorage(key, value, "window");
     };
