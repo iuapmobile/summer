@@ -1361,11 +1361,14 @@
     };
 	s.setStorage = function(key, value, storageType){
 		var v = value;
-		if(typeof v == 'object'){
-			v = JSON.stringify(v);
-			v = 'obj-'+ v;
-		}else{
-			v = 'str-'+ v;
+		if(storageType != "configure"){
+			//storageType == "configure" 是为原生提供的配置，callAction时原生读取，所以不能obj- str-处理
+			if(typeof v == 'object'){
+				v = JSON.stringify(v);
+				v = 'obj-'+ v;
+			}else{
+				v = 'str-'+ v;
+			}
 		}
 		var ls = umStorage(storageType);
 		if(ls){
@@ -1377,11 +1380,17 @@
         if(ls){
             var v = ls.getItem(key);
             if(!v){return;}
-            if(v.indexOf('obj-') === 0){
-                v = v.slice(4);
-                return JSON.parse(v);
-            }else if(v.indexOf('str-') === 0){
-                return v.slice(4);
+            if(storageType != "configure"){
+	            if(v.indexOf('obj-') === 0){
+	                v = v.slice(4);
+	                return JSON.parse(v);
+	            }else if(v.indexOf('str-') === 0){
+	                return v.slice(4);
+	            }else{
+	            	return v;
+	            }
+        	}else{
+            	return v;
             }
         }
     };
