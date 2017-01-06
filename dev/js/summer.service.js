@@ -196,7 +196,33 @@
 			}else{
 				alert("参数不是有效的JSONObject");
 			}
-		},		
+		},
+		writeConfig: function(key, val){
+			//1、准备参数
+			var args = {};
+			if(arguments.length == 1 && typeof arguments[0] == "object"){
+				args = key;
+			}else if(arguments.length == 2){
+				args[key] = val;
+			}else{
+				alert("writeConfig时,参数不合法");
+				return;
+			}
+			//2、调用服务
+			return s.callService("UMService.writeConfigure", args, false);
+		},
+		readConfig: function(name){
+			//1、准备参数
+			var args = {};
+			if(typeof name == "string")
+				args[name] = name;	
+			else{
+				alert("readConfig时，不支持参数[name]的参数类型为" + typeof name);
+				return;
+			}
+			//2、调用服务
+			return s.callService("UMService.readConfigure", args, false);
+		},
 		callAction : function(controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs){
 			if(arguments.length == 1 && typeof arguments[0] == "object"){
 				var args = {};
@@ -683,6 +709,8 @@
 	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;
 	s.callAction = s.UMService.callAction;
+	s.writeConfig = s.UMService.writeConfig;
+	s.readConfig = s.UMService.readConfig;
 	/*device*/
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
