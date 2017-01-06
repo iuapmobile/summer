@@ -2168,6 +2168,7 @@
 	s.callAction = s.UMService.callAction;
 	s.writeConfig = s.UMService.writeConfig;
 	s.readConfig = s.UMService.readConfig;
+	
 	/*device*/
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;
