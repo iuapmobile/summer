@@ -24,78 +24,105 @@
 						alert("调用服务[" + serviceType + "]时传递的参数不能标准化为json字符串，请检查参数格式。参数是" + jsonArgs);
 						return;
 					}
-				}else if(typeof jsonArgs == "object"){
+				}else if(typeof jsonArgs == "object"){//标准参数走这里
 					if(jsonArgs["callback"] && $summer.isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
-						//1、 callback:function(){}
-						var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
-						while($__cbm[newCallBackScript]){
-							newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
-						}
-						$__cbm[newCallBackScript] = jsonArgs["callback"];//callback can be global or local, so define a reference function in $__cbm
-
-						//
-						window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
-							try{
-								//alert(typeof sender);
-								//alert(typeof args);
-								//$alert(sender);
-								//$alert(args);
-								if(args == undefined)
-									args = sender;
-								var _func = $__cbm[newCallBackScript];
-								_func(sender, args);
-							}catch(e){
-								alert(e);
-							}finally{
-								delete $__cbm[newCallBackScript];
-								delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
-								//alert("del ok");
-								//alert(typeof $__cbm[newCallBackScript]);
-								//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+						try{
+							//1、 callback:function(){}
+							var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
+							while($__cbm[newCallBackScript]){
+								newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
 							}
+							$__cbm[newCallBackScript] = jsonArgs["callback"];//callback can be global or local, so define a reference function in $__cbm
+
+							//
+							window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
+								try{
+									//alert(typeof sender);
+									//alert(typeof args);
+									//$alert(sender);
+									//$alert(args);
+									if(args == undefined)
+										args = sender;
+									var _func = $__cbm[newCallBackScript];
+									_func(sender, args);
+								}catch(e){
+									alert(e);
+								}finally{
+									delete $__cbm[newCallBackScript];
+									delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
+									//alert("del ok");
+									//alert(typeof $__cbm[newCallBackScript]);
+									//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+								}
+							}
+							jsonArgs["callback"] = newCallBackScript;
+						}catch(e){
+							alert("Excp1: callback为function时，准备callback阶段异常:" + e);
 						}
-						jsonArgs["callback"] = newCallBackScript;
 					}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string" && !jsonArgs["__keepCallback"]){
-						//2、 callback:"mycallback()"
-						var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
-						var callbackFn = eval(cbName);
-						if(typeof callbackFn != "function"){
-							alert(cbName + " is not a global function, callback function must be a global function!");
+						try{
+							//2、 callback:"mycallback()"
+							try{
+								var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
+								var callbackFn = eval(cbName);
+								if(typeof callbackFn != "function"){
+									alert(cbName + " is not a global function, callback function must be a global function!");
+									return;
+								}
+							}catch(e){
+								alert("Excp2.1: 检查callback是否是全局可执行方法异常,callback参数为" + jsonArgs["callback"]);
+							}
+							
+							try{
+								var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
+								while(window[newCallBackScript]){
+									newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
+								}
+								//
+								window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
+									try{
+										//alert(typeof sender);
+										//alert(typeof args);
+										//$alert(sender);
+										//$alert(args);
+										if(args == undefined)
+											args = sender;
+										callbackFn(sender, args);
+									}catch(e){
+										alert(e);
+									}finally{
+										delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
+										//alert("del ok");
+										//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+									}
+								}
+								jsonArgs["callback"] = newCallBackScript;
+							}catch(e){
+								alert("Excp2.2: 接管callback阶段异常:" + e);
+							}
+						}catch(e){
+							alert("Excp2: callback为string时，准备callback阶段异常:" + e);
+						}
+					}
+					
+					
+					try{
+						s.UMService.callBackProxy(jsonArgs , "error");
+					}catch(e){
+						alert("Excp3: callback为string时，准备callback阶段异常:" + e);
+					}
+					
+					
+					
+					try{
+						serviceparams = $summer.jsonToStr(jsonArgs);
+						if(typeof serviceparams == "object"){
+							//转string后仍然为json，则报错，规定：调用服务的参数如果是字符串，必须是能转为json的字符串才行
+							alert("调用服务[" + serviceType + "]时传递的参数不能标准化为json字符串，请检查参数格式" + jsonArgs);
 							return;
 						}
-
-						var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
-						while(window[newCallBackScript]){
-							newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
-						}
-						//
-						window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
-							try{
-								//alert(typeof sender);
-								//alert(typeof args);
-								//$alert(sender);
-								//$alert(args);
-								if(args == undefined)
-									args = sender;
-								callbackFn(sender, args);
-							}catch(e){
-								alert(e);
-							}finally{
-								delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
-								//alert("del ok");
-								//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
-							}
-						}
-						jsonArgs["callback"] = newCallBackScript;
-					}
-
-					s.UMService.callBackProxy(jsonArgs , "error");
-
-					serviceparams = $summer.jsonToStr(jsonArgs);
-					if(typeof serviceparams == "object"){
-						//转string后仍然为json，则报错，规定：调用服务的参数如果是字符串，必须是能转为json的字符串才行
-						alert("调用服务[" + serviceType + "]时传递的参数不能标准化为json字符串，请检查参数格式" + jsonArgs);
-						return;
+					}catch(e){
+						alert("Excp4: 校验jsonArgs是否可jsonToStr时异常:" + e);
 					}
 				}else{
 					alert("调用$service.call("+serviceType+", jsonArgs, "+isSync+")时不合法,参数jsonArgs类型为"+typeof jsonArgs);
@@ -103,10 +130,18 @@
 				}
 
 				if(isSync){
-					return adrinvoker.call2(serviceType,serviceparams);//call2是同步调用
+					try{
+						return adrinvoker.call2(serviceType,serviceparams);//call2是同步调用
+					}catch(e){
+						alert("Excp5.1: 同步调用adrinvoker.call2异常:" + e);
+					}
 				}else{
-					//默认异步执行
-					return adrinvoker.call(serviceType,serviceparams);//call是异步调用 默认异步
+					try{
+						//默认异步执行
+						return adrinvoker.call(serviceType,serviceparams);//call是异步调用 默认异步
+					}catch(e){
+						alert("Excp5.2: 异步调用adrinvoker.call异常:" + e);
+					}
 				}
 			}catch(e){
 				var info="";
@@ -115,7 +150,16 @@
 				else
 					info = "调用$service.call(\""+serviceType+"\", jsonArgs)时发生异常,请检查!";
 				console.log(info);
-				alert(info+", 更多请查看console日志;\n错误堆栈信息为:\n" + e.stack);
+				alert(info+", 更多请使用chrome inspect调试查看console日志;\n错误堆栈信息e为:\n" + e);
+				alert(info+", 更多请使用chrome inspect调试查看console日志;\n错误堆栈信息e.stack为:\n" + e.stack);
+				
+				var e_info = "typeof jsonArgs为" + typeof jsonArgs + "\n";
+				if(typeof jsonArgs == "object"){
+					e_info += "jsonArgs的值为"+ JSON.stringify(jsonArgs) + "\n";				
+				}else{
+					e_info += "jsonArgs的值为"+ jsonArgs + "\n";
+				}
+				alert(e_info);
 			}
 		},
 		callBackProxy : function(jsonArgs, callback_KEY){
@@ -196,7 +240,35 @@
 			}else{
 				alert("参数不是有效的JSONObject");
 			}
-		},		
+		},
+		
+		writeConfig: function(key, val){
+			//1、准备参数
+			var args = {};
+			if(arguments.length == 1 && typeof arguments[0] == "object"){
+				args = key;
+			}else if(arguments.length == 2){
+				args[key] = val;
+			}else{
+				alert("writeConfig时,参数不合法");
+				return;
+			}
+			//2、调用服务
+			return s.callService("UMService.writeConfigure", args, false);
+		},
+		readConfig: function(name){
+			//1、准备参数
+			var args = {};
+			if(typeof name == "string")
+				args[name] = name;	
+			else{
+				alert("readConfig时，不支持参数[name]的参数类型为" + typeof name);
+				return;
+			}
+			//2、调用服务
+			return s.callService("UMService.readConfigure", args, false);
+		},
+		
 		callAction : function(controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs){
 			if(arguments.length == 1 && typeof arguments[0] == "object"){
 				var args = {};
@@ -683,6 +755,9 @@
 	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;
 	s.callAction = s.UMService.callAction;
+	s.writeConfig = s.UMService.writeConfig;
+	s.readConfig = s.UMService.readConfig;
+
 	/*device*/
 	s.getTimeZoneID = s.UMDevice.getTimeZoneID;
 	s.getTimeZoneDisplayName = s.UMDevice.getTimeZoneDisplayName;

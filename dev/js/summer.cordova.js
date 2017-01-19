@@ -11,7 +11,13 @@
     (function(){
     	var url;
         if(document.location.href.indexOf("http")==0){
-            w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || "..";
+			
+			var strFullPath = window.document.location.href;
+			var strPath = window.document.location.pathname;
+			var pos = strFullPath.indexOf(strPath);
+			var prePath = strFullPath.substring(0, pos); //domain name
+			var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1); //site name
+            w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || (prePath + postPath);
             if($summer.os == "android"){
                 alert("android");
                 url = w.__$_CORDOVA_PATH + "/cordova/android/cordova.js";
@@ -69,7 +75,7 @@
                     //alert($summer.jsonToStr(ret));
                     summer['pageParam'] = ret;//原生数据都放在summer对象上
                     //alert($summer.jsonToStr(summer.pageParam));
-
+                    summer.showWin({});
                     if(typeof summerready == "function")
                         summerready();
                     if(typeof summerReady == "function")
@@ -121,5 +127,5 @@
 		return true;
 	};
    
-   w.$summer.require = w.summer.require;
+	w.$summer.require = w.summer.require;
 })(window);

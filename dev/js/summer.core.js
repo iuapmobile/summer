@@ -63,7 +63,20 @@
 			return s.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupIndex', json, successFn, errFn);
 		},
         openWin : function(json, successFn, errFn){
+        	if(!json["animation"]){
+        		json["animation"]={
+				    type:"push", 
+				    subType:"from_right", 
+				    duration:300 
+				}
+        	}
 			return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
+        },
+        createWin : function(json, successFn, errFn){
+			return s.callCordova('summer-plugin-frame.XFrame', 'createWin', json, successFn, errFn);
+        },
+        showWin : function(json, successFn, errFn){
+			return s.callCordova('summer-plugin-frame.XFrame', 'showWin', json, successFn, errFn);
         },
         closeWin : function(json, successFn, errFn){
 			//support closeWin('xxx') and closeWin({id:'xxx'})
@@ -144,6 +157,8 @@
     s.openFrame = s.window.openFrame;
     s.closeFrame = s.window.closeFrame;
     s.openWin = s.window.openWin;
+    s.createWin = s.window.createWin;
+    s.showWin = s.window.showWin;
     s.closeWin = s.window.closeWin;
 	s.closeToWin = s.window.closeToWin;
 	s.getSysInfo = s.window.getSysInfo;
@@ -289,11 +304,14 @@
     };
 	s.setStorage = function(key, value, storageType){
 		var v = value;
-		if(typeof v == 'object'){
-			v = JSON.stringify(v);
-			v = 'obj-'+ v;
-		}else{
-			v = 'str-'+ v;
+		if(storageType != "configure"){
+			//storageType == "configure" 是为原生提供的配置，callAction时原生读取，所以不能obj- str-处理
+			if(typeof v == 'object'){
+				v = JSON.stringify(v);
+				v = 'obj-'+ v;
+			}else{
+				v = 'str-'+ v;
+			}
 		}
 		var ls = umStorage(storageType);
 		if(ls){
@@ -305,11 +323,17 @@
         if(ls){
             var v = ls.getItem(key);
             if(!v){return;}
-            if(v.indexOf('obj-') === 0){
-                v = v.slice(4);
-                return JSON.parse(v);
-            }else if(v.indexOf('str-') === 0){
-                return v.slice(4);
+            if(storageType != "configure"){
+	            if(v.indexOf('obj-') === 0){
+	                v = v.slice(4);
+	                return JSON.parse(v);
+	            }else if(v.indexOf('str-') === 0){
+	                return v.slice(4);
+	            }else{
+	            	return v;
+	            }
+        	}else{
+            	return v;
             }
         }
     };
@@ -320,14 +344,14 @@
 	s.getAppStorage = function(key){
         return s.getStorage(key, "application");
     };
-	
+	/*
 	s.writeConfig = function(key, value){
         return s.setStorage(key, value, "configure");
     };
 	s.readConfig = function(key){
         return s.getStorage(key, "configure");
     };
-	
+	*/
 	s.setWindowStorage = function(key, value){
         return s.setStorage(key, value, "window");
     };

@@ -21,14 +21,15 @@ var rename = require('gulp-rename');
 gulp.task('summer',function(){
 	//1 update github
 	var srcFiles = [];//需合并的源文件数组
-	srcFiles.push("dev/js/summer.module.js");//0
-	srcFiles.push("dev/js/summer.util.js");//0
-	srcFiles.push("dev/js/summer.cordova.js");//2
-	srcFiles.push("dev/js/summer.dom.js");//3
-	srcFiles.push("dev/js/summer.bridge.js");//4
-	srcFiles.push("dev/js/summer.core.js");//5
-	srcFiles.push("dev/js/summer.service.js");//6
-	srcFiles.push("dev/js/summer.plugins.js");//7
+	srcFiles.push("dev/js/summer.module.js");//1
+	srcFiles.push("dev/js/summer.util.js");//2
+	srcFiles.push("dev/js/summer.cordova.js");//3
+	srcFiles.push("dev/js/summer.dom.js");//4
+	srcFiles.push("dev/js/summer.bridge.js");//5
+	srcFiles.push("dev/js/summer.core.js");//6
+	srcFiles.push("dev/js/summer.service.js");//7
+	srcFiles.push("dev/js/summer.plugins.js");//8
+	srcFiles.push("dev/js/summer.debug.js");//9
 	
 	var fileName =  "summer";//目标文件名
 	var distPath = 'dist/js/';//目标文件夹
