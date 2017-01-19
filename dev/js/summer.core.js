@@ -63,6 +63,13 @@
 			return s.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupIndex', json, successFn, errFn);
 		},
         openWin : function(json, successFn, errFn){
+        	if(!json["animation"]){
+        		json["animation"]={
+				    type:"push", 
+				    subType:"from_right", 
+				    duration:300 
+				}
+        	}
 			return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
         createWin : function(json, successFn, errFn){
