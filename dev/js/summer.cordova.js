@@ -8,7 +8,6 @@
     w.$summer = w.$summer || {};
     w.summer = w.summer || {};
     w.api = w.summer;
-	
     (function(){
     	var url;
         if(document.location.href.indexOf("http")==0){

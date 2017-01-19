@@ -16,27 +16,44 @@
 
 	//Asynchronous call run as corodva bridge
     adrinvoker.call = function(srvName, strJson){
-		if(navigator.platform.toLowerCase().indexOf("win")>=0){
-			alert("执行"+srvName+"完毕\n参数是："+strJson);
-			return;
+		try{
+			if(navigator.platform.toLowerCase().indexOf("win")>=0){
+				alert("执行"+srvName+"完毕\n参数是："+strJson);
+				return;
+			}
+			
+			strJson = strJson || '{}';
+			try{
+				var plug = summer.require('summer-plugin-service.XService');
+				plug.call(srvName,$summer.strToJson(strJson));
+			}catch(e){
+				if($summer.__debug)
+					alert("Excp6.1: 异步调用summer-plugin-service.XService异常:" + e);
+				return;
+			}
+		}catch(e){
+			alert("Excp6: 异步调用adrinvoker.call异常:" + e);
 		}
-		
-		strJson = strJson || '{}';
-		
-		var plug = summer.require('summer-plugin-service.XService');
-		plug.call(srvName,$summer.strToJson(strJson));
     }
 
 	//Synchronous call as summer bridge
     adrinvoker.call2 = function(srvName, strJson){
-		if(navigator.platform.toLowerCase().indexOf("win")>=0){
-			alert("执行"+srvName+"完毕\n参数是："+strJson);
-			return;
-		}
-		if(typeof summerBridge != "undefined"){
-			return summerBridge.callSync(srvName,strJson);
-		}else{
-			alert("summerBridge is not defined by native successfully!");
+		try{
+			if(navigator.platform.toLowerCase().indexOf("win")>=0){
+				alert("执行"+srvName+"完毕\n参数是："+strJson);
+				return;
+			}
+			if(typeof summerBridge != "undefined"){
+				try{
+					return summerBridge.callSync(srvName,strJson);
+				}catch(e){
+					alert("Excp7.1: summerBridge.callSync异常:" + e);
+				}
+			}else{
+				alert("summerBridge is not defined by native successfully!");
+			}
+		}catch(e){
+			alert("Excp7: 同步调用adrinvoker.call2异常:" + e);
 		}
     }
     w.adrinvoker = adrinvoker;
