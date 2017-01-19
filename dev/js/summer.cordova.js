@@ -75,7 +75,7 @@
                     //alert($summer.jsonToStr(ret));
                     summer['pageParam'] = ret;//原生数据都放在summer对象上
                     //alert($summer.jsonToStr(summer.pageParam));
-
+                    summer.showWin({});
                     if(typeof summerready == "function")
                         summerready();
                     if(typeof summerReady == "function")
