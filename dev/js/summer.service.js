@@ -805,9 +805,9 @@
 	s.getNetworkInfo= s.UMNet.getNetworkInfo;
 
 	s.ajax=function(json, successFn, errFn){
-		if(json.type == "get"){
+		if(json.type.toLowerCase() == "get"){
 			return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
-		}else if(json.type == "post"){
+		}else if(json.type.toLowerCase() == "post"){
 			return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
 		}
 	};
