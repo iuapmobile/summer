@@ -1774,7 +1774,7 @@
 				 }
 				 */
 				args = controllerName;
-				var sysParam = {
+				/*var sysParam = {
 					viewid:"xxx.xxx.xx",
 					action:"methodName",
 					//"params" : {a:1,b:2},//自定义参数
@@ -1788,7 +1788,7 @@
 					if(!sysParam.hasOwnProperty(key) && typeof args[key] == "string"){
 						args[key] = $summer.strToJson(args[key]);
 					}
-				}
+				}*/
 				return s.callService("UMService.callAction", args, false);
 			}else{
 				var args = {};
