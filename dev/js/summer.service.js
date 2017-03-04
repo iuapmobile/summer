@@ -834,9 +834,9 @@
 	s.getContacts = s.UMDevice.getContacts;
 	s.saveContact = s.UMDevice.saveContact;
 	s.popupKeyboard = s.UMDevice.popupKeyboard;
-	s.listenGravitySensor = s.UMScanner.listenGravitySensor;
-	s.closeGravitySensor = s.UMScanner.closeGravitySensor;
-	// 
+	s.listenGravitySensor = s.UMDevice.listenGravitySensor;
+	s.closeGravitySensor = s.UMDevice.closeGravitySensor;
+	//
 	s.removeFile = s.UMFile.remove;
  	s.exists = s.UMFile.exists;
  	s.download = s.UMFile.download;
