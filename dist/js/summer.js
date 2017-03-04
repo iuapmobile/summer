@@ -1496,6 +1496,7 @@
 	}
 	//----------------------------------------------------------------------
 	s.UMService = {
+		//统一API，dsl和summer均支持的服务
 		call:function(serviceType, jsonArgs, isSync){
 			try{
 				jsonArgs = jsonArgs || {};
@@ -1515,6 +1516,7 @@
 					}
 				}else if(typeof jsonArgs == "object"){//标准参数走这里
 					if(jsonArgs["callback"] && $summer.isFunction(jsonArgs["callback"]) && !jsonArgs["__keepCallback"]){
+						//callback为function
 						try{
 							//1、 callback:function(){}
 							var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
@@ -1549,6 +1551,7 @@
 							alert("Excp1: callback为function时，准备callback阶段异常:" + e);
 						}
 					}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "string" && !jsonArgs["__keepCallback"]){
+						//callback为字符串写法
 						try{
 							//2、 callback:"mycallback()"
 							try{
@@ -1592,6 +1595,52 @@
 						}catch(e){
 							alert("Excp2: callback为string时，准备callback阶段异常:" + e);
 						}
+					}else if(jsonArgs["callback"] && typeof(jsonArgs["callback"]) == "function" && jsonArgs["__keepCallback"]){
+						//callback为字符串写法
+						try{
+							//2、 callback:function
+							try{
+								var cbName = jsonArgs["callback"].substring(0, jsonArgs["callback"].indexOf("("));
+								var callbackFn = eval(cbName);
+								if(typeof callbackFn != "function"){
+									alert(cbName + " is not a global function, callback function must be a global function!");
+									return;
+								}
+							}catch(e){
+								alert("Excp2.1: 检查callback是否是全局可执行方法异常,callback参数为" + jsonArgs["callback"]);
+							}
+							
+							try{
+								var newCallBackScript = "fun" + $summer.UUID(8, 16) + "()";//anonymous method
+								while(window[newCallBackScript]){
+									newCallBackScript =  "fun" + $summer.UUID(8, 16) + "()";//anonymous method
+								}
+								//
+								window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))] = function (sender, args){
+									try{
+										//alert(typeof sender);
+										//alert(typeof args);
+										//$alert(sender);
+										//$alert(args);
+										if(args == undefined)
+											args = sender;
+										callbackFn(sender, args);
+									}catch(e){
+										alert(e);
+									}finally{
+										delete window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))];
+										//alert("del ok");
+										//alert(typeof window[newCallBackScript.substring(0,newCallBackScript.indexOf("("))]);
+									}
+								}
+								jsonArgs["callback"] = newCallBackScript;
+							}catch(e){
+								alert("Excp2.2: 接管callback阶段异常:" + e);
+							}
+						}catch(e){
+							alert("Excp2: callback为string时，准备callback阶段异常:" + e);
+						}
+						
 					}
 					
 					
@@ -1964,6 +2013,12 @@
 		},
 		popupKeyboard : function(){
 			return s.callService("UMDevice.popupKeyboard",{},true);
+		},
+		listenGravitySensor : function(json){
+			return s.callService("UMDevice.listenGravitySensor",json,true);
+		},
+		closeGravitySensor : function(){
+			return s.callService("UMDevice.closeGravitySensor",{},true);
 		}
 	};
 	s.UMFile = {
@@ -2268,7 +2323,9 @@
 	s.getContacts = s.UMDevice.getContacts;
 	s.saveContact = s.UMDevice.saveContact;
 	s.popupKeyboard = s.UMDevice.popupKeyboard;
-	//
+	s.listenGravitySensor = s.UMScanner.listenGravitySensor;
+	s.closeGravitySensor = s.UMScanner.closeGravitySensor;
+	// 
 	s.removeFile = s.UMFile.remove;
  	s.exists = s.UMFile.exists;
  	s.download = s.UMFile.download;
