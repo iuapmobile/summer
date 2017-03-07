@@ -44,6 +44,11 @@
             w.summer["cordova"] = w.cordova;
 
             document.addEventListener('deviceready', function(){
+				if(typeof summerinit == "function")
+					summerinit();//框架调用
+				else if(typeof summerInit == "function")
+					summerInit();//框架调用
+				
                 //1、先通过cdv来获取页面参数
                 summer.winParam(function(ret){
 					//希望返回
@@ -78,9 +83,13 @@
                     summer.showWin({});
                     if(typeof summerready == "function")
                         summerready();
-                    if(typeof summerReady == "function")
+                    else if(typeof summerReady == "function")
                         summerReady();  
-
+					
+					if(typeof aftershowwin == "function")
+                        aftershowwin();
+                    else if(typeof afterShowWin == "function")
+                        afterShowWin();  
                 });         
             }, false);
 
