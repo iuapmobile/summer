@@ -30,7 +30,7 @@ gulp.task('summer',function(){
 	srcFiles.push("dev/js/summer.service.js");//7
 	srcFiles.push("dev/js/summer.plugins.js");//8
 	srcFiles.push("dev/js/summer.debug.js");//9
-	srcFiles.push("dev/js/emm.js");//10
+	srcFiles.push("dev/js/summer.emm.js");//10
 	
 	var fileName =  "summer";//目标文件名
 	var distPath = 'dist/js/';//目标文件夹
