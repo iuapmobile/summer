@@ -526,6 +526,8 @@
 			return s.callService("UMDevice.popupKeyboard",{},true);
 		},
 		listenGravitySensor : function(json){
+			json = json || {};
+			json["__keepCallback"] = true;
 			return s.callService("UMDevice.listenGravitySensor",json,true);
 		},
 		closeGravitySensor : function(){
