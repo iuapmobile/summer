@@ -2075,10 +2075,11 @@
 		listenGravitySensor : function(json){
 			json = json || {};
 			json["__keepCallback"] = true;
-			return s.callService("UMDevice.listenGravitySensor",json,true);
+			return s.callService("UMDevice.listenGravitySensor",json,false);
 		},
-		closeGravitySensor : function(){
-			return s.callService("UMDevice.closeGravitySensor",{},true);
+		closeGravitySensor : function(json){
+			json = json || {}
+			return s.callService("UMDevice.closeGravitySensor",json,false);
 		}
 	};
 	s.UMFile = {
