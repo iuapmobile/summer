@@ -2487,12 +2487,13 @@
 	w.$summer.__debug = false;
 }(window,summer);
 
-/*
+/*2017.3.8
  * Summer JavaScript Library
  * Copyright (c) 2016 yonyou.com
- * Author: qhb@yonyou.com go
+ * Author: Qhb@yonyou.com go
  * Version: 3.0.0.20170214.2047
  */
+
 (function(global, factory){
     if ( typeof module === "object" && typeof module.exports === "object" ) {
      
@@ -2582,5 +2583,21 @@
         json["callback"]=successFn;
         json["error"]=errFn;
         return  s.callService('UMEMMService.feedback', json, false);
+    };
+     e.installWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.installWebApp', json, false);
+    };
+     e.openWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.openWebApp', json, false);
+    };
+     e.removeWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.removeWebApp', json, false);
     }
+    
 }(window,emm,summer);
