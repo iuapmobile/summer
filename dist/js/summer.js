@@ -2123,6 +2123,20 @@
 		},
 		openFileSelector : function(args){
 			return s.callService("UMFile.openFileSelector", args);
+		},
+		fileToBase64:function(args){
+			var json = args;
+			if(typeof args == "string"){
+				json = {"path" : args};
+			}
+			return $service.call("UMFile.fileToBase64",json, true);
+		},
+		base64ToFile:function (args){
+			var json = args;
+			if(typeof args == "string"){
+				json = {"path" : args};
+			}
+			return $service.call("UMFile.base64ToFile",json, true);
 		}
 
 	};
@@ -2393,6 +2407,8 @@
  	s.openFile = s.UMFile.open;
  	s.getFileInfo = s.UMFile.getFileInfo;
  	s.openFileSelector = s.UMFile.openFileSelector;
+ 	s.fileToBase64 = s.UMFile.fileToBase64;
+ 	s.base64ToFile = s.UMFile.base64ToFile;
 	/*tel*/
 	s.callPhone= s.UMTel.call;
 	s.sendMsg= s.UMTel.sendMsg;
