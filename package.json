@@ -24,7 +24,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.1"
+    "gulp-uglify": "^2.1.2"
   },
   "dependencies": {
     "gulp-concat": "^2.6.0"
