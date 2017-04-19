@@ -30,6 +30,9 @@
             }
         
         }else{
+			if(w.__$_CORDOVA_PATH && + w.__$_CORDOVA_PATH != ""){
+				url = w.__$_CORDOVA_PATH + "www/cordova.js";
+			}
             url = document.location.pathname.split("www")[0]+"www/cordova.js";
         }
         var _script;
