@@ -96,6 +96,13 @@ gulp.task('iuapmobile.frameworks.listview',function(){
 	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
 	console.log('iuapmobile.frameworks.listview.js update to '+distPath+' at ' + (new Date()).toLocaleString());
+	
+	var srcFiles = ["dev/css/UM.Listview.css"];
+	var fileName =  "iuapmobile.um.listview";
+	var distPath = 'dist/css/';
+	gulp.src(srcFiles).pipe(concat(fileName+'.css')).pipe(gulp.dest(distPath));
+	//gulp.src(srcFiles).pipe(concat(fileName+'.min.css')).pipe(uglify()).pipe(gulp.dest(distPath));
+	console.log('iuapmobile.um.listview.css update to '+distPath+' at ' + (new Date()).toLocaleString());
 });
 gulp.task('umcss',function(){
 	var src = 'dev/css/iuapmobile.um.css'
