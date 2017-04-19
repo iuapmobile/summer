@@ -1,4 +1,5 @@
-﻿//summer native service v3.0.2016092011
+﻿
+//summer native service v3.0.2016092011
 +function(w,s){
 	w.$__cbm = [];
 	if(!s){
@@ -400,7 +401,7 @@
 		}
 	};//s.service end
 	//
-	s.callServiceEx = (json){
+	s.callServiceEx = function(json){
 		return s.callCordova('summer-plugin-service.XService','callSync',json, null, null);
 	};
 	
