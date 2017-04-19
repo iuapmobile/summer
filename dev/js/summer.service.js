@@ -399,7 +399,7 @@
 			}
 		}
 	};//s.service end
-
+	//
 	s.callServiceEx = (json){
 		return s.callCordova('summer-plugin-service.XService','callSync',json, null, null);
 	};
