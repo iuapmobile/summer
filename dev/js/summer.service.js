@@ -7,7 +7,7 @@
 	}
 	//----------------------------------------------------------------------
 	s.UMService = {
-		//统一API，dsl和summer均支持的服务
+		//统一API，summer.callService(), supported by dsl and summer 
 		call:function(serviceType, jsonArgs, isSync){
 			try{
 				jsonArgs = jsonArgs || {};
@@ -400,6 +400,10 @@
 		}
 	};//s.service end
 
+	s.callServiceEx = (json){
+		return s.callCordova('summer-plugin-service.XService','callSync',json, null, null);
+	};
+	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//summser.UMDevie.writeFile()
 	//summer.camera.open() --->summer.openCamera()

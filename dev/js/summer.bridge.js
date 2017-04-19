@@ -24,8 +24,7 @@
 			
 			strJson = strJson || '{}';
 			try{
-				var plug = summer.require('summer-plugin-service.XService');
-				plug.call(srvName,$summer.strToJson(strJson));
+				return summer.require('summer-plugin-service.XService').call(srvName,$summer.strToJson(strJson));
 			}catch(e){
 				if($summer.__debug)
 					alert("Excp6.1: 异步调用summer-plugin-service.XService异常:" + e);
@@ -109,7 +108,9 @@
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
 		if(this.canrequire() && !this.__debug){
             var plug = this.cordova.require(cordovaPlugName);
-			if(plug[plugFnName]){
+			if(plug && plug[plugFnName]){
+				//cordova.require("summer-plugin-service.XService").call("UMDevice.openCamara", {callback:"xxx()"}, successCallback, errorCallback)
+				// == cordova.exec(success, error, "XService", "call", ["UMDevice.openCamara", {callback:"xxx()"}]);
 				plug[plugFnName](json, successFn, errFn);
 			}else{
 				alert("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] not implementation");
@@ -120,3 +121,4 @@
 	}
 	
 }(window,summer);
+
