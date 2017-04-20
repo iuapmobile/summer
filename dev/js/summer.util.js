@@ -5,28 +5,28 @@
     */
     String.prototype.trim=function(){
         return this.replace(/(^\s*)|(\s*$)/g, "");
-    }
+    };
     /**
     * 删除左边的空格
     */
     String.prototype.ltrim=function(){
         return this.replace(/(^\s*)/g, "");
-    }
+    };
     /**
     * 删除右边的空格
     */
     String.prototype.rtrim=function(){
         return this.replace(/(\s*$)/g, "");
-    }
+    };
     String.prototype.isNullOrEmpty=function(){
         if(typeof this == "undefined" || this === null){
             return true;
         }
-        if(typeof this == "string" && this == ""){
+        if(typeof this == "string" && this === ""){
             return true;
         }
         return false;
-    }
+    };
 
     //给Number类型增加一个add方法，使用时直接用 .add 即可完成加法计算。
     Number.prototype.add = function (arg) {
@@ -105,7 +105,7 @@
         }
         this.splice(i,1);
         return this;
-    }
+    };
     Array.prototype.remove2 = function(i){
         if(isNaN(i))
             return this;
@@ -113,7 +113,7 @@
             return this;
         else
             return this.slice(0,i).concat(this.slice(i+1,this.length));
-    }
+    };
     Array.prototype.remove3 = function(dx){
         if(isNaN(dx) || dx > this.length){
             return false;
@@ -124,10 +124,10 @@
             }
         }
         this.length-=1;
-    }
+    };
     Array.prototype.insert = function (i, item){
       return this.splice(i, 0, item);
-    }
+    };
     Date.prototype.format = function(format){
         // (new Date()).format("yyyy-MM-dd hh:mm:ss")
         var o = {
@@ -138,7 +138,7 @@
             "s+" : this.getSeconds(), //second 
             "q+" : Math.floor((this.getMonth()+3)/3), //quarter 
             "S" : this.getMilliseconds() //millisecond 
-        }
+        };
 
         if(/(y+)/.test(format)) {
             format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
@@ -150,7 +150,7 @@
             }
         }
         return format;
-    }
+    };
 })();
 
 // $summer  API
@@ -178,7 +178,7 @@
             lang:(navigator.browserLanguage || navigator.language).toLowerCase()
         };
 		if(browser.info.platform.toLowerCase().indexOf("win")>=0){
-			return "pc"
+			return "pc";
 		}else if(browser.info.android){
             return "android";
         }else if(browser.info.ios || browser.info.iPhone || browser.info.iPad){
@@ -189,10 +189,10 @@
     })(u);
     u.isArray = function (obj) {
       return Object.prototype.toString.call(obj) === '[object Array]';
-    }
+    };
     u.isFunction = function (obj) {
       return Object.prototype.toString.call(obj) === '[object Function]';
-    }
+    };
     u.isEmptyObject = function(obj){
         if(JSON.stringify(obj) === '{}'){
             return true;
@@ -221,37 +221,37 @@
         var seedLen = seed.length - 1;
         var uid = '';
         while(len--){
-            uid += seed[Math.round(Math.random()*seedLen)]
+            uid += seed[Math.round(Math.random()*seedLen)];
         }
         return uid;
     };
 	
 	u.isJSONObject = function (obj) {
-		return Object.prototype.toString.call(obj) === '[object Object]';;
-	}	
+		return Object.prototype.toString.call(obj) === '[object Object]';
+	};
 	u.isJSONArray = function (obj) {   
 	  return Object.prototype.toString.call(obj) === '[object Array]';    
-	}
+	};
 	u.isFunction = function (obj) {   
 	  return Object.prototype.toString.call(obj) === '[object Function]';    
-	}
+	};
 	//是否为空字符串
 	u.isEmpty = function(obj){
-		if(obj == undefined || obj == null || (obj.toString && obj.toString() == "")){
+		if(obj === undefined || obj === null || (obj.toString && obj.toString() === "")){
 			return true;
 		}
 		return false;
-	}
+	};
     u.check = function(obj,paramNameArray,msg){
         for(var i=0,len=paramNameArray.length;i<len;i++){
-            if(obj[paramNameArray[i]] == undefined || obj[paramNameArray[i]] == null){
+            if(obj[paramNameArray[i]] === undefined || obj[paramNameArray[i]] === null){
                 var str = "参数["+paramNameArray[i]+"]不能为空";
                 alert(msg ? msg + str : str);
                 return false;
             }       
         }
         return true;
-    }
+    };
     u.checkIfExist = function(obj,paramNameArray,msg){
         for(var i=0,len=paramNameArray.length;i<len;i++){
             var key = paramNameArray[i];
@@ -262,12 +262,12 @@
             }           
         }
         return true;
-    }
+    };
     u.isNamespace = function(ns){
         if(typeof ns == "undefined" || ns === null){
             return false;
         }
-        if(typeof ns == "string" && ns == ""){
+        if(typeof ns == "string" && ns === ""){
             return false;
         }
         
@@ -279,19 +279,19 @@
         var nameArr = ns.split(".");
         for (var i=0, len=nameArr.length; i<len; i++) {
             var name = nameArr[i];
-            if (name == "") {
+            if (name === "") {
                 alert("非法的包名中连续含有两个.");
                 return false;
             }else{
                 var pattern = /^[a-z]+([a-zA-Z_][a-zA-Z_0-9]*)*$/;
                 if(!pattern.test(name)){
                     alert("非法的包名");
-                    return false
+                    return false;
                 }
             }
         }
         return true;
-    }
+    };
     window.$isJSONObject = u.isJSONObject;
     window.$isJSONArray = u.isJSONArray;
     window.$isFunction = u.isFunction;

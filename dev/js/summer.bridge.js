@@ -33,7 +33,7 @@
 		}catch(e){
 			alert("Excp6: 异步调用adrinvoker.call异常:" + e);
 		}
-    }
+    };
 
 	//Synchronous call as summer bridge
     adrinvoker.call2 = function(srvName, strJson){
@@ -54,7 +54,7 @@
 		}catch(e){
 			alert("Excp7: 同步调用adrinvoker.call2异常:" + e);
 		}
-    }
+    };
     w.adrinvoker = adrinvoker;
 	
 	//2、兼容ios
@@ -69,7 +69,7 @@
 	if(typeof UM_callNativeService == "undefined"){
 		var UM_callNativeService = function(serviceType,strParams){//同步调用，和安卓统一接口
 			return adrinvoker.call2(serviceType,strParams);
-		}
+		};
 	}else{
 		alert("UM_callNativeService is exist! fatal error!");
 		alert(UM_callNativeService);
@@ -80,7 +80,7 @@
 	if(typeof UM_callNativeServiceNoraml == "undefined"){
 		var UM_callNativeServiceNoraml = function(serviceType,strParams){//异步调用，和安卓统一接口
 			return adrinvoker.call(serviceType,strParams);
-		}
+		};
 	}else{
 		alert("UM_callNativeServiceNoraml is exist! fatal error!");
 		alert(UM_callNativeServiceNoraml);
@@ -103,7 +103,7 @@
 			}
 			alert(e);
 		}
-	}
+	};
 	//20160815
 	s.callCordova = function(cordovaPlugName, plugFnName, json, successFn, errFn){
 		if(this.canrequire() && !this.__debug){
@@ -118,7 +118,7 @@
 		}else{
 			console.log("the cordova plug["+cordovaPlugName+"]'s method[" + plugFnName + "] executed!");
 		}
-	}
+	};
 	
 }(window,summer);
 

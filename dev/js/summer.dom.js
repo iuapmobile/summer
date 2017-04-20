@@ -256,13 +256,10 @@
                 case 'SELECT':
                     var value = el.options[el.selectedIndex].value;
                     return value;
-                    break;
                 case 'INPUT':
                     return el.value;
-                    break;
                 case 'TEXTAREA':
                     return el.value;
-                    break;
             }
         }
         if(arguments.length === 2){
@@ -270,15 +267,12 @@
                 case 'SELECT':
                     el.options[el.selectedIndex].value = val;
                     return el;
-                    break;
                 case 'INPUT':
                     el.value = val;
                     return el;
-                    break;
                 case 'TEXTAREA':
                     el.value = val;
                     return el;
-                    break;
             }
         }
         

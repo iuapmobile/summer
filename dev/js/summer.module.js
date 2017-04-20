@@ -28,5 +28,5 @@
     window.$summer = $s;
     window.summer = s;
     return s;
-}))
+}));
 
