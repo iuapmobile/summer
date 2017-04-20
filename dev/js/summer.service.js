@@ -116,7 +116,7 @@
 							$__cbm[_cbProxy](sender, args);
 						}catch(e){
 							alert(e);
-						}finally{
+						}finally{ 
 							return;
 							//alert("del before");
 							//alert(typeof $__cbm[_cbProxy]);
@@ -400,6 +400,12 @@
 		closeGravitySensor : function(json){
 			json = json || {}
 			return s.callService("UMDevice.closeGravitySensor",json,false);
+		},
+		openApp: function (args) {
+			if(!$summer.isJSONObject(args)){
+				alert("调用openApp服务时，参数不是一个有效的JSONObject");
+			}
+			return s.callService("UMDevice.openApp", args);
 		}
 	};
 	s.UMFile = {
@@ -720,6 +726,7 @@
 	s.popupKeyboard = s.UMDevice.popupKeyboard;
 	s.listenGravitySensor = s.UMDevice.listenGravitySensor;
 	s.closeGravitySensor = s.UMDevice.closeGravitySensor;
+	s.openApp = s.UMDevice.openApp;
 	//
 	s.removeFile = s.UMFile.remove;
  	s.exists = s.UMFile.exists;
