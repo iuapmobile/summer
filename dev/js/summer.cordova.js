@@ -10,7 +10,7 @@
     w.api = w.summer;
     (function(){
     	var url;
-        if(document.location.href.indexOf("http")==0){
+        if(document.location.href.indexOf("http")===0){
 			
 			var strFullPath = window.document.location.href;
 			var strPath = window.document.location.pathname;
@@ -25,17 +25,17 @@
                 alert("ios");
                 url = w.__$_CORDOVA_PATH + "/cordova/ios/cordova.js";
             }else{
-                alert("请在移动设备上访问")
+                alert("请在移动设备上访问");
                 //url = path + "ios/cordova.js";
             }
         
         }else{
-			if(w.__$_CORDOVA_PATH && + w.__$_CORDOVA_PATH != ""){
+			if(w.__$_CORDOVA_PATH && + w.__$_CORDOVA_PATH !== ""){
 				url = w.__$_CORDOVA_PATH + "www/cordova.js";
 			}
             url = document.location.pathname.split("www")[0]+"www/cordova.js";
         }
-        var _script;
+		
         var _script = document.createElement('script');
         _script.id = "cordova_js";
         _script.type = 'text/javascript';
@@ -43,8 +43,8 @@
         _script.async = true;
         _script.src = url;
         _script.onload = function (e) {
-            w.$summer["cordova"] = w.cordova;
-            w.summer["cordova"] = w.cordova;
+            w.$summer.cordova = w.cordova;
+            w.summer.cordova = w.cordova;
 
             document.addEventListener('deviceready', function(){
 				if(typeof summerinit == "function")
@@ -74,7 +74,7 @@
 						frameHeight:"",
 						
 						appParam:"",
-					}
+					};
                     //alert(typeof ret)// --> object
 
                     if(typeof ret == "string"){
@@ -106,7 +106,7 @@
 	            fs = document.getElementsByTagName('script')[0];
 	            fs.parentNode.insertBefore(_script, fs);
         	}catch(e){
-        		console.log(e)
+        		console.log(e);
         	}
         }else{
         	
@@ -125,7 +125,7 @@
     
     w.summer.require = function(mdlName){
         if(window.$summer["cordova"] != window.cordova){
-           alert("---------warnning : init cordova is too late!")
+           alert("---------warnning : init cordova is too late!");
            window.$summer["cordova"] = window.cordova;
            window.summer["cordova"] = window.cordova;
         }
@@ -145,13 +145,13 @@
 	
 	var EventMgr = function() {
         this._events = {};
-    }
+    };
     EventMgr.prototype.on = function(evtName, handler) {
-        if (this._events[evtName] == null) {
+        if (this._events[evtName] === null) {
             this._events[evtName] = [];
         }
         this._events[evtName].push(handler);
-    }
+    };
     EventMgr.prototype.off = function(evtName, handler) {
         var handlers = this._events[evtName];
         if (typeof handler == "undefined") {
@@ -167,7 +167,7 @@
             if (index > 0)
                 handlers.remove(index);
         }
-    }
+    };
     EventMgr.prototype.trigger = function(evtName, sender, args) {
         try{
             var handlers = this._events[evtName];
@@ -181,12 +181,12 @@
         }catch(e){
             alert(e);
         }
-    }
+    };
 	var _ems = new EventMgr();
 	w.summer.on = function(eName, fn){
 		_ems.on(eName, fn);
-	}
+	};
 	w.summer.trigger = function(eName){
 		_ems.trigger(eName);
-	}
+	};
 })(window);

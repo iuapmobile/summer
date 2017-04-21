@@ -84,9 +84,10 @@
 					return true;
 				if(typeof(jsonArgs[callback_KEY]) == "string"){
 					//callback:"mycallback()", when callback is string, it must be a global function
+					var cbName = "";
 					try{
-						var cbName = jsonArgs[callback_KEY].substring(0, jsonArgs[callback_KEY].indexOf("("));
-						var cbFn = eval(cbName);
+						cbName = jsonArgs[callback_KEY].substring(0, jsonArgs[callback_KEY].indexOf("("));
+						var cbFn = window[cbName];
 						if(typeof cbFn != "function"){
 							alert("Excpt2.91:" + cbName + " is not a function, and must be a global function!\nit's typeof is " + typeof cbFn);
 							return false;
@@ -128,8 +129,8 @@
 							alert("del after");
 							//alert(typeof $__cbm[_cbProxy]);
 							//alert(typeof window[_cbProxy]);
-						}
-					}
+						};
+					};
 					jsonArgs[callback_KEY] = _cbProxy + "()";
 					return true;
 				}
@@ -222,7 +223,7 @@
 				args["callback"] = callbackActionID;
 				args["contextmapping"] = contextmapping;
 				if(customArgs){//处理自定义参数，用于该服务的参数扩展
-					for(key in customArgs){
+					for(var key in customArgs){
 						args[key] = customArgs[key];
 					}
 				}
@@ -398,7 +399,7 @@
 			return s.callService("UMDevice.listenGravitySensor",json,false);
 		},
 		closeGravitySensor : function(json){
-			json = json || {}
+			json = json || {};
 			return s.callService("UMDevice.closeGravitySensor",json,false);
 		},
 		openApp: function (args) {
@@ -514,14 +515,14 @@
 				args["callback"] = json["callback"];
 			if(json.compressionRatio)
 				args["compressionRatio"] = json["compressionRatio"];
-			return s.callService("UMDevice.openPhotoAlbum", args, false)//异步调用服务
+			return s.callService("UMDevice.openPhotoAlbum", args, false);//异步调用服务
 		}
-	}
+	};
 	s.UMScanner={
 		open: function (jsonArgs) {
 			var result = "";
 			if(jsonArgs){
-				if(jsonArgs["frameclose"] == null){
+				if(jsonArgs["frameclose"] == null || jsonArgs["frameclose"] == undefined){
 					jsonArgs["frameclose"] =  "true";//默认扫描后关闭
 				}
 				result = s.callService("UMDevice.captureTwodcode", jsonArgs, false);
@@ -568,7 +569,7 @@
 		},
 		getNetworkInfo: function () {
 			var result = s.callService("UMNetwork.getNetworkInfo", {}, true);//同步
-			if(typeof result == "String"){
+			if(typeof result == "string"){
 				return $summer.strToJson(result);
 			}else{
 				return result;
@@ -695,7 +696,7 @@
 				return null;
 			}
 		}
-	}
+	};
 	/*service*/
 	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;

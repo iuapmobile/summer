@@ -344,7 +344,7 @@
     w.api = w.summer;
     (function(){
     	var url;
-        if(document.location.href.indexOf("http")==0){
+        if(document.location.href.indexOf("http")===0){
 			
 			var strFullPath = window.document.location.href;
 			var strPath = window.document.location.pathname;
@@ -359,17 +359,17 @@
                 alert("ios");
                 url = w.__$_CORDOVA_PATH + "/cordova/ios/cordova.js";
             }else{
-                alert("请在移动设备上访问")
+                alert("请在移动设备上访问");
                 //url = path + "ios/cordova.js";
             }
         
         }else{
-			if(w.__$_CORDOVA_PATH && + w.__$_CORDOVA_PATH != ""){
+			if(w.__$_CORDOVA_PATH && + w.__$_CORDOVA_PATH !== ""){
 				url = w.__$_CORDOVA_PATH + "www/cordova.js";
 			}
             url = document.location.pathname.split("www")[0]+"www/cordova.js";
         }
-        var _script;
+		
         var _script = document.createElement('script');
         _script.id = "cordova_js";
         _script.type = 'text/javascript';
@@ -377,8 +377,8 @@
         _script.async = true;
         _script.src = url;
         _script.onload = function (e) {
-            w.$summer["cordova"] = w.cordova;
-            w.summer["cordova"] = w.cordova;
+            w.$summer.cordova = w.cordova;
+            w.summer.cordova = w.cordova;
 
             document.addEventListener('deviceready', function(){
 				if(typeof summerinit == "function")
@@ -408,7 +408,7 @@
 						frameHeight:"",
 						
 						appParam:"",
-					}
+					};
                     //alert(typeof ret)// --> object
 
                     if(typeof ret == "string"){
@@ -440,7 +440,7 @@
 	            fs = document.getElementsByTagName('script')[0];
 	            fs.parentNode.insertBefore(_script, fs);
         	}catch(e){
-        		console.log(e)
+        		console.log(e);
         	}
         }else{
         	
@@ -459,7 +459,7 @@
     
     w.summer.require = function(mdlName){
         if(window.$summer["cordova"] != window.cordova){
-           alert("---------warnning : init cordova is too late!")
+           alert("---------warnning : init cordova is too late!");
            window.$summer["cordova"] = window.cordova;
            window.summer["cordova"] = window.cordova;
         }
@@ -479,13 +479,13 @@
 	
 	var EventMgr = function() {
         this._events = {};
-    }
+    };
     EventMgr.prototype.on = function(evtName, handler) {
-        if (this._events[evtName] == null) {
+        if (this._events[evtName] === null) {
             this._events[evtName] = [];
         }
         this._events[evtName].push(handler);
-    }
+    };
     EventMgr.prototype.off = function(evtName, handler) {
         var handlers = this._events[evtName];
         if (typeof handler == "undefined") {
@@ -501,7 +501,7 @@
             if (index > 0)
                 handlers.remove(index);
         }
-    }
+    };
     EventMgr.prototype.trigger = function(evtName, sender, args) {
         try{
             var handlers = this._events[evtName];
@@ -515,14 +515,14 @@
         }catch(e){
             alert(e);
         }
-    }
+    };
 	var _ems = new EventMgr();
 	w.summer.on = function(eName, fn){
 		_ems.on(eName, fn);
-	}
+	};
 	w.summer.trigger = function(eName){
 		_ems.trigger(eName);
-	}
+	};
 })(window);
 
 
@@ -663,7 +663,7 @@
             targetDom = isSame(doms, el);
             while(!targetDom){
                 el = el.parentNode;
-                if(el != null && el.nodeType == el.DOCUMENT_NODE){
+                if(el !== null && el.nodeType == el.DOCUMENT_NODE){
                     return false;
                 }
                 traversal(el, selector);
@@ -1205,7 +1205,7 @@
 				    type:"push", 
 				    subType:"from_right", 
 				    duration:300 
-				}
+				};
         	}
 			return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
@@ -1530,10 +1530,10 @@
 		if(typeof ver == "string"){
 			return JSON.parse(ver);
 		}else{
-			alert("getVersion' return value is not string!")
+			alert("getVersion' return value is not string!");
 			return ver;
 		}
-	}
+	};
 	s.upgrade = function(json, successFn, errFn){
 		return s.callCordova('summer-plugin-core.XUpgrade', 'upgrade', json, successFn, errFn);
 	};
@@ -1630,9 +1630,10 @@
 					return true;
 				if(typeof(jsonArgs[callback_KEY]) == "string"){
 					//callback:"mycallback()", when callback is string, it must be a global function
+					var cbName = "";
 					try{
-						var cbName = jsonArgs[callback_KEY].substring(0, jsonArgs[callback_KEY].indexOf("("));
-						var cbFn = eval(cbName);
+						cbName = jsonArgs[callback_KEY].substring(0, jsonArgs[callback_KEY].indexOf("("));
+						var cbFn = window[cbName];
 						if(typeof cbFn != "function"){
 							alert("Excpt2.91:" + cbName + " is not a function, and must be a global function!\nit's typeof is " + typeof cbFn);
 							return false;
@@ -1674,8 +1675,8 @@
 							alert("del after");
 							//alert(typeof $__cbm[_cbProxy]);
 							//alert(typeof window[_cbProxy]);
-						}
-					}
+						};
+					};
 					jsonArgs[callback_KEY] = _cbProxy + "()";
 					return true;
 				}
@@ -1768,7 +1769,7 @@
 				args["callback"] = callbackActionID;
 				args["contextmapping"] = contextmapping;
 				if(customArgs){//处理自定义参数，用于该服务的参数扩展
-					for(key in customArgs){
+					for(var key in customArgs){
 						args[key] = customArgs[key];
 					}
 				}
@@ -1944,7 +1945,7 @@
 			return s.callService("UMDevice.listenGravitySensor",json,false);
 		},
 		closeGravitySensor : function(json){
-			json = json || {}
+			json = json || {};
 			return s.callService("UMDevice.closeGravitySensor",json,false);
 		},
 		openApp: function (args) {
@@ -2060,14 +2061,14 @@
 				args["callback"] = json["callback"];
 			if(json.compressionRatio)
 				args["compressionRatio"] = json["compressionRatio"];
-			return s.callService("UMDevice.openPhotoAlbum", args, false)//异步调用服务
+			return s.callService("UMDevice.openPhotoAlbum", args, false);//异步调用服务
 		}
-	}
+	};
 	s.UMScanner={
 		open: function (jsonArgs) {
 			var result = "";
 			if(jsonArgs){
-				if(jsonArgs["frameclose"] == null){
+				if(jsonArgs["frameclose"] == null || jsonArgs["frameclose"] == undefined){
 					jsonArgs["frameclose"] =  "true";//默认扫描后关闭
 				}
 				result = s.callService("UMDevice.captureTwodcode", jsonArgs, false);
@@ -2114,7 +2115,7 @@
 		},
 		getNetworkInfo: function () {
 			var result = s.callService("UMNetwork.getNetworkInfo", {}, true);//同步
-			if(typeof result == "String"){
+			if(typeof result == "string"){
 				return $summer.strToJson(result);
 			}else{
 				return result;
@@ -2241,7 +2242,7 @@
 				return null;
 			}
 		}
-	}
+	};
 	/*service*/
 	s.openHTTPS = s.UMService.openHTTPS;
 	s.callService = s.UMService.call;
@@ -2320,7 +2321,7 @@
 
 (function(w,s,$s,prefix){
 	//构建函数,用作实例化
-    s.umRef = function(){}
+    s.umRef = function(){};
     //储值对象，用作判断重复性
     var refManager = {
         refs : {},
@@ -2328,7 +2329,7 @@
             this.refs[id].callback(data);
             delete this.refs[id]; 
         }
-    }
+    };
     //summer追加的方法，用作公用    
     s.openRef = function(json,fn){
         var ref = new s.umRef();
@@ -2338,17 +2339,17 @@
             ref_winId : info.winId,
             ref_frameId : info.frameId,
             ref_callBack : prefix + ".refCallBack"
-        }
+        };
         ref.callback = fn;
         refManager.refs[ref.param.ref_id] = ref;
         json.pageParam = json.pageParam || {};
-        json.pageParam["refParam"] = ref.param;
+        json.pageParam.refParam = ref.param;
         s.openWin(json);
-    }
+    };
     // summer的回调方法，用作下个页面的调用
     s.refCallBack = function (id,data){
         refManager.exec(id,data);
-    }
+    };
     
     s.comleteRef = function(json){
         var str = json;
@@ -2368,8 +2369,8 @@
             script :  param.um_callBack + "('"+param.um_refId+"',"+str+");"//  xxx({z:1})  xxx(zzzz)
         });
         s.closeWin();
-    }
-})(window,summer,$summer,"summer")
+    };
+})(window,summer,$summer,"summer");
 
 //summer debug
 +function(w,s){

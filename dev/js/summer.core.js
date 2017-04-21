@@ -68,7 +68,7 @@
 				    type:"push", 
 				    subType:"from_right", 
 				    duration:300 
-				}
+				};
         	}
 			return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
@@ -393,10 +393,10 @@
 		if(typeof ver == "string"){
 			return JSON.parse(ver);
 		}else{
-			alert("getVersion' return value is not string!")
+			alert("getVersion' return value is not string!");
 			return ver;
 		}
-	}
+	};
 	s.upgrade = function(json, successFn, errFn){
 		return s.callCordova('summer-plugin-core.XUpgrade', 'upgrade', json, successFn, errFn);
 	};

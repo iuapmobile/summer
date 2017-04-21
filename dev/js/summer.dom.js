@@ -136,7 +136,7 @@
             targetDom = isSame(doms, el);
             while(!targetDom){
                 el = el.parentNode;
-                if(el != null && el.nodeType == el.DOCUMENT_NODE){
+                if(el !== null && el.nodeType == el.DOCUMENT_NODE){
                     return false;
                 }
                 traversal(el, selector);
