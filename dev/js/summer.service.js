@@ -129,7 +129,7 @@
 							alert("del after");
 							//alert(typeof $__cbm[_cbProxy]);
 							//alert(typeof window[_cbProxy]);
-						};
+						}
 					};
 					jsonArgs[callback_KEY] = _cbProxy + "()";
 					return true;
