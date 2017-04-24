@@ -141,7 +141,7 @@
         this._events = {};
     };
     EventMgr.prototype.on = function(evtName, handler) {
-        if (this._events[evtName] === null) {
+        if (this._events[evtName] == undefined) {
             this._events[evtName] = [];
         }
         this._events[evtName].push(handler);
