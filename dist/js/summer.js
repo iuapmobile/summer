@@ -364,10 +364,11 @@
             }
         
         }else{
-			if(w.__$_CORDOVA_PATH && + w.__$_CORDOVA_PATH !== ""){
+			if(w.__$_CORDOVA_PATH){
 				url = w.__$_CORDOVA_PATH + "www/cordova.js";
+			}else{
+				url = document.location.pathname.split("www")[0]+"www/cordova.js";
 			}
-            url = document.location.pathname.split("www")[0]+"www/cordova.js";
         }
 		
         var _script = document.createElement('script');
@@ -381,11 +382,7 @@
             w.summer.cordova = w.cordova;
 
             document.addEventListener('deviceready', function(){
-				if(typeof summerinit == "function")
-					summerinit();//框架调用
-				else if(typeof summerInit == "function")
-					summerInit();//框架调用
-				summer.trigger("init");
+				summer.trigger("init");//summer.on('init',function(){})
 				
                 //1、先通过cdv来获取页面参数
                 summer.winParam(function(ret){
@@ -416,19 +413,16 @@
 
                     }
                     //alert($summer.jsonToStr(ret));
-                    summer['pageParam'] = ret;//原生数据都放在summer对象上
-                    //alert($summer.jsonToStr(summer.pageParam));
-                    summer.showWin({});
+                    summer.pageParam = ret;//put the param in summer
+					if(summer.autoShowWin !== false){
+						summer.showWin({});
+					}
                     if(typeof summerready == "function")
                         summerready();
                     else if(typeof summerReady == "function")
                         summerReady();  
 					summer.trigger("ready");
 					
-					if(typeof aftershowwin == "function")
-                        aftershowwin();
-                    else if(typeof afterShowWin == "function")
-                        afterShowWin();
 					summer.trigger("aftershowwin");
                 });         
             }, false);

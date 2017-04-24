@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var jshint = require("gulp-jshint");  
 gulp.task("scripts",function(){  
-   gulp.src("src/js/*.js")  
+   gulp.src("dev/js/*.js")  
       .pipe(jshint())  
       .pipe(jshint.reporter("default"))  
 });  
