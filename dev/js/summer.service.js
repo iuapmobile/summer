@@ -407,6 +407,9 @@
 				alert("调用openApp服务时，参数不是一个有效的JSONObject");
 			}
 			return s.callService("UMDevice.openApp", args);
+		},
+		getLocationInfo : function(){
+			return s.callService("UMDevice.getLocationInfo",{},true);
 		}
 	};
 	s.UMFile = {
@@ -728,6 +731,7 @@
 	s.listenGravitySensor = s.UMDevice.listenGravitySensor;
 	s.closeGravitySensor = s.UMDevice.closeGravitySensor;
 	s.openApp = s.UMDevice.openApp;
+	s.getLocationInfo = s.UMDevice.getLocationInfo;
 	//
 	s.removeFile = s.UMFile.remove;
  	s.exists = s.UMFile.exists;
