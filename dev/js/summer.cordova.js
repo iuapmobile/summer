@@ -9,113 +9,110 @@
     w.summer = w.summer || {};
     w.api = w.summer;
     (function(){
-    	var url;
-        if(document.location.href.indexOf("http")===0){
-			
-			var strFullPath = window.document.location.href;
-			var strPath = window.document.location.pathname;
-			var pos = strFullPath.indexOf(strPath);
-			var prePath = strFullPath.substring(0, pos); //domain name
-			var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1); //site name
-            w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || (prePath + postPath);
-            if($summer.os == "android"){
-                alert("android");
-                url = w.__$_CORDOVA_PATH + "/cordova/android/cordova.js";
-            }else if($summer.os == "ios"){
-                alert("ios");
-                url = w.__$_CORDOVA_PATH + "/cordova/ios/cordova.js";
-            }else{
-                alert("请在移动设备上访问");
-                //url = path + "ios/cordova.js";
-            }
-        
-        }else{
-			if(w.__$_CORDOVA_PATH){
-				url = w.__$_CORDOVA_PATH + "www/cordova.js";
+		try{
+			if($summer.os =="pc" && document.location.href.toLocaleString().indexOf("http")<0){
+				document.addEventListener('DOMContentLoaded',function(){
+					if(typeof summerready == "function")
+						summerready();
+					if(typeof summerReady == "function")
+						summerReady();  
+				},false);
 			}else{
-				url = document.location.pathname.split("www")[0]+"www/cordova.js";
-			}
-        }
-		
-        var _script = document.createElement('script');
-        _script.id = "cordova_js";
-        _script.type = 'text/javascript';
-        _script.charset = 'utf-8';
-        _script.async = true;
-        _script.src = url;
-        _script.onload = function (e) {
-            w.$summer.cordova = w.cordova;
-            w.summer.cordova = w.cordova;
-
-            document.addEventListener('deviceready', function(){
-				summer.trigger("init");//summer.on('init',function(){})
-				
-                //1、先通过cdv来获取页面参数
-                summer.winParam(function(ret){
-					//希望返回
-					var ctx = {
-						systemType:"android",//"ios"
-						systemVersion:7,// ios--> 7    android-->21
-						iOS7StatusBarAppearance:true,//false
-						fullScreen:true,
-						pageParam:{param0:123,param1:"abc"},
-						screenWidth:"",
-						screenHeight:"",
-						
-						winId:"",
-						winWidth:"",
-						winHeight:"",
-						
-						frameId:"",
-						frameWidth:"",
-						frameHeight:"",
-						
-						appParam:"",
-					};
-                    //alert(typeof ret)// --> object
-
-                    if(typeof ret == "string"){
-                        ret = $summer.strToJson(ret);
-
-                    }
-                    //alert($summer.jsonToStr(ret));
-                    summer.pageParam = ret;//put the param in summer
-					if(summer.autoShowWin !== false){
-						summer.showWin({});
+				var url = "";
+				if(document.location.href.indexOf("http")===0){
+					//1、webapp
+					var strFullPath = window.document.location.href;
+					var strPath = window.document.location.pathname;
+					var pos = strFullPath.indexOf(strPath);
+					var prePath = strFullPath.substring(0, pos); //domain name
+					var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1); //site name
+					w.__$_CORDOVA_PATH = w.__$_CORDOVA_PATH || (prePath + postPath);
+					if($summer.os == "android"){
+						//alert("android");
+						url = w.__$_CORDOVA_PATH + "/cordova/android/cordova.js";
+					}else if($summer.os == "ios"){
+						//alert("ios");
+						url = w.__$_CORDOVA_PATH + "/cordova/ios/cordova.js";
+					}else{
+						//alert("请在移动设备上访问");
+						//url = path + "ios/cordova.js";
 					}
-                    if(typeof summerready == "function")
-                        summerready();
-                    else if(typeof summerReady == "function")
-                        summerReady();  
-					summer.trigger("ready");
-					
-					summer.trigger("aftershowwin");
-                });         
-            }, false);
+				
+				}else{
+					//2、hybrid app
+					if(w.__$_CORDOVA_PATH){
+						url = w.__$_CORDOVA_PATH + "www/cordova.js";
+					}else{
+						url = document.location.pathname.split("www")[0]+"www/cordova.js";
+					}
+				}
+				//normal load
+				var _script = document.createElement('script');
+				_script.id = "cordova_js";
+				_script.type = 'text/javascript';
+				_script.charset = 'utf-8';
+				_script.async = true;
+				_script.src = url;
+				_script.onload = function (e) {
+					w.$summer.cordova = w.cordova;
+					w.summer.cordova = w.cordova;
 
-        };
-        if(navigator.platform.toLowerCase().indexOf("win")<0){
-        	try{
-//            document.currentScript.parentNode.insertBefore(_script, document.currentScript);
-	            fs = document.getElementsByTagName('script')[0];
-	            fs.parentNode.insertBefore(_script, fs);
-        	}catch(e){
-        		console.log(e);
-        	}
-        }else{
-        	
+					document.addEventListener('deviceready', function(){
+						summer.trigger("init");//summer.on('init',function(){})
+						
+						//1、先通过cdv来获取页面参数
+						summer.winParam(function(ret){
+							//希望返回
+							var ctx = {
+								systemType:"android",//"ios"
+								systemVersion:7,// ios--> 7    android-->21
+								iOS7StatusBarAppearance:true,//false
+								fullScreen:true,
+								pageParam:{param0:123,param1:"abc"},
+								screenWidth:"",
+								screenHeight:"",
+								
+								winId:"",
+								winWidth:"",
+								winHeight:"",
+								
+								frameId:"",
+								frameWidth:"",
+								frameHeight:"",
+								
+								appParam:"",
+							};
+							//alert(typeof ret)// --> object
+
+							if(typeof ret == "string"){
+								ret = $summer.strToJson(ret);
+
+							}
+							//alert($summer.jsonToStr(ret));
+							summer.pageParam = ret;//put the param in summer
+							if(summer.autoShowWin !== false){
+								summer.showWin({});
+							}
+							if(typeof summerready == "function")
+								summerready();
+							else if(typeof summerReady == "function")
+								summerReady();  
+							summer.trigger("ready");
+							
+							summer.trigger("aftershowwin");
+						});         
+					}, false);
+
+				};
+				//document.currentScript.parentNode.insertBefore(_script, document.currentScript);
+				fs = document.getElementsByTagName('script')[0];
+				fs.parentNode.insertBefore(_script, fs);
+				
+			}
+		}catch(e){
+        	console.log(e);
         }
     })();
-    
-    if(navigator.platform.toLowerCase().indexOf("win")>-1){
-    	//alert("DOMContentLoaded")
-    	document.addEventListener('DOMContentLoaded',function(){
-    		if(typeof summerready == "function")
-                summerready();
-            if(typeof summerReady == "function")
-                summerReady();  
-    	},false);
-    }
     
     w.summer.require = function(mdlName){
         if(window.$summer["cordova"] != window.cordova){
