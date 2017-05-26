@@ -177,7 +177,7 @@
             }(),
             lang:(navigator.browserLanguage || navigator.language).toLowerCase()
         };
-		if(browser.info.platform.toLowerCase().indexOf("win")>=0){
+		if(browser.info.platform.toLowerCase().indexOf("win")>= 0 || browser.info.platform.toLowerCase().indexOf("mac")>= 0){
 			return "pc";
 		}else if(browser.info.android){
             return "android";
