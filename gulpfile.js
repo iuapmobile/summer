@@ -25,6 +25,16 @@ gulp.task("scripts",function(){
 /*********************** common task begin **********************/
 gulp.task('summer',function(){
 	//1 update github
+	var srcFiles = mergeSummerJs();//需合并的源文件数组
+	var fileName =  "summer";//目标文件名
+	
+	var distPath = 'dist/js/';//目标文件夹
+	//var distPath = 'test/**/**/css';
+	gulp.src(srcFiles).pipe(jshint()).pipe(jshint.reporter('default')).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
+	console.log('summer.js update github dist/js/ end at ' + (new Date()).toLocaleString());
+});
+function mergeSummerJs(){
 	var srcFiles = [];//需合并的源文件数组
 	srcFiles.push("dev/js/summer.module.js");//1
 	srcFiles.push("dev/js/summer.util.js");//2
@@ -36,14 +46,8 @@ gulp.task('summer',function(){
 	srcFiles.push("dev/js/summer.plugins.js");//8
 	srcFiles.push("dev/js/summer.debug.js");//9
 	srcFiles.push("dev/js/summer.emm.js");//10
-	
-	var fileName =  "summer";//目标文件名
-	var distPath = 'dist/js/';//目标文件夹
-	//var distPath = 'test/**/**/css';
-	gulp.src(srcFiles).pipe(jshint()).pipe(jshint.reporter('default')).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
-	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
-	console.log('summer.js update github dist/js/ end at ' + (new Date()).toLocaleString());
-});
+	return srcFiles;
+}
 gulp.task('iuapmobile.frameworks.core',function(){
 	
 	//1 update github
@@ -236,17 +240,9 @@ gulp.task('init_gct',function(){
 });
 
 gulp.task('summer_update_gct',function(){
-	var srcFiles = [];//需合并的源文件数组
-	srcFiles.push("dev/js/summer.module.js");//0
-	srcFiles.push("dev/js/summer.util.js");//2
-	srcFiles.push("dev/js/summer.cordova.js");//1
-	srcFiles.push("dev/js/summer.dom.js");//3
-	srcFiles.push("dev/js/summer.bridge.js");//4
-	srcFiles.push("dev/js/summer.core.js");//5
-	srcFiles.push("dev/js/summer.service.js");//6
-	srcFiles.push("dev/js/summer.plugins.js");//7
-		
+	var srcFiles = mergeSummerJs();//需合并的源文件数组
 	var fileName =  "summer";//目标文件名
+	
 	//2 update gityy
 	var path1 = TASKPATH_gct.git["tpl_ump_js"];
 	var path2 = TASKPATH_gct.git["tpl_ratchet_js"];

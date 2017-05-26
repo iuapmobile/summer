@@ -211,7 +211,7 @@
             lang:(navigator.browserLanguage || navigator.language).toLowerCase()
         };
 		if(browser.info.platform.toLowerCase().indexOf("win")>= 0 || browser.info.platform.toLowerCase().indexOf("mac")>= 0){
-			return "pc";
+		    return "pc";
 		}else if(browser.info.android){
             return "android";
         }else if(browser.info.ios || browser.info.iPhone || browser.info.iPad){
@@ -2372,7 +2372,7 @@
 
 //summer debug
 +function(w,s){
-	w.$summer.__debug = false;
+	w.$summer.__debug = false;//debug
 }(window,summer);
 
 /*2017.3.8
