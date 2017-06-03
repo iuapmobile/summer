@@ -344,13 +344,23 @@
     w.api = w.summer;
     (function(){
 		try{
-			if($summer.os =="pc" && document.location.href.toLocaleString().indexOf("http")<0){
+			var summerDOMContentLoaded = function(){
 				document.addEventListener('DOMContentLoaded',function(){
+					summer.trigger("init");
+					summer.pageParam = window.localStorage;
 					if(typeof summerready == "function")
 						summerready();
 					if(typeof summerReady == "function")
-						summerReady();  
+						summerReady();
+					summer.trigger("ready");
+					summer.trigger("aftershowwin");
 				},false);
+			}
+				
+			if($summer.os =="pc" && document.location.href.toLocaleString().indexOf("http")<0){
+				summer.__debug = true;
+				console.log("run by file:// protocol in debug Mode");
+				summerDOMContentLoaded();
 			}else{
 				var url = "";
 				if(document.location.href.indexOf("http")===0){
@@ -380,7 +390,7 @@
 						url = document.location.pathname.split("www")[0]+"www/cordova.js";
 					}
 				}
-				//normal load
+				
 				var _script = document.createElement('script');
 				_script.id = "cordova_js";
 				_script.type = 'text/javascript';
@@ -437,6 +447,11 @@
 						});         
 					}, false);
 
+				};
+				_script.onerror = function (e) {
+					summer.__debug = true;
+					console.log("run by http:// protocol in debug Mode");
+					summerDOMContentLoaded();
 				};
 				//document.currentScript.parentNode.insertBefore(_script, document.currentScript);
 				fs = document.getElementsByTagName('script')[0];
