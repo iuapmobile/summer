@@ -225,11 +225,23 @@ gulp.task('init_gct',function(){
 	TASKPATH_gct.git["tpl_ump_js_fw"] = TASKPATH_gct.git["tpl_ump_js"] + '/frameworks';
 	TASKPATH_gct.git["tpl_ratchet_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/js';
 	TASKPATH_gct.git["tpl_files_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/files/js';
-
+	
+	TASKPATH_gct.git["tpl_summer-uba_js"]     = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-uba/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-gulp_js"]    = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-gulp/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-react_js"]   = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-react/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-webpack_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-webpack/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-um_js"]      = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-um/projects/default/src/assets/js';
+	
 	
 	//4 js studio path
 	TASKPATH_gct.studio["tpl_ump_js"] = PATH_gct.studioPath + '/MOB/designer/templates/system/webtemplates/frametemplate/ump/projects/default/js';
 	TASKPATH_gct.studio["tpl_ratchet_js"] = PATH_gct.studioPath + '/MOB/designer/templates/system/webtemplates/frametemplate/ratchet/projects/default/js';
+	TASKPATH_gct.git["tpl_summer-uba_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-uba/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-gulp_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-gulp/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-react_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-react/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-webpack_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-webpack/projects/default/src/assets/js';
+	TASKPATH_gct.git["tpl_summer-um_js"] = PATH_gct.gitPath + '/publibs/resources/designer/templates/system/webtemplates/frametemplate/summer-um/projects/default/src/assets/js';
+	
 	TASKPATH_gct.studio["tpl_files_js"] = PATH_gct.studioPath + '/MOB/designer/templates/system/webtemplates/files/js';
 	TASKPATH_gct.studio["tpl_ump_js_fw"] = TASKPATH_gct.studio["tpl_ump_js"] + '/frameworks';
 
@@ -247,9 +259,14 @@ gulp.task('summer_update_gct',function(){
 	var path1 = TASKPATH_gct.git["tpl_ump_js"];
 	var path2 = TASKPATH_gct.git["tpl_ratchet_js"];
 	var path3 = TASKPATH_gct.git["tpl_files_js"];
+	var path4 = TASKPATH_gct.git["tpl_summer-uba_js"];
+	var path5 = TASKPATH_gct.git["tpl_summer-gulp_js"];
+	var path6 = TASKPATH_gct.git["tpl_summer-react_js"];
+	var path7 = TASKPATH_gct.git["tpl_summer-webpack_js"];
+	var path8 = TASKPATH_gct.git["tpl_summer-um_js"];
 	
-	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
-	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3)).pipe(gulp.dest(path4)).pipe(gulp.dest(path5)).pipe(gulp.dest(path6)).pipe(gulp.dest(path7)).pipe(gulp.dest(path8));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(path1)).pipe(gulp.dest(path2)).pipe(gulp.dest(path3)).pipe(gulp.dest(path4)).pipe(gulp.dest(path5)).pipe(gulp.dest(path6)).pipe(gulp.dest(path7)).pipe(gulp.dest(path8));
 	
 	console.log('summer.js is updated to gityy end');
 	
@@ -257,10 +274,15 @@ gulp.task('summer_update_gct',function(){
 	var studio1 = TASKPATH_gct.studio["tpl_ump_js"];
 	var studio2 = TASKPATH_gct.studio["tpl_ratchet_js"];
 	var studio3  = TASKPATH_gct.studio["tpl_files_js"];
+	var studio4 = TASKPATH_gct.studio["tpl_summer-uba_js"];
+	var studio5 = TASKPATH_gct.studio["tpl_summer-gulp_js"];
+	var studio6 = TASKPATH_gct.studio["tpl_summer-react_js"];
+	var studio7 = TASKPATH_gct.studio["tpl_summer-webpack_js"];
+	var studio8 = TASKPATH_gct.studio["tpl_summer-um_js"];
 	
 	var wzjc = TASKPATH_gct.wzjc["scripts"];
-	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
-	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(wzjc));
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(studio4)).pipe(gulp.dest(studio5)).pipe(gulp.dest(studio6)).pipe(gulp.dest(studio7)).pipe(gulp.dest(studio8)).pipe(gulp.dest(wzjc));
+	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio2)).pipe(gulp.dest(studio3)).pipe(gulp.dest(studio4)).pipe(gulp.dest(studio5)).pipe(gulp.dest(studio6)).pipe(gulp.dest(studio7)).pipe(gulp.dest(studio8)).pipe(gulp.dest(wzjc));
 	console.log('summer.js is updated to studio end');
 });
 

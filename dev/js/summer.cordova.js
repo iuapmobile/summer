@@ -70,7 +70,7 @@
 					document.addEventListener('deviceready', function(){
 						summer.trigger("init");//summer.on('init',function(){})
 						
-						//1、先通过cdv来获取页面参数
+						//1、先获取页面参数123
 						summer.winParam(function(ret){
 							//希望返回
 							var ctx = {
