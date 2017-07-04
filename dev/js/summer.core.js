@@ -405,4 +405,8 @@
 		return s.callCordova('summer-plugin-core.XUpgrade', 'exitApp', json || {}, successFn, errFn);
 	};
 	
+	s.collectInfos = function(json){
+		var APMPARAMS = ["login", json];
+		cordova.require("summer-plugin-apm.SummerAPM").insertAction(APMPARAMS,function(args){},function(args){});
+	}
 }(window,summer);
