@@ -1972,6 +1972,9 @@
 		remove : function(args){
 			return s.callService("UMFile.remove", args, false);//默认异步
 		},
+		compressImage : function(args){
+			return s.callService("UMFile.compressImg", args, false);//默认异步
+		},
 		exists : function(args){
 			return s.callService("UMFile.exists", args, true);
 		},
@@ -2290,6 +2293,7 @@
 	s.getLocationInfo = s.UMDevice.getLocationInfo;
 	//
 	s.removeFile = s.UMFile.remove;
+	s.compressImage=s.UMFile.compressImage
  	s.exists = s.UMFile.exists;
  	s.download = s.UMFile.download;
  	s.openFile = s.UMFile.open;
