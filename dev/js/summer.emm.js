@@ -98,6 +98,7 @@
      e.installWebApp = function(json,successFn,errFn){
         json["callback"]=successFn;
         json["error"]=errFn;
+		 json["__keepCallback"] = true;
         return  s.callService('UMEMMService.installWebApp', json, false);
     };
      e.openWebApp = function(json,successFn,errFn){

@@ -1551,7 +1551,13 @@
 	s.collectInfos = function(json){
 		var APMPARAMS = ["login", json];
 		cordova.require("summer-plugin-apm.SummerAPM").insertAction(APMPARAMS,function(args){},function(args){});
-	}
+	};
+	//安卓手动获取权限
+	s.getPermission = function(json, successFn, errFn){
+		if($summer.os=='android'){
+        	return s.callCordova('summer-plugin-service.XService', 'getPermission', json, successFn, errFn);
+    	}
+    }
 }(window,summer);
 
 
@@ -2495,6 +2501,7 @@
      e.installWebApp = function(json,successFn,errFn){
         json["callback"]=successFn;
         json["error"]=errFn;
+		 json["__keepCallback"] = true;
         return  s.callService('UMEMMService.installWebApp', json, false);
     };
      e.openWebApp = function(json,successFn,errFn){

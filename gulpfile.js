@@ -175,7 +175,13 @@ gulp.task('qhb',function(){
 
 
 
+/*********************** zhouleim's task begin **********************/
 
+gulp.task('zhouleim',function(){	
+	gulp.watch('dev/js/summer.*.js', ['summer']);
+	 
+	
+});
 /*********************** gct's task begin **********************/
 gulp.task('gct',function(){
 	gulp.watch('dev/js/summer.*.js', ['init_gct','summer', 'summer_update_gct']);
