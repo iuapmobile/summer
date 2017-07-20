@@ -1292,7 +1292,10 @@
         refreshFooterLoadDone : function(json, successFn, errFn){
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').refreshFooterLoadDone(json, successFn, errFn);
-        }
+        },
+        hideLaunch : function(json, successFn, errFn){
+			return s.callCordova('summer-plugin-frame.XFrame','removeStartPage',json, successFn, errFn);
+        },
     };
  
  
@@ -1319,6 +1322,7 @@
     s.closeFrameGroup = s.window.closeFrameGroup;
     s.setFrameGroupAttr = s.window.setFrameGroupAttr;
     s.setFrameGroupIndex = s.window.setFrameGroupIndex;
+    s.hideLaunch = s.window.hideLaunch;
 
     s.showProgress = function(json){
 		if(!s.canrequire()) return;
