@@ -5,7 +5,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 //var sass = require('gulp-sass');
 var rename = require('gulp-rename');
-var jshint = require("gulp-jshint");  
+//var jshint = require("gulp-jshint");  
 gulp.task("scripts",function(){  
    gulp.src("dev/js/*.js")  
       .pipe(jshint())  
@@ -30,7 +30,9 @@ gulp.task('summer',function(){
 	
 	var distPath = 'dist/js/';//目标文件夹
 	//var distPath = 'test/**/**/css';
-	gulp.src(srcFiles).pipe(jshint()).pipe(jshint.reporter('default')).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
+	//gulp.src(srcFiles).pipe(jshint()).pipe(jshint.reporter('default')).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
+	
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
 	gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
 	console.log('summer.js update github dist/js/ end at ' + (new Date()).toLocaleString());
 });

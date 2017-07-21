@@ -23,7 +23,7 @@
 				},false);
 			}
 				
-			if($summer.os =="pc" && document.location.href.toLocaleString().indexOf("http")<0){
+			if($summer.os =="pc" || !window.summerBridge){
 				summer.__debug = true;
 				console.log("run by file:// protocol in debug Mode");
 				summerDOMContentLoaded();
