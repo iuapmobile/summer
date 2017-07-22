@@ -137,6 +137,17 @@
         json["callback"]=successFn;
         json["error"]=errFn;
         return  s.callService('UMEMMService.removeWebApp', json, false);
-    }
+    };
+    e.upgradeSummerApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        json["__keepCallback"] = true;
+        return  s.callService('UMEMMService.upgradeSummerApp', json, false);
+    };
+    e.upgradeSilentSignal = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        s.callService("UMEMMService.upgradeSilentSignal", json, false)
+    }; 
     
 }(window,emm,summer);
