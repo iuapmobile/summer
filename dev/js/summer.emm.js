@@ -95,10 +95,37 @@
         json["error"]=errFn;
         return  s.callService('UMEMMService.feedback', json, false);
     };
+    e.getUserCommonApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getUserCommonApps', json, false);
+    };
+    e.getSystemApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getSystemApps', json, false);
+    };
+    e.getRecommendedApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getRecommendedApps', json, false);
+    };
+    e.updateUserApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+
+        return  s.callService('UMEMMService.updateUserApps', json, false);
+    };
+    e.upgradeWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        json["__keepCallback"] = true;
+        return  s.callService('UMEMMService.upgradeWebApp', json, false);
+    };
      e.installWebApp = function(json,successFn,errFn){
         json["callback"]=successFn;
         json["error"]=errFn;
-		 json["__keepCallback"] = true;
+         json["__keepCallback"] = true;
         return  s.callService('UMEMMService.installWebApp', json, false);
     };
      e.openWebApp = function(json,successFn,errFn){
