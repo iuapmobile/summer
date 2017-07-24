@@ -83,7 +83,7 @@
 			if(typeof json == "string"){
 				json = {"id" : json};
 			}else if(typeof json == "undefined"){
-				json = {};
+				json = {}
 			}				
 			return s.callCordova('summer-plugin-frame.XFrame', 'closeWin', json, successFn, errFn);
 		},

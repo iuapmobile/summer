@@ -144,6 +144,15 @@ gulp.task('sass',function(){
 	gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/css/'));
 	console.log('sass and rename ok');
 });
+gulp.task('summer2',function(){
+	var srcFiles = ["dev/smin/summer2.dom.js","dev/smin/summer2.core.js","dev/smin/summer2.service.js"];
+	var fileName =  "summer2";//目标文件名
+	
+	var distPath = 'dist/js/';//目标文件夹	
+	gulp.src(srcFiles).pipe(concat(fileName+'.js')).pipe(gulp.dest(distPath));
+	//gulp.src(srcFiles).pipe(concat(fileName+'.min.js')).pipe(uglify()).pipe(gulp.dest(distPath));
+	console.log('summer.js update github dist/js/ end at ' + (new Date()).toLocaleString());
+});
 /*********************** common task end **********************/
 
 
@@ -158,9 +167,10 @@ gulp.task('xyc',function(){
 	gulp.watch('dev/js/plugins/*.js', ['iuapmobile.frameworks.ui']);
 
 	gulp.watch('dev/js/Frameworks/UM.Listview.js', ['iuapmobile.frameworks.listview']);
-
 	//监听umcss
 	gulp.watch('dev/css/iuapmobile.um.css', ['umcss']);
+
+	gulp.watch('dev/smin/summer2.*.js', ['summer2']);
 });
 /*********************** xyc's task end **********************/
 
