@@ -96,12 +96,6 @@
 			}				
 			return s.callCordova('summer-plugin-frame.XFrame', 'closeToWin', json, successFn, errFn);
 		},
-		removeStartPage : function(json, successFn, errFn){	
-			if(typeof json == "undefined"){
-				json = {};
-			}				
-			return s.callCordova('summer-plugin-frame.XFrame', 'removeStartPage', json, successFn, errFn);
-		},
 		getSysInfo : function(json, successFn, errFn){
 			//support closeWin('xxx') and closeWin({id:'xxx'})
 			if(typeof json == "string"){
@@ -170,7 +164,6 @@
     s.showWin = s.window.showWin;
     s.closeWin = s.window.closeWin;
 	s.closeToWin = s.window.closeToWin;
-	s.removeStartPage=s.window.removeStartPage;
 	s.getSysInfo = s.window.getSysInfo;
 
     s.winParam = s.window.winParam;
