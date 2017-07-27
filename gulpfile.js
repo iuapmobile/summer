@@ -145,7 +145,13 @@ gulp.task('sass',function(){
 	console.log('sass and rename ok');
 });
 gulp.task('summer2',function(){
-	var srcFiles = ["dev/smin/summer2.dom.js","dev/smin/summer2.core.js","dev/smin/summer2.service.js"];
+	var srcFiles = [
+		"dev/js/summer.module.js",
+		"dev/smin/summer2.dom.js",
+		"dev/smin/summer2.core.js",
+		"dev/js/summer.service.js",
+		"dev/js/summer.emm.js"
+	];
 	var fileName =  "summer2";//目标文件名
 	
 	var distPath = 'dist/js/';//目标文件夹	

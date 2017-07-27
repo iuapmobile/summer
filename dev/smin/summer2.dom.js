@@ -1,29 +1,3 @@
-(function(global, factory){
-    if ( typeof module === "object" && typeof module.exports === "object" ) {
-        module.exports = global.document ?
-            factory( global, true ) :
-            function( w ) {
-                if ( !w.document ) {
-                    throw new Error( "jQuery requires a window with a document" );
-                }
-                return factory( w );
-            };
-    } else {
-        factory( global );
-    }
-}(window,function(window,noGlobal){
-    var $s = {};
-    var s = {$:$s};
-    if ( typeof define === "function" && define.amd ) {
-        define( "summer", [], function() {
-            return s;
-        });
-    }
-    window.$summer = $s;
-    window.summer = s;
-    return s;
-}));
-//HTML DOM API by gct
 ;(function(window){
     var u = window.$summer || {};
     var isAndroid = (/android/gi).test(navigator.appVersion);
@@ -31,7 +5,7 @@
         var browser={
             info:function(){
                 var ua = navigator.userAgent, app = navigator.appVersion;
-                return { //移动终端浏览器版本信息
+                return { 
                     webKit: ua.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
                     mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
                     ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端

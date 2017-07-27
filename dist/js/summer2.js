@@ -1,4 +1,10 @@
-(function(global, factory){
+/*
+ * Summer JavaScript Library
+ * Copyright (c) 2016 yonyou.com
+ * Author: gct@yonyou.com
+ * Version: 0.3.0.20170419.1411
+ */
+ (function(global, factory){
     if ( typeof module === "object" && typeof module.exports === "object" ) {
         module.exports = global.document ?
             factory( global, true ) :
@@ -23,7 +29,8 @@
     window.summer = s;
     return s;
 }));
-//HTML DOM API by gct
+
+
 ;(function(window){
     var u = window.$summer || {};
     var isAndroid = (/android/gi).test(navigator.appVersion);
@@ -31,7 +38,7 @@
         var browser={
             info:function(){
                 var ua = navigator.userAgent, app = navigator.appVersion;
-                return { //移动终端浏览器版本信息
+                return { 
                     webKit: ua.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
                     mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
                     ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
@@ -184,10 +191,13 @@
 	}
 	//----------------------------------------------------------------------
 	s.UMService = {
+		//统一API，summer.callService(), supported by dsl and summer 
 		call:function(serviceType, jsonArgs, isSync){
 			try{
 				jsonArgs = jsonArgs || {};
 				var serviceparams = "";
+				
+				//Setp1: jsonArgs JSON Format
 				if(typeof jsonArgs == "string"){
 					try{
 						var json = $summer.strToJson(jsonArgs);
@@ -202,6 +212,8 @@
 						return;
 					}
 				}
+				
+				
 				if(typeof jsonArgs == "object"){
 					//Setp2: callback proxy
 					s.UMService._callbackProxy(jsonArgs, "callback");
@@ -951,3 +963,157 @@
 	};
 
 }(window,summer);
+
+/*2017.3.8
+ * Summer JavaScript Library
+ * Copyright (c) 2016 yonyou.com
+ * Author: Qhb@yonyou.com go
+ * Version: 3.0.0.20170214.2047
+ */
+
+(function(global, factory){
+    if ( typeof module === "object" && typeof module.exports === "object" ) {
+     
+        module.exports = global.document ?
+            factory( global, true ) :
+            function( w ) {
+                if ( !w.document ) {
+                    throw new Error( "jQuery requires a window with a document" );
+                }
+                return factory( w );
+            };
+    } else {
+        factory( global );
+    }
+}(window,function(window,noGlobal){
+    var e = {};
+    window.emm = e;
+    return emm;
+}))
+
++function(w,e,s){
+    if(!e){
+        e={};
+        w.emm=e;
+    }
+
+    e.writeConfig = function(json,successFn,errFn){
+        s.callService("UMEMMService.writeConfig", json, false)
+
+    };
+    e.autofind = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.autofind', json, false);
+    };
+    e.registerDevice = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.registerDevice', json, false);
+    };
+    e.login = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.login', json, false);
+    };
+    e.logout = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.logout', json, false);
+    };
+    e.getUserInfo = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getUserInfo', json, false);
+    };  
+    e.modifyPassword = function(json,successFn,errFn){  
+        json["callback"]=successFn;
+        json["error"]=errFn;    
+        return  s.callService('UMEMMService.modifyPassword', json, false);
+    };
+    e.modifyAvatar = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.modifyAvatar', json, false);
+    };
+    e.getApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getApps', json, false);
+    };
+    e.getDocs = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getDocs', json, false);
+    };
+    e.startStrategy = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.startStrategy', json, false);
+    };
+    e.stopStrategy = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.stopStrategy', json, false);
+    };
+    e.feedback = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.feedback', json, false);
+    };
+    e.getUserCommonApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getUserCommonApps', json, false);
+    };
+    e.getSystemApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getSystemApps', json, false);
+    };
+    e.getRecommendedApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.getRecommendedApps', json, false);
+    };
+    e.updateUserApps = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+
+        return  s.callService('UMEMMService.updateUserApps', json, false);
+    };
+    e.upgradeWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        json["__keepCallback"] = true;
+        return  s.callService('UMEMMService.upgradeWebApp', json, false);
+    };
+     e.installWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+         json["__keepCallback"] = true;
+        return  s.callService('UMEMMService.installWebApp', json, false);
+    };
+     e.openWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.openWebApp', json, false);
+    };
+     e.removeWebApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMEMMService.removeWebApp', json, false);
+    };
+    e.upgradeSummerApp = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        json["__keepCallback"] = true;
+        return  s.callService('UMEMMService.upgradeSummerApp', json, false);
+    };
+    e.upgradeSilentSignal = function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        s.callService("UMEMMService.upgradeSilentSignal", json, false)
+    }; 
+    
+}(window,emm,summer);
