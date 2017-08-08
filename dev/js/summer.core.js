@@ -142,6 +142,11 @@
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').refreshHeaderLoadDone(json, successFn, errFn);
         },
+        refreshHeaderBegin : function(json, successFn, errFn) {
+			if (s.canrequire()) {
+				return s.cordova.require("summer-plugin-frame.XFrame").refreshHeaderBegin(json, successFn, errFn)
+			}
+		},
         setRefreshFooterInfo : function(json, successFn, errFn){
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').setRefreshFooterInfo(json, successFn, errFn);
@@ -172,6 +177,7 @@
 
     s.setRefreshHeaderInfo = s.window.setRefreshHeaderInfo;
     s.refreshHeaderLoadDone = s.window.refreshHeaderLoadDone;
+    s.refreshHeaderBegin = s.window.refreshHeaderBegin;
     s.setRefreshFooterInfo = s.window.setRefreshFooterInfo;
     s.refreshFooterLoadDone = s.window.refreshFooterLoadDone;
 
