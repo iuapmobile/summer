@@ -42,13 +42,13 @@
             return s.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupIndex', json, successFn, errFn);
         },
         openWin: function (json, successFn, errFn) {
-            if (!json["animation"]) {
-                json["animation"] = {
-                    type: "push",
-                    subType: "from_right",
-                    duration: 300
-                };
-            }
+			if(!json["animation"]){
+        		json["animation"]={
+				    type:"push", 
+				    subType:"from_right", 
+				    duration:300 
+				};
+        	}
             return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
         createWin: function (json, successFn, errFn) {
@@ -59,6 +59,9 @@
         },
         showWin: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'showWin', json, successFn, errFn);
+        },
+		setWinAttr: function (json, successFn, errFn) {
+            return s.callCordova('summer-plugin-frame.XFrame', 'setWinAttr', json, successFn, errFn);
         },
         closeWin: function (json, successFn, errFn) {
             //support closeWin('xxx') and closeWin({id:'xxx'})
@@ -152,6 +155,7 @@
     s.openFrame = s.window.openFrame;
     s.closeFrame = s.window.closeFrame;
     s.openWin = s.window.openWin;
+	s.setWinAttr = s.window.setWinAttr;
     s.createWin = s.window.createWin;
     s.getOpenWinTime = s.window.getOpenWinTime;
     s.showWin = s.window.showWin;
