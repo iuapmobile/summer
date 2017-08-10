@@ -4,24 +4,24 @@
  * Author: gct@yonyou.com
  * Version: 0.3.0.20170419.1411
  */
- (function(global, factory){
-    if ( typeof module === "object" && typeof module.exports === "object" ) {
+(function (global, factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
         module.exports = global.document ?
-            factory( global, true ) :
-            function( w ) {
-                if ( !w.document ) {
-                    throw new Error( "jQuery requires a window with a document" );
+            factory(global, true) :
+            function (w) {
+                if (!w.document) {
+                    throw new Error("jQuery requires a window with a document");
                 }
-                return factory( w );
+                return factory(w);
             };
     } else {
-        factory( global );
+        factory(global);
     }
-}(window,function(window,noGlobal){
+}(window, function (window, noGlobal) {
     var $s = {};
-    var s = {$:$s};
-    if ( typeof define === "function" && define.amd ) {
-        define( "summer", [], function() {
+    var s = {$: $s};
+    if (typeof define === "function" && define.amd) {
+        define("summer", [], function () {
             return s;
         });
     }
