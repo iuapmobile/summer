@@ -1348,6 +1348,12 @@
         var SERVER = json.SERVER;
         ft.upload(fileURL, encodeURI(SERVER), sFn, eFn, options);
     };
+	 //多图多文件批量上传 
+    s.multiUpload= function(json,successFn,errFn){
+        json["callback"]=successFn;
+        json["error"]=errFn;
+        return  s.callService('UMFile.multiUpload', json, false);
+    };
     s.eval = function (script) {
         var t = setTimeout("try{eval(" + script + ")}catch(e){alert(e)}", 10);
     };
