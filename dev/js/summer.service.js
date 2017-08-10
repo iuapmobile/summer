@@ -470,6 +470,9 @@
 				json = {"path" : args};
 			}
 			return s.callService("UMFile.base64ToFile",json, true);
+		},
+		compressImg : function(json) {
+			return s.callService("UMFile.compressImg", json)
 		}
 
 	};
@@ -745,6 +748,7 @@
  	s.openFileSelector = s.UMFile.openFileSelector;
  	s.fileToBase64 = s.UMFile.fileToBase64;
  	s.base64ToFile = s.UMFile.base64ToFile;
+ 	s.compressImg = s.UMFile.compressImg;
 	/*tel*/
 	s.callPhone= s.UMTel.call;
 	s.sendMsg= s.UMTel.sendMsg;

@@ -75,6 +75,9 @@
         createWin : function(json, successFn, errFn){
 			return s.callCordova('summer-plugin-frame.XFrame', 'createWin', json, successFn, errFn);
         },
+        getOpenWinTime : function(json, successFn, errFn) {
+			return s.callCordova("summer-plugin-frame.XFrame", "getOpenWinTime", json, successFn, errFn)
+		},
         showWin : function(json, successFn, errFn){
 			return s.callCordova('summer-plugin-frame.XFrame', 'showWin', json, successFn, errFn);
         },
@@ -155,6 +158,11 @@
 			if(s.canrequire())
             return s.cordova.require('summer-plugin-frame.XFrame').refreshFooterLoadDone(json, successFn, errFn);
         },
+        refreshFooterBegin : function(json, successFn, errFn) {
+			if (s.canrequire()) {
+				return s.cordova.require("summer-plugin-frame.XFrame").refreshFooterBegin(json, successFn, errFn)
+			}
+		},
         hideLaunch : function(json, successFn, errFn){
 			return s.callCordova('summer-plugin-frame.XFrame','removeStartPage',json, successFn, errFn);
         },
@@ -166,6 +174,7 @@
     s.closeFrame = s.window.closeFrame;
     s.openWin = s.window.openWin;
     s.createWin = s.window.createWin;
+    s.getOpenWinTime = s.window.getOpenWinTime;
     s.showWin = s.window.showWin;
     s.closeWin = s.window.closeWin;
 	s.closeToWin = s.window.closeToWin;
@@ -180,7 +189,7 @@
     s.refreshHeaderBegin = s.window.refreshHeaderBegin;
     s.setRefreshFooterInfo = s.window.setRefreshFooterInfo;
     s.refreshFooterLoadDone = s.window.refreshFooterLoadDone;
-
+    s.refreshFooterBegin = s.window.refreshFooterBegin;
     s.openFrameGroup = s.window.openFrameGroup;
     s.closeFrameGroup = s.window.closeFrameGroup;
     s.setFrameGroupAttr = s.window.setFrameGroupAttr;
