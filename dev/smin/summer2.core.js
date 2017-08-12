@@ -71,4 +71,17 @@
 		}		
 		return window.adrMininvoker.callSync("closeWin","");
 	};
+    s.execScript = function (json) {
+        if (typeof json == "object") {
+            //json.execFn = "summer.eval"
+            if (json.script) {
+                json.script = "try{" + json.script + "}catch(e){alert(e)}";
+            } else {
+                alert("the parameter script of the execScript function is " + json.script);
+            }
+        }
+        if (s.canrequire()) {
+            return window.adrMininvoker.callSync("execScript",JSON.stringify(json));
+        }
+    };
 }(window,summer);

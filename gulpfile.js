@@ -148,6 +148,7 @@ gulp.task('summer2',function(){
 	var srcFiles = [
 		"dev/js/summer.module.js",
 		"dev/smin/summer2.dom.js",
+		"dev/js/summer.bridge.js",//5
 		"dev/smin/summer2.core.js",
 		"dev/js/summer.service.js",
 		"dev/js/summer.emm.js"
