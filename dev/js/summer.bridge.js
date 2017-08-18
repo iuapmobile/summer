@@ -8,7 +8,7 @@
      }
      }
      }
-     */
+    */
     //1、兼容Android
     if (w.adrinvoker) alert(w.adrinvoker);
     var adrinvoker = {};
