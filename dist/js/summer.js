@@ -2084,6 +2084,7 @@
         },
         openPhotoAlbum: function (json) {
             if (!json) return;
+            /*
             var args = {};
             if (json.bindfield)
                 args["bindfield"] = json["bindfield"];
@@ -2091,7 +2092,8 @@
                 args["callback"] = json["callback"];
             if (json.compressionRatio)
                 args["compressionRatio"] = json["compressionRatio"];
-            return s.callService("UMDevice.openPhotoAlbum", args, false);//异步调用服务
+            */
+            return s.callService("UMDevice.openPhotoAlbum", json, false);//异步调用服务
         }
     };
     s.UMScanner = {
