@@ -2449,6 +2449,21 @@
         json["error"] = errFn;
         return s.callService('UMEMMService.registerDevice', json, false);
     };
+	e.openAdmin = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMMDMService.openAdmin', json, false);
+    };
+     e.openMDM = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMMDMService.openMDM', json, false);
+    };
+     e.closeMDM = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMMDMService.closeMDM', json, false);
+    };
     e.login = function (json, successFn, errFn) {
         json["callback"] = successFn;
         json["error"] = errFn;
