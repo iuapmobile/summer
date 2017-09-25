@@ -1989,6 +1989,12 @@
         exists: function (args) {
             return s.callService("UMFile.exists", args, true);
         },
+		//获取安卓手机app内文件路径
+		getStorageDirectory : function(args){
+			if($summer.os=="android"){
+				return s.callService("UMFile.getStorageDirectory", args, true);
+			}
+		},
         download: function (jsonArgs) {
             if ($summer.isEmpty(jsonArgs.url)) {
                 alert("参数url不能为空");
@@ -2311,6 +2317,7 @@
     s.removeFile = s.UMFile.remove;
     s.compressImage = s.UMFile.compressImage
     s.exists = s.UMFile.exists;
+	s.getStorageDirectory=s.UMFile.getStorageDirectory
     s.download = s.UMFile.download;
     s.openFile = s.UMFile.open;
     s.getFileInfo = s.UMFile.getFileInfo;
