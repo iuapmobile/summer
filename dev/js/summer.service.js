@@ -418,6 +418,9 @@
         compressImage: function (args) {
             return s.callService("UMFile.compressImg", args, false);//默认异步
         },
+		saveImageToAlbum: function (args) {
+            return s.callService("UMFile.saveImageToAlbum", args, false);//默认异步
+        },
         exists: function (args) {
             return s.callService("UMFile.exists", args, true);
         },
@@ -748,6 +751,7 @@
     //
     s.removeFile = s.UMFile.remove;
     s.compressImage = s.UMFile.compressImage
+	s.saveImageToAlbum = s.UMFile.saveImageToAlbum
     s.exists = s.UMFile.exists;
 	s.getStorageDirectory=s.UMFile.getStorageDirectory
     s.download = s.UMFile.download;
