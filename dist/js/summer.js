@@ -1986,6 +1986,10 @@
         compressImage: function (args) {
             return s.callService("UMFile.compressImg", args, false);//默认异步
         },
+		//涂鸦
+		doodle: function (args) {
+		return s.callService("UMFile.startDraw", args, false);//默认异步
+        },
 		saveImageToAlbum: function (args) {
             return s.callService("UMFile.saveImageToAlbum", args, false);//默认异步
         },
@@ -2319,6 +2323,7 @@
     //
     s.removeFile = s.UMFile.remove;
     s.compressImage = s.UMFile.compressImage
+	s.doodle = s.UMFile.doodle
 	s.saveImageToAlbum = s.UMFile.saveImageToAlbum
     s.exists = s.UMFile.exists;
 	s.getStorageDirectory=s.UMFile.getStorageDirectory
@@ -2360,6 +2365,17 @@
         return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
     };
     s.getLocation = function (successFn, errFn) {
+        return navigator.geolocation.getCurrentPosition(successFn, errFn);
+    };
+	s.getNativeLocation = function (json,successFn, errFn) {
+		if(!json){return}
+		if($summer.os=="android"){
+			 return   s.cordova.require("cordova-plugin-amap.AMap").getLocation(json,successFn, errFn);
+		}else{
+			 json["callback"] = successFn;
+             json["error"] = errFn;
+			return s.callService("UMDevice.getLocation", json, false);
+		}
         return navigator.geolocation.getCurrentPosition(successFn, errFn);
     };
 
