@@ -474,14 +474,14 @@
             if (typeof args == "string") {
                 json = {"path": args};
             }
-            return s.callService("UMFile.fileToBase64", json, true);
+            return s.callService("UMFile.fileToBase64", json, false);
         },
         base64ToFile: function (args) {
             var json = args;
             if (typeof args == "string") {
                 json = {"path": args};
             }
-            return s.callService("UMFile.base64ToFile", json, true);
+            return s.callService("UMFile.base64ToFile", json, false);
         },
         compressImg: function (json) {
             return s.callService("UMFile.compressImg", json)
