@@ -11,8 +11,11 @@
 		<script src="../dist/js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
 		<script src="js/index.js" ></script>
 	</head>
-	<body>
-		<div id="win" class="um-win" >
+	<body style="backgroud-color:red">
+		<button id="button0" style="display:block;width:100px"></button>
+		<button id="button1" width='200px'style="display:block;"></button>
+		<button id="button2" style="display:block;width:100px"></button>
+		<div id="win" class="um-win1" >
 			<div id="header" class="um-header">
 				<a href="#" class="um-back">返回</a>
 				<h3>iuap mobile</h3>
@@ -45,7 +48,54 @@
 			</div>
 		</div>
 		<script>
+debugger;
+		function showCase(value) {
+  switch(value) {
+    case 'A':
+      console.log('A');
+      break;
+    case 'String':
+      console.log('String');
+      break;
+    case 'string':
+      console.log('string');
+      break;
+		case 'object':
+	      console.log('object');
+	      break;
+    default:
+      console.log('Do not know!');
+  }
+}
+showCase(new String('A'));
+showCase('A');
 
+
+	console.log('ddd' == new String('ddd'))
+	console.log(null ==undefined)
+  console.log(0 ==false)
+	console.log(''==null)
+
+
+
+		alert(document.getElementById('button0').getAttribute('style').width)
+		alert(document.getElementById('button0').getAttribute('width'))
+		alert(document.getElementById('button0').style.width)
+		alert(document.getElementById('button0').style['width'])
+		alert(document.getElementById('button0').width)
+		alert(document.getElementById('button0').Width)
+debugger;
+
+var derp = "one";
+var Herp = function () {
+	   this.derp = "two";
+}
+var foo = Herp();
+alert(derp);
+
+
+
+debugger;
 		var val= 1;
        (function(){
        		console.log(val);

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../dist/css/font-icons.css">
+		<link rel="stylesheet" href="../dist/css/iuapmobile.um.css">
+		<script src="../dist/js/summer.js" ></script>
+		<script src="../dist/libs/jquery.min.js" ></script>
+		<script src="../dist/js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="js/index.js" ></script>
+	</head>
+	<body style="backgroud-color:red">
+		<button id="button0" style="display:block;width:100px"></button>
+		<button id="button1" width='200px'style="display:block;"></button>
+		<button id="button2" style="display:block;width:100px"></button>
+		<div id="win" class="um-win1" >
+			<div id="header" class="um-header">
+				<a href="#" class="um-back">返回</a>
+				<h3>iuap mobile</h3>
+				<a href="#" class="um-header-right ti-plus f20"></a>
+			</div>
+
+			<div id="content" class="um-content p15">
+
+			</div>
+
+			<div id="footer" class="um-footer">
+				<div class="um-footerbar">
+					<a id="item0" href="#" class="um-footerbar-item">
+						<i class="ti-comments f20"></i>
+						<div class="f12 lh1">消息</div>
+					</a>
+					<a id="item1" href="#" class="um-footerbar-item">
+						<i class="ti-notepad f20"></i>
+						<div class="f12 lh1">日程</div>
+					</a>
+					<a id="item2" href="#" class="um-footerbar-item active">
+						<i class="ti-agenda f20"></i>
+						<div class="f12 lh1">通讯录</div>
+					</a>
+					<a id="item3" href="#" class="um-footerbar-item">
+						<i class="ti-user f20"></i>
+						<div class="f12 lh1">我</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script>
+
+debugger;
+
+function bubbleSort2(arr) {
+    var len = arr.length;
+    for (var i = len-1; i > 0; i--) {
+        for (var j = len-1; j >len-1-i; j--) {
+            if (arr[j] < arr[j-1]) {        // 相邻元素两两对比
+                var temp = arr[j-1];        // 元素交换
+                arr[j-1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+     }
+     return arr;
+   }
+
+var arr = [2,5,4,2,5,2,1,3]
+bubbleSort2(arr);
+
+
+  Array.prototype.remove = function(i){
+        if(isNaN(i) || i < 0 || i >= this.length){
+            return this;
+        }
+        for(var j=i;j<this.length;j++){
+            this[j] = this[j+1];
+        }
+        this.length-=1;
+    };
+
+
+var arr = [1,2,3,4,5,6];
+arr.remove(3);
+
+var arr1 = [1,2,3,4,5,6];
+arr1.remove(0);
+
+var arr2 = [1,2,3,4,5,6];
+arr2.remove(arr2.length-1);
+
+
+function bubbleSort(arr) {
+    var len = arr.length;
+    for (var i = 0; i < len; i++) {
+        for (var j = 0; j < len - 1 - i; j++) {
+            if (arr[j] > arr[j+1]) {        // 相邻元素两两对比
+                var temp = arr[j+1];        // 元素交换
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+var arr = [2,4,5,2,3,5,1]
+var arr2 = bubbleSort(arr);
+
+
+		</script>
+	</body>
+</html>
