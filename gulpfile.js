@@ -3,17 +3,20 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-//var sass = require('gulp-sass');
+var sass = require('gulp-sass');
 var rename = require('gulp-rename');
+var minimist = require('minimist');
 //var jshint = require("gulp-jshint");  
 gulp.task("scripts",function(){  
    gulp.src("dev/js/*.js")  
       .pipe(jshint())  
       .pipe(jshint.reporter("default"))  
 });  
-
-
-
+var knowOptions = {
+	string: 'themes',
+	default: {themes:'default'}
+}
+var options = minimist(process.argv.slice(2),knowOptions);
 
 
 
@@ -137,12 +140,15 @@ gulp.task('umcss',function(){
 	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
 	console.log('iuapmobile.um.css is updated to studio end');
 });
-gulp.task('sass',function(){
-	//var srcFiles = [];//需合并的源文件数组
-	//srcFiles.push("dev/js/summer.cordova.js");//1
-	//srcFiles.push("dev/js/summer.util.js");//2
-	gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/css/'));
-	console.log('sass and rename ok');
+gulp.task('sass',function(args){
+	if(options.themes){
+		console.log('the themes['+ options.themes+'] is begin to sass build...');
+		gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/themes/'+options.themes+'/css/'));
+	}else{
+		gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/css/'));
+	}
+
+	console.log('sass build finished!');
 });
 gulp.task('summer2',function(){
 	var srcFiles = [

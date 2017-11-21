@@ -2,42 +2,45 @@
 /*********20160810 *********/
 /*** from scss/um/Common/variables.scss ***/
 
-//IOS header font color == #017afd
-// header bg color == #f6f6f6
-// body bg color == #f0eff4
-// border -color #c8c8ca
 
-//== Colors
-//
-// 第一组颜色搭配 ios blue
+//=============================================================================> Colors
+
+// blue
 //$um-theme-color:		 #00a1ea !default; //ios blue
 //$um-theme-color2:		 #ffffff !default; //ios white
-//$um-body-bg-color:       #efeff4 !default;
+//$um-body-bg-color:     #efeff4 !default;
 
 
-// 第二组颜色搭配 gray
+// gray
 //$um-theme-color:		 #5e7489 !default; 
 //$um-theme-color2:		 #ffffff !default;
-//$um-body-bg-color:       #efeff4 !default;
+//$um-body-bg-color:     #efeff4 !default;
 
-
+// gree
 //$um-theme-color:		 #2dbb69 !default;
 //$um-theme-color2:		 #ffffff !default;
-//$um-body-bg-color:       #efeff4 !default;
+//$um-body-bg-color:     #efeff4 !default;
 
-// 第四组颜色搭配 orange
-//$um-theme-color:		 #FF7800 !default;
+// xiaomi orange
+//$um-theme-color:		 #FF7E00 !default;
 //$um-theme-color2:		 #ffffff !default;
-//$um-body-bg-color:       #efeff4 !default;
+//$um-body-bg-color:     #efeff4 !default;
 
+// red
 //$um-theme-color:		 #E40011 !default;
 //$um-theme-color2:		 #ffffff !default;
-//$um-body-bg-color:       #efeff4 !default;
+//$um-body-bg-color:     #efeff4 !default;
 
-// 默认颜色 ios blue
+// default
 $um-theme-color:		 #007aff !default;
 $um-theme-color2:		 #ffffff !default;
 $um-body-bg-color:       #efeff4 !default;
+
+
+// ios blue2
+//$um-theme-color:		 #ffffff !default;
+//$um-theme-color2:		 #007aff !default;
+//$um-body-bg-color:       #efeff4 !default;
 
 
 
@@ -108,11 +111,11 @@ $border-radius-small:       3px !default;
 
 //=======================================================================> Components
 //
-// list
+// ==============================>list
 
 //$list-border-color:            #ddd !default;
 
-//== Tables
+//===============================> Tables
 //
 
 $panel-bg:                     #fefefe !default;
@@ -126,14 +129,23 @@ $header-bgcolor:  	 		 #f5f5f7 !default;
 
 // side bar
 $sidebar-width:                80% !default;
-//== Buttons
+//===============================> Buttons
 //
-//## For each of Bootstrap's buttons, define text, background and border color.
+//## For each of buttons, define text, background and border color.
 $btn-active-bgcolor:             rgba(230,230,230,.95) !default;
 
 $um-btn-color:           		 $um-theme-color !default;
 $um-btn-bgcolor:              	 #fff !default;
 $um-btn-border:          		 $um-theme-color !default;
+
+
+
+$um-btn-color:           		 $um-theme-color2 !default;
+$um-btn-bgcolor:              	 #um-theme-color  !default;
+$um-btn-border:          		 $um-theme-color  !default;
+
+
+
 
 $btn-primary-color:              $brand-primary !default;
 $btn-primary-bg:                 #fff !default;
@@ -157,7 +169,7 @@ $btn-danger-border:              $brand-danger !default;
 
 $btn-link-disabled-color:        $gray-light !default;
 
-//== Forms
+//===============================> Forms
 //
 //##
 

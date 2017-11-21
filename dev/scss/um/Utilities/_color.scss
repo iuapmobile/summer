@@ -1,6 +1,9 @@
 @charset "utf-8";
 /* 常用颜色 */
 // 字体颜色 七彩色
+.um-theme-color{color:$um-theme-color;}
+.um-theme-color2{color:$um-theme-color2;}
+
 .um-red{color:$brand-danger;}
 .um-orange{color:$brand-warning;}
 .um-yellow{color:#ffcc00;}
