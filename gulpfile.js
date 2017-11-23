@@ -140,15 +140,21 @@ gulp.task('umcss',function(){
 	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
 	console.log('iuapmobile.um.css is updated to studio end');
 });
-gulp.task('sass',function(args){
+gulp.task('sass',function(cb){
 	if(options.themes){
 		console.log('the themes['+ options.themes+'] is begin to sass build...');
-		gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/themes/'+options.themes+'/css/'));
+		gulp.src('dev/scss/um.scss').pipe(sass())
+		.pipe(rename('iuapmobile.um.css'))
+		.pipe(gulp.dest('dist/themes/'+options.themes+'/css/'))
+		.on('end', function() {
+            console.log('###### sass task real done ###### ' + (new Date()).valueOf());
+            cb();
+        });;
 	}else{
 		gulp.src('dev/scss/um.scss').pipe(sass()).pipe(rename('iuapmobile.um.css')).pipe(gulp.dest('dist/css/'));
 	}
 
-	console.log('sass build finished!');
+	console.log('-------- sass js run finished! -------- ' + (new Date()).valueOf());
 });
 gulp.task('summer2',function(){
 	var srcFiles = [
@@ -432,4 +438,22 @@ gulp.task('umcss_copy_gct',function(){
 	gulp.src(src).pipe(gulp.dest(studio1)).pipe(gulp.dest(studio3));
 	console.log('iuapmobile.um.css is updated to studio end');
 });
+
+
+gulp.task('g1',function(cb){ //cb为任务函数提供的回调，用来通知任务已经完成
+  //one是一个异步执行的任务
+  console.log("#################g1 function run!")
+  //console.log(typeof cb)
+  setTimeout(function(){
+    console.log('################# one is done after 5000ms');
+    cb();  //执行回调，表示这个异步任务已经完成
+  },5000);
+  //cb();
+});
+
+//这时two任务会在one任务中的异步操作完成后再执行
+gulp.task('g2',['g1'],function(){
+  console.log('################# two is done');
+});
+
 /*********************** gct's task end **********************/
