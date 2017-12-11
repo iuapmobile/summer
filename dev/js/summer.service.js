@@ -412,9 +412,15 @@
         },
         addCalendarEvent: function (args) {
             if (!$summer.isJSONObject(args)) {
-                alert("调用openApp服务时，参数不是一个有效的JSONObject");
+                alert("调用addCalendarEvent服务时，参数不是一个有效的JSONObject");
             }
             return s.callService("UMDevice.addCalendarEvent", args, false);
+        },
+        systemShare: function (args) {
+            if (!$summer.isJSONObject(args)) {
+                alert("调用systemShare服务时，参数不是一个有效的JSONObject");
+            }
+            return s.callService("UMDevice.systemShare", args, false);
         }
     };
     s.UMFile = {
@@ -759,6 +765,7 @@
     s.openApp = s.UMDevice.openApp;
     s.getLocationInfo = s.UMDevice.getLocationInfo;
     s.addCalendarEvent = s.UMDevice.addCalendarEvent;
+    s.systemShare = s.UMDevice.systemShare;
     /*file*/
     s.removeFile = s.UMFile.remove;
     s.compressImage = s.UMFile.compressImage
