@@ -117,7 +117,7 @@
      }
      }
      }
-     */
+    */
     //1、兼容Android
     if (w.adrinvoker) alert(w.adrinvoker);
     var adrinvoker = {};
@@ -568,11 +568,6 @@
             }
         },
         post: function (json) {
-            /*	参数：
-             url : "http://academy.yonyou.com/api/loginLx.ashx",//请求的url,
-             data: {key:"6480-4230-27FD-8AA0",user:"apitest",pwd:"123456"},
-             callback : "mycallback()"
-             */
             if ($summer.isJSONObject(json)) {
                 if (!json.url) {
                     alert("请输入请求的url");
@@ -731,6 +726,18 @@
         },
         getLocationInfo: function () {
             return s.callService("UMDevice.getLocationInfo", {}, true);
+        },
+        addCalendarEvent: function (args) {
+            if (!$summer.isJSONObject(args)) {
+                alert("调用addCalendarEvent服务时，参数不是一个有效的JSONObject");
+            }
+            return s.callService("UMDevice.addCalendarEvent", args, false);
+        },
+        systemShare: function (args) {
+            if (!$summer.isJSONObject(args)) {
+                alert("调用systemShare服务时，参数不是一个有效的JSONObject");
+            }
+            return s.callService("UMDevice.systemShare", args, false);
         }
     };
     s.UMFile = {
@@ -740,9 +747,22 @@
         compressImage: function (args) {
             return s.callService("UMFile.compressImg", args, false);//默认异步
         },
+		//涂鸦
+		doodle: function (args) {
+		return s.callService("UMFile.startDraw", args, false);//默认异步
+        },
+		saveImageToAlbum: function (args) {
+            return s.callService("UMFile.saveImageToAlbum", args, false);//默认异步
+        },
         exists: function (args) {
             return s.callService("UMFile.exists", args, true);
         },
+		//获取安卓手机app内文件路径
+		getStorageDirectory : function(args){
+			if($summer.os=="android"){
+				return s.callService("UMFile.getStorageDirectory", args, true);
+			}
+		},
         download: function (jsonArgs) {
             if ($summer.isEmpty(jsonArgs.url)) {
                 alert("参数url不能为空");
@@ -783,14 +803,14 @@
             if (typeof args == "string") {
                 json = {"path": args};
             }
-            return s.callService("UMFile.fileToBase64", json, true);
+            return s.callService("UMFile.fileToBase64", json, false);
         },
         base64ToFile: function (args) {
             var json = args;
             if (typeof args == "string") {
                 json = {"path": args};
             }
-            return s.callService("UMFile.base64ToFile", json, true);
+            return s.callService("UMFile.base64ToFile", json, false);
         },
         compressImg: function (json) {
             return s.callService("UMFile.compressImg", json)
@@ -838,6 +858,7 @@
         },
         openPhotoAlbum: function (json) {
             if (!json) return;
+            /*
             var args = {};
             if (json.bindfield)
                 args["bindfield"] = json["bindfield"];
@@ -845,7 +866,8 @@
                 args["callback"] = json["callback"];
             if (json.compressionRatio)
                 args["compressionRatio"] = json["compressionRatio"];
-            return s.callService("UMDevice.openPhotoAlbum", args, false);//异步调用服务
+            */
+            return s.callService("UMDevice.openPhotoAlbum", json, false);//异步调用服务
         }
     };
     s.UMScanner = {
@@ -909,7 +931,7 @@
     s.UMSqlite = {
         openDB: function (args) {
             if ($summer.isJSONObject(args) && !$summer.isEmpty(args["db"])) {
-                return s.callService(this.UMSQLite_openDB, args, false);
+                return s.callService("UMSQLite.openDB", args, false);
             } else {
                 alert("参数不是一个有效的JSONObject，请使用openDB({...})形式的API");
             }
@@ -1059,10 +1081,15 @@
     s.closeGravitySensor = s.UMDevice.closeGravitySensor;
     s.openApp = s.UMDevice.openApp;
     s.getLocationInfo = s.UMDevice.getLocationInfo;
-    //
+    s.addCalendarEvent = s.UMDevice.addCalendarEvent;
+    s.systemShare = s.UMDevice.systemShare;
+    /*file*/
     s.removeFile = s.UMFile.remove;
     s.compressImage = s.UMFile.compressImage
+	s.doodle = s.UMFile.doodle
+	s.saveImageToAlbum = s.UMFile.saveImageToAlbum
     s.exists = s.UMFile.exists;
+	s.getStorageDirectory=s.UMFile.getStorageDirectory
     s.download = s.UMFile.download;
     s.openFile = s.UMFile.open;
     s.getFileInfo = s.UMFile.getFileInfo;
@@ -1101,6 +1128,17 @@
         return cordovaHTTP.post(url || "", param || {}, header || {}, successFn, errFn);
     };
     s.getLocation = function (successFn, errFn) {
+        return navigator.geolocation.getCurrentPosition(successFn, errFn);
+    };
+	s.getNativeLocation = function (json,successFn, errFn) {
+		if(!json){return}
+		if($summer.os=="android"){
+			 return   s.cordova.require("cordova-plugin-amap.AMap").getLocation(json,successFn, errFn);
+		}else{
+			 json["callback"] = successFn;
+             json["error"] = errFn;
+			return s.callService("UMDevice.getLocation", json, false);
+		}
         return navigator.geolocation.getCurrentPosition(successFn, errFn);
     };
 
@@ -1142,6 +1180,21 @@
         json["callback"] = successFn;
         json["error"] = errFn;
         return s.callService('UMEMMService.registerDevice', json, false);
+    };
+	e.openAdmin = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMMDMService.openAdmin', json, false);
+    };
+     e.openMDM = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMMDMService.openMDM', json, false);
+    };
+     e.closeMDM = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMMDMService.closeMDM', json, false);
     };
     e.login = function (json, successFn, errFn) {
         json["callback"] = successFn;

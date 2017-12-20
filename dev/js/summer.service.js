@@ -246,11 +246,6 @@
             }
         },
         post: function (json) {
-            /*	参数：
-             url : "http://academy.yonyou.com/api/loginLx.ashx",//请求的url,
-             data: {key:"6480-4230-27FD-8AA0",user:"apitest",pwd:"123456"},
-             callback : "mycallback()"
-             */
             if ($summer.isJSONObject(json)) {
                 if (!json.url) {
                     alert("请输入请求的url");
