@@ -747,6 +747,7 @@
     s.callAction = s.UMService.callAction;
     s.writeConfig = s.UMService.writeConfig;
     s.readConfig = s.UMService.readConfig;
+    s.setAppContext = s.UMService.setAppContext;
 
     /*device*/
     s.getTimeZoneID = s.UMDevice.getTimeZoneID;
