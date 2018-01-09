@@ -1721,7 +1721,6 @@
                 alert("参数不是有效的JSONObject");
             }
         },
-
         writeConfig: function (key, val) {
             //1、准备参数
             var args = {};
@@ -1748,7 +1747,23 @@
             //2、调用服务
             return s.callService("UMService.readConfigure", args, false);
         },
-
+        setAppContext: function (ret) {
+            //1、准备参数
+            var args = {};
+            if (arguments.length == 1 && typeof arguments[0] == "object") {
+                args["appid"] = ret.appid || '';
+                args["versionname"] = ret.version || '';
+                args["appversion"] = ret.version || '';
+                args["userid"] = ret.userid || '';
+                args["user"] = ret.userid || '';
+                args["pass"] = ret.pass || '';
+            } else {
+                alert("setAppContext时,参数不合法");
+                return;
+            }
+            //2、调用服务
+            return s.callService("UMCtx.setAppValue", args, false);
+        },
         callAction: function (controllerName, actionName, params, isDataCollect, callbackActionID, contextmapping, customArgs) {
             if (arguments.length == 1 && typeof arguments[0] == "object") {
                 var args = {};
@@ -1843,7 +1858,6 @@
         },
         openAddressBook: function () {
             return s.callService("UMDevice.openAddressBook", {});
-
         },
         getInternalMemoryInfo: function () {
             return s.callService("UMDevice.getInternalMemoryInfo", {}, true);

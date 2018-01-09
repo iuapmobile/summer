@@ -2,3 +2,4 @@ node_modules
 .classpath
 dev/.idea/
 .idea/
+.DS_Store
