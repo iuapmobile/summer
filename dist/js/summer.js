@@ -2619,4 +2619,9 @@
         json["error"] = errFn;
         s.callService("UMEMMService.upgradeSilentSignal", json, false);
     };
+    e.getLocalApps = function (json, successFn, errFn) {
+        json["callback"] = successFn;
+        json["error"] = errFn;
+        return s.callService('UMEMMService.getLocalApps', json, false);
+    };
 }(window, emm, summer);
