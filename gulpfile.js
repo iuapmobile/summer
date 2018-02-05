@@ -51,6 +51,7 @@ function mergeSummerJs(){
 	srcFiles.push("dev/js/summer.plugins.js");//8
 	srcFiles.push("dev/js/summer.debug.js");//9
 	srcFiles.push("dev/js/summer.emm.js");//10
+	srcFiles.push("dev/js/summer.im.js");//11
 	return srcFiles;
 }
 gulp.task('iuapmobile.frameworks.core',function(){
@@ -163,7 +164,8 @@ gulp.task('summer2',function(){
 		"dev/js/summer.bridge.js",//5
 		"dev/smin/summer2.core.js",
 		"dev/js/summer.service.js",
-		"dev/js/summer.emm.js"
+		"dev/js/summer.emm.js",
+		"dev/js/summer.im.js"
 	];
 	var fileName =  "summer2";//目标文件名
 	
