@@ -12,23 +12,27 @@
         factory(global);
     }
 }(window, function (window, noGlobal) {
-    var e = {};
-    window.im = e;
+    var i = {};
+    window.im = i;
     return im;
 }))
-+ function (w, e, s) {
-    if (!e) {
-        e = {};
-        w.im = e;
++ function (w, i, s) {
+    if (!i) {
+        i = {};
+        w.im = i;
     }
-    e.login = function (json, successFn, errFn) {
-        json["callback"] = successFn;
-        json["error"] = errFn;
-        s.callService("YYIM.login", json, false);
+    i.login = function (json, successFn, errFn) {
+        var params = {
+            "params": json
+        };
+        params["method"] = "YYIM.login";
+        s.callServiceEx(params);
     };
-    e.logout = function (json, successFn, errFn) {
-        json["callback"]=successFn;
-        json["error"]=errFn;
-        s.callService("YYIM.logout", json, false);
+    i.logout = function (json, successFn, errFn) {
+        var params = {
+            "params": json
+        };
+        params["method"] = "YYIM.logout";
+        s.callService(params);
     };
 }(window, im, summer);
