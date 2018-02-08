@@ -2837,4 +2837,10 @@
         params["method"] = "YYIM.chatSearch";
         s.callServiceEx(params, successFn, errFn);
     };
+    i.getSettings = function () {
+        return s.callSync('YYIM.getSettings',{});
+    };
+    i.updateSettings = function (json) {
+        s.callSync("YYIM.updateSettings", json);
+    };
 }(window, im, summer);
