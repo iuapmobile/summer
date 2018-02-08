@@ -273,7 +273,15 @@
         }
     };//s.service end
     //
-    s.callServiceEx = function (json) {
+    s.callServiceEx = function (json, successFn, errFn) {
+        if(successFn){
+            json.params["callback"] = successFn;
+            s.UMService._callbackProxy(json.params, "callback");
+        }
+        if(errFn){
+            json.params["error"] = errFn;
+            s.UMService._callbackProxy(json.params, "error");
+        }
         return s.callCordova('summer-plugin-service.XService', 'callSync', json, null, null);
     };
 

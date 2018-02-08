@@ -26,13 +26,13 @@
             "params": json
         };
         params["method"] = "YYIM.login";
-        s.callServiceEx(params);
+        s.callServiceEx(params, successFn, errFn);
     };
     i.logout = function (json, successFn, errFn) {
         var params = {
             "params": json
         };
         params["method"] = "YYIM.logout";
-        s.callService(params);
+        s.callServiceEx(params, successFn, errFn);
     };
 }(window, im, summer);
