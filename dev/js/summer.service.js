@@ -503,14 +503,14 @@
             if (typeof args == "string") {
                 json = {"path": args};
             }
-            return s.callService("UMFile.fileToBase64", json, false);
+            return s.callService("UMFile.fileToBase64", json);
         },
         base64ToFile: function (args) {
             var json = args;
             if (typeof args == "string") {
                 json = {"path": args};
             }
-            return s.callService("UMFile.base64ToFile", json, false);
+            return s.callService("UMFile.base64ToFile", json);
         },
         compressImg: function (json) {
             return s.callService("UMFile.compressImg", json)
