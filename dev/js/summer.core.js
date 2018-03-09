@@ -51,6 +51,18 @@
         	}
             return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
+        // ios下，退出登录，关闭其他页面
+        initializeWin: function (json, successFn, errFn) {
+            if ($summer.os == "ios") {
+                return s.callCordova('summer-plugin-frame.XFrame', 'initializeWin', json, successFn, errFn);
+            }
+        },
+        // ios下，重新挂载事件监听
+        addEventListener: function (json, successFn, errFn) {
+            if ($summer.os == "ios") {
+                return s.callCordova('summer-plugin-frame.XFrame', 'addEventListener', json, successFn, errFn);
+            }
+        },
         createWin: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'createWin', json, successFn, errFn);
         },
@@ -155,6 +167,8 @@
     s.openFrame = s.window.openFrame;
     s.closeFrame = s.window.closeFrame;
     s.openWin = s.window.openWin;
+    s.initializeWin = s.window.initializeWin;
+    s.addEventListener = s.window.addEventListener;
 	s.setWinAttr = s.window.setWinAttr;
     s.createWin = s.window.createWin;
     s.getOpenWinTime = s.window.getOpenWinTime;
@@ -162,11 +176,9 @@
     s.closeWin = s.window.closeWin;
     s.closeToWin = s.window.closeToWin;
     s.getSysInfo = s.window.getSysInfo;
-
     s.winParam = s.window.winParam;
     s.frameParam = s.window.frameParam;
     s.setFrameAttr = s.window.setFrameAttr;
-
     s.setRefreshHeaderInfo = s.window.setRefreshHeaderInfo;
     s.refreshHeaderLoadDone = s.window.refreshHeaderLoadDone;
     s.refreshHeaderBegin = s.window.refreshHeaderBegin;
@@ -426,5 +438,5 @@
         if ($summer.os == 'android') {
             return s.callCordova('summer-plugin-service.XService', 'getPermission', json, successFn, errFn);
         }
-    }
+    };
 }(window, summer);
