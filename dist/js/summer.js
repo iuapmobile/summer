@@ -1205,7 +1205,8 @@
                 return s.callCordova('summer-plugin-frame.XFrame', 'addEventListener', json, successFn, errFn);
             } else if ($summer.os == "android") {
             	if (json.event && json.handler) {
-            		document.addEventListener(json.event, json.handler, false);
+            		var handler = json.handler.replace(/\(|\)/g,'');
+					document.addEventListener(json.event, eval("("+ handler +")"), false);
             	}
             }
         },
