@@ -55,12 +55,21 @@
         initializeWin: function (json, successFn, errFn) {
             if ($summer.os == "ios") {
                 return s.callCordova('summer-plugin-frame.XFrame', 'initializeWin', json, successFn, errFn);
+            } else if ($summer.os == "android") {
+                if (json.id && json.url && json.toId) {
+                    summer.openWin({"id": json.id, "url": json.url, "isKeep": false});
+                    summer.closeToWin({id: json.toId});
+                }
             }
         },
         // ios下，重新挂载事件监听
         addEventListener: function (json, successFn, errFn) {
             if ($summer.os == "ios") {
                 return s.callCordova('summer-plugin-frame.XFrame', 'addEventListener', json, successFn, errFn);
+            } else if ($summer.os == "android") {
+            	if (json.event && json.handler) {
+            		document.addEventListener(json.event, json.handler, false);
+            	}
             }
         },
         createWin: function (json, successFn, errFn) {
@@ -398,11 +407,6 @@
         if (s.canrequire())
             return s.cordova.require('summer-plugin-frame.XService').sysInfo(json, successFn, errFn);
     };
-    s.addEventListener = function (json, successFn, errFn) {
-        if (s.canrequire())
-            return s.cordova.require('summer-plugin-frame.XFrame').addEventListener(json, successFn, errFn);
-    };
-
     //app upgrade API
     s.getAppVersion = function (json) {
         return s.callSync('XUpgrade.getAppVersion', json || {});
