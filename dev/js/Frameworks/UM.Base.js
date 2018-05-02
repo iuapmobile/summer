@@ -38,7 +38,7 @@
     UM.EventMgr.prototype.off = function(evtName, handler) {
         var handlers = this._events[evtName];
         if (typeof handler == "undefined") {
-            delete handlers;
+            delete  this._events[evtName];
         } else {
             var index = -1;
             for (var i = 0, len = handlers.length; i < len; i++) {
