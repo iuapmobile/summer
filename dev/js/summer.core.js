@@ -170,6 +170,9 @@
         hideLaunch: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'removeStartPage', json, successFn, errFn);
         },
+        setTabbarIndex: function (json, successFn, errFn) {
+            return s.callCordova('summer-plugin-frame.XFrame', 'setTabbarItemSelect', json, successFn, errFn);
+        }
     };
 
 
@@ -200,6 +203,7 @@
     s.setFrameGroupAttr = s.window.setFrameGroupAttr;
     s.setFrameGroupIndex = s.window.setFrameGroupIndex;
     s.hideLaunch = s.window.hideLaunch;
+    s.setTabbarIndex = s.window.setTabbarIndex;
 
     s.showProgress = function (json) {
         if (!s.canrequire()) return;
