@@ -183,12 +183,17 @@
             //1、准备参数
             var args = {};
             if (arguments.length == 1 && typeof arguments[0] == "object") {
-                args["appid"] = ret.appid || '';
-                args["versionname"] = ret.version || '';
-                args["appversion"] = ret.version || '';
-                args["userid"] = ret.userid || '';
-                args["user"] = ret.userid || '';
-                args["pass"] = ret.pass || '';
+                for (var key in ret) {
+                    if (key == "version") {
+                        args["versionname"] = ret[key];
+                        args["appversion"] = ret[key];
+                    } else if (key == "userid") {
+                        args["userid"] = ret[key];
+                        args["user"] = ret[key];
+                    } else {
+                        args[key] = ret[key];
+                    }
+                }
             } else {
                 alert("setAppContext时,参数不合法");
                 return;
