@@ -448,7 +448,7 @@
                     summerDOMContentLoaded();
                 };
                 //document.currentScript.parentNode.insertBefore(_script, document.currentScript);
-                var  fs = document.getElementsByTagName('script')[0];
+                var fs = document.getElementsByTagName('script')[0];
                 fs.parentNode.insertBefore(_script, fs);
 
             }
@@ -1179,13 +1179,13 @@
             return s.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupIndex', json, successFn, errFn);
         },
         openWin: function (json, successFn, errFn) {
-			if(!json["animation"]){
-        		json["animation"]={
-				    type:"push", 
-				    subType:"from_right", 
-				    duration:300 
-				};
-        	}
+            if(!json["animation"]){
+                json["animation"]={
+                    type:"push", 
+                    subType:"from_right", 
+                    duration:300 
+                };
+            }
             return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
         // ios下，退出登录，关闭其他页面
@@ -1204,10 +1204,10 @@
             if ($summer.os == "ios") {
                 return s.callCordova('summer-plugin-frame.XFrame', 'addEventListener', json, successFn, errFn);
             } else if ($summer.os == "android") {
-            	if (json.event && json.handler) {
-            		var handler = json.handler.replace(/\(|\)/g,'');
-					document.addEventListener(json.event, eval("("+ handler +")"), false);
-            	}
+                if (json.event && json.handler) {
+                    var handler = json.handler.replace(/\(|\)/g,'');
+                    document.addEventListener(json.event, eval("("+ handler +")"), false);
+                }
             }
         },
         createWin: function (json, successFn, errFn) {
@@ -1219,7 +1219,7 @@
         showWin: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'showWin', json, successFn, errFn);
         },
-		setWinAttr: function (json, successFn, errFn) {
+        setWinAttr: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'setWinAttr', json, successFn, errFn);
         },
         closeWin: function (json, successFn, errFn) {
@@ -1319,7 +1319,7 @@
     s.openWin = s.window.openWin;
     s.initializeWin = s.window.initializeWin;
     s.addEventListener = s.window.addEventListener;
-	s.setWinAttr = s.window.setWinAttr;
+    s.setWinAttr = s.window.setWinAttr;
     s.createWin = s.window.createWin;
     s.getOpenWinTime = s.window.getOpenWinTime;
     s.showWin = s.window.showWin;
@@ -1378,7 +1378,7 @@
         var SERVER = json.SERVER;
         ft.upload(fileURL, encodeURI(SERVER), sFn, eFn, options);
     };
-	 //多图多文件批量上传 
+    //多图多文件批量上传 
     s.multiUpload= function(json,successFn,errFn){
         json["callback"]=successFn;
         json["error"]=errFn;
@@ -2043,22 +2043,22 @@
         compressImage: function (args) {
             return s.callService("UMFile.compressImg", args, false);//默认异步
         },
-		//涂鸦
-		doodle: function (args) {
-		return s.callService("UMFile.startDraw", args, false);//默认异步
+        //涂鸦
+        doodle: function (args) {
+            return s.callService("UMFile.startDraw", args, false);//默认异步
         },
-		saveImageToAlbum: function (args) {
+        saveImageToAlbum: function (args) {
             return s.callService("UMFile.saveImageToAlbum", args, false);//默认异步
         },
         exists: function (args) {
             return s.callService("UMFile.exists", args, true);
         },
 		//获取安卓手机app内文件路径
-		getStorageDirectory : function(args){
-			if($summer.os=="android"){
-				return s.callService("UMFile.getStorageDirectory", args, true);
-			}
-		},
+        getStorageDirectory : function(args){
+            if($summer.os=="android"){
+                return s.callService("UMFile.getStorageDirectory", args, true);
+            }
+        },
         download: function (jsonArgs) {
             if ($summer.isEmpty(jsonArgs.url)) {
                 alert("参数url不能为空");
@@ -2382,11 +2382,11 @@
     s.systemShare = s.UMDevice.systemShare;
     /*file*/
     s.removeFile = s.UMFile.remove;
-    s.compressImage = s.UMFile.compressImage
-	s.doodle = s.UMFile.doodle
-	s.saveImageToAlbum = s.UMFile.saveImageToAlbum
+    s.compressImage = s.UMFile.compressImage;
+    s.doodle = s.UMFile.doodle;
+    s.saveImageToAlbum = s.UMFile.saveImageToAlbum;
     s.exists = s.UMFile.exists;
-	s.getStorageDirectory=s.UMFile.getStorageDirectory
+    s.getStorageDirectory=s.UMFile.getStorageDirectory;
     s.download = s.UMFile.download;
     s.openFile = s.UMFile.open;
     s.getFileInfo = s.UMFile.getFileInfo;
@@ -2427,15 +2427,15 @@
     s.getLocation = function (successFn, errFn) {
         return navigator.geolocation.getCurrentPosition(successFn, errFn);
     };
-	s.getNativeLocation = function (json,successFn, errFn) {
-		if(!json){return}
-		if($summer.os=="android"){
-			 return   s.cordova.require("cordova-plugin-amap.AMap").getLocation(json,successFn, errFn);
-		}else{
-			 json["callback"] = successFn;
-             json["error"] = errFn;
-			return s.callService("UMDevice.getLocation", json, false);
-		}
+    s.getNativeLocation = function (json,successFn, errFn) {
+        if(!json){return}
+        if($summer.os=="android"){
+            return s.cordova.require("cordova-plugin-amap.AMap").getLocation(json,successFn, errFn);
+        }else{
+            json["callback"] = successFn;
+            json["error"] = errFn;
+            return s.callService("UMDevice.getLocation", json, false);
+        }
         return navigator.geolocation.getCurrentPosition(successFn, errFn);
     };
 

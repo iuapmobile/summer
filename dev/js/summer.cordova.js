@@ -114,7 +114,7 @@
                     summerDOMContentLoaded();
                 };
                 //document.currentScript.parentNode.insertBefore(_script, document.currentScript);
-                var  fs = document.getElementsByTagName('script')[0];
+                var fs = document.getElementsByTagName('script')[0];
                 fs.parentNode.insertBefore(_script, fs);
 
             }

@@ -454,22 +454,22 @@
         compressImage: function (args) {
             return s.callService("UMFile.compressImg", args, false);//默认异步
         },
-		//涂鸦
-		doodle: function (args) {
-		return s.callService("UMFile.startDraw", args, false);//默认异步
+        //涂鸦
+        doodle: function (args) {
+            return s.callService("UMFile.startDraw", args, false);//默认异步
         },
-		saveImageToAlbum: function (args) {
+        saveImageToAlbum: function (args) {
             return s.callService("UMFile.saveImageToAlbum", args, false);//默认异步
         },
         exists: function (args) {
             return s.callService("UMFile.exists", args, true);
         },
 		//获取安卓手机app内文件路径
-		getStorageDirectory : function(args){
-			if($summer.os=="android"){
-				return s.callService("UMFile.getStorageDirectory", args, true);
-			}
-		},
+        getStorageDirectory : function(args){
+            if($summer.os=="android"){
+                return s.callService("UMFile.getStorageDirectory", args, true);
+            }
+        },
         download: function (jsonArgs) {
             if ($summer.isEmpty(jsonArgs.url)) {
                 alert("参数url不能为空");
@@ -793,11 +793,11 @@
     s.systemShare = s.UMDevice.systemShare;
     /*file*/
     s.removeFile = s.UMFile.remove;
-    s.compressImage = s.UMFile.compressImage
-	s.doodle = s.UMFile.doodle
-	s.saveImageToAlbum = s.UMFile.saveImageToAlbum
+    s.compressImage = s.UMFile.compressImage;
+    s.doodle = s.UMFile.doodle;
+    s.saveImageToAlbum = s.UMFile.saveImageToAlbum;
     s.exists = s.UMFile.exists;
-	s.getStorageDirectory=s.UMFile.getStorageDirectory
+    s.getStorageDirectory=s.UMFile.getStorageDirectory;
     s.download = s.UMFile.download;
     s.openFile = s.UMFile.open;
     s.getFileInfo = s.UMFile.getFileInfo;
@@ -838,15 +838,15 @@
     s.getLocation = function (successFn, errFn) {
         return navigator.geolocation.getCurrentPosition(successFn, errFn);
     };
-	s.getNativeLocation = function (json,successFn, errFn) {
-		if(!json){return}
-		if($summer.os=="android"){
-			 return   s.cordova.require("cordova-plugin-amap.AMap").getLocation(json,successFn, errFn);
-		}else{
-			 json["callback"] = successFn;
-             json["error"] = errFn;
-			return s.callService("UMDevice.getLocation", json, false);
-		}
+    s.getNativeLocation = function (json,successFn, errFn) {
+        if(!json){return}
+        if($summer.os=="android"){
+            return s.cordova.require("cordova-plugin-amap.AMap").getLocation(json,successFn, errFn);
+        }else{
+            json["callback"] = successFn;
+            json["error"] = errFn;
+            return s.callService("UMDevice.getLocation", json, false);
+        }
         return navigator.geolocation.getCurrentPosition(successFn, errFn);
     };
 

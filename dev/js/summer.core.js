@@ -42,13 +42,13 @@
             return s.callCordova('summer-plugin-frame.XFrame', 'setFrameGroupIndex', json, successFn, errFn);
         },
         openWin: function (json, successFn, errFn) {
-			if(!json["animation"]){
-        		json["animation"]={
-				    type:"push", 
-				    subType:"from_right", 
-				    duration:300 
-				};
-        	}
+            if(!json["animation"]){
+                json["animation"]={
+                    type:"push", 
+                    subType:"from_right", 
+                    duration:300 
+                };
+            }
             return s.callCordova('summer-plugin-frame.XFrame', 'openWin', json, successFn, errFn);
         },
         // ios下，退出登录，关闭其他页面
@@ -67,10 +67,10 @@
             if ($summer.os == "ios") {
                 return s.callCordova('summer-plugin-frame.XFrame', 'addEventListener', json, successFn, errFn);
             } else if ($summer.os == "android") {
-            	if (json.event && json.handler) {
-            		var handler = json.handler.replace(/\(|\)/g,'');
-					document.addEventListener(json.event, eval("("+ handler +")"), false);
-            	}
+                if (json.event && json.handler) {
+                    var handler = json.handler.replace(/\(|\)/g,'');
+                    document.addEventListener(json.event, eval("("+ handler +")"), false);
+                }
             }
         },
         createWin: function (json, successFn, errFn) {
@@ -82,7 +82,7 @@
         showWin: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'showWin', json, successFn, errFn);
         },
-		setWinAttr: function (json, successFn, errFn) {
+        setWinAttr: function (json, successFn, errFn) {
             return s.callCordova('summer-plugin-frame.XFrame', 'setWinAttr', json, successFn, errFn);
         },
         closeWin: function (json, successFn, errFn) {
@@ -182,7 +182,7 @@
     s.openWin = s.window.openWin;
     s.initializeWin = s.window.initializeWin;
     s.addEventListener = s.window.addEventListener;
-	s.setWinAttr = s.window.setWinAttr;
+    s.setWinAttr = s.window.setWinAttr;
     s.createWin = s.window.createWin;
     s.getOpenWinTime = s.window.getOpenWinTime;
     s.showWin = s.window.showWin;
@@ -241,7 +241,7 @@
         var SERVER = json.SERVER;
         ft.upload(fileURL, encodeURI(SERVER), sFn, eFn, options);
     };
-	 //多图多文件批量上传 
+    //多图多文件批量上传 
     s.multiUpload= function(json,successFn,errFn){
         json["callback"]=successFn;
         json["error"]=errFn;
