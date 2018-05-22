@@ -464,7 +464,7 @@
         exists: function (args) {
             return s.callService("UMFile.exists", args, true);
         },
-		//获取安卓手机app内文件路径
+        //获取安卓手机app内文件路径
         getStorageDirectory : function(args){
             if($summer.os=="android"){
                 return s.callService("UMFile.getStorageDirectory", args, true);
