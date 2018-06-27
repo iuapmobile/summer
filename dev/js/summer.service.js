@@ -190,6 +190,9 @@
                     } else if (key == "userid") {
                         args["userid"] = ret[key];
                         args["user"] = ret[key];
+                    } else if (key == "password" || key == "pass") {
+                        args["password"] = ret[key];
+                        args["pass"] = ret[key];
                     } else {
                         args[key] = ret[key];
                     }
