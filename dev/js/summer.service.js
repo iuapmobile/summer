@@ -825,11 +825,42 @@
     s.netAvailable = s.UMNet.available;
     s.getNetworkInfo = s.UMNet.getNetworkInfo;
 
-    s.ajax = function (json, successFn, errFn) {
-        if (json.type.toLowerCase() == "get") {
-            return cordovaHTTP.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
-        } else if (json.type.toLowerCase() == "post") {
-            return cordovaHTTP.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+    s.ajax = function(json, successFn, errFn){
+        if(json.type.toLowerCase() == "get"){
+            return summer.get(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+        }else if(json.type.toLowerCase() == "post"){
+            if($summer.os == "android" && $ && json.header && json.header["Content-Type"] == "application/json"){
+                var jsonAjax = {};
+                    jsonAjax["type"] = 'post';
+                    jsonAjax["url"] = json.url;
+                    if(json.param)
+                        jsonAjax["data"] = JSON.stringify(json.param);//后端得到json字符串
+                    if(json.header && json.header["Content-Type"])
+                        jsonAjax["contentType"] = json.header["Content-Type"];
+                    jsonAjax["processData"] = true;
+                    if(json.dataType)
+                        jsonAjax["dataType"] = json.dataType;//当服务器返回json,jquery返回的是json还是jsonstring
+                    if(json.header){
+                        jsonAjax["beforeSend"] =  function(request){
+                            for(var key in json.header){
+                                if(key == "Content-Type") continue;
+                                request.setRequestHeader(key, json.header[key]);
+                            }
+                        }
+                    }
+                    jsonAjax["success"] = function(data){
+                        if(successFn)
+                            successFn({data:data});
+                    };
+                    jsonAjax["error"] = function(data){
+                        if(errFn)
+                            errFn({data:data});
+                    };
+                
+                return $.ajax(jsonAjax);
+            }else{
+                return summer.post(json.url || "", json.param || {}, json.header || {}, successFn, errFn);
+            }
         }
     };
     s.get = function (url, param, header, successFn, errFn) {
